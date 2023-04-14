@@ -1,6 +1,7 @@
 {
         "name": "@kompanie/reagenz",
-        "version": "1.0.0",
+        "version": "1.0.1",
+        "license": "MIT",
         "main": "index.js",
         "scripts": {
                 "start": "npx parcel demo/index.html --dist-dir build --no-cache --port 5000"
