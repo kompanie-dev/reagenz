@@ -1,0 +1,11 @@
+{
+        "name": "@kompanie/reagenz",
+        "version": "1.0.0",
+        "main": "index.js",
+        "scripts": {
+                "start": "npx parcel demo/index.html --dist-dir build --no-cache --port 5000"
+        },
+        "devDependencies": {
+                "parcel": "^2.8.3"
+        }
+}
