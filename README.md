@@ -6,6 +6,11 @@ It tries to stay as close to the already existing [Web Components standard](http
 
 ## Usage
 
+At first you need to install the package using the following command:
+```
+npm i @kompanie/reagenz
+```
+
 Reagenz uses ES6 class syntax.
 You can see a simple counter component in the example.
 For more details go to the [Getting Started markdown](documentation/GETTING_STARTED.md).
@@ -15,12 +20,12 @@ import { Component } from "@kompanie/reagenz";
 
 export class CountComponent extends Component {
     click() {
-        const currentCount = this.getState('count');
-        this.setState('count', currentCount + 1);
+        const currentCount = this.getState("count");
+        this.setState("count", currentCount + 1);
     }
 
     render() {
-        return /*html*/`<button>Count: ${this.getState('count')}</button>`;
+        return /*html*/`<button>Count: ${this.getState("count")}</button>`;
     }
 }
 ```
