@@ -8,7 +8,7 @@
                 "/source"
         ],
         "scripts": {
-                "start": "npx parcel demo/index.html --dist-dir build --no-cache --port 5000"
+                "start": "npx parcel demo/index.html --dist-dir build --no-cache --port 8000"
         },
         "devDependencies": {
                 "parcel": "^2.8.3"
