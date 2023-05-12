@@ -3,6 +3,7 @@
         "version": "1.0.2",
         "license": "MIT",
         "main": "index.js",
+        "repository": "github:kompanie-dev/reagenz",
         "files": [
                 "/source"
         ],
