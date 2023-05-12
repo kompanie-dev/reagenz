@@ -18,6 +18,7 @@ export class Reagenz {
 
         const appComponent = new appComponentClass();
         document.body = document.createElement("body");
+        document.body.setAttribute("reagenz-version", "1.1.0");
         document.body.append(appComponent);
     }
 }
