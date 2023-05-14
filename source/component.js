@@ -20,7 +20,9 @@ export class Component extends HTMLElement {
     }
 
     #addEventListeners() {
-        for (const eventName of ["change", "click", "input"]) {
+        const events = ["change", "click", "input", "mousedown", "mouseup"];
+
+        for (const eventName of events) {
             this.addEventListener(eventName, this[eventName]);
         }
     }
