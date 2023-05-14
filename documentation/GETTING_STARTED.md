@@ -124,7 +124,7 @@ export class MyState extends ApplicationState {
 
 ```
 
-You can use shorthand functions for `change`, `click` and `input` events to trigger functionality.
+You can use shorthand functions for `change`, `click`, `input`, `mousedown` and `mouseup` events to trigger functionality.
 In the following component a click logs a message into the developer tools of the browser.
 
 ```js
