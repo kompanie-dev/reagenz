@@ -11,6 +11,6 @@
                 "start": "npx parcel demo/index.html --dist-dir build --no-cache --port 8000"
         },
         "devDependencies": {
-                "parcel": "^2.8.3"
+                "parcel": "^2.9.2"
         }
 }
