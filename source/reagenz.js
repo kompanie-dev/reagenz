@@ -18,7 +18,13 @@ export class Reagenz {
 
         const appComponent = new appComponentClass();
         document.body = document.createElement("body");
-        document.body.setAttribute("reagenz-version", "1.2.0");
+        document.body.setAttribute("reagenz-version", "1.2.1");
         document.body.append(appComponent);
+    }
+
+    static enableDevMode() {
+        window.ReagenzDev = {
+            getStates: () => Globals.states
+        };
     }
 }

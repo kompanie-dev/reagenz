@@ -44,3 +44,5 @@ Reagenz.startApp(
     ],
     true
 );
+
+Reagenz.enableDevMode();

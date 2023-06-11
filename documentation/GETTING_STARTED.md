@@ -53,6 +53,11 @@ Reagenz.startApp(
 );
 ```
 
+## Dev Mode
+
+For debugging purposes Reagenz offers `Reagenz.enableDevMode()`.
+Executing this function makes all states accessible via the global `ReagenzDev.getStates()` function.
+
 ## Components
 
 Now it's time to define some components!
