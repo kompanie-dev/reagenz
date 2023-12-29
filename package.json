@@ -1,16 +1,19 @@
 {
         "name": "@kompanie/reagenz",
-        "version": "1.2.1",
+        "version": "2.0.0",
         "license": "MIT",
         "main": "index.js",
         "repository": "github:kompanie-dev/reagenz",
+        "type": "module",
         "files": [
                 "/source"
         ],
         "scripts": {
-                "start": "npx parcel demo/index.html --dist-dir build --no-cache --port 8000"
+                "build": "npx parcel build index.js --dist-dir build --no-cache",
+                "start": "npx parcel demo/index.html --dist-dir build --no-cache --port 8000",
+                "test": "npx parcel demo/tests.html --dist-dir build --no-cache --port 8001"
         },
         "devDependencies": {
-                "parcel": "^2.9.2"
+                "parcel": "^2.10.3"
         }
 }

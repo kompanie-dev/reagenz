@@ -1,0 +1,25 @@
+.display-flex {
+  display: flex;
+}
+
+.gap-24px {
+  gap: 24px;
+}
+
+.margin-top-small {
+  margin-top: 1.5rem;
+}
+.margin-left-xsmall {
+  margin-left: 1rem;
+}
+
+.padding-right-xsmall {
+  padding-right: 1rem;
+}
+
+.width-50 {
+  width: 50%;
+}
+.width-100 {
+  width: 100%;
+}

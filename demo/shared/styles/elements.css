@@ -1,0 +1,32 @@
+.a {
+    text-decoration: none;
+}
+
+body,
+.button,
+.input,
+.textarea {
+    background: #000;
+    color: #ccc;
+    font-family: Arial, sans-serif;
+}
+
+.button,
+.input,
+.textarea {
+    border: 1px solid #ccc;
+    border-radius: 13px;
+    padding: 5px;
+}
+
+.button:hover {
+    background: #ccc;
+    color: #000;
+    cursor: pointer;
+}
+
+.input[type=text]:read-only {
+    background: #999;
+    color: #333;
+    cursor: not-allowed;
+}
