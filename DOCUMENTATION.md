@@ -288,3 +288,9 @@ If you also need the index of the looping function you can access it via the sec
 ```js
 forEach(entries, (entry, index) => /*html*/`<my-item item-id="${entry.id}">${index}</my-item>`);
 ```
+
+`forEach` also works on [Map objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map).
+
+```js
+forEach(entries, (value, key) => /*html*/`<my-item item-id="${value}">${key}</my-item>`);
+```
