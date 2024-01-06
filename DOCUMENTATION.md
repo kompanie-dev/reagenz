@@ -283,8 +283,8 @@ export class MyListComponent extends Component {
     }
 }
 ```
-If you also need the iterator of the looping function you can access it via the second parameter.
+If you also need the index of the looping function you can access it via the second parameter.
 
 ```js
-forEach(entries, (entry, iterator) => /*html*/`<my-item item-id="${entry.id}">${iterator}</my-item>`);
+forEach(entries, (entry, index) => /*html*/`<my-item item-id="${entry.id}">${index}</my-item>`);
 ```

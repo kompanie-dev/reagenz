@@ -5,7 +5,6 @@ Reagenz is a Web Component based front-end library written in JavaScript.
 It has the following features:
 
 * Extremly compact
-    * The source code is less than 15kb including JSDoc comments
 * Doesn't require any compilation or transpilation
     * When structured correctly you can even copy paste your projects source into a web server and it will work
 * Doesn't reinvent the wheel
