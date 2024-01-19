@@ -1,6 +1,6 @@
-# Reagenz
+# Reagenz 🧪
 
-Reagenz is a Web Component based front-end library written in JavaScript.
+Reagenz is a Web Component based frontend library written in JavaScript.
 
 It has the following features:
 
@@ -46,19 +46,11 @@ export class MyCountComponent extends Component {
         });
     }
 
-    // $* functions get automatically bound to the component.
-    // So in this case when anything inside the component gets clicked.
+    // This function gets bound by the $click attribute seen in render()
+    // It only fires for the element with the $click attribute
     // There are bindings by default for "blur", "change", "click", "focus", "input", "keydown", "keyup", "mousedown", "mouseup"
-    // Every component automatically has access to the store variable.
-    $click() {
+    buttonClickEvent() {
         this.store.dispatch(countUp(1));
-    }
-
-    // This function gets bound by the $mousedown attribute seen in render()
-    // It only fires for the element with the $mousedown attribute
-    // The $* attributes have bindings for the same events as $* functions
-    buttonMouseDownEvent() {
-        console.log("Button mousedown event triggered");
     }
 
     // This function generates the innerHTML of the component.
@@ -66,7 +58,7 @@ export class MyCountComponent extends Component {
     render({ count }) {
         return /*html*/`
             <div>Current value: ${count}</div>
-            <button $mousedown="buttonMouseDownEvent">Increase</button>`;
+            <button $click="buttonClickEvent">Increase</button>`;
     }
 }
 ```

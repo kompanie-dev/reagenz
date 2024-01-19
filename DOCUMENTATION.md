@@ -202,11 +202,11 @@ If you forget this super calls in  `connectedCallback()` and `disconnectedCallba
 export class MyAboutButton extends Component {
     render() {
         return /*html*/`
-            <button>Open about dialog</button>
+            <button $click="clickCallback">Open about dialog</button>
         `;
     }
 
-    $click(event) {
+    clickCallback(event) {
         console.log("Button got clicked", event);
         alert("About my app");
     }
@@ -232,7 +232,7 @@ import { Component } from "@kompanie/reagenz";
 import { countUp } from "../store/test.actions.js";
 
 export class MyMainComponent extends Component {
-    $click() {
+    clickCallback() {
         this.store.dispatch(countUp());
     }
 }
@@ -287,10 +287,4 @@ If you also need the index of the looping function you can access it via the sec
 
 ```js
 forEach(entries, (entry, index) => /*html*/`<my-item item-id="${entry.id}">${index}</my-item>`);
-```
-
-`forEach` also works on [Map objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map).
-
-```js
-forEach(entries, (value, key) => /*html*/`<my-item item-id="${value}">${key}</my-item>`);
 ```
