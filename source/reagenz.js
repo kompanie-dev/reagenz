@@ -38,7 +38,7 @@ export class Reagenz {
      */
     static injectDependencies(dependencies, classes) {
         classes.forEach(
-            receiverClass => receiverClass.prototype.dependencies = dependencies
+            receiverClass => Object.assign(receiverClass.prototype.dependencies, dependencies)
         );
     }
 
@@ -51,6 +51,16 @@ export class Reagenz {
     static registerReagenzComponents(reagenzComponents) {
         for (let componentClass of reagenzComponents) {
             const tagName = Reagenz.classNameToHtmlTag(componentClass.name);
+
+            componentClass.prototype.dependencies = new Proxy({}, {
+                get: function(dependencyContainer, propertyName) {
+                    if (!(propertyName in dependencyContainer) && propertyName !== "store") {
+                        console.warn(`${tagName} is accessing the undefined dependency '${propertyName}'. Did you inject it using Reagenz.injectDependencies()?`);
+                    }
+    
+                    return Reflect.get(...arguments);
+                }
+            });
 
             if (customElements.get(tagName) === undefined) {
                 customElements.define(tagName, componentClass);
@@ -76,7 +86,7 @@ export class Reagenz {
      */
     static startApp(appComponentClass, appContainerElement) {
         const appComponent = new appComponentClass();
-        appComponent.setAttribute("reagenz-version", "2.0.0");
+        appComponent.setAttribute("framework", "@kompanie/reagenz@3.0.0");
         appContainerElement.append(appComponent);
     }
 }
