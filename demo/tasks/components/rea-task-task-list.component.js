@@ -19,13 +19,9 @@ export class ReaTaskTaskListComponent extends Component {
                 /*html*/`<rea-task-task-item done="${entry.done}" task-id="${entry.id}">${entry.text}</rea-task-task-item>`
             ) +
             /*html*/`<div class="margin-top-small">
-                <input type="text" class="input" $keydown="keydownTaskInputEvent" $blur="blurTaskInputEvent" maxlength="25" ${ isLoading ? "disabled": "" } placeholder="Text" value="" autofocus>
+                <input type="text" class="input" $keydown="keydownTaskInputEvent" maxlength="25" ${ isLoading ? "disabled": "" } placeholder="Text" value="" autofocus>
                 <button class="button" $click="clickAddTaskEvent" ${ isLoading ? "disabled": "" }>Add</button>
             </div>`;
-    }
-
-    blurTaskInputEvent() {
-        this.querySelector("input[type=text]").focus();
     }
 
     clickAddTaskEvent() {
@@ -39,6 +35,7 @@ export class ReaTaskTaskListComponent extends Component {
         this.store.dispatch(addTask(taskId, taskText));
         this.store.dispatch(saveEntriesRequest());
 
+        this.querySelector("input[type=text]").value = "";
         this.querySelector("input[type=text]").focus();
     }
 
