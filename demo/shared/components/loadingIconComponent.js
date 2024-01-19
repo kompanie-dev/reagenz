@@ -9,7 +9,7 @@ export class LoadingIconComponent extends Component {
             </div>`;
     }
 
-    get styles() {
+    styles() {
         return /*css*/`
             .loading-icon-ripple {
                 display: inline-block;

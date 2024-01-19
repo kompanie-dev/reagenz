@@ -16,7 +16,7 @@ export class ReaTaskTaskItemComponent extends Component {
         `;
     }
 
-    get styles() {
+    styles() {
         return /*css*/`
             rea-task-task-item div span {
                 display: inline-block;
