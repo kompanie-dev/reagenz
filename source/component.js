@@ -5,7 +5,6 @@
 export class Component extends HTMLElement {
     store = this.dependencies?.store;
 
-    #eventNames;
     #currentSelectorData;
     #selectors;
     #unsubscribeCallback;
@@ -17,7 +16,6 @@ export class Component extends HTMLElement {
     constructor(componentConfig) {
         super();
 
-        this.#eventNames = componentConfig?.eventNames ?? DEFAULT_EVENT_NAMES;
         this.#selectors = componentConfig?.selectors ?? {};
         this.#unsubscribeCallback = this.store?.subscribe(() => this.#updateDOMIfChangesDetected());
 
@@ -125,12 +123,16 @@ export class Component extends HTMLElement {
      * <button $click="functionA">Test</button>.
      * @param {HTMLElement} component The parent component which contains the functions that get connected.
      * @param {HTMLElement} element The child element of which the attributes should get connected.
-     * @param {string[]} eventNames An array containing all the event names which should get connected.
      */
-    #addChildElementEventCallbacks(component, element, eventNames) {
-        for (const eventName of eventNames) {
-            const functionName = element.getAttribute("$" + eventName);
+    #addChildElementEventCallbacks(component, element) {
+        for (const attribute of element.attributes) {
+            if (attribute.name.startsWith("$") === false) {
+                continue;
+            }
 
+            const eventName = attribute.name.substring(1);
+            const functionName = attribute.value;
+            
             if (component[functionName] !== undefined) {
                 element.addEventListener(eventName, (event) => component[functionName](event));
                 continue;
@@ -213,7 +215,7 @@ export class Component extends HTMLElement {
 
         this.#currentSelectorData = selectorData;
         
-        this.#iterateChildElementsRecursively(this, (childNode) => this.#addChildElementEventCallbacks(this, childNode, this.#eventNames));
+        this.#iterateChildElementsRecursively(this, (childNode) => this.#addChildElementEventCallbacks(this, childNode));
     }
 
     /**
@@ -228,8 +230,3 @@ export class Component extends HTMLElement {
         }
     }
 }
-
-/**
- * A string array containing all event names that are handled by the Component class by default.
- */
-export const DEFAULT_EVENT_NAMES = ["blur", "change", "click", "focus", "input", "keydown", "keyup", "mousedown", "mouseup"];

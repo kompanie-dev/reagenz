@@ -132,18 +132,8 @@ Otherwise the component might re-render unnecessarily.
 
 ## Event system
 Since attaching event handlers using attributes like `onclick` is messy if you want to use it in Web Components and `addAddEventListener` is annoying, Reagenz has a small custom event system.
-By default the following events are handled, but can be extended via the component configuration mentioned later:
-* `blur`
-* `change`
-* `click`
-* `focus`
-* `input`
-* `keydown`
-* `keyup`
-* `mousedown`
-* `mouseup`
 
-If we take our component from before we can handle the `click` by using the `$click` attribute.
+If we take our component from before we can handle the `click` event by using the `$click` attribute.
 The `$click` attribute specifies the name of the function which should be executed on the component.
 If you want to handle the `change` event, you can use `$change="..."`, etc.
 
@@ -171,27 +161,6 @@ export class MyMainComponent extends Component {
     }
 }
 ```
-
-If you want Reagenz to handle other events than the defaule ones, you can specify them in the component configuration in the constructor.
-Note that this replaces the list with the specified one.
-In the following example `MyDragComponent` would only react to `drag` events by default but not `click` etc.
-If you want to also use the default event names, you can add them via `DEFAULT_EVENT_NAMES`.
-
-```js
-import { Component, DEFAULT_EVENT_NAMES } from "@kompanie/reagenz";
-
-export class MyDragComponent extends Component {
-    constructor() {
-        super({
-            eventNames: ["drag", ...DEFAULT_EVENT_NAMES]
-        });
-    }
-}
-```
-
-The event system also adds global shorthand functions to Reagenz components.
-By default, the same events are handled as mentioned above.
-This makes it possible to react to events that affect the whole component.
 
 `onConnect` and `onDisconnect` are executed when the component gets added to or removed from the DOM, just like the functions included in the Web Components standard called `connectedCallback()` and `disconnectedCallback()`.
 
