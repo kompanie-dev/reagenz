@@ -17,3 +17,5 @@ export class ReaTaskTaskListPageComponent extends Component {
             <rea-task-task-list></rea-task-task-list>`;
     }
 }
+
+Component.define("rea-task-task-list-page", ReaTaskTaskListPageComponent);

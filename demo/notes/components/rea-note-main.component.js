@@ -29,3 +29,5 @@ export class ReaNoteMainComponent extends Component {
         this.store.dispatch(loadNotesRequest());
     }
 }
+
+Component.define("rea-note-main", ReaNoteMainComponent);

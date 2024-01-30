@@ -14,3 +14,5 @@ export class ReaTaskAboutPageComponent extends Component {
             </div>`;
     }
 }
+
+Component.define("rea-task-about-page", ReaTaskAboutPageComponent);

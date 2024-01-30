@@ -36,3 +36,5 @@ export class ReaTaskTaskDetailPageComponent extends Component {
             </div>`;
     }
 }
+
+Component.define("rea-task-task-detail-page", ReaTaskTaskDetailPageComponent);

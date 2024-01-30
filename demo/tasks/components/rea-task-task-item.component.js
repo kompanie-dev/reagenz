@@ -51,3 +51,5 @@ export class ReaTaskTaskItemComponent extends Component {
         this.store.dispatch(saveEntriesRequest());
     }
 }
+
+Component.define("rea-task-task-item", ReaTaskTaskItemComponent);

@@ -44,3 +44,5 @@ export class ReaTaskTimeDisplayComponent extends Component {
         return formattedString;
     }
 }
+
+Component.define("rea-task-time-display", ReaTaskTimeDisplayComponent);

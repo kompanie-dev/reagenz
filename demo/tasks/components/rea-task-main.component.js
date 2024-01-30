@@ -34,3 +34,5 @@ export class ReaTaskMainComponent extends Component {
         this.store.dispatch(updateRoute(location.hash));
     }
 }
+
+Component.define("rea-task-main", ReaTaskMainComponent);

@@ -79,7 +79,7 @@ The following limitations are known:
     * This is usually fine as long as your components are at a reasonable size
 * Reagenz has no idea of the hierarchy of the components that need to be re-rendered
     * So it's possible that child-components get re-rendered first, just to be trashed because their parent get's re-rendered
-* No complete seperation of apps
+* No complete separation of apps
     * It's not possible to have different components with the same tag in two or more apps 
 * No out of the box TypeScript support
 

@@ -10,11 +10,6 @@ Reagenz.registerWebComponents({
     "example-web-component": ExampleWebComponent
 });
 
-// Every component you want to use in your application needs to get registered first
-Reagenz.registerReagenzComponents([
-    ReaNoteMainComponent
-]);
-
 // Configures the dependency injection of the notes application
 // You don't need to add components here that don't use any dependencies
 Reagenz.injectDependencies(

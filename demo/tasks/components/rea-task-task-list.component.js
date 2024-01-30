@@ -45,3 +45,5 @@ export class ReaTaskTaskListComponent extends Component {
         }
     }
 }
+
+Component.define("rea-task-task-list", ReaTaskTaskListComponent);

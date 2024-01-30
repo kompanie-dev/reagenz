@@ -25,6 +25,27 @@ export class Component extends HTMLElement {
     }
 
     /**
+     * Defines the component and under which tag name it should be available.
+     * @param {string} tagName The name of the element, how it should be available in HTML. Needs to comply to the Web Components standard.
+     * @param {Class} componentClass The class of the component.
+     */
+    static define(tagName, componentClass) {
+        componentClass.prototype.dependencies = new Proxy({}, {
+            get: function(dependencyContainer, propertyName) {
+                if (!(propertyName in dependencyContainer) && propertyName !== "store") {
+                    console.warn(`${tagName} is accessing the undefined dependency '${propertyName}'. Did you inject it using Reagenz.injectDependencies()?`);
+                }
+
+                return Reflect.get(...arguments);
+            }
+        });
+
+        if (customElements.get(tagName) === undefined) {
+            customElements.define(tagName, componentClass);
+        }
+    }
+
+    /**
      * The default callback function when web components get added to the DOM.
      */
     connectedCallback() {

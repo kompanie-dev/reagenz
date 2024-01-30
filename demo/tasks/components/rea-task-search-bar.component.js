@@ -12,3 +12,5 @@ export class ReaTaskSearchBarComponent extends Component {
         this.store.dispatch(setSearchValue(event.target.value));
     }
 }
+
+Component.define("rea-task-search-bar", ReaTaskSearchBarComponent);

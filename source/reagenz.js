@@ -3,34 +3,6 @@
  */
 export class Reagenz {
     /**
-     * Takes the name of a component class and converts it to a matching tag name.
-     * So for instance MyTestComponent becomes my-test.
-     * @param {string} className The name of the component class.
-     * @returns The tag name of the component class.
-     */
-    static classNameToHtmlTag(className) {
-        let result = "";
-
-        for (let i = 0; i < className.length; i++) {
-            const char = className[i];
-        
-            if (char === char.toUpperCase() && i > 0) {
-                result += "-";
-            }
-        
-            result += char.toLowerCase();
-        }
-
-        const lastComponentWordIndex = result.lastIndexOf("-component");
-
-        if (lastComponentWordIndex === -1) {
-            return result;
-        }
-        
-        return result.substring(0, lastComponentWordIndex);
-    }
-
-    /**
      * Injects the given dependency object into the prototype of all supplied classes.
      * The dependencies will be available in the class as dependencies property.
      * @param {Object} dependencies An object containing all dependencies that should be available in the classes.
@@ -40,32 +12,6 @@ export class Reagenz {
         classes.forEach(
             receiverClass => Object.assign(receiverClass.prototype.dependencies, dependencies)
         );
-    }
-
-    /**
-     * Registers Reagenz components using an object, skipping already registered ones.
-     * The tag name of the Component will be generated automatically
-     * using the classNameToHtmlTag function of this class.
-     * @param {Class[]} reagenzComponents An array containing component classes.
-     */
-    static registerReagenzComponents(reagenzComponents) {
-        for (let componentClass of reagenzComponents) {
-            const tagName = Reagenz.classNameToHtmlTag(componentClass.name);
-
-            componentClass.prototype.dependencies = new Proxy({}, {
-                get: function(dependencyContainer, propertyName) {
-                    if (!(propertyName in dependencyContainer) && propertyName !== "store") {
-                        console.warn(`${tagName} is accessing the undefined dependency '${propertyName}'. Did you inject it using Reagenz.injectDependencies()?`);
-                    }
-    
-                    return Reflect.get(...arguments);
-                }
-            });
-
-            if (customElements.get(tagName) === undefined) {
-                customElements.define(tagName, componentClass);
-            }
-        }
     }
 
     /**
