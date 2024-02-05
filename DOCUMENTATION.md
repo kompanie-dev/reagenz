@@ -136,6 +136,7 @@ Since attaching event handlers using attributes like `onclick` is messy if you w
 If we take our component from before we can handle the `click` event by using the `$click` attribute.
 The `$click` attribute specifies the name of the function which should be executed on the component.
 If you want to handle the `change` event, you can use `$change="..."`, etc.
+Every event supported by [addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) can be bound by using the $-prefix.
 
 ```js
 import { Component } from "@kompanie/reagenz";

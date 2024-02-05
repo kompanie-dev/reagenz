@@ -48,7 +48,7 @@ export class MyCountComponent extends Component {
 
     // This function gets bound by the $click attribute seen in render()
     // It only fires for the element with the $click attribute
-    // There are bindings by default for "blur", "change", "click", "focus", "input", "keydown", "keyup", "mousedown", "mouseup"
+    // You can also bind other events with $change, $input etc.
     buttonClickEvent() {
         this.store.dispatch(countUp(1));
     }
