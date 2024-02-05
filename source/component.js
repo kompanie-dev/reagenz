@@ -118,29 +118,25 @@ export class Component extends HTMLElement {
     }
 
     /**
-     * Connects event attributes like $click of a child element to the functions of the parent component.
-     * In the following example, the button's $click attribute would be mapped to the component's function "functionA":
-     * <button $click="functionA">Test</button>.
-     * @param {HTMLElement} component The parent component which contains the functions that get connected.
-     * @param {HTMLElement} element The child element of which the attributes should get connected.
-     */
-    #addChildElementEventCallbacks(component, element) {
-        for (const attribute of element.attributes) {
-            if (attribute.name.startsWith("$") === false) {
-                continue;
-            }
+    * Connects event attributes like $click of a child element to the functions of the parent component.
+    * In the following example, the button's $click attribute would be mapped to the component's function "functionA":
+    * <button $click="functionA">Test</button>.
+    * @param {HTMLElement} component The parent component which contains the functions that get connected.
+    * @param {HTMLElement} element The child element of which the attributes should get connected.
+    * @param {string} attributeName The name of the attribute which contains the function name ($click etc.).
+    * @param {string} attributeValue The name of the function which the event should get connected to.
+    */
+    #addEventAttributeBinding(component, element, attributeName, attributeValue) {
+        const eventName = attributeName.substring(1);
+        const functionName = attributeValue;
+        
+        if (component[functionName] !== undefined) {
+            element.addEventListener(eventName, (event) => component[functionName](event));
+            return;
+        }
 
-            const eventName = attribute.name.substring(1);
-            const functionName = attribute.value;
-            
-            if (component[functionName] !== undefined) {
-                element.addEventListener(eventName, (event) => component[functionName](event));
-                continue;
-            }
-
-            if (functionName !== null) {
-                console.warn(`${component.tagName.toLowerCase()} defined a non-existent $${eventName} handler called '${functionName}'`);
-            }
+        if (functionName !== null) {
+            console.warn(`${component.tagName.toLowerCase()} defined a non-existent $${eventName} handler called '${functionName}'`);
         }
     }
 
@@ -215,7 +211,13 @@ export class Component extends HTMLElement {
 
         this.#currentSelectorData = selectorData;
         
-        this.#iterateChildElementsRecursively(this, (childNode) => this.#addChildElementEventCallbacks(this, childNode));
+        this.#iterateChildElementsRecursively(this, (childNode) => {
+            for (const attribute of childNode.attributes) {
+                if (attribute.name.startsWith("$") === true) {
+                    this.#addEventAttributeBinding(this, childNode, attribute.name, attribute.value);
+                }
+            }
+        });
     }
 
     /**
