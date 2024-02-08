@@ -28,6 +28,10 @@ export class Component extends HTMLElement {
      * @param {Class} componentClass The class of the component.
      */
     static define(tagName, componentClass) {
+        if (customElements.get(tagName) === undefined) {
+            customElements.define(tagName, componentClass);
+        }
+
         componentClass.prototype.dependencies = new Proxy({}, {
             get: function(dependencyContainer, propertyName) {
                 if (!(propertyName in dependencyContainer) && propertyName !== "store") {
@@ -37,10 +41,6 @@ export class Component extends HTMLElement {
                 return Reflect.get(...arguments);
             }
         });
-
-        if (customElements.get(tagName) === undefined) {
-            customElements.define(tagName, componentClass);
-        }
     }
 
     /**
