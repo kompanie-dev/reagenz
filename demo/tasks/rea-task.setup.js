@@ -1,4 +1,4 @@
-import { Reagenz } from "../../index.js";
+import { Injector, Launcher } from "../../index.js";
 
 import "../shared/components/loadingIconComponent.js";
 
@@ -26,7 +26,7 @@ window.addEventListener(
 // Configures the dependency injection of the tasks application
 // You don't need to add components here that don't use any dependencies
 // As you can see ReaTaskTaskListPageComponent and the shared LoadingIconComponent is not listed here
-Reagenz.injectDependencies(
+Injector.injectDependencies(
     {
         logger: console,
         store: reaTaskStore
@@ -43,7 +43,7 @@ Reagenz.injectDependencies(
 );
 
 // Adds the main component to the DOM and starts the application.
-Reagenz.startApp(
+Launcher.startApp(
     ReaTaskMainComponent,
     document.getElementById("task-app-container")
 );

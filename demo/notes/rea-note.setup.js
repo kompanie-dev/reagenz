@@ -1,4 +1,4 @@
-import { Reagenz } from "../../index.js";
+import { Injector, Launcher, Registry } from "../../index.js";
 
 import { ReaNoteMainComponent } from "./components/rea-note-main.component.js";
 import { reaNoteStore } from "./store/rea-note.store.js";
@@ -6,13 +6,13 @@ import { reaNoteStore } from "./store/rea-note.store.js";
 import { ExampleWebComponent } from "./webComponents/exampleWebComponent.js";
 
 // Registers a non-Reagenz Web Component
-Reagenz.registerWebComponents({
+Registry.registerWebComponents({
     "example-web-component": ExampleWebComponent
 });
 
 // Configures the dependency injection of the notes application
 // You don't need to add components here that don't use any dependencies
-Reagenz.injectDependencies(
+Injector.injectDependencies(
     {
         logger: console,
         store: reaNoteStore
@@ -21,7 +21,7 @@ Reagenz.injectDependencies(
 );
 
 // Adds the main component to the DOM and starts the application.
-Reagenz.startApp(
+Launcher.startApp(
     ReaNoteMainComponent,
     document.getElementById("note-app-container")
 );
