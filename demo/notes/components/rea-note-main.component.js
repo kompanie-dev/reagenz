@@ -22,11 +22,11 @@ export class ReaNoteMainComponent extends Component {
     }
 
     inputNotesValueEvent(event) {
-        this.store.dispatch(saveNotesRequest(event.target.value));
+        this.dispatch(saveNotesRequest(event.target.value));
     }
 
     onConnect() {
-        this.store.dispatch(loadNotesRequest());
+        this.dispatch(loadNotesRequest());
     }
 }
 

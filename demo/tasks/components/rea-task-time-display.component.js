@@ -21,7 +21,7 @@ export class ReaTaskTimeDisplayComponent extends Component {
 
     onConnect() {
         this.#intervalID = setInterval(
-            () => this.store.dispatch(setTime(new Date().getTime())),
+            () => this.dispatch(setTime(new Date().getTime())),
             1000
         );
     }

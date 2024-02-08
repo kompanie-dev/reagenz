@@ -50,7 +50,7 @@ export class MyCountComponent extends Component {
     // It only fires for the element with the $click attribute
     // You can also bind other events with $change, $input etc.
     buttonClickEvent() {
-        this.store.dispatch(countUp(1));
+        this.dispatch(countUp(1));
     }
 
     // This function generates the innerHTML of the component.

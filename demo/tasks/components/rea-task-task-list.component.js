@@ -32,8 +32,8 @@ export class ReaTaskTaskListComponent extends Component {
             return;
         }
 
-        this.store.dispatch(addTask(taskId, taskText));
-        this.store.dispatch(saveEntriesRequest());
+        this.dispatch(addTask(taskId, taskText));
+        this.dispatch(saveEntriesRequest());
 
         this.querySelector("input[type=text]").value = "";
         this.querySelector("input[type=text]").focus();

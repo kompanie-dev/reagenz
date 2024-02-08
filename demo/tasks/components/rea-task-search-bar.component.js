@@ -9,7 +9,7 @@ export class ReaTaskSearchBarComponent extends Component {
     }
 
     inputSearchValueEvent(event) {
-        this.store.dispatch(setSearchValue(event.target.value));
+        this.dispatch(setSearchValue(event.target.value));
     }
 }
 

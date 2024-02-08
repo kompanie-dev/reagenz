@@ -30,8 +30,8 @@ export class ReaTaskMainComponent extends Component {
     }
 
     onConnect() {
-        this.store.dispatch(loadEntriesRequest());
-        this.store.dispatch(updateRoute(location.hash));
+        this.dispatch(loadEntriesRequest());
+        this.dispatch(updateRoute(location.hash));
     }
 }
 

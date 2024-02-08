@@ -40,15 +40,15 @@ export class ReaTaskTaskItemComponent extends Component {
         const done = this.querySelector("input").checked;
         const text = this.querySelector("span").textContent;
 
-        this.store.dispatch(updateTask(id, done, text));
-        this.store.dispatch(saveEntriesRequest());
+        this.dispatch(updateTask(id, done, text));
+        this.dispatch(saveEntriesRequest());
     }
 
     clickRemoveTaskEvent() {
         const id = this.getAttribute("task-id");
 
-        this.store.dispatch(removeTask(id));
-        this.store.dispatch(saveEntriesRequest());
+        this.dispatch(removeTask(id));
+        this.dispatch(saveEntriesRequest());
     }
 }
 

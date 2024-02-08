@@ -3,8 +3,6 @@
  * All Reagenz components are Web Components.
  */
 export class Component extends HTMLElement {
-    store = this.dependencies?.store;
-
     #currentSelectorData;
     #selectors;
     #unsubscribeCallback;
@@ -17,7 +15,7 @@ export class Component extends HTMLElement {
         super();
 
         this.#selectors = componentConfig?.selectors ?? {};
-        this.#unsubscribeCallback = this.store?.subscribe(() => this.#updateDOMIfChangesDetected());
+        this.#unsubscribeCallback = this.dependencies.store?.subscribe(() => this.#updateDOMIfChangesDetected());
 
         this.#updateDOMIfChangesDetected();
     }
@@ -57,6 +55,19 @@ export class Component extends HTMLElement {
         this.#unsubscribeCallback?.();
 
         this.onDisconnect?.();
+    }
+
+    /**
+     * Dispatches the action in the injected store.
+     * A shorthand for this.dependencies.store.dispatch.
+     * @param {Object} action The Action object which should be dispatched
+     */
+    dispatch(action) {
+        if (this.dependencies.store === undefined) {
+            throw new Error(`No store was injected into ${this.tagName.toLowerCase()}, so the action ${action?.type} could not be dispatched. Did you inject the store using Injector.injectDependencies()?`);
+        }
+
+        this.dependencies.store.dispatch(action);
     }
 
     /**
@@ -225,7 +236,7 @@ export class Component extends HTMLElement {
      * If changes are detected, an update of the innerHTML property is triggered.
      */
     #updateDOMIfChangesDetected() {
-        const newSelectorData = this.#executeSelectors?.(this.#selectors, this.store);
+        const newSelectorData = this.#executeSelectors?.(this.#selectors, this.dependencies.store);
 
         if (this.#isSelectorDataEqual(this.#currentSelectorData, newSelectorData) === false) {
             this.#updateDOM(newSelectorData);
