@@ -1,6 +1,6 @@
 import { loadNotesSuccess, saveNotesSuccess } from "./rea-note.actions.js";
 
-export const reaNoteNetworkMiddleware = (store) => (next) => (action) => {
+export const reaNoteNetworkMiddleware = (store, next, action) => {
     switch (action.type) {
         case "NOTE_LOAD_REQUEST": {
                 setTimeout(

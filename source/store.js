@@ -27,7 +27,7 @@ export class Store {
             const currentMiddleware = this.#middlewares[i];
             const nextMiddleware = this.#middlewares[i + 1] ?? new Function();
 
-            currentMiddleware(this)(nextMiddleware)(action);
+            currentMiddleware(this, nextMiddleware, action);
         }
 
         this.state = this.#reducer(this.state, action);
@@ -38,11 +38,10 @@ export class Store {
     /**
      * Executes the give selector function against the current state and returns the result.
      * @param {Function} selector The selector function which should be executed.
-     * @param  {...any} parameters The parameters which should be passed to the selector function.
      * @returns {any} The result of the selector function
      */
-    select(selector, ...parameters) {
-        return selector(this.state, ...parameters);
+    select(selector) {
+        return selector(this.state);
     }
 
     /**
