@@ -1,6 +1,6 @@
 # Reagenz 🧪
 
-Reagenz is a Web Component based frontend library written in JavaScript.
+Reagenz is an opinionated [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) based frontend library written in JavaScript.
 
 It has the following features:
 
@@ -8,7 +8,7 @@ It has the following features:
 * Doesn't require any compilation or transpilation
     * When structured correctly you can even copy paste your projects source into a web server and it will work
 * Doesn't reinvent the wheel
-    * Uses as much of the [Web Components standard](https://developer.mozilla.org/en-US/docs/Web/Web_Components) as possible
+    * Uses as much of the Web Components standard as possible
     * Every Reagenz component is also a Web Component
     * Fully compatible with non-Reagenz Web Components
 * No external dependencies
@@ -79,8 +79,11 @@ The following limitations are known:
     * This is usually fine as long as your components are at a reasonable size
 * Reagenz has no idea of the hierarchy of the components that need to be re-rendered
     * So it's possible that child-components get re-rendered first, just to be trashed because their parent get's re-rendered
+* It's not possible to update a state property and use it in the same component
+    * This would cause focus issues: `<input type="text" value="${searchValue}" $input="updateSearchValue">`
 * No complete separation of apps
-    * It's not possible to have different components with the same tag in two or more apps 
+    * It's not possible to have different components with the same tag in two or more apps
+    * Multiple instances of the same app are not possible
 * No out of the box TypeScript support
 
 ## Getting Started
