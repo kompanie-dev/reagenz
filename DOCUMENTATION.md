@@ -12,33 +12,19 @@ This file is the one which gets added to the HTML.
 <script src="./my-app-name/my-app-name.setup.js" type="module"></script>
 ```
 
-### Registering Components
+### Registering Web Components
 
-After creating and linking the file you need to register your components.
-There are two functions for registering Web Components:
-* `registerReagenzComponents` is used for Reagenz-based Web Components only
-* `registerWebComponents` is used for standard Web Components
-
-`registerReagenzComponents` is converting the component's class name from something like `MyMainComponent` to `my-main` automatically, checks if a Web Component with this name is not added yet and then calls `customElements.define()`.
-If you want to know how the names are generated, take a look at `Reagenz.classNameToHtmlTag()`.
-
-`registerWebComponents` is checking if a Web Component with the specified name is not added yet and then calls `customElements.define()`.
+After creating and linking the file you need to register your web components, if you use any.
+`Injector.registerWebComponents` is checking if a Web Component with the specified name is not added yet and then calls `customElements.define()`.
 If you have your own logic for registering standard Web Components, that's completly fine too.
 Just don't forget to register them in some way before using them.
-
 
 ```js
 // Registers a non-Reagenz Web Component
 // In this example it will be available as 'example-web-component' in HTML
-Reagenz.registerWebComponents({
+Registry.registerWebComponents({
     "example-web-component": ExampleWebComponent
 });
-
-// Registers a Reagenz Web Component
-// In this example it will be available as my-main in HTML
-Reagenz.registerReagenzComponents([
-    MyMainComponent
-]);
 ```
 
 ### Setting up Dependency Injection
@@ -49,7 +35,7 @@ Then you need to inject this dependencies into every component which should be a
 The dependencies will be available as a property called `dependencies` in the components, as seen in an example later in this documentation.
 
 ```js
-Reagenz.injectDependencies(
+Injector.injectDependencies(
     {
         logger: console,
         store: testStore
@@ -60,10 +46,10 @@ Reagenz.injectDependencies(
 
 ### Starting the application
 
-After setting up your components and the dependency injection, you can start your app using the `Reagenz.startApp()` function.
+After setting up your components and the dependency injection, you can start your app using the `Launcher.startApp()` function.
 
 ```js
-Reagenz.startApp(
+Launcher.startApp(
     MyMainComponent,
     document.getElementById("my-app-container")
 );
@@ -138,6 +124,8 @@ The `$click` attribute specifies the name of the function which should be execut
 If you want to handle the `change` event, you can use `$change="..."`, etc.
 Every event supported by [addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) can be bound by using the $-prefix.
 
+Reagenz will also warn you if you are trying to connect an event attribute to a non-existing function, like the `$input` attribute does in the example below.
+
 ```js
 import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/test.selector.js";
@@ -153,7 +141,7 @@ export class MyMainComponent extends Component {
 
     render({ count }) {
         return /*html*/`
-            <div $click="clickCallback">${count}</div>
+            <div $click="clickCallback" $input="nonExistingFunction">${count}</div>
         `;
     }
 
@@ -192,10 +180,12 @@ export class MyAboutButton extends Component {
 ```
 
 ## Store access
-Every component has access to the store via it's `store` property.
+Every component has access to the store via the `dependencies.store` property.
+If you only use selectors in the `render()` function and only dispatch actions using the Reagenz `dispatch()` function, you dont need to access the store directly at all.
 While every component has this property, it's fine to not use selectors and stores at all and create a dumb component.
 It's also possible to use standard Web Components as dumb components and manage the store selectors and actions in a parent Reagenz component.
 Keep in mind that you need to inject a store if you want to use selectors or dispatch actions in your component.
+Reagenz will throw an error if you try to dispatch an action without injecting a store.
 
 ```js
 import { Component } from "@kompanie/reagenz";
@@ -203,14 +193,14 @@ import { countUp } from "../store/test.actions.js";
 
 export class MyMainComponent extends Component {
     clickCallback() {
-        this.store.dispatch(countUp());
+        this.dispatch(countUp());
     }
 }
 ```
 
 ## Dependency injection in components
 To access the dependencies you injected before, you can use the `dependencies` property in the component.
-In this example a click would cause a console.log execution, since the `Reagenz.injectDependencies` call in the `Setting up Dependency Injection` sets the `logger` dependency to the browsers native `console`.
+In this example a click would cause a console.log execution, since the `Injector.injectDependencies` call in the `Setting up Dependency Injection` sets the `logger` dependency to the browsers native `console`.
 
 If you would want to replace the logger with something else, the only thing you would need to change is the `logger` property of the `injectDependencies` call.
 ```js
@@ -229,6 +219,8 @@ export class ReaTaskAboutPageComponent extends Component {
     }
 }
 ```
+If you forget to inject a dependency and you are trying to access it, Reagenz will log a warning and tell you how to do so.
+
 
 ## Looping HTML elements
 Since a lot of components are iterating through arrays and convert the data into HTML, Reagenz has a helper function called `forEach`.
