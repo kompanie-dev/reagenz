@@ -46,15 +46,15 @@ export class MyCountComponent extends Component {
         });
     }
 
-    // This function gets bound by the $click attribute seen in render()
+    // This function gets executed by the $click attribute seen in render()
     // It only fires for the element with the $click attribute
-    // You can also bind other events with $change, $input etc.
+    // You can also connect other events with $change, $input etc.
     buttonClickEvent() {
         this.dispatch(countUp(1));
     }
 
     // This function generates the innerHTML of the component.
-    // In this case it also accesses the count selector, specified in the constructor.
+    // In this case it also accesses the count selector specified in the constructor.
     render({ count }) {
         return /*html*/`
             <div>Current value: ${count}</div>
@@ -65,22 +65,19 @@ export class MyCountComponent extends Component {
 
 ## Structure
 The repository consists of two folders:
-* `demo`: Contains two apps to play around with
+* `demo`: A demo project containing two apps to play around with
     * `notes`: A note app
     * `shared`: Components shared between the apps
     * `tasks`: A ToDo app
 * `source`: The source code of the Reagenz library
 
 ## Limitations
-The simplicity of Reagenz comes at the cost of some performance optimizations and features.
-
-The following limitations are known:
 * Reagenz currently re-renders the whole component even if only a small part of it's DOM is affected
     * This is usually fine as long as your components are at a reasonable size
 * Reagenz has no idea of the hierarchy of the components that need to be re-rendered
-    * So it's possible that child-components get re-rendered first, just to be trashed because their parent get's re-rendered
+    * It's possible that child-components get re-rendered first, just to be trashed because their parent get's re-rendered
 * It's not possible to update a state property and use it in the same component
-    * This example would cause focus issues: `<input type="text" value="${searchValue}" $input="updateSearchValue">`
+    * This example would cause focus issues if `updateSearchValue` would update `searchValue` while you type in the input: `<input type="text" value="${searchValue}" $input="updateSearchValue">`
 * No complete separation of apps
     * It's not possible to have different components with the same tag in two or more apps
     * Multiple instances of the same app are not possible

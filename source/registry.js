@@ -1,9 +1,9 @@
 /**
- * A helper class for registering web components.
+ * A helper class for registering Web Components.
  */
 export class Registry {
     /**
-     * Registers web components using an object and skips already registered ones.
+     * Registers Web Components using an object and skips already registered ones.
      * @param {Object} componentConfig An object containing keys and the component class ({ "test-element": TestElementComponent, ... }).
      */
     static registerWebComponents(componentConfig) {

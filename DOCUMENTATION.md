@@ -12,12 +12,36 @@ This file is the one which gets added to the HTML.
 <script src="./my-app-name/my-app-name.setup.js" type="module"></script>
 ```
 
+### Registering Reagenz Components
+After creating and linking the file you need to register your Reagenz Components in your `*.setup.js`.
+First of all make sure that all components call `Component.define` in their class.
+
+```js
+Component.define("my-main-component", MyMainComponent);
+```
+
+You have two options to import the component.
+If you are not injecting any dependencies into your component you can import the component the following way:
+```js
+import "./components/my-main.component.js";
+```
+
+If you need dependency injection you need to access the class directly.
+You can use the following way to import the component:
+```js
+import { MyMainComponent } from "./components/my-main.component.js";
+```
+
 ### Registering Web Components
 
-After creating and linking the file you need to register your web components, if you use any.
-`Injector.registerWebComponents` is checking if a Web Component with the specified name is not added yet and then calls `customElements.define()`.
-If you have your own logic for registering standard Web Components, that's completly fine too.
-Just don't forget to register them in some way before using them.
+Web Components are registered using `Registry.registerWebComponents()`.
+The function is checking if a Web Component with the specified name is not added yet and then calls `customElements.define()`.
+
+You can also use your own logic for registering standard Web Components.
+Just keep in mind:
+* You need to register them before using them
+* If you have multiple apps using the same Web Component you should register them in every `*.setup.js` file
+    * That means you also have to take care that your component get's only added once, since `customElements.define()` throws an error otherwise
 
 ```js
 // Registers a non-Reagenz Web Component

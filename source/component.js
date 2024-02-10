@@ -42,14 +42,14 @@ export class Component extends HTMLElement {
     }
 
     /**
-     * The default callback function when web components get added to the DOM.
+     * The default callback function when Web Components get added to the DOM.
      */
     connectedCallback() {
         this.onConnect?.();
     }
 
     /**
-     * The default callback function when web components get removed from the DOM.
+     * The default callback function when Web Components get removed from the DOM.
      */
     disconnectedCallback() {
         this.#unsubscribeCallback?.();
