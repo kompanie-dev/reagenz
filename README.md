@@ -80,7 +80,7 @@ The following limitations are known:
 * Reagenz has no idea of the hierarchy of the components that need to be re-rendered
     * So it's possible that child-components get re-rendered first, just to be trashed because their parent get's re-rendered
 * It's not possible to update a state property and use it in the same component
-    * This would cause focus issues: `<input type="text" value="${searchValue}" $input="updateSearchValue">`
+    * This example would cause focus issues: `<input type="text" value="${searchValue}" $input="updateSearchValue">`
 * No complete separation of apps
     * It's not possible to have different components with the same tag in two or more apps
     * Multiple instances of the same app are not possible

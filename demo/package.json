@@ -1,0 +1,13 @@
+{
+        "type": "module",
+        "scripts": {
+                "preview": "vite preview --port 8000",
+                "start": "vite --force --port 8000"
+        },
+        "files": [
+                "/source"
+        ],
+        "devDependencies": {
+                "vite": "5.1.1"
+        }
+}
