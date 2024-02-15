@@ -1,3 +1,5 @@
+import { HtmlEscaper } from "./htmlEscaper.js";
+
 /**
  * Represents a store, which can dispatch actions, select data from the state and subscribe to changes.
  */
@@ -31,11 +33,20 @@ export class Store {
     }
 
     /**
-     * Executes the give selector function against the current state and returns the result.
+     * Executes the given selector function against the current state and returns the escaped result.
      * @param {Function} selector The selector function which should be executed.
-     * @returns {any} The result of the selector function
+     * @returns {any} The result of the selector function, with all properties escaped.
      */
     select(selector) {
+        return HtmlEscaper.escapeObject(selector(this.state));
+    }
+
+    /**
+     * Executes the given selector function against the current state and returns the unescaped result.
+     * @param {Function} selector The selector function which should be executed.
+     * @returns {any} The result of the selector function, with all properties escaped.
+     */
+    insecureSelect(selector) {
         return selector(this.state);
     }
 
