@@ -24,5 +24,5 @@ export const reaNoteNetworkMiddleware = (store, next, action) => {
             break;
     }
 
-    return next(action);
+    return next();
 };
