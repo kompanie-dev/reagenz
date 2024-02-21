@@ -11,22 +11,24 @@ export class HtmlEscaper {
         if (typeof unsafeObject === "string") {
             return HtmlEscaper.escapeString(unsafeObject);
         }
+
         if (Array.isArray(unsafeObject)) {
             return unsafeObject.map(item => HtmlEscaper.escapeObject(item));
         }
-        if (typeof unsafeObject === "object" && unsafeObject !== null) {
-            const escapedObject = {};
-    
-            for (const key in unsafeObject) {
-                if (Object.prototype.hasOwnProperty.call(unsafeObject, key)) {
-                    escapedObject[key] = HtmlEscaper.escapeObject(unsafeObject[key]);
-                }
-            }
-    
-            return escapedObject;
+
+        if (unsafeObject === null || typeof unsafeObject !== "object") {
+            return unsafeObject;
         }
-    
-        return unsafeObject;
+
+        const escapedObject = {};
+
+        for (const key in unsafeObject) {
+            if (Object.prototype.hasOwnProperty.call(unsafeObject, key)) {
+                escapedObject[key] = HtmlEscaper.escapeObject(unsafeObject[key]);
+            }
+        }
+
+        return escapedObject;
     }
 
     /**
