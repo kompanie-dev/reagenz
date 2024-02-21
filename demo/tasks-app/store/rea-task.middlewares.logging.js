@@ -5,5 +5,5 @@ export const reaTaskLoggingMiddleware = (store, next, action) => {
         console.log(action);
     }
 
-    return next();
+    next();
 };

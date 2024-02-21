@@ -26,5 +26,5 @@ export const reaTaskNetworkMiddleware = (store, next, action) => {
             break;
     }
 
-    return next();
+    next();
 };

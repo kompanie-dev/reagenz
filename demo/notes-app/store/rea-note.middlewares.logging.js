@@ -5,5 +5,5 @@ export const reaNoteLoggingMiddleware = (store, next, action) => {
         console.log(action);
     }
 
-    return next();
+    next();
 };
