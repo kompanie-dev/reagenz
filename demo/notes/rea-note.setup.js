@@ -1,7 +1,10 @@
-import { Injector, Launcher, Registry } from "../../index.js";
+import { Injector, Launcher, Registry, Store } from "../../index.js";
+
+import { reaNoteNetworkMiddleware } from "./store/rea-note.middlewares.network.js";
+import { reaNoteReducer, reaNoteInitialState } from "./store/rea-note.reducer.js";
+import { reaNoteLoggingMiddleware } from "./store/rea-note.middlewares.logging.js";
 
 import { ReaNoteMainComponent } from "./components/rea-note-main.component.js";
-import { reaNoteStore } from "./store/rea-note.store.js";
 
 import { ExampleWebComponent } from "./webComponents/exampleWebComponent.js";
 
@@ -15,7 +18,7 @@ Registry.registerWebComponents({
 Injector.injectDependencies(
     {
         logger: console,
-        store: reaNoteStore
+        store: new Store(reaNoteReducer, reaNoteInitialState, [reaNoteLoggingMiddleware, reaNoteNetworkMiddleware])
     },
     [ReaNoteMainComponent]
 );

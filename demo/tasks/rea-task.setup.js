@@ -1,4 +1,4 @@
-import { Injector, Launcher } from "../../index.js";
+import { Injector, Launcher, Store } from "../../index.js";
 
 import "../shared/components/loadingIconComponent.js";
 
@@ -12,7 +12,12 @@ import { ReaTaskTaskListComponent } from "./components/rea-task-task-list.compon
 import { ReaTaskTimeDisplayComponent } from "./components/rea-task-time-display.component.js";
 
 import { updateRoute } from "./store/rea-task.actions.js";
-import { reaTaskStore } from "./store/rea-task.store.js";
+
+import { reaTaskLoggingMiddleware } from "./store/rea-task.middlewares.logging.js";
+import { reaTaskNetworkMiddleware } from "./store/rea-task.middlewares.network.js";
+import { reaTaskReducer, reaTaskInitialState } from "./store/rea-task.reducer.js";
+
+const reaTaskStore = new Store(reaTaskReducer, reaTaskInitialState, [reaTaskLoggingMiddleware, reaTaskNetworkMiddleware]);
 
 if (location.hash === "") {
     location.hash = "#/";
