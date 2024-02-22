@@ -8,7 +8,7 @@ export class TasksTaskListPage extends Component {
 
                 <tasks-time-display></tasks-time-display>
 
-                <a href="/#/about" class="a">ℹ️</a>
+                <a href="#/about" class="a">ℹ️</a>
             </div>
 
             <hr/>

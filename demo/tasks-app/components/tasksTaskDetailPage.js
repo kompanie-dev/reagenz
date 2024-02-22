@@ -31,7 +31,7 @@ export class TasksTaskDetailPage extends Component {
                 <div>${selectedEntryData.done}</div>
 
                 <div class="margin-top-small">
-                    <a href="/#" class="a button">Back to the task list</a>
+                    <a href="#" class="a button">Back to the task list</a>
                 </div>
             </div>`;
     }

@@ -2,7 +2,7 @@ import { Injector, Launcher, Store } from "../../index.js";
 
 import "../shared/components/loadingIconComponent.js";
 
-import "./components/tasksTaskTaskList.js";
+import "./components/tasksTaskListPage.js";
 import { TasksAboutPage } from "./components/tasksAboutPage.js";
 import { TasksMain } from "./components/tasksMain.js";
 import { TasksSearchBar } from "./components/tasksSearchBar.js";

@@ -10,7 +10,7 @@ export class TasksAboutPage extends Component {
                 Welcome to the simple Tasks App!
             </div>
             <div class="margin-top-small">
-                <a href="/#" class="a button">Back to home</a>
+                <a href="#" class="a button">Back to home</a>
             </div>`;
     }
 }
