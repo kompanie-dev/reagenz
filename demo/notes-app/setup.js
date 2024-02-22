@@ -4,7 +4,7 @@ import { notesNetworkMiddleware } from "./store/notes.middlewares.network.js";
 import { reaNoteReducer, reaNoteInitialState } from "./store/notes.reducer.js";
 import { loggingMiddleware } from "../shared/middlewares/loggingMiddleware.js";
 
-import { NotesMain } from "./components/notes-main.js";
+import { NotesMain } from "./components/notesMain.js";
 
 import { ExampleWebComponent } from "./webComponents/exampleWebComponent.js";
 

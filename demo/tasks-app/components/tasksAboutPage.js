@@ -5,7 +5,7 @@ export class TasksAboutPage extends Component {
 
     render() {
         return /*html*/`
-            <h1>About My Tasks App</h1>
+            <h1>About Tasks Demo App</h1>
             <div $click="notExistingClickFunction">
                 Welcome to the simple Tasks App!
             </div>
