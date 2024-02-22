@@ -1,7 +1,7 @@
 import { Component } from "../../../index.js";
-import { removeTask, saveEntriesRequest, updateTask } from "../store/rea-task.actions.js";
+import { removeTask, saveEntriesRequest, updateTask } from "../store/tasks.actions.js";
 
-export class ReaTaskTaskItemComponent extends Component {
+export class TasksTaskItem extends Component {
     render() {
         const id = this.getAttribute("task-id");
         const isDone = this.getBoolAttribute("done");
@@ -18,7 +18,7 @@ export class ReaTaskTaskItemComponent extends Component {
 
     styles() {
         return /*css*/`
-            rea-task-task-item div span {
+            tasks-task-item div span {
                 display: inline-block;
                 width: 170px;
             }
@@ -52,4 +52,4 @@ export class ReaTaskTaskItemComponent extends Component {
     }
 }
 
-Component.define("rea-task-task-item", ReaTaskTaskItemComponent);
+Component.define("tasks-task-item", TasksTaskItem);

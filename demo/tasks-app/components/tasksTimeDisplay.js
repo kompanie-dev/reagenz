@@ -1,8 +1,8 @@
 import { Component } from "../../../index.js";
-import { setTime } from "../store/rea-task.actions.js";
-import { getTime } from "../store/rea-task.selectors.js";
+import { setTime } from "../store/tasks.actions.js";
+import { getTime } from "../store/tasks.selectors.js";
 
-export class ReaTaskTimeDisplayComponent extends Component {
+export class TasksTimeDisplay extends Component {
     #intervalID;
 
     constructor() {
@@ -45,4 +45,4 @@ export class ReaTaskTimeDisplayComponent extends Component {
     }
 }
 
-Component.define("rea-task-time-display", ReaTaskTimeDisplayComponent);
+Component.define("tasks-time-display", TasksTimeDisplay);

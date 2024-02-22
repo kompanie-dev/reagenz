@@ -1,6 +1,6 @@
-import { loadEntriesSuccess, saveEntriesSuccess } from "./rea-task.actions.js";
+import { loadEntriesSuccess, saveEntriesSuccess } from "./tasks.actions.js";
 
-export const reaTaskNetworkMiddleware = (store, next, action) => {
+export const tasksNetworkMiddleware = (store, next, action) => {
     switch (action.type) {
         case "TASK_LOAD_ENTRIES_REQUEST": {
                 setTimeout(

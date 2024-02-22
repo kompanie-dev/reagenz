@@ -1,6 +1,6 @@
 import { Component } from "../../../index.js";
 
-export class ReaTaskAboutPageComponent extends Component {
+export class TasksAboutPage extends Component {
     #logger = this.dependencies.notExistingDependency;
 
     render() {
@@ -15,4 +15,4 @@ export class ReaTaskAboutPageComponent extends Component {
     }
 }
 
-Component.define("rea-task-about-page", ReaTaskAboutPageComponent);
+Component.define("tasks-about-page", TasksAboutPage);

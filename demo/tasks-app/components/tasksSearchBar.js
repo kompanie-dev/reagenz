@@ -1,7 +1,7 @@
 import { Component } from "../../../index.js";
-import { setSearchValue } from "../store/rea-task.actions.js";
+import { setSearchValue } from "../store/tasks.actions.js";
 
-export class ReaTaskSearchBarComponent extends Component {
+export class TasksSearchBar extends Component {
     render() {
         return /*html*/`
             <input type="text" class="input" $input="inputSearchValueEvent" placeholder="Search...">
@@ -13,4 +13,4 @@ export class ReaTaskSearchBarComponent extends Component {
     }
 }
 
-Component.define("rea-task-search-bar", ReaTaskSearchBarComponent);
+Component.define("tasks-search-bar", TasksSearchBar);

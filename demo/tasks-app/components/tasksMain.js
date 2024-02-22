@@ -1,8 +1,8 @@
 import { Component } from "../../../index.js";
-import { loadEntriesRequest, updateRoute } from "../store/rea-task.actions.js";
-import { getRoute } from "../store/rea-task.selectors.js";
+import { loadEntriesRequest, updateRoute } from "../store/tasks.actions.js";
+import { getRoute } from "../store/tasks.selectors.js";
 
-export class ReaTaskMainComponent extends Component {
+export class TasksMain extends Component {
     constructor() {
         super({
             selectors: {
@@ -13,17 +13,17 @@ export class ReaTaskMainComponent extends Component {
 
     render({ route }) {
         if (route === "" || route === "#/") {
-            return /*html*/`<rea-task-task-list-page></rea-task-task-list-page>`;
+            return /*html*/`<tasks-task-list-page></tasks-task-list-page>`;
         }
 
         if (route === "#/about") {
-            return /*html*/`<rea-task-about-page></rea-task-about-page>`;
+            return /*html*/`<tasks-about-page></tasks-about-page>`;
         }
 
         if (route.startsWith("#/tasks/") === true) {
             const taskId = route.replace("#/tasks/", "");
 
-            return /*html*/`<rea-task-task-detail-page task-id="${taskId}"></rea-task-task-detail-page>`;
+            return /*html*/`<tasks-task-detail-page task-id="${taskId}"></tasks-task-detail-page>`;
         }
 
         return /*html*/`<h1>Not Found</h1>`;
@@ -35,4 +35,4 @@ export class ReaTaskMainComponent extends Component {
     }
 }
 
-Component.define("rea-task-main", ReaTaskMainComponent);
+Component.define("tasks-main", TasksMain);

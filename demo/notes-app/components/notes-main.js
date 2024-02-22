@@ -1,8 +1,8 @@
 import { Component } from "../../../index.js";
-import { getNotes } from "../store/rea-note.selector.js";
-import { loadNotesRequest, saveNotesRequest } from "../store/rea-note.actions.js";
+import { getNotes } from "../store/notes.selector.js";
+import { loadNotesRequest, saveNotesRequest } from "../store/notes.actions.js";
 
-export class ReaNoteMainComponent extends Component {
+export class NotesMain extends Component {
     constructor() {
         super({
             selectors: {
@@ -30,4 +30,4 @@ export class ReaNoteMainComponent extends Component {
     }
 }
 
-Component.define("rea-note-main", ReaNoteMainComponent);
+Component.define("notes-main", NotesMain);

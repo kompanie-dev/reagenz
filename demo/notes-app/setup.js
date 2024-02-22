@@ -1,10 +1,10 @@
 import { Injector, Launcher, Registry, Store } from "../../index.js";
 
-import { reaNoteNetworkMiddleware } from "./store/rea-note.middlewares.network.js";
-import { reaNoteReducer, reaNoteInitialState } from "./store/rea-note.reducer.js";
-import { reaNoteLoggingMiddleware } from "./store/rea-note.middlewares.logging.js";
+import { notesNetworkMiddleware } from "./store/notes.middlewares.network.js";
+import { reaNoteReducer, reaNoteInitialState } from "./store/notes.reducer.js";
+import { loggingMiddleware } from "../shared/middlewares/loggingMiddleware.js";
 
-import { ReaNoteMainComponent } from "./components/rea-note-main.component.js";
+import { NotesMain } from "./components/notes-main.js";
 
 import { ExampleWebComponent } from "./webComponents/exampleWebComponent.js";
 
@@ -18,13 +18,13 @@ Registry.registerWebComponents({
 Injector.injectDependencies(
     {
         logger: console,
-        store: new Store(reaNoteReducer, reaNoteInitialState, [reaNoteLoggingMiddleware, reaNoteNetworkMiddleware])
+        store: new Store(reaNoteReducer, reaNoteInitialState, [loggingMiddleware, notesNetworkMiddleware])
     },
-    [ReaNoteMainComponent]
+    [NotesMain]
 );
 
 // Adds the main component to the DOM and starts the application.
 Launcher.startApp(
-    ReaNoteMainComponent,
+    NotesMain,
     document.getElementById("note-app-container")
 );

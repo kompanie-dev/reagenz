@@ -1,8 +1,8 @@
 import { Component, forEach } from "../../../index.js";
-import { addTask, saveEntriesRequest } from "../store/rea-task.actions.js";
-import { getIsLoading, searchEntries } from "../store/rea-task.selectors.js";
+import { addTask, saveEntriesRequest } from "../store/tasks.actions.js";
+import { getIsLoading, searchEntries } from "../store/tasks.selectors.js";
 
-export class ReaTaskTaskListComponent extends Component {
+export class TasksTaskList extends Component {
     constructor() {
         super({
             selectors: {
@@ -16,7 +16,7 @@ export class ReaTaskTaskListComponent extends Component {
         return isLoading ?
             /*html*/`<loading-icon></loading-icon>` : "" +
             forEach(entries, entry =>
-                /*html*/`<rea-task-task-item done="${entry.done}" task-id="${entry.id}">${entry.text}</rea-task-task-item>`
+                /*html*/`<tasks-task-item done="${entry.done}" task-id="${entry.id}">${entry.text}</tasks-task-item>`
             ) +
             /*html*/`<div class="margin-top-small">
                 <input type="text" class="input" $keydown="keydownTaskInputEvent" maxlength="25" ${ isLoading ? "disabled": "" } placeholder="Text" value="" autofocus>
@@ -46,4 +46,4 @@ export class ReaTaskTaskListComponent extends Component {
     }
 }
 
-Component.define("rea-task-task-list", ReaTaskTaskListComponent);
+Component.define("tasks-task-list", TasksTaskList);

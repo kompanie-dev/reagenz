@@ -230,7 +230,7 @@ If you would want to replace the logger with something else, the only thing you 
 ```js
 import { Component } from "@kompanie/reagenz";
 
-export class ReaTaskAboutPageComponent extends Component {
+export class TasksAboutPageComponent extends Component {
     #logger = this.dependencies.logger;
 
     render() {

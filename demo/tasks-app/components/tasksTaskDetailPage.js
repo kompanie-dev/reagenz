@@ -1,7 +1,7 @@
 import { Component } from "../../../index.js";
-import { getSelectedEntryId, getSelectedEntryData } from "../store/rea-task.selectors.js";
+import { getSelectedEntryId, getSelectedEntryData } from "../store/tasks.selectors.js";
 
-export class ReaTaskTaskDetailPageComponent extends Component {
+export class TasksTaskDetailPage extends Component {
     constructor() {
         super({
             selectors: {
@@ -37,4 +37,4 @@ export class ReaTaskTaskDetailPageComponent extends Component {
     }
 }
 
-Component.define("rea-task-task-detail-page", ReaTaskTaskDetailPageComponent);
+Component.define("tasks-task-detail-page", TasksTaskDetailPage);
