@@ -1,4 +1,4 @@
-export const reaTaskInitialState = {
+export const tasksInitialState = {
     entries: [],
     isLoading: true,
     route: "",
@@ -7,7 +7,7 @@ export const reaTaskInitialState = {
     time: new Date().getTime()
 };
 
-export function reaTaskReducer(state = reaTaskInitialState, action) {
+export function tasksReducer(state = tasksInitialState, action) {
     switch (action.type) {
         case "ROUTE_UPDATE": {
             const selectedEntryId = action.route.replace("#/tasks/", "");

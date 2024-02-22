@@ -1,8 +1,8 @@
-export const reaNoteInitialState = {
+export const notesInitialState = {
     notes: ""
 };
 
-export function reaNoteReducer(state = reaNoteInitialState, action) {
+export function notesReducer(state = notesInitialState, action) {
     switch (action.type) {
         case "NOTE_UPDATE": {
             return { ...state, notes: action.notes };

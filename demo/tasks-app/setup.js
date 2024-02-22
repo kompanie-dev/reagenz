@@ -14,10 +14,10 @@ import { TasksTimeDisplay } from "./components/tasksTimeDisplay.js";
 import { updateRoute } from "./store/tasks.actions.js";
 
 import { tasksNetworkMiddleware } from "./store/tasks.middlewares.network.js";
-import { reaTaskReducer, reaTaskInitialState } from "./store/tasks.reducer.js";
+import { tasksReducer, tasksInitialState } from "./store/tasks.reducer.js";
 import { loggingMiddleware } from "../shared/middlewares/loggingMiddleware.js";
 
-const reaTaskStore = new Store(reaTaskReducer, reaTaskInitialState, [loggingMiddleware, tasksNetworkMiddleware]);
+const reaTaskStore = new Store(tasksReducer, tasksInitialState, [loggingMiddleware, tasksNetworkMiddleware]);
 
 if (location.hash === "") {
     location.hash = "#/";

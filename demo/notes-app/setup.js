@@ -1,7 +1,7 @@
 import { Injector, Launcher, Registry, Store } from "../../index.js";
 
 import { notesNetworkMiddleware } from "./store/notes.middlewares.network.js";
-import { reaNoteReducer, reaNoteInitialState } from "./store/notes.reducer.js";
+import { notesReducer, notesInitialState } from "./store/notes.reducer.js";
 import { loggingMiddleware } from "../shared/middlewares/loggingMiddleware.js";
 
 import { NotesMain } from "./components/notesMain.js";
@@ -18,7 +18,7 @@ Registry.registerWebComponents({
 Injector.injectDependencies(
     {
         logger: console,
-        store: new Store(reaNoteReducer, reaNoteInitialState, [loggingMiddleware, notesNetworkMiddleware])
+        store: new Store(notesReducer, notesInitialState, [loggingMiddleware, notesNetworkMiddleware])
     },
     [NotesMain]
 );
