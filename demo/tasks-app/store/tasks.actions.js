@@ -2,7 +2,7 @@ export const addTask = (id, text) => ({ type: "TASK_ADD", id, text });
 
 export const removeTask = (id) => ({ type: "TASK_REMOVE", id });
 
-export const updateTask = (id, done, text) => ({ type: "TASK_UPDATE", id, done, text });
+export const updateTaskDone = (id, done) => ({ type: "TASK_UPDATE_DONE", id, done });
 
 
 

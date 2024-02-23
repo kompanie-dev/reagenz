@@ -26,11 +26,10 @@ export function tasksReducer(state = tasksInitialState, action) {
             return { ...state, entries: entries };
         }
 
-        case "TASK_UPDATE": {
+        case "TASK_UPDATE_DONE": {
             const entries = [...state.entries];
             const indexToUpdate = state.entries.findIndex(entry => entry.id === action.id);
             entries[indexToUpdate].done = action.done;
-            entries[indexToUpdate].text = action.text;
 
             return { ...state, entries };
         }

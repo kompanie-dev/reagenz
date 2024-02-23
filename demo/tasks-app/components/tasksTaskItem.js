@@ -1,5 +1,5 @@
 import { Component } from "../../../index.js";
-import { removeTask, saveEntriesRequest, updateTask } from "../store/tasks.actions.js";
+import { removeTask, saveEntriesRequest, updateTaskDone } from "../store/tasks.actions.js";
 
 export class TasksTaskItem extends Component {
     render() {
@@ -38,9 +38,8 @@ export class TasksTaskItem extends Component {
     clickDoneCheckboxEvent() {
         const id = this.getAttribute("task-id");
         const done = this.querySelector("input").checked;
-        const text = this.querySelector("span").textContent;
 
-        this.dispatch(updateTask(id, done, text));
+        this.dispatch(updateTaskDone(id, done));
         this.dispatch(saveEntriesRequest());
     }
 
