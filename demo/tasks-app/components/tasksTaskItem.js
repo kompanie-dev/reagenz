@@ -1,4 +1,4 @@
-import { Component } from "../../../index.js";
+import { Component } from "@kompanie/reagenz";
 import { removeTask, saveEntriesRequest, updateTaskDone } from "../store/tasks.actions.js";
 
 export class TasksTaskItem extends Component {

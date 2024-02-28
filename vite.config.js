@@ -8,5 +8,10 @@ export default defineConfig({
             name: "Reagenz",
             fileName: "reagenz"
         }
+    },
+    resolve: {
+        alias: {
+            "@kompanie/reagenz": "/index.js"
+        }
     }
 });

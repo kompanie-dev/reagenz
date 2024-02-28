@@ -1,4 +1,4 @@
-import { Component } from "../../../index.js";
+import { Component } from "@kompanie/reagenz";
 import { loadEntriesRequest, updateRoute } from "../store/tasks.actions.js";
 import { getRoute } from "../store/tasks.selectors.js";
 

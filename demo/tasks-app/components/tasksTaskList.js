@@ -1,4 +1,4 @@
-import { Component, forEach } from "../../../index.js";
+import { Component, forEach } from "@kompanie/reagenz";
 import { addTask, saveEntriesRequest } from "../store/tasks.actions.js";
 import { getIsLoading, searchEntries } from "../store/tasks.selectors.js";
 

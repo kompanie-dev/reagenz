@@ -5,6 +5,19 @@
 <link rel="stylesheet" href="shared/styles/elements.css">
 <link rel="stylesheet" href="shared/styles/utilities.css">
 
+<!--
+If you don't want to use a bundler like vite, you can use import maps to
+replace the @kompanie/reagenz imports with actual file names.
+
+<script type="importmap">
+    {
+        "imports": {
+            "@kompanie/reagenz": "<URL_OR_FILEPATH_TO_REAGENZ_JS>"
+        }
+    }
+</script>
+-->
+
 <body class="display-flex gap-24px">
     <div id="task-app-container" class="width-50"></div>
     <div id="note-app-container" class="width-50"></div>

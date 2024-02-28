@@ -10,7 +10,7 @@
         ],
         "scripts": {
                 "build": "vite build",
-                "start": "cd demo && npm start"
+                "start": "vite --force --port 8000"
         },
         "devDependencies": {
                 "vite": "^5.1.4"

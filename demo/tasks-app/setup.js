@@ -1,4 +1,4 @@
-import { Injector, Launcher, Store } from "../../index.js";
+import { Injector, Launcher, Store } from "@kompanie/reagenz";
 
 import "../shared/components/loadingIconComponent.js";
 

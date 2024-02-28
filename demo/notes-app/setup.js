@@ -1,4 +1,4 @@
-import { Injector, Launcher, Registry, Store } from "../../index.js";
+import { Injector, Launcher, Registry, Store } from "@kompanie/reagenz";
 
 import { notesNetworkMiddleware } from "./store/notes.middlewares.network.js";
 import { notesReducer, notesInitialState } from "./store/notes.reducer.js";

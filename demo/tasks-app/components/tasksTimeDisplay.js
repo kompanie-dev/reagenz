@@ -1,4 +1,4 @@
-import { Component } from "../../../index.js";
+import { Component } from "@kompanie/reagenz";
 import { setTime } from "../store/tasks.actions.js";
 import { getTime } from "../store/tasks.selectors.js";
 

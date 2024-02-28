@@ -1,4 +1,4 @@
-import { Component } from "../../../index.js";
+import { Component } from "@kompanie/reagenz";
 
 export class TasksAboutPage extends Component {
     #logger = this.dependencies.notExistingDependency;

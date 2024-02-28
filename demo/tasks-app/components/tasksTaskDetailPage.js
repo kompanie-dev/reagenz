@@ -1,4 +1,4 @@
-import { Component } from "../../../index.js";
+import { Component } from "@kompanie/reagenz";
 import { getSelectedEntryId, getSelectedEntryData } from "../store/tasks.selectors.js";
 
 export class TasksTaskDetailPage extends Component {

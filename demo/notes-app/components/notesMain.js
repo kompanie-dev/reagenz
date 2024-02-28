@@ -1,4 +1,4 @@
-import { Component } from "../../../index.js";
+import { Component } from "@kompanie/reagenz";
 import { getNotes } from "../store/notes.selector.js";
 import { loadNotesRequest, saveNotesRequest } from "../store/notes.actions.js";
 

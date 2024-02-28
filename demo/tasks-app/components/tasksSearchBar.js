@@ -1,4 +1,4 @@
-import { Component } from "../../../index.js";
+import { Component } from "@kompanie/reagenz";
 import { setSearchValue } from "../store/tasks.actions.js";
 
 export class TasksSearchBar extends Component {
