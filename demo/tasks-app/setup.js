@@ -2,6 +2,8 @@ import { Injector, Launcher, Store } from "@kompanie/reagenz";
 
 import "../shared/components/loadingIconComponent.js";
 
+import "./components/tasksAboutDialog.js";
+import "./components/tasksDialogWrapper.js";
 import "./components/tasksTaskListPage.js";
 import { TasksAboutPage } from "./components/tasksAboutPage.js";
 import { TasksMain } from "./components/tasksMain.js";

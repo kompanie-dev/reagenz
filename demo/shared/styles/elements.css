@@ -3,12 +3,15 @@
 }
 
 body,
+dialog,
 .button,
+.dialog-button,
 .input,
 .textarea {
     background: #000;
     color: #ccc;
     font-family: Arial, sans-serif;
+    font-size: 1rem;
 }
 
 .button,
@@ -16,7 +19,7 @@ body,
 .textarea {
     border: 1px solid #ccc;
     border-radius: 13px;
-    padding: 5px;
+    padding: 5px 8px;
 }
 
 .button:hover {
@@ -29,4 +32,16 @@ body,
     background: #999;
     color: #333;
     cursor: not-allowed;
+}
+
+.dialog-button {
+    border: none;
+    cursor: pointer;
+}
+
+dialog {
+    border: 1px solid #ccc;
+}
+::backdrop {
+    background-color: rgba(0, 0, 0, .7);
 }
