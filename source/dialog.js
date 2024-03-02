@@ -32,12 +32,28 @@ export class Dialog {
         }
 
         const dialogComponentInstance = new this.#dialogComponentClass();
+        const title = dialogComponentInstance.querySelector("[dialog-part='title']").content.textContent;
+        const dialogHeader = document.createElement("b");
+        dialogHeader.innerHTML = title;
+
+        const closeButton = document.createElement("button");
+        closeButton.className = "dialog-button";
+        closeButton.innerHTML = "✖";
+        closeButton.type = "submit";
+        closeButton.value = "cancel";
+
+        const form = document.createElement("form");
+        form.method = "dialog";
+        form.append(dialogHeader, dialogComponentInstance);
+
         this.#dialogElement = document.createElement("dialog");
-        this.#dialogElement.append(dialogComponentInstance);
+        this.#dialogElement.append(form);
 
         if (isClosable === true) {
+            form.insertBefore(closeButton, dialogHeader);
+
             this.#dialogElement.addEventListener("click", (event) => {
-                if (event.target === this.#dialogElement) {
+                if (event.target === this.#dialogElement || isClosable === true && event.target.value === "cancel") {
                     this.#dialogElement.close("cancel");
                 }
             });
@@ -51,7 +67,7 @@ export class Dialog {
 
             callback?.({
                 formData,
-                result: event.target.returnValue
+                success: event.target.returnValue !== "cancel"
             });
         });
 

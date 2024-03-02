@@ -13,17 +13,27 @@ export class TasksAboutPage extends Component {
             </div>
 
             <div class="margin-top-small">
-                <button $click="showDialog" class="button">Show Example About Dialog</button>
+                <button $click="showRequiredDialog" class="button">Show Required About Dialog</button>
+                <button $click="showNotRequiredDialog" class="button">Show Not Required About Dialog</button>
+
                 <a href="#" class="a button">Back to home</a>
             </div>`;
     }
 
-    showDialog() {
+    showNotRequiredDialog() {
         const dialog = new Dialog(TasksAboutDialog);
 
         dialog.show((result) => {
             console.log("Dialog Result", result);
-        });
+        }, true);
+    }
+
+    showRequiredDialog() {
+        const dialog = new Dialog(TasksAboutDialog);
+
+        dialog.show((result) => {
+            console.log("Dialog Result", result);
+        }, false);
     }
 }
 
