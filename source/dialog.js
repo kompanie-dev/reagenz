@@ -59,6 +59,12 @@ export class Dialog {
             });
         }
 
+        this.#dialogElement.addEventListener("keydown", (event) => {
+            if (isClosable === false && event.key == "Escape") {
+                event.preventDefault();
+            }
+        });
+
         this.#dialogElement.addEventListener("close", (event) => {
             this.#dialogElement.remove();
 
