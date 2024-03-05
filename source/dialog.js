@@ -27,53 +27,55 @@ export class Dialog {
      * @param {?boolean} isClosable If true, the dialog can be closed by clicking the backdrop. Enabled by default.
      */
     show(callback, isClosable = true) {
-        if (this.#dialogElement?.open === true) {
-            return;
-        }
-
         const dialogComponentInstance = new this.#dialogComponentClass();
         const title = dialogComponentInstance.querySelector("[dialog-part='title']").content.textContent;
-        const dialogHeader = document.createElement("b");
-        dialogHeader.innerHTML = title;
 
-        const closeButton = document.createElement("button");
-        closeButton.className = "dialog-button";
-        closeButton.innerHTML = "✖";
-        closeButton.type = "submit";
-        closeButton.value = "cancel";
+        const html = /*html*/`
+            <form method="dialog">
+                <div>
+                    ${ isClosable ? /*html*/`<button type='submit' value='cancel' class='reagenz-dialog-close-button'>✖</button>` : "" }
+                    <b>${title}</b>
+                </div>
 
-        const form = document.createElement("form");
-        form.method = "dialog";
-        form.append(dialogHeader, dialogComponentInstance);
+                <div class="reagenz-dialog-content"></div>
+            </form>`;
 
-        this.#dialogElement = document.createElement("dialog");
-        this.#dialogElement.append(form);
+        this.#dialogElement = document.createElement('dialog');
+        this.#dialogElement.className = "dialog";
+        this.#dialogElement.innerHTML = html;
 
-        if (isClosable === true) {
-            form.insertBefore(closeButton, dialogHeader);
+        this.#dialogElement
+            .querySelector(".reagenz-dialog-content")
+            .append(dialogComponentInstance);
 
-            this.#dialogElement.addEventListener("click", (event) => {
-                if (event.target === this.#dialogElement || isClosable === true && event.target.value === "cancel") {
-                    this.#dialogElement.close("cancel");
-                }
-            });
-        }
+        this.#dialogElement.addEventListener("click", (event) => {
+            if (isClosable === true && (event.target === this.#dialogElement || event.target.value === "cancel")) {
+                this.#dialogElement.close("cancel");
+            }
+        });
 
         this.#dialogElement.addEventListener("keydown", (event) => {
-            if (isClosable === false && event.key == "Escape") {
+            if (event.key !== "Escape") {
+                return;
+            }
+
+            if (isClosable === true) {
+                this.#dialogElement.close("cancel");
+            }
+            else {
                 event.preventDefault();
             }
         });
 
         this.#dialogElement.addEventListener("close", (event) => {
-            this.#dialogElement.remove();
-
             const formElement = this.#dialogElement.querySelector("[method='dialog']");
             const formData = formElement === null ? null : new FormData(formElement);
 
+            this.#dialogElement.remove();
+
             callback?.({
                 formData,
-                success: event.target.returnValue !== "cancel"
+                returnValue: event.target.returnValue
             });
         });
 

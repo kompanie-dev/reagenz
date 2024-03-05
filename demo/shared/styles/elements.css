@@ -5,9 +5,9 @@
 body,
 dialog,
 .button,
-.dialog-button,
 .input,
-.textarea {
+.textarea,
+.reagenz-dialog-close-button {
     background: #000;
     color: #ccc;
     font-family: Arial, sans-serif;
@@ -28,20 +28,27 @@ dialog,
     cursor: pointer;
 }
 
+.dialog {
+    border: 1px solid #ccc;
+}
+.dialog::backdrop {
+    background: rgba(0, 0, 0, .7);
+}
+
 .input[type=text]:read-only {
     background: #999;
     color: #333;
     cursor: not-allowed;
 }
+.input:invalid {
+    border-color: red;
+    outline: 5px solid red;
+}
 
-.dialog-button {
+.reagenz-dialog-close-button {
     border: none;
     cursor: pointer;
 }
-
-dialog {
-    border: 1px solid #ccc;
-}
-::backdrop {
-    background-color: rgba(0, 0, 0, .7);
+.reagenz-dialog-content {
+    margin-top: 1.5rem;
 }
