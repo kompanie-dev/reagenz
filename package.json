@@ -5,6 +5,7 @@
         "main": "index.js",
         "repository": "github:kompanie-dev/reagenz",
         "type": "module",
+        "sideEffects": false,
         "files": [
                 "/source"
         ],
