@@ -1,3 +1,6 @@
+import "./ifComponent.js";
+import "./forComponent.js";
+
 /**
  * Contains helper functions for starting a Reagenz app.
  */

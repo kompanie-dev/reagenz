@@ -1,4 +1,4 @@
-import { Component, forEach } from "@kompanie/reagenz";
+import { Component } from "@kompanie/reagenz";
 import { addTask, saveEntriesRequest } from "../store/tasks.actions.js";
 import { getIsLoading, searchEntries } from "../store/tasks.selectors.js";
 
@@ -13,15 +13,20 @@ export class TasksTaskList extends Component {
     }
 
     render({ entries, isLoading }) {
-        return isLoading ?
-            /*html*/`<loading-icon></loading-icon>` : "" +
-            forEach(entries, entry =>
-                /*html*/`<tasks-task-item done="${entry.done}" task-id="${entry.id}">${entry.text}</tasks-task-item>`
-            ) +
-            /*html*/`<div class="margin-top-small">
+        return /*html*/`
+            <x-if condition="${ isLoading === true }">
+                <loading-icon></loading-icon>
+            </x-if>
+
+            <x-for array='${JSON.stringify(entries)}'>
+                <tasks-task-item done="@element(done)" task-id="@element(id)">@element(text)</tasks-task-item>
+            </x-for>
+
+            <div class="margin-top-small">
                 <input type="text" class="input" $keydown="keydownTaskInputEvent" maxlength="25" ${ isLoading ? "disabled": "" } placeholder="Text" value="" autofocus>
                 <button class="button" $click="clickAddTaskEvent" ${ isLoading ? "disabled": "" }>Add</button>
-            </div>`;
+            </div>
+        `;  
     }
 
     clickAddTaskEvent() {

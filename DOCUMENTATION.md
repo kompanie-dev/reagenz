@@ -247,10 +247,10 @@ If you forget to inject a dependency and you are trying to access it, Reagenz wi
 
 
 ## Looping HTML elements
-Since a lot of components are iterating through arrays and convert the data into HTML, Reagenz has a helper function called `forEach`.
+Since a lot of components are iterating through arrays and convert the data into HTML, Reagenz has a helper component called `x-for`.
 
 ```js
-import { Component, forEach } from "@kompanie/reagenz";
+import { Component } from "@kompanie/reagenz";
 import { getEntries } from "../store/test.selectors.js";
 
 export class MyListComponent extends Component {
@@ -263,14 +263,10 @@ export class MyListComponent extends Component {
     }
 
     render({ entries }) {
-        return `<div>` +
-            forEach(entries, entry => /*html*/`<my-item item-id="${entry.id}">${entry.text}</my-item>`) +
-            `</div>`;
+        return /*html*/`<div>
+            <x-for array='${JSON.stringify(entries)}'>
+                <tasks-task-item done="@element(done)" task-id="@element(id)">@index(): @element(text)</tasks-task-item>
+            </x-for>
+        </div>`;
     }
 }
-```
-If you also need the index of the looping function you can access it via the second parameter.
-
-```js
-forEach(entries, (entry, index) => /*html*/`<my-item item-id="${entry.id}">${index}</my-item>`);
-```
