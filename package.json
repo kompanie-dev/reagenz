@@ -1,13 +1,14 @@
 {
         "name": "@kompanie/reagenz",
-        "version": "5.0.0",
+        "version": "5.1.0",
         "license": "MIT",
         "main": "index.js",
         "repository": "github:kompanie-dev/reagenz",
         "type": "module",
         "sideEffects": false,
         "files": [
-                "/source"
+                "/source",
+                "/template-project"
         ],
         "scripts": {
                 "build": "vite build",
