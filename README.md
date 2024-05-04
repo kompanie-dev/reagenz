@@ -72,12 +72,12 @@ The repository consists of two folders:
 * `source`: The source code of the Reagenz library
 
 ## Limitations
-* Reagenz currently re-renders the whole component even if only a small part of it's DOM is affected
+* Reagenz currently re-renders the whole component even if only a small part of its DOM is affected
     * This is usually fine as long as your components are at a reasonable size
 * Reagenz has no idea of the hierarchy of the components that need to be re-rendered
     * It's possible that child-components get re-rendered first, just to be trashed because their parent get's re-rendered
 * It's not possible to update a state property and use it in the same component
-    * This example would cause focus issues if `updateSearchValue` would update `searchValue` while you type in the input: `<input type="text" value="${searchValue}" $input="updateSearchValue">`
+    * This example would cause focus issues if `updateSearchValue` updated `searchValue` while you type in the input: `<input type="text" value="${searchValue}" $input="updateSearchValue">`
 * No complete separation of apps
     * It's not possible to have different components with the same tag in two or more apps
     * Multiple instances of the same app are not possible

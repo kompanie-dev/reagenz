@@ -4,7 +4,7 @@
 
 ### HTML
 
-Every Reagenz app should have it's own JavaScript file setting up the application.
+Every Reagenz app should have its own JavaScript file setting up the application.
 Usually you want to name it something like `my-app-name.setup.js`.
 This file is the one which gets added to the HTML.
 
@@ -109,7 +109,7 @@ The main way of retrieving data in smart components is through selector function
 
 In the following test component you can see a selector function called `getCount`, which gets executed in the background by the Reagenz component system.
 The value is then available in the `render` function as `count`, as specified in the constructor.
-The `render` function then can access it's data directly.
+The `render` function then can access its data directly.
 
 ```js
 import { Component } from "@kompanie/reagenz";
@@ -206,7 +206,7 @@ export class MyAboutButton extends Component {
 ## Store access
 Every component has access to the store via the `dependencies.store` property.
 If you only use selectors in the `render()` function and only dispatch actions using the Reagenz `dispatch()` function, you don't need to access the store directly at all.
-While every component has this property, it's fine to not use selectors and stores at all and create a dumb component.
+While every component has this property, it is fine to not use selectors and stores at all and create a dumb component.
 It's also possible to use standard Web Components as dumb components and manage the store selectors and actions in a parent Reagenz component.
 Keep in mind that you need to inject a store if you want to use selectors or dispatch actions in your component.
 Reagenz will throw an error if you try to dispatch an action without injecting a store.
