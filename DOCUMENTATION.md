@@ -9,27 +9,27 @@ Usually you want to name it something like `my-app-name.setup.js`.
 This file is the one which gets added to the HTML.
 
 ```html
-<script src="./my-app-name/my-app-name.setup.js" type="module"></script>
+<script src="./my-app-name/setup.js" type="module"></script>
 ```
 
 ### Registering Reagenz Components
-After creating and linking the file you need to register your Reagenz Components in your `*.setup.js`.
+After creating and linking the file you need to register your Reagenz Components in your `setup.js`.
 First of all make sure that all components call `Component.define` in their class.
 
 ```js
-Component.define("my-main-component", MyMainComponent);
+Component.define("my-main-page", MyMainPage);
 ```
 
 You have two options to import the component.
 If you are not injecting any dependencies into your component you can import the component the following way:
 ```js
-import "./components/my-main.component.js";
+import "./components/myMainPage.js";
 ```
 
 If you need dependency injection you need to access the class directly.
 You can use the following way to import the component:
 ```js
-import { MyMainComponent } from "./components/my-main.component.js";
+import { MyMainPage } from "./components/myMainPage.js";
 ```
 
 ### Registering Web Components
@@ -40,7 +40,7 @@ The function is checking if a Web Component with the specified name is not added
 You can also use your own logic for registering standard Web Components.
 Just keep in mind:
 * You need to register them before using them
-* If you have multiple apps using the same Web Component you should register them in every `*.setup.js` file
+* If you have multiple apps using the same Web Component you should register them in every `setup.js` file
     * That means you also have to take care that your component get's only added once, since `customElements.define()` throws an error otherwise
 
 ```js
@@ -64,7 +64,7 @@ Injector.injectDependencies(
         logger: console,
         store: testStore
     },
-    [MyMainComponent]
+    [MyMainPage]
 );
 ```
 
@@ -74,11 +74,11 @@ After setting up your components and the dependency injection, you can start you
 
 ```js
 Launcher.startApp(
-    MyMainComponent,
+    MyMainPage,
     document.getElementById("my-app-container")
 );
 ```
-Since Reagenz components are internally Web Components, you can also attach them directly in your HTML like this:
+Since Reagenz components are internally Web Components, you could also attach them directly in your HTML like this:
 
 ```html
 <body>
@@ -115,7 +115,7 @@ The `render` function then can access it's data directly.
 import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/test.selector.js";
 
-export class MyMainComponent extends Component {
+export class MyMainPage extends Component {
     constructor() {
         super({
             selectors: {
@@ -138,7 +138,7 @@ Every time an action is dispatched in the Store, all connected components execut
 If the result differs, the entire component gets re-rendered.
 This simple change detection is quite effective and predictable as long as you keep your components at a reasonable size.
 Also be sure to only include selectors in the constructor that you are actually using in the `render` function.
-Otherwise the component might re-render unnecessarily.
+Otherwise the component does unnecessary selector executions and might even re-render.
 
 ## Event system
 Since attaching event handlers using attributes like `onclick` is messy if you want to use it in Web Components and `addAddEventListener` is annoying, Reagenz has a small custom event system.
@@ -154,7 +154,7 @@ Reagenz will also warn you if you are trying to connect an event attribute to a 
 import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/test.selector.js";
 
-export class MyMainComponent extends Component {
+export class MyMainPage extends Component {
     constructor() {
         super({
             selectors: {
@@ -205,7 +205,7 @@ export class MyAboutButton extends Component {
 
 ## Store access
 Every component has access to the store via the `dependencies.store` property.
-If you only use selectors in the `render()` function and only dispatch actions using the Reagenz `dispatch()` function, you dont need to access the store directly at all.
+If you only use selectors in the `render()` function and only dispatch actions using the Reagenz `dispatch()` function, you don't need to access the store directly at all.
 While every component has this property, it's fine to not use selectors and stores at all and create a dumb component.
 It's also possible to use standard Web Components as dumb components and manage the store selectors and actions in a parent Reagenz component.
 Keep in mind that you need to inject a store if you want to use selectors or dispatch actions in your component.
@@ -215,7 +215,7 @@ Reagenz will throw an error if you try to dispatch an action without injecting a
 import { Component } from "@kompanie/reagenz";
 import { countUp } from "../store/test.actions.js";
 
-export class MyMainComponent extends Component {
+export class MyMainPage extends Component {
     clickCallback() {
         this.dispatch(countUp());
     }
@@ -230,7 +230,7 @@ If you would want to replace the logger with something else, the only thing you 
 ```js
 import { Component } from "@kompanie/reagenz";
 
-export class TasksAboutPageComponent extends Component {
+export class TasksAboutPage extends Component {
     #logger = this.dependencies.logger;
 
     render() {
@@ -245,6 +245,32 @@ export class TasksAboutPageComponent extends Component {
 ```
 If you forget to inject a dependency and you are trying to access it, Reagenz will log a warning and tell you how to do so.
 
+## if conditions
+Most apps require some kind of templating to hide or show content based on the value of a variable.
+In Reagenz this is done via the `x-if` helper component.
+
+```js
+import { Component } from "@kompanie/reagenz";
+import { getEntries } from "../store/test.selectors.js";
+
+export class MyLoadingSpinner extends Component {
+    constructor() {
+        super({
+            selectors: {
+                entries: getIsLoading
+            }
+        });
+    }
+
+    render({ isLoading }) {
+        return /*html*/`<div>
+            <x-if condition="${ isLoading === true }">
+                <h1>This block is visible while isLoading is true</h1>
+            </x-if>
+        </div>`;
+    }
+}
+```
 
 ## Looping HTML elements
 Since a lot of components are iterating through arrays and convert the data into HTML, Reagenz has a helper component called `x-for`.
@@ -253,7 +279,7 @@ Since a lot of components are iterating through arrays and convert the data into
 import { Component } from "@kompanie/reagenz";
 import { getEntries } from "../store/test.selectors.js";
 
-export class MyListComponent extends Component {
+export class MyListView extends Component {
     constructor() {
         super({
             selectors: {
@@ -270,3 +296,4 @@ export class MyListComponent extends Component {
         </div>`;
     }
 }
+```
