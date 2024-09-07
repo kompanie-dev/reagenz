@@ -291,7 +291,7 @@ export class MyListView extends Component {
     render({ entries }) {
         return /*html*/`<div>
             <x-for array='${JSON.stringify(entries)}'>
-                <tasks-task-item done="@element(done)" task-id="@element(id)">@index(): @element(text)</tasks-task-item>
+                <tasks-task-item done="@item(done)" task-id="@item(id)">@index(): @item(text)</tasks-task-item>
             </x-for>
         </div>`;
     }
