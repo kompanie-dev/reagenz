@@ -5,9 +5,7 @@ import { Component } from "./component.js";
  */
 export class IfComponent extends Component {
     render() {
-        const conditionResult = this.getBoolAttribute("condition");
-
-        return (conditionResult === true) ? this.innerHTML : "";
+        return this.getAttribute("condition") === "true" ? this.innerHTML : "";
     }
 }
 
