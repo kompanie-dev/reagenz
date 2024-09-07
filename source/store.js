@@ -1,7 +1,7 @@
 import { HtmlEscaper } from "./htmlEscaper.js";
 
 /**
- * Represents a store, which can dispatch actions, select data from the state and subscribe to changes.
+ * A store, which can dispatch actions, select data from the state and subscribe to changes.
  */
 export class Store {
     #listeners = [];
