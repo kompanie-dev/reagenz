@@ -30,7 +30,9 @@ export class Dialog {
         const dialogComponentInstance = new this.#dialogComponentClass();
         const title = dialogComponentInstance.querySelector("[dialog-part='title']").content.textContent;
 
-        const html = /*html*/`
+        this.#dialogElement = document.createElement('dialog');
+        this.#dialogElement.className = "dialog";
+        this.#dialogElement.innerHTML = /*html*/`
             <form method="dialog">
                 <div>
                     ${ isClosable ? /*html*/`<button type='submit' value='cancel' class='reagenz-dialog-close-button'>✖</button>` : "" }
@@ -39,10 +41,6 @@ export class Dialog {
 
                 <div class="reagenz-dialog-content"></div>
             </form>`;
-
-        this.#dialogElement = document.createElement('dialog');
-        this.#dialogElement.className = "dialog";
-        this.#dialogElement.innerHTML = html;
 
         this.#dialogElement
             .querySelector(".reagenz-dialog-content")
