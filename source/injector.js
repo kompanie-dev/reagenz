@@ -10,7 +10,7 @@ export class Injector {
      */
     static injectDependencies(dependencies, classes) {
         for (let receiverClass of classes) {
-            Object.assign(receiverClass.prototype.dependencies, dependencies)
+            Object.assign(receiverClass.prototype.dependencies, dependencies);
         }
     }
 }
