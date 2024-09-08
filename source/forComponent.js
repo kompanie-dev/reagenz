@@ -28,22 +28,15 @@ export class ForComponent extends Component {
      * @returns {any} The value of the specified property of the object.
      */
     getProperty(obj, propertiesString) {
-        if (typeof obj === "number" || typeof obj === "string" || typeof obj === "boolean") {
+        if (typeof obj !== "object" || obj === null) {
             return obj;
         }
 
-        const properties = propertiesString.split(".");
-        let result = obj;
-        
-        for (let i = 0; i !== properties.length; i++) {
-            if (result.hasOwnProperty(properties[i]) === false) {
-                return undefined;
-            }
-
-            result = result[properties[i]];
-        }
-        
-        return result;
+        return propertiesString
+            .split(".")
+            .reduce(
+                (result, propertyName) => result?.[propertyName], obj
+            );
     }
 }
 
