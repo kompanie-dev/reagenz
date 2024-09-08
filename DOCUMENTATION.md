@@ -34,7 +34,7 @@ import { MyMainPage } from "./components/myMainPage.js";
 
 ### Registering Web Components
 
-Web Components are registered using `Registry.registerWebComponents()`.
+Web Components should be registered using `WebComponentUtilities.defineComponents()`.
 The function is checking if a Web Component with the specified name is not added yet and then calls `customElements.define()`.
 
 You can also use your own logic for registering standard Web Components.
@@ -46,8 +46,9 @@ Just keep in mind:
 ```js
 // Registers a non-Reagenz Web Component
 // In this example it will be available as 'example-web-component' in HTML
-Registry.registerWebComponents({
-    "example-web-component": ExampleWebComponent
+WebComponentUtilities.defineComponents({
+    "example-web-component": ExampleWebComponent,
+    "another-web-component": AnotherWebComponent
 });
 ```
 

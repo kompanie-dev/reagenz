@@ -1,12 +1,12 @@
 /**
- * A helper class for registering Web Components.
+ * A utility class for standard (non-Reagenz) Web Components.
  */
-export class Registry {
+export class WebComponentUtilities {
     /**
-     * Registers Web Components using an object and skips already registered ones.
+     * Registers Web Components in the CustomElementRegistry of the browser using an object and skips already registered ones.
      * @param {Object} componentConfig An object containing keys and the component class ({ "test-element": TestElementComponent, ... }).
      */
-    static registerWebComponents(componentConfig) {
+    static defineComponents(componentConfig) {
         Object
             .entries(componentConfig)
             .filter(([tagName]) => customElements.get(tagName) === undefined)

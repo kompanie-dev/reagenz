@@ -9,7 +9,7 @@ import { CounterPage } from "./components/counterPage.js";
 
 // Registers non-Reagenz Web Components
 /*
-Registry.registerWebComponents({
+WebComponentUtilities.defineComponents({
     "example-web-component": ExampleWebComponent
 });
 */

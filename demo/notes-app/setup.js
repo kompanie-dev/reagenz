@@ -1,4 +1,4 @@
-import { Injector, Launcher, Registry, Store } from "@kompanie/reagenz";
+import { Injector, Launcher, Store, WebComponentUtilities } from "@kompanie/reagenz";
 
 import { notesNetworkMiddleware } from "./store/notes.middlewares.network.js";
 import { notesReducer, notesInitialState } from "./store/notes.reducer.js";
@@ -9,7 +9,7 @@ import { NotesMain } from "./components/notesMain.js";
 import { ExampleWebComponent } from "./webComponents/exampleWebComponent.js";
 
 // Registers a non-Reagenz Web Component
-Registry.registerWebComponents({
+WebComponentUtilities.defineComponents({
     "example-web-component": ExampleWebComponent
 });
 
