@@ -12,7 +12,7 @@ export class Launcher {
      */
     static startApp(appComponentClass, appContainerElement) {
         const appComponent = new appComponentClass();
-        appComponent.setAttribute("framework", "@kompanie/reagenz@5.1.0");
+        appComponent.setAttribute("framework", "@kompanie/reagenz@6.0.0");
         appContainerElement.append(appComponent);
     }
 }
