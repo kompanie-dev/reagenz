@@ -29,7 +29,7 @@ if (args[0] === 'new') {
 
         await executeExternalCommand("npm install");
     }
-    catch {
+    catch (error) {
         console.error(createLoggingTimeStamp() + "❌ Error running npm install: ", error);
 
         process.exit(1);
