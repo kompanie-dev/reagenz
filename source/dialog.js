@@ -51,7 +51,7 @@ export class Dialog {
                 this.#dialogElement.close("cancel");
             }
         });
-
+        
         this.#dialogElement.addEventListener("keydown", (event) => {
             if (event.key !== "Escape") {
                 return;
@@ -75,6 +75,12 @@ export class Dialog {
                 formData,
                 returnValue: event.target.returnValue
             });
+        });
+        
+        this.#dialogElement.addEventListener("submit", (event) => {
+            if (event.target.returnValue !== "cancel" && dialogComponentInstance.validate?.() === false) {
+                event.preventDefault();
+            }
         });
 
         document.body.append(this.#dialogElement);
