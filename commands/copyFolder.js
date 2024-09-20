@@ -1,4 +1,4 @@
-import fs from "path";
+import fs from "fs";
 import path from "path";
 
 export const copyFile = (sourceFile, destFile) => {
