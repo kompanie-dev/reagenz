@@ -298,3 +298,51 @@ export class MyListView extends Component {
     }
 }
 ```
+
+## Dialog System
+Reagenz has a built-in dialog system.
+It allows you to open Reagenz components inside an [HTML dialog element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog), validate the dialog component and return the result as a Form in the callback of the dialog.
+
+The following example shows a component with form validation in the input and special validation in it's `validate()` function.
+The title of the dialog is set via `<template dialog-part="title">About Reagenz</template>`.
+
+```js
+// Example Dialog component:
+export class AboutDialog extends Component {
+    render() {
+        return /*html*/`
+            <template dialog-part="title">About Reagenz</template>
+
+            <div class="margin-top-small">The following input should have 3-5 characters and start with R:</div>
+
+            <input type="text" name="username" class="input" minlength="3" maxlength="5" value="Rtest">
+
+            <button type="submit" value="submit" class="button">OK</button>`;
+    }
+
+    // true, if the state of the dialog is valid, otherwise false
+    // If the validate function is omitted, the component is always valid
+    validate() {
+        return this.querySelector("[name='username']").value.startsWith("R");
+    }
+}
+```
+
+To open the component as dialog you need to import the `Dialog` class and instantiate it with the component you want to use as dialog content.
+After that call the `.show()` function, where you specifiy if a dialog is closable and the callback that gets executed when the dialog is cancelled or submitted.
+If `isClosable` is set to `false`, it's not possible to cancel the dialog, can only be submitted if the `validate()` function returns `true` and the form inside the component is in a valid state.
+
+```js
+import { Dialog } from "@kompanie/reagenz";
+
+const isClosable = true;
+const dialog = new Dialog(AboutDialog);
+
+dialog.show((result) => {
+    console.log("Dialog Result", result);
+}, isClosable);
+```
+
+Keep in mind that the form validation is based on the HTML standard, with all it's advantages and drawbacks.
+
+You can read more about [Client-side form validation on MDN](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation).
