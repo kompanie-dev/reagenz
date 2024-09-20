@@ -1,13 +1,21 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .a {
     text-decoration: none;
 }
 
+body {
+    padding: .5rem;
+}
+
 body,
-dialog,
 .button,
 .input,
-.textarea,
-.reagenz-dialog-close-button {
+.textarea {
     background: #000;
     color: #ccc;
     font-family: Arial, sans-serif;
@@ -28,13 +36,6 @@ dialog,
     cursor: pointer;
 }
 
-.dialog {
-    border: 1px solid #ccc;
-}
-.dialog::backdrop {
-    background: rgba(0, 0, 0, .7);
-}
-
 .input[type=text]:read-only {
     background: #999;
     color: #333;
@@ -43,12 +44,4 @@ dialog,
 .input:invalid {
     border-color: red;
     outline: 5px solid red;
-}
-
-.reagenz-dialog-close-button {
-    border: none;
-    cursor: pointer;
-}
-.reagenz-dialog-content {
-    margin-top: 1.5rem;
 }

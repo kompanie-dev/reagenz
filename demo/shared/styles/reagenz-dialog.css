@@ -1,0 +1,30 @@
+.reagenz-dialog,
+.reagenz-dialog-close-button {
+    background: #000;
+    color: #ccc;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+}
+.reagenz-dialog {
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    margin-top: 25%;
+}
+.reagenz-dialog::backdrop {
+    background: rgba(0, 0, 0, .7);
+}
+.reagenz-dialog-close-button {
+    border: none;
+    cursor: pointer;
+    padding-right: .4rem;
+}
+.reagenz-dialog-close-button:hover {
+    color: #999;
+}
+.reagenz-dialog-content {
+    padding: 1rem;
+}
+.reagenz-dialog-header {
+    font-weight: 700;
+    padding: 1rem;
+}

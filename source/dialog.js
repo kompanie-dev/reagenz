@@ -31,12 +31,12 @@ export class Dialog {
         const title = dialogComponentInstance.querySelector("[dialog-part='title']").content.textContent;
 
         this.#dialogElement = document.createElement('dialog');
-        this.#dialogElement.className = "dialog";
+        this.#dialogElement.className = "reagenz-dialog";
         this.#dialogElement.innerHTML = /*html*/`
             <form method="dialog">
-                <div>
+                <div class="reagenz-dialog-header">
                     ${ isClosable ? /*html*/`<button type='submit' value='cancel' class='reagenz-dialog-close-button'>✖</button>` : "" }
-                    <b>${title}</b>
+                    <span class="reagenz-dialog-title">${title}</span>
                 </div>
 
                 <div class="reagenz-dialog-content"></div>
