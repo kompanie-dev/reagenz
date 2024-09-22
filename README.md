@@ -93,8 +93,7 @@ If you use Visual Studio Code you can use [es6-string-html](https://marketplace.
 
 ## Setting up your own project
 If you want to start a completly fresh Reagenz project with only the basic structure set up do the following:
-* Copy the contents of `template-project`
-* run `npm install`
+* run `npx reagenz new`
 * run `npm start`
 
 You can now start developing your own Reagenz project.
