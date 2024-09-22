@@ -6,5 +6,5 @@ export { Launcher } from "./source/launcher.js";
 export { Store } from "./source/store.js";
 export { WebComponentUtilities } from "./source/webComponentUtilities.js";
 
-import "./source/forComponent.js";
-import "./source/ifComponent.js";
+export { ForComponent } from "./source/forComponent.js";
+export { IfComponent } from "./source/ifComponent.js";

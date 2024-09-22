@@ -1,5 +1,8 @@
 # Reagenz Changelog
 
+## v6.1.0 (2024-09-22)
+* Changed import to export for ForComponent and IfComponent
+
 ## v6.0.0 (2024-09-22)
 * Updated dependencies
 * Added npx reagenz help
