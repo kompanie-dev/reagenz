@@ -21,7 +21,7 @@ export const copyFolder = async (sourceFolder, destinationFolder) => {
 
     const items = fs.readdirSync(sourceFolder);
 
-    for (let item of items) {
+    for (const item of items) {
         const sourceItem = path.join(sourceFolder, item);
         const destinationItem = path.join(destinationFolder, item);
 
