@@ -91,6 +91,8 @@ The site will be available at [localhost:8000/demo/](http://localhost:8000/demo/
 You should use an ES6 template string formatter to better see the HTML used in the render function of components.
 If you use Visual Studio Code you can use [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html).
 
+If you want to update Reagenz you can check out [CHANGELOG.md](CHANGELOG.md) to see what changed between releases.
+
 ## Setting up your own project
 If you want to start a completly fresh Reagenz project with only the basic structure set up do the following:
 * run `npx reagenz new`
