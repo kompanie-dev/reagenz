@@ -5,9 +5,7 @@ import { loadNotesRequest, saveNotesRequest } from "../store/notes.actions.js";
 export class NotesMain extends Component {
     constructor() {
         super({
-            selectors: {
-                notes: getNotes
-            }
+            notes: getNotes
         });
     }
 

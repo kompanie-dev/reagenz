@@ -5,9 +5,7 @@ import { getRoute } from "../store/tasks.selectors.js";
 export class TasksMain extends Component {
     constructor() {
         super({
-            selectors: {
-                route: getRoute
-            }
+            route: getRoute
         });
     }
 

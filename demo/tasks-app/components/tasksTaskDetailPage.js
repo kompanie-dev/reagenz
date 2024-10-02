@@ -4,10 +4,8 @@ import { getSelectedEntryId, getSelectedEntryData } from "../store/tasks.selecto
 export class TasksTaskDetailPage extends Component {
     constructor() {
         super({
-            selectors: {
-                selectedEntryId: getSelectedEntryId,
-                selectedEntryData: getSelectedEntryData
-            }
+            selectedEntryId: getSelectedEntryId,
+            selectedEntryData: getSelectedEntryData
         });
     }
 

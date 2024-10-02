@@ -5,9 +5,7 @@ import { updateRoute } from "../store/myapp.actions.js";
 export class AppRoot extends Component {
     constructor() {
         super({
-            selectors: {
-                route: getRoute
-            }
+            route: getRoute
         });
     }
 

@@ -119,9 +119,7 @@ import { getCount } from "../store/test.selector.js";
 export class MyMainPage extends Component {
     constructor() {
         super({
-            selectors: {
-                count: getCount
-            }
+            count: getCount
         });
     }
 
@@ -158,9 +156,7 @@ import { getCount } from "../store/test.selector.js";
 export class MyMainPage extends Component {
     constructor() {
         super({
-            selectors: {
-                count: getCount
-            }
+            count: getCount
         });
     }
 
@@ -257,9 +253,7 @@ import { getEntries } from "../store/test.selectors.js";
 export class MyLoadingSpinner extends Component {
     constructor() {
         super({
-            selectors: {
-                entries: getIsLoading
-            }
+            isLoading: getIsLoading
         });
     }
 
@@ -283,9 +277,7 @@ import { getEntries } from "../store/test.selectors.js";
 export class MyListView extends Component {
     constructor() {
         super({
-            selectors: {
-                entries: getEntries
-            }
+            entries: getEntries
         });
     }
 

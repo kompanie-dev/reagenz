@@ -5,9 +5,7 @@ import { loadCountRequest, increaseCounter, saveCountRequest } from "../store/my
 export class CounterPage extends Component {
     constructor() {
         super({
-            selectors: {
-                count: getCount
-            }
+            count: getCount
         });
     }
 

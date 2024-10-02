@@ -9,12 +9,12 @@ export class Component extends HTMLElement {
 
     /**
      * Creates a new instance of the Component.
-     * @param {?Object} componentConfig An object containing the configuration of the Component { eventNames: ["click"], selectors: { selectorValue: selectorFunction } }.
+     * @param {?Object} selectors An object containing the selectors of the Component { selectorValue: selectorFunction }.
      */
-    constructor(componentConfig) {
+    constructor(selectors = {}) {
         super();
 
-        this.#selectors = componentConfig?.selectors ?? {};
+        this.#selectors = selectors;
         this.#unsubscribeCallback = this.dependencies.store?.subscribe(() => this.#updateDOMIfChangesDetected());
 
         this.#updateDOMIfChangesDetected();
@@ -183,11 +183,11 @@ export class Component extends HTMLElement {
     
         const propertyNamesA = Object.keys(objectA);
         const propertyNamesB = Object.keys(objectB);
-    
+
         if (propertyNamesA.length !== propertyNamesB.length) {
-                return false;
+            return false;
         }
-    
+
         return propertyNamesA.every(
             propertyName => this.#isDeepEqual(objectA[propertyName], objectB[propertyName])
         );
@@ -224,7 +224,7 @@ export class Component extends HTMLElement {
         
         this.#iterateChildElementsRecursively(this, (childNode) => {
             for (const attribute of childNode.attributes) {
-                    this.#addEventAttributeBinding(this, childNode, attribute.name, attribute.value);
+                this.#addEventAttributeBinding(this, childNode, attribute.name, attribute.value);
             }
         });
     }

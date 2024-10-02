@@ -40,9 +40,7 @@ export class MyCountComponent extends Component {
     constructor() {
         super({
             // The selectors you want to use in your component
-            selectors: {
-                count: getCount
-            }
+            count: getCount
         });
     }
 

@@ -5,10 +5,8 @@ import { getIsLoading, searchEntries } from "../store/tasks.selectors.js";
 export class TasksTaskList extends Component {
     constructor() {
         super({
-            selectors: {
-                isLoading: getIsLoading,
-                entries: searchEntries
-            }
+            isLoading: getIsLoading,
+            entries: searchEntries
         });
     }
 

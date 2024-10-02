@@ -7,9 +7,7 @@ export class TasksTimeDisplay extends Component {
 
     constructor() {
         super({
-            selectors: {
-                time: getTime
-            }
+            time: getTime
         });
     }
 
