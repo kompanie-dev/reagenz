@@ -25,9 +25,9 @@ export class Store {
      * @param {Object} action An Action object, containing a type property and additional data.
      */
     dispatch(action) {
-        this.#executeMiddlewares(this.#middlewares, this, action);
-
-        this.state = this.#reducer(this.state, action);
+        this.#middlewares.reduceRight((next, middleware) =>
+            () => middleware(this, next, action), 
+            () => this.state = this.#reducer(this.state, action))();
 
         this.#listeners.forEach(listener => listener());
     }
@@ -59,29 +59,5 @@ export class Store {
         this.#listeners.push(listener);
 
         return () => this.#listeners = this.#listeners.filter(l => l !== listener);
-    }
-
-    /**
-     * Executes all supplied middlewares on the given action.
-     * @param {Function[]} middlewares An array of middleware functions which should be executed in order.
-     * @param {Store} store The store which should be used in the middleware functions.
-     * @param {Object} action The action which should be used in the middleware functions.
-     */
-    #executeMiddlewares(middlewares, store, action) {
-        let index = 0;
-    
-        const next = () => {
-            const middleware = middlewares[index];
-    
-            if (middleware === undefined) {
-                return;
-            }
-    
-            index++;
-    
-            middleware(store, next, action);
-        }
-    
-        next();
     }
 }
