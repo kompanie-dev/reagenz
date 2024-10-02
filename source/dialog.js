@@ -28,7 +28,7 @@ export class Dialog {
      */
     show(callback, isClosable = true) {
         const dialogComponentInstance = new this.#dialogComponentClass();
-        const title = dialogComponentInstance.querySelector("[dialog-part='title']").content.textContent;
+        const title = dialogComponentInstance.querySelector("[dialog-part='title']")?.content.textContent;
 
         this.#dialogElement = document.createElement('dialog');
         this.#dialogElement.className = "reagenz-dialog";
@@ -46,45 +46,45 @@ export class Dialog {
             .querySelector(".reagenz-dialog-content")
             .append(dialogComponentInstance);
 
-        this.#dialogElement.addEventListener("click", (event) => {
-            if (isClosable === true && (event.target === this.#dialogElement || event.target.value === "cancel")) {
-                this.#dialogElement.close("cancel");
-            }
-        });
-        
-        this.#dialogElement.addEventListener("keydown", (event) => {
-            if (event.key !== "Escape") {
-                return;
-            }
+        this.#addEventHandlers(this.#dialogElement, isClosable, callback, dialogComponentInstance);
 
-            if (isClosable === true) {
-                this.#dialogElement.close("cancel");
-            }
-            else {
-                event.preventDefault();
+        document.body.append(this.#dialogElement);
+
+        this.#dialogElement.showModal();
+    }
+
+    #addEventHandlers(dialogElement, isClosable, callback, dialogComponentInstance) {
+        dialogElement.addEventListener("click", (event) => {
+            if (isClosable === true && (event.target === dialogElement || event.target.value === "cancel")) {
+                dialogElement.close("cancel");
             }
         });
 
-        this.#dialogElement.addEventListener("close", (event) => {
-            const formElement = this.#dialogElement.querySelector("[method='dialog']");
-            const formData = formElement === null ? null : new FormData(formElement);
+        dialogElement.addEventListener("close", (event) => {
+            const formElement = dialogElement.querySelector("[method='dialog']");
+            const formData = new FormData(formElement);
 
-            this.#dialogElement.remove();
+            dialogElement.remove();
 
             callback?.({
                 formData,
                 returnValue: event.target.returnValue
             });
         });
-        
-        this.#dialogElement.addEventListener("submit", (event) => {
-            if (event.target.returnValue !== "cancel" && dialogComponentInstance.validate?.() === false) {
+
+        dialogElement.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && isClosable === true) {
+                dialogElement.close("cancel");
+            }
+            else if (isClosable === false) {
                 event.preventDefault();
             }
         });
 
-        document.body.append(this.#dialogElement);
-
-        this.#dialogElement.showModal();
+        dialogElement.addEventListener("submit", (event) => {
+            if (event.target.returnValue !== "cancel" && dialogComponentInstance.validate?.() === false) {
+                event.preventDefault();
+            }
+        });
     }
 }
