@@ -5,12 +5,14 @@
         "type": "module",
         "scripts": {
                 "build": "vite build",
+                "lint": "eslint",
                 "start": "vite --force --port 8000"
         },
         "dependencies": {
                 "@kompanie/reagenz": "7.0.0"
         },
         "devDependencies": {
+                "eslint": "^9.11.1",
                 "vite": "^5.4.8"
         }
 }
