@@ -1,4 +1,5 @@
 import { Component } from "./component.js";
+import { HtmlEscaper } from "./htmlEscaper.js";
 
 /**
  * Reads the stringified array contained inside the array attribute of the component
@@ -14,29 +15,36 @@ export class ForComponent extends Component {
             .map((element, index) =>
                 this.innerHTML
                     .replaceAll("@index()", index)
-                    .replaceAll(/@item\((.*?)\)/g, (_, propertyName) => this.getProperty(element, propertyName))
+                    .replaceAll(/@item\((.*?)\)/g, (_, propertyName) => this.getItemValue(element, propertyName))
             )
             .join("");
     }
 
     /**
-     * Takes an object and tries to access the specified property (for instance obj.propertyA.propertyB).
+     * Takes an object, tries to access the specified property (for instance obj.propertyA.propertyB) and escapes the value if the data is of type string.
      * If the given object is already a boolean, number or string, execution is skipped and the object will be returned as-is.
      * If the desired property does not exist, undefined will be returned.
      * @param {any} obj The object, of which the value should be extracted.
      * @param {string} propertiesString The names of the properties of which the value should be extracted (example: obj.propertyA.propertyB). 
      * @returns {any} The value of the specified property of the object.
      */
-    getProperty(obj, propertiesString) {
+    getItemValue(obj, propertiesString) {
+        if (typeof obj === "string") {
+            return HtmlEscaper.escapeString(obj);
+        }
         if (typeof obj !== "object" || obj === null) {
             return obj;
         }
 
-        return propertiesString
+        const propertyValue = propertiesString
             .split(".")
             .reduce(
                 (result, propertyName) => result?.[propertyName], obj
             );
+
+        return typeof propertyValue === "string" ?
+            HtmlEscaper.escapeString(propertyValue) :
+            propertyValue;
     }
 }
 
