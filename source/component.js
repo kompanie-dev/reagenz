@@ -167,12 +167,12 @@ export class Component extends HTMLElement {
     }
 
     /**
-     * Determines if two selector data objects are equal.
-     * @param {Object} objectA The selector data object which should be compared.
-     * @param {Object} objectB The selector data object which should be compared against.
-     * @returns {boolean} true, if the selector data objects contain the same data, otherwise false.
+     * Determines if two objects are deep equal.
+     * @param {Object} objectA The object which should be compared.
+     * @param {Object} objectB The object which should be compared against.
+     * @returns {boolean} true, if both objects are the same or contain the same data, otherwise false.
      */
-    #isSelectorDataEqual(objectA, objectB) {
+    #isDeepEqual(objectA, objectB) {
         if (objectA === objectB) {
             return true;
         }
@@ -184,13 +184,13 @@ export class Component extends HTMLElement {
         const propertyNamesA = Object.keys(objectA);
         const propertyNamesB = Object.keys(objectB);
     
-        for (const propertyName of propertyNamesA) {
-            if (!propertyNamesB.includes(propertyName) || !this.#isSelectorDataEqual(objectA[propertyName], objectB[propertyName])) {
+        if (propertyNamesA.length !== propertyNamesB.length) {
                 return false;
-            }
         }
     
-        return true;
+        return propertyNamesA.every(
+            propertyName => this.#isDeepEqual(objectA[propertyName], objectB[propertyName])
+        );
     }
 
     /**
@@ -236,7 +236,7 @@ export class Component extends HTMLElement {
     #updateDOMIfChangesDetected() {
         const newSelectorData = this.#executeSelectors?.(this.#selectors, this.dependencies.store);
 
-        if (this.#isSelectorDataEqual(this.#currentSelectorData, newSelectorData) === false) {
+        if (this.#isDeepEqual(this.#currentSelectorData, newSelectorData) === false) {
             this.#updateDOM(newSelectorData);
         }
     }
