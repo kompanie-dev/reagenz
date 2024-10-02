@@ -1,5 +1,12 @@
 # Reagenz Changelog
 
+## 7.0.0 (?)
+* Updated dependencies
+* Added eslint to template and source code
+* Fix x-for not escaping @item() values
+* Component: remove componentConfig parent object
+* Many smaller refactorings and cleanups
+
 ## v6.1.0 (2024-09-22)
 * Changed import to export for ForComponent and IfComponent
 
