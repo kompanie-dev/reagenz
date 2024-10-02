@@ -10,8 +10,6 @@ export class AppRoot extends Component {
     }
 
     render({ route }) {
-        console.log(route)
-
         return /*html*/`
             <div>
                 <div>

@@ -27,7 +27,7 @@ export class Store {
     dispatch(action) {
         this.#middlewares.reduceRight((next, middleware) =>
             () => middleware(this, next, action), 
-            () => this.state = this.#reducer(this.state, action))();
+            () => this.state = this.#reducer(action, this.state))();
 
         this.#listeners.forEach(listener => listener());
     }
@@ -52,12 +52,14 @@ export class Store {
 
     /**
      * Add the given listener function to the list of subscribers and execute the listener each time an action is dispatched.
-     * @param {Function} listener A function which gets called whenever an action get's dispatched.
+     * @param {Function} listenerCallback A function which gets called whenever an action get's dispatched.
      * @returns {Function} An unsubscribe function which removes the listener function from the subscribed functions when executed.
      */
-    subscribe(listener) {
-        this.#listeners.push(listener);
+    subscribe(listenerCallback) {
+        this.#listeners.push(listenerCallback);
 
-        return () => this.#listeners = this.#listeners.filter(l => l !== listener);
+        return () => {
+            this.#listeners = this.#listeners.filter(listener => listener !== listenerCallback);
+        }
     }
 }

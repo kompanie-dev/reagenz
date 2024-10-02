@@ -1,6 +1,6 @@
 import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/myapp.selector.js";
-import { loadCountRequest, increaseCounter, saveCountRequest } from "../store/myapp.actions.js";
+import { increaseCounter, loadCountRequest, saveCountRequest } from "../store/myapp.actions.js";
 
 export class CounterPage extends Component {
     constructor() {

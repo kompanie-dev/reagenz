@@ -12,15 +12,15 @@ const packageJson = JSON.parse(
     )
 );
 
-console.log(`🧪 Reagenz CLI ${packageJson.version}`);
+console.info(`🧪 Reagenz CLI ${packageJson.version}`);
 
 switch (args[0]) {
-    default:
-    case "help":
-        executeHelpCommand();
-        break;
-
     case "new":
         executeNewProjectCommand();
+        break;
+
+    case "help":
+    default:
+        executeHelpCommand();
         break;
 }

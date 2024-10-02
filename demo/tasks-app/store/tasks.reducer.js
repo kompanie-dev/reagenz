@@ -7,23 +7,23 @@ export const tasksInitialState = {
     time: new Date().getTime()
 };
 
-export function tasksReducer(state = tasksInitialState, action) {
+export function tasksReducer(action, state = tasksInitialState) {
     switch (action.type) {
         case "ROUTE_UPDATE": {
             const selectedEntryId = action.route.replace("#/tasks/", "");
 
-            return { ...state, selectedEntryId, route: action.route };
+            return { ...state, route: action.route, selectedEntryId };
         }
 
         case "TASK_ADD":
-            return { ...state, entries: [...state.entries, { id: action.id, text: action.text, done: false }] };
+            return { ...state, entries: [...state.entries, { done: false, id: action.id, text: action.text }] };
 
         case "TASK_REMOVE": {
             const entries = [...state.entries];
             const indexToRemove = state.entries.findIndex(entry => entry.id === action.id);
             entries.splice(indexToRemove, 1);
 
-            return { ...state, entries: entries };
+            return { ...state, entries };
         }
 
         case "TASK_UPDATE_DONE": {
@@ -51,7 +51,8 @@ export function tasksReducer(state = tasksInitialState, action) {
 
         case "TASK_SET_TIME":
             return { ...state, time: action.time };
-    }
 
-    return state;
+        default:
+            return state;
+    }
 }

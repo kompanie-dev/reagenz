@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 
-export const copyFile = (sourceFile, destFile) => {
-    return new Promise((resolve, reject) => {
+export const copyFile = (sourceFile, destFile) =>
+    new Promise((resolve, reject) => {
         const readStream = fs.createReadStream(sourceFile);
         const writeStream = fs.createWriteStream(destFile);
 
@@ -12,7 +12,6 @@ export const copyFile = (sourceFile, destFile) => {
         writeStream.on("error", reject);
         writeStream.on("finish", resolve);
     });
-};
 
 export const copyFolder = async (sourceFolder, destinationFolder) => {
     if (!fs.existsSync(destinationFolder)) {

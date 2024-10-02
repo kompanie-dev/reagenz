@@ -3,7 +3,7 @@ export const myAppInitialState = {
     route: ""
 };
 
-export function myAppReducer(state = myAppInitialState, action) {
+export function myAppReducer(action, state = myAppInitialState) {
     switch (action.type) {
         case "COUNT_UPDATE": {
             return { ...state, count: state.count + action.count };
@@ -16,7 +16,8 @@ export function myAppReducer(state = myAppInitialState, action) {
         case "ROUTE_UPDATE": {
             return { ...state, route: action.route };
         }
-    }
 
-    return state;
+        default:
+            return state;
+    }
 }

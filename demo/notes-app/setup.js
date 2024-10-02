@@ -1,7 +1,7 @@
 import { Injector, Launcher, Store, WebComponentUtilities } from "@kompanie/reagenz";
 
 import { notesNetworkMiddleware } from "./store/notes.middlewares.network.js";
-import { notesReducer, notesInitialState } from "./store/notes.reducer.js";
+import { notesInitialState, notesReducer } from "./store/notes.reducer.js";
 import { loggingMiddleware } from "../shared/middlewares/loggingMiddleware.js";
 
 import { NotesMain } from "./components/notesMain.js";

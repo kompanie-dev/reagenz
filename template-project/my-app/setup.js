@@ -1,11 +1,11 @@
 import { Injector, Launcher, Store } from "@kompanie/reagenz";
 
 import { myAppNetworkMiddleware } from "./store/myapp.middlewares.network.js";
-import { myAppReducer, myAppInitialState } from "./store/myapp.reducer.js";
+import { myAppInitialState, myAppReducer } from "./store/myapp.reducer.js";
 
-import "./components/aboutPage.js";
 import { AppRoot } from "./components/appRoot.js";
 import { CounterPage } from "./components/counterPage.js";
+import "./components/aboutPage.js";
 
 // Registers non-Reagenz Web Components
 /*

@@ -23,7 +23,7 @@ export class HtmlEscaper {
         const escapedObject = {};
 
         for (const key in unsafeObject) {
-            if (Object.prototype.hasOwnProperty.call(unsafeObject, key)) {
+            if (Object.hasOwn(unsafeObject, key)) {
                 escapedObject[key] = HtmlEscaper.escapeObject(unsafeObject[key]);
             }
         }

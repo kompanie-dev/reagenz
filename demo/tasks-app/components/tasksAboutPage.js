@@ -2,7 +2,13 @@ import { Component, Dialog } from "@kompanie/reagenz";
 import { TasksAboutDialog } from "./tasksAboutDialog.js";
 
 export class TasksAboutPage extends Component {
-    #logger = this.dependencies.notExistingDependency;
+    #logger = this.dependencies.logger;
+
+    constructor() {
+        super();
+
+        this.dependencies.notExistingDependency;
+    }
 
     render() {
         return /*html*/`
@@ -24,7 +30,7 @@ export class TasksAboutPage extends Component {
         const dialog = new Dialog(TasksAboutDialog);
 
         dialog.show((result) => {
-            console.log("Dialog Result", result);
+            this.#logger.log("Dialog Result", result);
         }, true);
     }
 
@@ -32,7 +38,7 @@ export class TasksAboutPage extends Component {
         const dialog = new Dialog(TasksAboutDialog);
 
         dialog.show((result) => {
-            console.log("Dialog Result", result);
+            this.#logger.log("Dialog Result", result);
         }, false);
     }
 }

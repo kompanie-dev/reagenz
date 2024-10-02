@@ -31,12 +31,12 @@ export class Component extends HTMLElement {
         }
 
         componentClass.prototype.dependencies = new Proxy({}, {
-            get: function(dependencyContainer, propertyName) {
+            get(dependencyContainer, propertyName, ...args) {
                 if (!(propertyName in dependencyContainer) && propertyName !== "store") {
                     console.warn(`${tagName} is accessing the undefined dependency '${propertyName}'. Did you inject it using Injector.injectDependencies()?`);
                 }
 
-                return Reflect.get(...arguments);
+                return Reflect.get(dependencyContainer, propertyName, ...args);
             }
         });
     }

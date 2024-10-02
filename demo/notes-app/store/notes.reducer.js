@@ -2,7 +2,7 @@ export const notesInitialState = {
     notes: ""
 };
 
-export function notesReducer(state = notesInitialState, action) {
+export function notesReducer(action, state = notesInitialState) {
     switch (action.type) {
         case "NOTE_UPDATE": {
             return { ...state, notes: action.notes };
@@ -11,7 +11,8 @@ export function notesReducer(state = notesInitialState, action) {
         case "NOTE_LOAD_SUCCESS": {
             return { ...state, notes: action.notes };
         }
-    }
 
-    return state;
+        default:
+            return state;
+    }
 }

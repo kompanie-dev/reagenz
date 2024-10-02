@@ -13,12 +13,14 @@
         ],
         "scripts": {
                 "build": "vite build",
+                "lint": "eslint",
                 "start": "vite --force --port 8000"
         },
         "bin": {
                 "reagenz": "cli/index.js"
         },
         "devDependencies": {
+                "eslint": "^9.11.1",
                 "vite": "^5.4.8"
         }
 }

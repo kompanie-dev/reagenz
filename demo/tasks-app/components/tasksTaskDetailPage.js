@@ -1,11 +1,11 @@
 import { Component } from "@kompanie/reagenz";
-import { getSelectedEntryId, getSelectedEntryData } from "../store/tasks.selectors.js";
+import { getSelectedEntryData, getSelectedEntryId } from "../store/tasks.selectors.js";
 
 export class TasksTaskDetailPage extends Component {
     constructor() {
         super({
-            selectedEntryId: getSelectedEntryId,
-            selectedEntryData: getSelectedEntryData
+            selectedEntryData: getSelectedEntryData,
+            selectedEntryId: getSelectedEntryId
         });
     }
 

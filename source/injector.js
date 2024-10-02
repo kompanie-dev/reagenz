@@ -9,7 +9,7 @@ export class Injector {
      * @param {Object[]} classes An array of classes in which the dependencies should get injected.
      */
     static injectDependencies(dependencies, classes) {
-        for (let receiverClass of classes) {
+        for (const receiverClass of classes) {
             Object.assign(receiverClass.prototype.dependencies, dependencies);
         }
     }

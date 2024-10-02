@@ -15,7 +15,7 @@ import { TasksTimeDisplay } from "./components/tasksTimeDisplay.js";
 import { updateRoute } from "./store/tasks.actions.js";
 
 import { tasksNetworkMiddleware } from "./store/tasks.middlewares.network.js";
-import { tasksReducer, tasksInitialState } from "./store/tasks.reducer.js";
+import { tasksInitialState, tasksReducer } from "./store/tasks.reducer.js";
 import { loggingMiddleware } from "../shared/middlewares/loggingMiddleware.js";
 
 const reaTaskStore = new Store(tasksReducer, tasksInitialState, [loggingMiddleware, tasksNetworkMiddleware]);

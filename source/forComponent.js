@@ -15,7 +15,7 @@ export class ForComponent extends Component {
             .map((element, index) =>
                 this.innerHTML
                     .replaceAll("@index()", index)
-                    .replaceAll(/@item\((.*?)\)/g, (_, propertyName) => this.getItemValue(element, propertyName))
+                    .replaceAll(/@item\((.*?)\)/gv, (_, propertyName) => this.getItemValue(element, propertyName))
             )
             .join("");
     }
