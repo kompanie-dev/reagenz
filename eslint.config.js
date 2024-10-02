@@ -20,7 +20,7 @@ export default [
         rules: {
             "arrow-body-style": "error",
             "capitalized-comments": ["error", "always", { "ignorePattern": "css|html" }],
-            "default-case": "warn",
+            "default-case": "error",
             "default-case-last": "error",
             "default-param-last": "error",
             //"no-await-in-loop": "error",
@@ -28,7 +28,7 @@ export default [
             "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
             "id-length": ["error", { "exceptions": ["_"] }],
             "max-params": ["error", 4],
-            "no-console": ["warn", { allow: ["error", "info", "warn"] }],
+            "no-console": ["error", { allow: ["error", "info", "warn"] }],
             "no-inline-comments": ["error", { "ignorePattern": "css|html" }],
             "no-lone-blocks": "error",
             //"no-return-assign": "error",
