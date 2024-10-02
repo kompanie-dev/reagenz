@@ -129,26 +129,29 @@ export class Component extends HTMLElement {
     }
 
     /**
-    * Connects event attributes like $click of a child element to the functions of the parent component.
-    * In the following example, the button's $click attribute would be mapped to the component's function "functionA":
+    * Connects all attributes starting with "$" to functions of the parent component.
+    * In this example the button's click event would execute "functionA" on the Reagenz component:
     * <button $click="functionA">Test</button>.
-    * Only attribute names starting with $ will be handled.
     * @param {HTMLElement} component The parent component which contains the functions that get connected.
-    * @param {HTMLElement} element The child element of which the attributes should get connected.
-    * @param {string} eventName The name of the attribute which contains the function name ($click etc.).
-    * @param {string} functionName The name of the function which the event should get connected to.
     */
-    #addEventAttributeBinding(component, element, eventName, functionName) {
-        if (eventName.startsWith("$") === false) {
-            return;
-        }
+    #addEventAttributeBindings(component) {
+        this.#iterateChildElementsRecursively(this, (childNode) => {
+            for (const attribute of childNode.attributes) {
+                const eventName = attribute.name;
+                const functionName = attribute.value;
 
-        if (eventName.startsWith("$") && typeof component[functionName] === "function") {
-            element.addEventListener(eventName.substring(1), (event) => component[functionName](event));
-        }
-        else {
-            console.warn(`${component.tagName.toLowerCase()} defined a ${eventName} handler called '${functionName}' which does not exist or isn't a function`);
-        }
+                if (eventName.startsWith("$") === false) {
+                    continue;
+                }
+        
+                if (typeof component[functionName] === "function") {
+                    childNode.addEventListener(eventName.substring(1), (event) => component[functionName](event));
+                }
+                else {
+                    console.warn(`${component.tagName.toLowerCase()} defined a ${eventName} handler called '${functionName}' which does not exist or isn't a function`);
+                }
+            }
+        });
     }
 
     /**
@@ -222,11 +225,7 @@ export class Component extends HTMLElement {
 
         this.#currentSelectorData = selectorData;
         
-        this.#iterateChildElementsRecursively(this, (childNode) => {
-            for (const attribute of childNode.attributes) {
-                this.#addEventAttributeBinding(this, childNode, attribute.name, attribute.value);
-            }
-        });
+        this.#addEventAttributeBindings(this);
     }
 
     /**
