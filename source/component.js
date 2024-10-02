@@ -76,12 +76,12 @@ export class Component extends HTMLElement {
      * @returns {?boolean} true, when the value is "true", false when the value is "false". If the value can't be converted or the attribute does not exist, null.
      */
     getBoolAttribute(attributeName) {
-        const value = this.getAttribute(attributeName);
+        const attributeValue = this.getAttribute(attributeName);
 
-        if (value === "true") {
+        if (attributeValue === "true") {
             return true;
         }
-        if (value === "false") {
+        if (attributeValue === "false") {
             return false;
         }
 
@@ -94,8 +94,8 @@ export class Component extends HTMLElement {
      * @returns {?number} A float if the conversion was successful. If the value can't be converted or the attribute does not exist, null.
      */
     getFloatAttribute(attributeName) {
-        const value = this.getAttribute(attributeName);
-        const parsedValue = Number.parseFloat(value);
+        const attributeValue = this.getAttribute(attributeName);
+        const parsedValue = Number.parseFloat(attributeValue);
 
         return Number.isNaN(parsedValue) ? null : parsedValue;
     }
@@ -106,8 +106,8 @@ export class Component extends HTMLElement {
      * @returns {?number} An integer if the conversion was successful. If the value can't be converted or the attribute does not exist, null.
      */
     getIntAttribute(attributeName) {
-        const value = this.getAttribute(attributeName);
-        const parsedValue = Number.parseInt(value, 10);
+        const attributeValue = this.getAttribute(attributeName);
+        const parsedValue = Number.parseInt(attributeValue, 10);
 
         return Number.isNaN(parsedValue) ? null : parsedValue;
     }
@@ -118,10 +118,10 @@ export class Component extends HTMLElement {
      * @returns {?Object} A JavaScript object if the conversion was successful. If the value can't be converted or the attribute does not exist, null.
      */
     getJsonAttribute(attributeName) {
-        const value = this.getAttribute(attributeName);
+        const attributeValue = this.getAttribute(attributeName);
         
         try {
-            return JSON.parse(value);
+            return JSON.parse(attributeValue);
         }
         catch {
             return null;
