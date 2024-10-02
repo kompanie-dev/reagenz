@@ -32,9 +32,9 @@ export class HtmlEscaper {
     }
 
     /**
-     * Escapes the supplied string.
+     * Escapes the unsafe characters of HTML (&, <, >, ", ') in the supplied string.
      * @param {string} unsafeString The unescaped HTML string.
-     * @returns An escaped string.
+     * @returns The escaped string.
      */
     static escapeString(unsafeString) {
         return unsafeString
