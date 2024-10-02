@@ -132,22 +132,22 @@ export class Component extends HTMLElement {
     * Connects event attributes like $click of a child element to the functions of the parent component.
     * In the following example, the button's $click attribute would be mapped to the component's function "functionA":
     * <button $click="functionA">Test</button>.
+    * Only attribute names starting with $ will be handled.
     * @param {HTMLElement} component The parent component which contains the functions that get connected.
     * @param {HTMLElement} element The child element of which the attributes should get connected.
-    * @param {string} attributeName The name of the attribute which contains the function name ($click etc.).
-    * @param {string} attributeValue The name of the function which the event should get connected to.
+    * @param {string} eventName The name of the attribute which contains the function name ($click etc.).
+    * @param {string} functionName The name of the function which the event should get connected to.
     */
-    #addEventAttributeBinding(component, element, attributeName, attributeValue) {
-        const eventName = attributeName.substring(1);
-        const functionName = attributeValue;
-        
-        if (component[functionName] !== undefined) {
-            element.addEventListener(eventName, (event) => component[functionName](event));
+    #addEventAttributeBinding(component, element, eventName, functionName) {
+        if (eventName.startsWith("$") === false) {
             return;
         }
 
-        if (functionName !== null) {
-            console.warn(`${component.tagName.toLowerCase()} defined a non-existent $${eventName} handler called '${functionName}'`);
+        if (eventName.startsWith("$") && typeof component[functionName] === "function") {
+            element.addEventListener(eventName.substring(1), (event) => component[functionName](event));
+        }
+        else {
+            console.warn(`${component.tagName.toLowerCase()} defined a ${eventName} handler called '${functionName}' which does not exist or isn't a function`);
         }
     }
 
@@ -224,9 +224,7 @@ export class Component extends HTMLElement {
         
         this.#iterateChildElementsRecursively(this, (childNode) => {
             for (const attribute of childNode.attributes) {
-                if (attribute.name.startsWith("$") === true) {
                     this.#addEventAttributeBinding(this, childNode, attribute.name, attribute.value);
-                }
             }
         });
     }
