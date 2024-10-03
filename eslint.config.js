@@ -31,7 +31,7 @@ export default [
 			"no-console": ["error", { allow: ["error", "info", "warn"] }],
 			"no-inline-comments": ["error", { "ignorePattern": "css|html" }],
 			"no-lone-blocks": "error",
-			//"no-return-assign": "error",
+			"no-return-assign": "error",
 			"object-shorthand": "error",
 			//"prefer-named-capture-group": "error",
 			"prefer-object-has-own": "error",

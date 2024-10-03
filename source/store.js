@@ -25,9 +25,10 @@ export class Store {
 	 * @param {Object} action An Action object, containing a type property and additional data.
 	 */
 	dispatch(action) {
-		this.#middlewares.reduceRight((next, middleware) =>
-			() => middleware(this, next, action),
-			() => this.state = this.#reducer(action, this.state))();
+		this.#middlewares.reduceRight(
+			(next, middleware) => () => middleware(this, next, action),
+			() => { this.state = this.#reducer(action, this.state); }
+		)();
 
 		this.#listeners.forEach(listener => listener());
 	}
