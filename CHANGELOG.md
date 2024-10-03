@@ -4,6 +4,7 @@
 * Updated dependencies
 * Added .editorconfig to template source code
 * Added eslint to template and source code
+* Added tests to source code
 * Fix x-for not escaping @item() values
 * Component: remove componentConfig parent object
 * Many smaller refactorings and cleanups

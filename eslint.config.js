@@ -9,6 +9,7 @@ export default [
 			"demo/**/*.js",
 			"source/**/*.js",
 			"template-project/**/*.js",
+			"tests/**/*.js",
 			"index.js"
 		],
 		languageOptions: {
