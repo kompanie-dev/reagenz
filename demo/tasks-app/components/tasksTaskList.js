@@ -3,16 +3,16 @@ import { addTask, saveEntriesRequest } from "../store/tasks.actions.js";
 import { getIsLoading, searchEntries } from "../store/tasks.selectors.js";
 
 export class TasksTaskList extends Component {
-    constructor() {
-        super({
-            entries: searchEntries,
-            isLoading: getIsLoading
-        });
-    }
+	constructor() {
+		super({
+			entries: searchEntries,
+			isLoading: getIsLoading
+		});
+	}
 
-    render({ entries, isLoading }) {
-        return /*html*/`
-            <x-if condition="${ isLoading === true }">
+	render({ entries, isLoading }) {
+		return /*html*/`
+            <x-if condition="${isLoading === true}">
                 <loading-icon></loading-icon>
             </x-if>
 
@@ -21,32 +21,32 @@ export class TasksTaskList extends Component {
             </x-for>
 
             <div class="margin-top-small">
-                <input type="text" class="input" $keydown="keydownTaskInputEvent" maxlength="25" ${ isLoading ? "disabled": "" } placeholder="Text" value="" autofocus>
-                <button class="button" $click="clickAddTaskEvent" ${ isLoading ? "disabled": "" }>Add</button>
+                <input type="text" class="input" $keydown="keydownTaskInputEvent" maxlength="25" ${isLoading ? "disabled" : ""} placeholder="Text" value="" autofocus>
+                <button class="button" $click="clickAddTaskEvent" ${isLoading ? "disabled" : ""}>Add</button>
             </div>
-        `;  
-    }
+        `;
+	}
 
-    clickAddTaskEvent() {
-        const taskId = crypto.randomUUID();
-        const taskText = this.querySelector("input[type=text]").value.trim();
+	clickAddTaskEvent() {
+		const taskId = crypto.randomUUID();
+		const taskText = this.querySelector("input[type=text]").value.trim();
 
-        if (taskText === "") {
-            return;
-        }
+		if (taskText === "") {
+			return;
+		}
 
-        this.dispatch(addTask(taskId, taskText));
-        this.dispatch(saveEntriesRequest());
+		this.dispatch(addTask(taskId, taskText));
+		this.dispatch(saveEntriesRequest());
 
-        this.querySelector("input[type=text]").value = "";
-        this.querySelector("input[type=text]").focus();
-    }
+		this.querySelector("input[type=text]").value = "";
+		this.querySelector("input[type=text]").focus();
+	}
 
-    keydownTaskInputEvent(event) {
-        if (event.key === "Enter") {
-            this.clickAddTaskEvent();
-        }
-    }
+	keydownTaskInputEvent(event) {
+		if (event.key === "Enter") {
+			this.clickAddTaskEvent();
+		}
+	}
 }
 
 Component.define("tasks-task-list", TasksTaskList);

@@ -1,12 +1,12 @@
 import { Component } from "@kompanie/reagenz";
 
 export class TasksTaskListPage extends Component {
-    render() {
-        return /*html*/`
+	render() {
+		return /*html*/`
             <h1>Tasks App</h1>
 
             <tasks-time-display></tasks-time-display>
-            
+
             <a href="#/about" class="a">ℹ️</a>
 
             <div class="margin-top-small">
@@ -16,7 +16,7 @@ export class TasksTaskListPage extends Component {
             <div class="margin-top-small">
                 <tasks-task-list></tasks-task-list>
             </div>`;
-    }
+	}
 }
 
 Component.define("tasks-task-list-page", TasksTaskListPage);

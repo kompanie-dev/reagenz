@@ -1,5 +1,5 @@
 export const executeHelpCommand = () => {
-    console.info(`
+	console.info(`
 Usage: npx reagenz [command]
 
 Commands:

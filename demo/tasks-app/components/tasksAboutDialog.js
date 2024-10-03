@@ -1,8 +1,8 @@
 import { Component } from "@kompanie/reagenz";
 
 export class TasksAboutDialog extends Component {
-    render() {
-        return /*html*/`
+	render() {
+		return /*html*/`
             <template dialog-part="title">About Reagenz</template>
 
             <div>This app was made with ❤️ and Reagenz!</div>
@@ -14,15 +14,15 @@ export class TasksAboutDialog extends Component {
                 <button type="submit" value="submit" class="button">OK</button>
                 <button type="button" class="button" $click="resetInput">Reset</button>
             </div>`;
-    }
+	}
 
-    resetInput() {
-        this.querySelector("[name='username']").value = "Rtest";
-    }
+	resetInput() {
+		this.querySelector("[name='username']").value = "Rtest";
+	}
 
-    validate() {
-        return this.querySelector("[name='username']").value.startsWith("R");
-    }
+	validate() {
+		return this.querySelector("[name='username']").value.startsWith("R");
+	}
 }
 
 Component.define("tasks-about-dialog", TasksAboutDialog);

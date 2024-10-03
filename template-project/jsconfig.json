@@ -1,10 +1,12 @@
 {
-    "compilerOptions": {
-        "target": "ESNext",
-        "module": "ESNext",
-        "moduleResolution": "classic",
-        "checkJs": false,
-        "experimentalDecorators": true
-    },
-    "exclude": ["node_modules"]
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "classic",
+		"checkJs": false,
+		"experimentalDecorators": true
+	},
+	"exclude": [
+		"node_modules"
+	]
 }

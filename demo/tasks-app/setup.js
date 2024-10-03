@@ -21,35 +21,35 @@ import { loggingMiddleware } from "../shared/middlewares/loggingMiddleware.js";
 const reaTaskStore = new Store(tasksReducer, tasksInitialState, [loggingMiddleware, tasksNetworkMiddleware]);
 
 if (location.hash === "") {
-    location.hash = "#/";
+	location.hash = "#/";
 }
 
 window.addEventListener(
-    "popstate",
-    () => reaTaskStore.dispatch(updateRoute(location.hash))
+	"popstate",
+	() => reaTaskStore.dispatch(updateRoute(location.hash))
 );
 
 // Configures the dependency injection of the tasks application
 // You don't need to add components here that don't use any dependencies
 // As you can see TasksTaskListPageComponent and the shared LoadingIconComponent is not listed here
 Injector.injectDependencies(
-    {
-        logger: console,
-        store: reaTaskStore
-    },
-    [
-        TasksAboutPage,
-        TasksMain,
-        TasksSearchBar,
-        TasksTaskDetailPage,
-        TasksTaskItem,
-        TasksTaskList,
-        TasksTimeDisplay
-    ]
+	{
+		logger: console,
+		store: reaTaskStore
+	},
+	[
+		TasksAboutPage,
+		TasksMain,
+		TasksSearchBar,
+		TasksTaskDetailPage,
+		TasksTaskItem,
+		TasksTaskList,
+		TasksTimeDisplay
+	]
 );
 
 // Adds the main component to the DOM and starts the application.
 Launcher.startApp(
-    TasksMain,
-    document.getElementById("task-app-container")
+	TasksMain,
+	document.getElementById("task-app-container")
 );

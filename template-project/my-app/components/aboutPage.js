@@ -1,8 +1,8 @@
 import { Component } from "@kompanie/reagenz";
 
 export class AboutPage extends Component {
-    render() {
-        return /*html*/`
+	render() {
+		return /*html*/`
             <div>
                 <h1>About my Counter App</h1>
                 <div>
@@ -10,7 +10,7 @@ export class AboutPage extends Component {
                 </div>
             </div>
         `;
-    }
+	}
 }
 
 Component.define("about-page", AboutPage);

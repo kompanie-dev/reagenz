@@ -3,14 +3,14 @@ import { getCount } from "../store/myapp.selector.js";
 import { increaseCounter, loadCountRequest, saveCountRequest } from "../store/myapp.actions.js";
 
 export class CounterPage extends Component {
-    constructor() {
-        super({
-            count: getCount
-        });
-    }
+	constructor() {
+		super({
+			count: getCount
+		});
+	}
 
-    render({ count }) {
-        return /*html*/`
+	render({ count }) {
+		return /*html*/`
             <div>
                 <h1>Welcome to my Counter App!</h1>
                 <div>
@@ -20,21 +20,21 @@ export class CounterPage extends Component {
                 <button $click="decreaseCounter">-</button>
             </div>
         `;
-    }
+	}
 
-    increaseCounter() {
-        this.dispatch(increaseCounter(1));
-        this.dispatch(saveCountRequest());
-    }
+	increaseCounter() {
+		this.dispatch(increaseCounter(1));
+		this.dispatch(saveCountRequest());
+	}
 
-    decreaseCounter() {
-        this.dispatch(increaseCounter(-1));
-        this.dispatch(saveCountRequest());
-    }
+	decreaseCounter() {
+		this.dispatch(increaseCounter(-1));
+		this.dispatch(saveCountRequest());
+	}
 
-    onConnect() {
-        this.dispatch(loadCountRequest());
-    }
+	onConnect() {
+		this.dispatch(loadCountRequest());
+	}
 }
 
 Component.define("counter-page", CounterPage);

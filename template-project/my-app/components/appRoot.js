@@ -3,14 +3,14 @@ import { getRoute } from "../store/myapp.selector.js";
 import { updateRoute } from "../store/myapp.actions.js";
 
 export class AppRoot extends Component {
-    constructor() {
-        super({
-            route: getRoute
-        });
-    }
+	constructor() {
+		super({
+			route: getRoute
+		});
+	}
 
-    render({ route }) {
-        return /*html*/`
+	render({ route }) {
+		return /*html*/`
             <div>
                 <div>
                     <a href="#!about">About</a>
@@ -26,13 +26,13 @@ export class AppRoot extends Component {
                 </x-if>
             </div>
         `;
-    }
+	}
 
-    onConnect() {
-        window.addEventListener("popstate", () => {
-            this.dispatch(updateRoute(location.hash));
-        });
-    }
+	onConnect() {
+		window.addEventListener("popstate", () => {
+			this.dispatch(updateRoute(location.hash));
+		});
+	}
 }
 
 Component.define("app-root", AppRoot);

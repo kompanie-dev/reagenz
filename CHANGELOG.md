@@ -2,6 +2,7 @@
 
 ## 7.0.0 (?)
 * Updated dependencies
+* Added .editorconfig to template source code
 * Added eslint to template and source code
 * Fix x-for not escaping @item() values
 * Component: remove componentConfig parent object

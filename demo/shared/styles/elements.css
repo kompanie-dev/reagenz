@@ -1,47 +1,48 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 .a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 body {
-    padding: .5rem;
+	padding: .5rem;
 }
 
 body,
 .button,
 .input,
 .textarea {
-    background: #000;
-    color: #ccc;
-    font-family: Arial, sans-serif;
-    font-size: 1rem;
+	background: #000;
+	color: #ccc;
+	font-family: Arial, sans-serif;
+	font-size: 1rem;
 }
 
 .button,
 .input,
 .textarea {
-    border: 1px solid #ccc;
-    border-radius: 13px;
-    padding: 5px 8px;
+	border: 1px solid #ccc;
+	border-radius: 13px;
+	padding: 5px 8px;
 }
 
 .button:hover {
-    background: #ccc;
-    color: #000;
-    cursor: pointer;
+	background: #ccc;
+	color: #000;
+	cursor: pointer;
 }
 
 .input[type=text]:read-only {
-    background: #999;
-    color: #333;
-    cursor: not-allowed;
+	background: #999;
+	color: #333;
+	cursor: not-allowed;
 }
+
 .input:invalid {
-    border-color: red;
-    outline: 5px solid red;
+	border-color: red;
+	outline: 5px solid red;
 }

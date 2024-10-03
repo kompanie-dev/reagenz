@@ -2,21 +2,21 @@ import { Component } from "@kompanie/reagenz";
 import { getSelectedEntryData, getSelectedEntryId } from "../store/tasks.selectors.js";
 
 export class TasksTaskDetailPage extends Component {
-    constructor() {
-        super({
-            selectedEntryData: getSelectedEntryData,
-            selectedEntryId: getSelectedEntryId
-        });
-    }
+	constructor() {
+		super({
+			selectedEntryData: getSelectedEntryData,
+			selectedEntryId: getSelectedEntryId
+		});
+	}
 
-    render({ selectedEntryId, selectedEntryData }) {
-        if (selectedEntryData === undefined) {
-            return /*html*/`
+	render({ selectedEntryId, selectedEntryData }) {
+		if (selectedEntryData === undefined) {
+			return /*html*/`
                 <h1>Loading details for Task ID ${selectedEntryId}</h1>
                 <loading-icon></loading-icon>`;
-        }
+		}
 
-        return /*html*/`
+		return /*html*/`
             <h1>Task Details</h1>
             <div>
                 <h2>ID</h2>
@@ -32,7 +32,7 @@ export class TasksTaskDetailPage extends Component {
                     <a href="#" class="a button">Back to the task list</a>
                 </div>
             </div>`;
-    }
+	}
 }
 
 Component.define("tasks-task-detail-page", TasksTaskDetailPage);
