@@ -37,6 +37,7 @@ export default [
 			"prefer-object-has-own": "error",
 			"prefer-rest-params": "error",
 			"prefer-template": "error",
+			"quotes": ["error", "double", { "allowTemplateLiterals": true }],
 			"radix": "error",
 			"require-await": "error",
 			"require-unicode-regexp": ["error", { "requireFlag": "v" }],

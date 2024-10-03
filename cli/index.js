@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFile } from 'fs/promises';
+import { readFile } from "fs/promises";
 
 import { executeNewProjectCommand } from "./commands.new.js";
 import { executeHelpCommand } from "./commands.help.js";

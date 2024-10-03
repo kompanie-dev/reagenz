@@ -2,8 +2,8 @@ export class ExampleWebComponent extends HTMLElement {
 	constructor() {
 		super();
 
-		const shadowRoot = this.attachShadow({ mode: 'open' });
-		const template = document.createElement('template');
+		const shadowRoot = this.attachShadow({ mode: "open" });
+		const template = document.createElement("template");
 		template.innerHTML = `
 			<style>
 				:host {

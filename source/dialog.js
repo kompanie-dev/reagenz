@@ -30,7 +30,7 @@ export class Dialog {
 		const dialogComponentInstance = new this.#dialogComponentClass();
 		const title = dialogComponentInstance.querySelector("[dialog-part='title']")?.content.textContent;
 
-		this.#dialogElement = document.createElement('dialog');
+		this.#dialogElement = document.createElement("dialog");
 		this.#dialogElement.className = "reagenz-dialog";
 		this.#dialogElement.innerHTML = /*html*/`
             <form method="dialog">
