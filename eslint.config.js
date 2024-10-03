@@ -39,7 +39,8 @@ export default [
 			"prefer-template": "error",
 			"radix": "error",
 			"require-await": "error",
-			"require-unicode-regexp": ["error", { "requireFlag": "v" }]
+			"require-unicode-regexp": ["error", { "requireFlag": "v" }],
+			"semi": ["error", "always"]
 		}
 	}
 ];

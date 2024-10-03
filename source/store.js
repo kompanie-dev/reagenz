@@ -60,6 +60,6 @@ export class Store {
 
 		return () => {
 			this.#listeners = this.#listeners.filter(listener => listener !== listenerCallback);
-		}
+		};
 	}
 }

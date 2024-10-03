@@ -38,4 +38,4 @@ const executeNpmInstall = async () => {
 
 		process.exit(1);
 	}
-}
+};
