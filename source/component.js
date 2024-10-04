@@ -1,3 +1,5 @@
+import { ObjectComparator } from "./objectComparator.js";
+
 /**
  * Represents the base class for all Reagenz components.
  * All Reagenz components are Web Components.
@@ -155,33 +157,6 @@ export class Component extends HTMLElement {
 	}
 
 	/**
-	 * Determines if two objects are deep equal.
-	 * @param {Object} objectA The object which should be compared.
-	 * @param {Object} objectB The object which should be compared against.
-	 * @returns {boolean} true, if both objects are the same or contain the same data, otherwise false.
-	 */
-	#isDeepEqual(objectA, objectB) {
-		if (objectA === objectB) {
-			return true;
-		}
-
-		if (typeof objectA !== "object" || typeof objectB !== "object" || objectA === null || objectB === null || objectA.length !== objectB.length) {
-			return false;
-		}
-
-		const propertyNamesA = Object.keys(objectA);
-		const propertyNamesB = Object.keys(objectB);
-
-		if (propertyNamesA.length !== propertyNamesB.length) {
-			return false;
-		}
-
-		return propertyNamesA.every(
-			propertyName => this.#isDeepEqual(objectA[propertyName], objectB[propertyName])
-		);
-	}
-
-	/**
 	 * Iterates through all the child elements of the given element recursively,
 	 * excluding the children of registered Web Components.
 	 * @param {HTMLElement} element The element of which the child elements should get iterated through.
@@ -220,7 +195,7 @@ export class Component extends HTMLElement {
 	#updateDOMIfChangesDetected() {
 		const newSelectorData = this.dependencies.store?.executeSelectors(this.#selectors) ?? {};
 
-		if (this.#isDeepEqual(this.#currentSelectorData, newSelectorData) === false) {
+		if (ObjectComparator.checkDeepEquality(this.#currentSelectorData, newSelectorData) === false) {
 			this.#updateDOM(newSelectorData);
 		}
 	}
