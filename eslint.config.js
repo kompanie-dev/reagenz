@@ -56,6 +56,7 @@ export default [
 			"no-return-assign": "error",
 			"no-self-compare": "error",
 			"no-unmodified-loop-condition": "error",
+			"no-unneeded-ternary": "error",
 			"no-unreachable-loop": "error",
 			"no-useless-assignment": "error",
 			"no-use-before-define": "error",
