@@ -155,21 +155,6 @@ export class Component extends HTMLElement {
 	}
 
 	/**
-	 * Executes all the selector functions contained within the object and returns the result.
-	 * @param {Object} selectorObject An object containing selector functions as properties ({ selectorA: selectorFunction, ... }).
-	 * @param {?Store} store The instance of Store which should be used to execute the selectors against.
-	 * @returns {Object} An object containing the same property names, filled with the selector execution results.
-	 */
-	#executeSelectors(selectorObject, store) {
-		const executionResults =
-			Object
-				.entries(selectorObject)
-				.map(([propertyName, selectorFunction]) => [propertyName, store?.select(selectorFunction)]);
-
-		return Object.fromEntries(executionResults);
-	}
-
-	/**
 	 * Determines if two objects are deep equal.
 	 * @param {Object} objectA The object which should be compared.
 	 * @param {Object} objectB The object which should be compared against.
@@ -233,7 +218,7 @@ export class Component extends HTMLElement {
 	 * If changes are detected, an update of the innerHTML property is triggered.
 	 */
 	#updateDOMIfChangesDetected() {
-		const newSelectorData = this.#executeSelectors?.(this.#selectors, this.dependencies.store);
+		const newSelectorData = this.dependencies.store?.executeSelectors(this.#selectors) ?? {};
 
 		if (this.#isDeepEqual(this.#currentSelectorData, newSelectorData) === false) {
 			this.#updateDOM(newSelectorData);
