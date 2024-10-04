@@ -26,7 +26,6 @@ export default [
 			"default-case-last": "error",
 			"default-param-last": "error",
 			"eqeqeq": "error",
-			//"no-await-in-loop": "error",
 			"func-names": "error",
 			"func-style": ["error", "declaration", { "allowArrowFunctions": true }],
 			"id-length": ["error", { "exceptions": ["_"] }],
@@ -39,6 +38,21 @@ export default [
 			"no-nested-ternary": "error",
 			"no-object-constructor": "error",
 			"no-promise-executor-return": "error",
+			"no-restricted-globals": [
+				"error",
+				{
+					"name": "isNaN",
+					"message": "Use Number.isNaN() instead"
+				},
+				{
+					"name": "parseFloat",
+					"message": "Use Number.parseFloat() instead"
+				},
+				{
+					"name": "parseInt",
+					"message": "Use Number.parseInt() instead"
+				},
+			],
 			"no-return-assign": "error",
 			"no-self-compare": "error",
 			"no-unmodified-loop-condition": "error",
@@ -46,7 +60,6 @@ export default [
 			"no-useless-assignment": "error",
 			"no-use-before-define": "error",
 			"object-shorthand": "error",
-			//"prefer-named-capture-group": "error",
 			"prefer-object-has-own": "error",
 			"prefer-rest-params": "error",
 			"prefer-template": "error",
