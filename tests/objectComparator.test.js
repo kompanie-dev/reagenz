@@ -98,6 +98,15 @@ describe("ObjectComparator.checkDeepEquality()", () => {
 		assert.isFalse(actual);
 	});
 
+	it("Should return false for two objects with one missing a nested property", () => {
+		const objectA = { testA: 0, testB: { nestedA: 0, nestedB: 7 } };
+		const objectB = { testA: 0, testB: { nestedA: 0 } };
+
+		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
+
+		assert.isFalse(actual);
+	});
+
 	it("Should return true for two empty arrays", () => {
 		const actual = ObjectComparator.checkDeepEquality([], []);
 
