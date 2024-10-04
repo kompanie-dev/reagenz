@@ -13,7 +13,7 @@ export class ObjectComparator {
 			return true;
 		}
 
-		if (typeof objectA !== "object" || typeof objectB !== "object" || objectA === null || objectB === null || objectA.length !== objectB.length) {
+		if (typeof objectA !== "object" || typeof objectB !== "object" || objectA === null || objectB === null) {
 			return false;
 		}
 
