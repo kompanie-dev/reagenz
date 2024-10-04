@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { readFile } from "fs/promises";
 
-import { executeNewProjectCommand } from "./commands.new.js";
 import { executeHelpCommand } from "./commands.help.js";
+import { executeNewProjectCommand } from "./commands.new.js";
 
 const args = process.argv.slice(2);
 

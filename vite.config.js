@@ -5,8 +5,8 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: resolve(import.meta.dirname, "index.js"),
-			name: "Reagenz",
-			fileName: "reagenz"
+			fileName: "reagenz",
+			name: "Reagenz"
 		}
 	},
 	resolve: {

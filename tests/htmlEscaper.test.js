@@ -40,26 +40,26 @@ describe("HtmlEscaper.escapeObject()", () => {
 		const testObject = {
 			testArray: [1, 2, 3],
 			testBool: true,
+			testNumber: 123,
 			testObject: {
 				propertyA: 1,
 				propertyB: true,
 				propertyC: [],
 				propertyD: "<h1>Test</h1>"
 			},
-			testNumber: 123,
 			testString: "Nothing to escape here"
 		};
 
 		const expected = {
 			testArray: [1, 2, 3],
 			testBool: true,
+			testNumber: 123,
 			testObject: {
 				propertyA: 1,
 				propertyB: true,
 				propertyC: [],
 				propertyD: "&lt;h1&gt;Test&lt;/h1&gt;"
 			},
-			testNumber: 123,
 			testString: "Nothing to escape here"
 		};
 
@@ -72,12 +72,12 @@ describe("HtmlEscaper.escapeObject()", () => {
 		const expected = {
 			testArray: [1, 2, 3],
 			testBool: true,
+			testNumber: 123,
 			testObject: {
 				propertyA: 1,
 				propertyB: true,
 				propertyC: []
-			},
-			testNumber: 123
+			}
 		};
 
 		const actual = HtmlEscaper.escapeObject(expected);
