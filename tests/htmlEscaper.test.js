@@ -11,7 +11,7 @@ describe("HtmlEscaper.escapeString()", () => {
 	});
 
 	it("Should escape quotes (\", ')", () => {
-		const expected = "&lt;test-component value=&quot;&#039;&quot;&gt;&lt;/test-component&gt;";
+		const expected = "&lt;test-component value=&quot;&#39;&quot;&gt;&lt;/test-component&gt;";
 
 		const actual = HtmlEscaper.escapeString(`<test-component value="'"></test-component>`);
 

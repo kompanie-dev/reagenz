@@ -67,7 +67,7 @@ export default [
 			"quotes": ["error", "double", { "allowTemplateLiterals": true }],
 			"radix": "error",
 			"require-await": "error",
-			"require-unicode-regexp": ["error", { "requireFlag": "v" }],
+			"require-unicode-regexp": "error",
 			"semi": ["error", "always"]
 		}
 	}
