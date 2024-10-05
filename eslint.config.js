@@ -9,7 +9,7 @@ export default [
 			"demo/**/*.js",
 			"source/**/*.js",
 			"template-project/**/*.js",
-			"tests/**/*.js",
+			"tests/unit/*.js",
 			"index.js"
 		],
 		languageOptions: {
@@ -28,7 +28,6 @@ export default [
 			"eqeqeq": "error",
 			"func-names": "error",
 			"func-style": ["error", "declaration", { "allowArrowFunctions": true }],
-			"id-length": ["error", { "exceptions": ["_"] }],
 			"max-params": ["error", 4],
 			"no-array-constructor": "error",
 			"no-console": ["error", { allow: ["error", "info", "warn"] }],

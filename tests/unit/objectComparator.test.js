@@ -1,5 +1,5 @@
 import { assert, describe, it } from "vitest";
-import { ObjectComparator } from "../source/objectComparator.js";
+import { ObjectComparator } from "../../source/objectComparator.js";
 
 describe("ObjectComparator.checkDeepEquality()", () => {
 	it("Should return true for same bool inputs", () => {
@@ -147,5 +147,162 @@ describe("ObjectComparator.checkDeepEquality()", () => {
 		const actual = ObjectComparator.checkDeepEquality(arrayA, arrayB);
 
 		assert.isFalse(actual);
+	});
+
+
+	it("Should return false for two different mixed big objects containing nulls", () => {
+		const objectA = {
+			name: "Test Object",
+			id: 123,
+			isActive: null,
+			details: {
+				createdAt: new Date("2023-10-04T12:00:00Z"),
+				updatedAt: new Date("2024-01-01T08:00:00Z"),
+				tags: ["tag1", "tag2", { name: "special", active: false }],
+				metadata: {
+					description: "This is a nested description",
+					views: 100,
+					likes: 50,
+					options: [
+						{ key: "option1", value: "val1" },
+						{ key: "option2", value: "val2" }
+					]
+				}
+			},
+			nestedArray: [
+				[1, 2, 3],
+				[{ a: 10, b: 20 }, { c: 30, d: [40, 50, 60] }],
+				"simple string",
+				null
+			],
+			references: {
+				key1: { ref: "value1", status: true },
+				key2: { ref: "value2", status: false, subRef: { count: 5 } }
+			},
+			someNullValue: null,
+			numberArray: [1, 2, 3, 4, 5],
+			extraInfo: {
+				emptyArray: [],
+				emptyObject: {}
+			}
+		};
+
+		const objectB = {
+			name: "Test Object",
+			id: 123,
+			isActive: true,
+			details: {
+				createdAt: new Date("2023-10-04T12:00:00Z"),
+				updatedAt: new Date("2024-01-01T08:00:00Z"),
+				tags: ["tag1", "tag2", { name: "special", active: false }],
+				metadata: {
+					description: "This is a nested description",
+					views: 100,
+					likes: 50,
+					options: [
+						{ key: "option1", value: "val1" },
+						{ key: "option2", value: "val2" }
+					]
+				}
+			},
+			nestedArray: [
+				[1, 2, 3],
+				[{ a: 10, b: 20 }, { c: 30, d: [40, 50, 60] }],
+				"simple string",
+				null
+			],
+			references: {
+				key1: { ref: "value1", status: true },
+				key2: { ref: "value2", status: false, subRef: { count: 5 } }
+			},
+			someNullValue: null,
+			numberArray: [1, 2, 3, 4, 5],
+			extraInfo: {
+				emptyArray: [],
+				emptyObject: {}
+			}
+		};
+
+		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
+
+		assert.isFalse(actual);
+	});
+
+	it("Should return true for two identical mixed big objects containing nulls", () => {
+		const objectA = {
+			name: "Test Object",
+			id: 123,
+			isActive: true,
+			details: {
+				createdAt: new Date("2023-10-04T12:00:00Z"),
+				updatedAt: new Date("2024-01-01T08:00:00Z"),
+				tags: ["tag1", "tag2", { name: "special", active: false }],
+				metadata: {
+					description: "This is a nested description",
+					views: 100,
+					likes: 50,
+					options: [
+						{ key: "option1", value: "val1" },
+						{ key: "option2", value: "val2" }
+					]
+				}
+			},
+			nestedArray: [
+				[1, 2, 3],
+				[{ a: 10, b: 20 }, { c: 30, d: [40, 50, 60] }],
+				"simple string",
+				null
+			],
+			references: {
+				key1: { ref: "value1", status: true },
+				key2: { ref: "value2", status: false, subRef: { count: 5 } }
+			},
+			someNullValue: null,
+			numberArray: [1, 2, 3, 4, 5],
+			extraInfo: {
+				emptyArray: [],
+				emptyObject: {}
+			}
+		};
+
+		const objectB = {
+			name: "Test Object",
+			id: 123,
+			isActive: true,
+			details: {
+				createdAt: new Date("2023-10-04T12:00:00Z"),
+				updatedAt: new Date("2024-01-01T08:00:00Z"),
+				tags: ["tag1", "tag2", { name: "special", active: false }],
+				metadata: {
+					description: "This is a nested description",
+					views: 100,
+					likes: 50,
+					options: [
+						{ key: "option1", value: "val1" },
+						{ key: "option2", value: "val2" }
+					]
+				}
+			},
+			nestedArray: [
+				[1, 2, 3],
+				[{ a: 10, b: 20 }, { c: 30, d: [40, 50, 60] }],
+				"simple string",
+				null
+			],
+			references: {
+				key1: { ref: "value1", status: true },
+				key2: { ref: "value2", status: false, subRef: { count: 5 } }
+			},
+			someNullValue: null,
+			numberArray: [1, 2, 3, 4, 5],
+			extraInfo: {
+				emptyArray: [],
+				emptyObject: {}
+			}
+		};
+
+		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
+
+		assert.isTrue(actual);
 	});
 });

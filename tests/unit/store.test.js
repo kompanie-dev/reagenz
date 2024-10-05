@@ -1,5 +1,5 @@
 import { assert, describe, it } from "vitest";
-import { Store } from "../source/store.js";
+import { Store } from "../../source/store.js";
 
 describe("Store.constructor()", () => {
 	it("Should correctly assign the initial state", () => {

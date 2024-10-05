@@ -1,5 +1,5 @@
 import { assert, describe, it } from "vitest";
-import { HtmlEscaper } from "../source/htmlEscaper.js";
+import { HtmlEscaper } from "../../source/htmlEscaper.js";
 
 describe("HtmlEscaper.escapeString()", () => {
 	it("Should escape HTML tags (<, >)", () => {

@@ -1,5 +1,5 @@
 import { assert, describe, it } from "vitest";
-import { Injector } from "../source/injector.js";
+import { Injector } from "../../source/injector.js";
 
 describe("Injector.injectDependencies()", () => {
 	it("Should inject dependencies into the prototype", () => {
