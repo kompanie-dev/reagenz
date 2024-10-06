@@ -79,4 +79,55 @@ describe("Store.dispatch()", () => {
 
 		assert.deepEqual(testStore.state.entries, expected);
 	});
+
+	it("Should correctly execute the action, modify the state and execute middleware", () => {
+		const initialState = {
+			entries: ["Apple", "Peach"]
+		};
+		const testReducer = (action, state = initialState) => {
+			state.entries = [...state.entries, action.text ];
+
+			return state;
+		};
+		const middlewareA = (store, next, action) => {
+			store.state.entries.push("Lemon"); // Never directly modify the state outside tests!
+			next();
+		};
+		const middlewareB = (store, next, action) => {
+			store.state.entries.push("Raspberry"); // Never directly modify the state outside tests!
+			next();
+		};
+		const testStore = new Store(testReducer, initialState, [middlewareA, middlewareB]);
+		const expected = ["Apple", "Peach", "Lemon", "Raspberry", "Orange"];
+		const testAction = { type: "Test", text: "Orange" };
+
+		testStore.dispatch(testAction);
+
+		assert.deepEqual(testStore.state.entries, expected);
+	});
+
+	it("Should correctly execute the action, modify the state and skip the second middleware and reducer call", () => {
+		const initialState = {
+			entries: ["Apple", "Peach"]
+		};
+		const testReducer = (action, state = initialState) => {
+			state.entries = [...state.entries, action.text ];
+
+			return state;
+		};
+		const middlewareA = (store, next, action) => {
+			store.state.entries.push("Lemon"); // Never directly modify the state outside tests!
+		};
+		const middlewareB = (store, next, action) => {
+			store.state.entries.push("Raspberry"); // Never directly modify the state outside tests!
+			next();
+		};
+		const testStore = new Store(testReducer, initialState, [middlewareA, middlewareB]);
+		const expected = ["Apple", "Peach", "Lemon"];
+		const testAction = { type: "Test", text: "Orange" };
+
+		testStore.dispatch(testAction);
+
+		assert.deepEqual(testStore.state.entries, expected);
+	});
 });
