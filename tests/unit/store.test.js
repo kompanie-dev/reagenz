@@ -59,3 +59,24 @@ describe("Store.insecureSelect()", () => {
 		assert.deepEqual(actual, expected);
 	});
 });
+
+
+describe("Store.dispatch()", () => {
+	it("Should correctly execute the action and modify the state", () => {
+		const initialState = {
+			entries: ["Apple", "Peach"]
+		};
+		const testReducer = (action, state = initialState) => {
+			state.entries = [...state.entries, action.text ];
+
+			return state;
+		};
+		const testStore = new Store(testReducer, initialState, []);
+		const expected = ["Apple", "Peach", "Orange"];
+		const testAction = { type: "Test", text: "Orange" };
+
+		testStore.dispatch(testAction);
+
+		assert.deepEqual(testStore.state.entries, expected);
+	});
+});
