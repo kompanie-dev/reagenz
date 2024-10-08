@@ -67,7 +67,7 @@ describe("Store.dispatch()", () => {
 			entries: ["Apple", "Peach"]
 		};
 		const testReducer = (action, state = initialState) => {
-			state.entries = [...state.entries, action.text ];
+			state.entries = [...state.entries, action.text];
 
 			return state;
 		};
@@ -85,16 +85,18 @@ describe("Store.dispatch()", () => {
 			entries: ["Apple", "Peach"]
 		};
 		const testReducer = (action, state = initialState) => {
-			state.entries = [...state.entries, action.text ];
+			state.entries = [...state.entries, action.text];
 
 			return state;
 		};
-		const middlewareA = (store, next, action) => {
-			store.state.entries.push("Lemon"); // Never directly modify the state outside tests!
+		const middlewareA = (store, next) => {
+			// Never directly modify the state outside tests!
+			store.state.entries.push("Lemon");
 			next();
 		};
-		const middlewareB = (store, next, action) => {
-			store.state.entries.push("Raspberry"); // Never directly modify the state outside tests!
+		const middlewareB = (store, next) => {
+			// Never directly modify the state outside tests!
+			store.state.entries.push("Raspberry");
 			next();
 		};
 		const testStore = new Store(testReducer, initialState, [middlewareA, middlewareB]);
@@ -111,15 +113,17 @@ describe("Store.dispatch()", () => {
 			entries: ["Apple", "Peach"]
 		};
 		const testReducer = (action, state = initialState) => {
-			state.entries = [...state.entries, action.text ];
+			state.entries = [...state.entries, action.text];
 
 			return state;
 		};
-		const middlewareA = (store, next, action) => {
-			store.state.entries.push("Lemon"); // Never directly modify the state outside tests!
+		const middlewareA = (store) => {
+			// Never directly modify the state outside tests!
+			store.state.entries.push("Lemon");
 		};
-		const middlewareB = (store, next, action) => {
-			store.state.entries.push("Raspberry"); // Never directly modify the state outside tests!
+		const middlewareB = (store, next) => {
+			// Never directly modify the state outside tests!
+			store.state.entries.push("Raspberry");
 			next();
 		};
 		const testStore = new Store(testReducer, initialState, [middlewareA, middlewareB]);
@@ -129,5 +133,48 @@ describe("Store.dispatch()", () => {
 		testStore.dispatch(testAction);
 
 		assert.deepEqual(testStore.state.entries, expected);
+	});
+
+	it("Should correctly execute the action and notify all subscribers in the correct order", () => {
+		const receivedSubscriberData = [];
+		const initialState = {};
+		const testReducer = (action, state = initialState) => state;
+		const testStore = new Store(testReducer, initialState, []);
+		const expected = ["Lemon", "Raspberry"];
+
+		testStore.subscribe(() => {
+			receivedSubscriberData.push("Lemon");
+		});
+		testStore.subscribe(() => {
+			receivedSubscriberData.push("Raspberry");
+		});
+		testStore.dispatch({});
+
+		assert.deepEqual(receivedSubscriberData, expected);
+	});
+});
+
+describe("Store.unsubscribe()", () => {
+	it("Should correctly unsubscribe the correct subscriber when calling the unsubscribe function", () => {
+		const receivedSubscriberData = [];
+		const initialState = {};
+		const testReducer = (action, state = initialState) => state;
+		const testStore = new Store(testReducer, initialState, []);
+		const expected = ["Lemon", "Apple"];
+
+		testStore.subscribe(() => {
+			receivedSubscriberData.push("Lemon");
+		});
+		const unsubscribeFunction = testStore.subscribe(() => {
+			receivedSubscriberData.push("Raspberry");
+		});
+		testStore.subscribe(() => {
+			receivedSubscriberData.push("Apple");
+		});
+
+		unsubscribeFunction();
+		testStore.dispatch({});
+
+		assert.deepEqual(receivedSubscriberData, expected);
 	});
 });
