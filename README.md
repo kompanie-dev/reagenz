@@ -39,9 +39,18 @@ import { getCount } from "../store/counter/selectors.js";
 export class MyCountComponent extends Component {
     constructor() {
         super({
-            // The selectors you want to use in your component
+            // The selectors you want to use inside your render function
+			// If values of the selectors change, the whole component re-renders
             count: getCount
         });
+    }
+
+	// This function generates the innerHTML of the component.
+    // In this case it also accesses the count selector specified in the constructor.
+    render({ count }) {
+        return /*html*/`
+            <div>Current value: ${count}</div>
+            <button $click="buttonClickEvent">Increase</button>`;
     }
 
     // This function gets executed by the $click attribute seen in render()
@@ -50,24 +59,19 @@ export class MyCountComponent extends Component {
     buttonClickEvent() {
         this.dispatch(countUp(1));
     }
-
-    // This function generates the innerHTML of the component.
-    // In this case it also accesses the count selector specified in the constructor.
-    render({ count }) {
-        return /*html*/`
-            <div>Current value: ${count}</div>
-            <button $click="buttonClickEvent">Increase</button>`;
-    }
 }
 ```
 
 ## Structure
-The repository consists of two folders:
+The repository consists of the following folders:
+* `cli`: The source for the command line interface `npx reagenz`
 * `demo`: A demo project containing two apps to play around with
     * `notes`: A note app
     * `shared`: Components shared between the apps
     * `tasks`: A ToDo app
 * `source`: The source code of the Reagenz library
+* `template-project`: The project that get's used for `npx reagenz new`
+* `tests`: Unit and performance tests
 
 ## Limitations
 * Reagenz currently re-renders the whole component even if only a small part of its DOM is affected
