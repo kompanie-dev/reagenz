@@ -1,18 +1,23 @@
 # Reagenz Changelog
 
 ## 7.0.0 (?)
+
 * Updated dependencies
 * Added .editorconfig to template source code
 * Added eslint to template and source code
 * Added tests to source code
+* Added markdownlint to source code
+* Added TypeScript definitions
 * Fix x-for not escaping @item() values
 * Component: remove componentConfig parent object
 * Many smaller refactorings and cleanups
 
 ## v6.1.0 (2024-09-22)
+
 * Changed import to export for ForComponent and IfComponent
 
 ## v6.0.0 (2024-09-22)
+
 * Updated dependencies
 * Added npx reagenz help
 * Added npx reagenz new
@@ -25,17 +30,20 @@
 * Simplified forComponent and ifComponent import
 
 ## v5.1.0 (2024-05-04)
+
 * Updated dependencies
 * Added template project for new projects
 * Removed parcel folders from .gitignore
 
 ## v5.0.0 (2024-03-24)
+
 * Updated dependencies
 * Marked Reagenz as sideeffect free
 * Added x-for and x-if components
 * Refactored and fixed dialog system
 
 ## v4.0.0 (2024-03-01)
+
 * Updated dependencies
 * Added automatic HTML Escaping select function
 * Added insecureSelect for selecting data without escaping
@@ -46,6 +54,7 @@
 * Added dialog system
 
 ## v3.0.0 (2024-02-15)
+
 * Revert "Added Map support to forEach function"
 * Added warnings for accessing undefined dependencies
 * Demo: Fixed focus issues on Chrome
@@ -63,30 +72,38 @@
 * Fixed middlewares
 
 ## v2.1.0 (2024-01-06)
+
 * Updated dependencies
 * Added Map support to forEach function
 
 ## v2.0.0 (2023-12-29)
+
 * Complete rewrite of Reagenz
 * Store-based state
 
 ## v1.2.1 (2023-06-11)
+
 * Updated parcel
 * Added dev mode
 
 ## v1.2.0 (2023-05-14)
+
 * Added mousedown and mouseup events to Component
 
 ## v1.1.0 (2023-05-12)
+
 * Added repository to package.json
 * Added reagenz-version attribute to body
 * Changed local port to 8000 since macOS uses port 5000 internally
 
 ## v1.0.2 (2023-04-28)
+
 * Whitelisted source folder
 
 ## v1.0.1 (2023-04-14)
+
 * Added license to package.json
 
 ## v1.0.0 (2023-04-14)
+
 * Initial version

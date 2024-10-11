@@ -1,4 +1,4 @@
-# Reagenz Documentation
+# Reagenz Component System Documentation
 
 ## Setting up an application
 
@@ -13,6 +13,7 @@ This file is the one which gets added to the HTML.
 ```
 
 ### Registering Reagenz Components
+
 After creating and linking the file you need to register your Reagenz Components in your `setup.js`.
 First of all make sure that all components call `Component.define` in their class.
 
@@ -22,12 +23,14 @@ Component.define("my-main-page", MyMainPage);
 
 You have two options to import the component.
 If you are not injecting any dependencies into your component you can import the component the following way:
+
 ```js
 import "./components/myMainPage.js";
 ```
 
 If you need dependency injection you need to access the class directly.
 You can use the following way to import the component:
+
 ```js
 import { MyMainPage } from "./components/myMainPage.js";
 ```
@@ -39,9 +42,10 @@ The function is checking if a Web Component with the specified name is not added
 
 You can also use your own logic for registering standard Web Components.
 Just keep in mind:
+
 * You need to register them before using them
 * If you have multiple apps using the same Web Component you should register them in every `setup.js` file
-    * That means you also have to take care that your component get's only added once, since `customElements.define()` throws an error otherwise
+	* That means you also have to take care that your component get's only added once, since `customElements.define()` throws an error otherwise
 
 ```js
 // Registers a non-Reagenz Web Component
@@ -79,6 +83,7 @@ Launcher.startApp(
     document.getElementById("my-app-container")
 );
 ```
+
 Since Reagenz components are internally Web Components, you could also attach them directly in your HTML like this:
 
 ```html
@@ -88,10 +93,12 @@ Since Reagenz components are internally Web Components, you could also attach th
 ```
 
 This is however not recommended for a few reasons:
+
 * Unnecessary split between configuring and starting the app
 * You need to be more careful with the correct order of executing things
 
 ## Attribute helper functions
+
 Every Reagenz component has access to attribute helper functions.
 Those were made to be similar to the [getAttribute function](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute) which every HTML element has by default.
 This also means that every helper function returns `null` if the attribute does not exist or can not be converted into the respective data type, instead of throwing an error.
@@ -106,6 +113,7 @@ These helper function are useful for accessing the attributes of the component i
 `getJsonAttribute(attributeName)`
 
 ## Selectors
+
 The main way of retrieving data in smart components is through selector functions, similar to the ones found in `Redux`.
 
 In the following test component you can see a selector function called `getCount`, which gets executed in the background by the Reagenz component system.
@@ -132,6 +140,7 @@ export class MyMainPage extends Component {
 ```
 
 ## Change detection
+
 Selector functions are also responsible for the change detection in Reagenz.
 Every time an action is dispatched in the Store, all connected components execute their selector functions and check if the result changed.
 If the result differs, the entire component gets re-rendered.
@@ -140,6 +149,7 @@ Also be sure to only include selectors in the constructor that you are actually 
 Otherwise the component does unnecessary selector executions and might even re-render.
 
 ## Event system
+
 Since attaching event handlers using attributes like `onclick` is messy if you want to use it in Web Components and `addAddEventListener` is annoying, Reagenz has a small custom event system.
 
 If we take our component from before we can handle the `click` event by using the `$click` attribute.
@@ -201,6 +211,7 @@ export class MyAboutButton extends Component {
 ```
 
 ## Store access
+
 Every component has access to the store via the `dependencies.store` property.
 If you only use selectors in the `render()` function and only dispatch actions using the Reagenz `dispatch()` function, you don't need to access the store directly at all.
 While every component has this property, it is fine to not use selectors and stores at all and create a dumb component.
@@ -220,10 +231,12 @@ export class MyMainPage extends Component {
 ```
 
 ## Dependency injection in components
+
 To access the dependencies you injected before, you can use the `dependencies` property in the component.
 In this example a click would cause a console.log execution, since the `Injector.injectDependencies` call in the `Setting up Dependency Injection` sets the `logger` dependency to the browsers native `console`.
 
 If you would want to replace the logger with something else, the only thing you would need to change is the `logger` property of the `injectDependencies` call.
+
 ```js
 import { Component } from "@kompanie/reagenz";
 
@@ -240,9 +253,11 @@ export class TasksAboutPage extends Component {
     }
 }
 ```
+
 If you forget to inject a dependency and you are trying to access it, Reagenz will log a warning and tell you how to do so.
 
 ## if conditions
+
 Most apps require some kind of templating to hide or show content based on the value of a variable.
 In Reagenz this is done via the `x-if` helper component.
 
@@ -268,6 +283,7 @@ export class MyLoadingSpinner extends Component {
 ```
 
 ## Looping HTML elements
+
 Since a lot of components are iterating through arrays and convert the data into HTML, Reagenz has a helper component called `x-for`.
 
 ```js
@@ -292,6 +308,7 @@ export class MyListView extends Component {
 ```
 
 ## Dialog System
+
 Reagenz has a built-in dialog system.
 It allows you to open Reagenz components inside an [HTML dialog element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog), validate the dialog component and return the result as a Form in the callback of the dialog.
 
