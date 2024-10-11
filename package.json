@@ -14,6 +14,7 @@
 	"scripts": {
 		"build": "vite build",
 		"lint": "eslint",
+		"mdlint": "npx markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
 		"start": "vite --force --port 8000",
 		"test": "vitest run",
 		"test-watch": "vitest watch"
@@ -23,8 +24,8 @@
 	},
 	"devDependencies": {
 		"eslint": "^9.12.0",
+		"markdownlint-cli2": "^0.14.0",
 		"vite": "^5.4.8",
 		"vitest": "^2.1.2"
 	}
 }
-
