@@ -19,6 +19,7 @@ It has the following features:
 * Event system for attributes and component functions like `$click`, `$change` etc.
 * Helper functions like `getBoolAttribute`, `getFloatAttribute`, `getIntAttribute` and `getJsonAttribute`
 * No [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM)
+* TypeScript support (Beta)
 
 ## Usage
 At first you need to install the package using the following command:
