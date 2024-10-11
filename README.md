@@ -83,7 +83,7 @@ The repository consists of the following folders:
 The performance of Reagenz is usually great if you keep the following things in mind:
 
 * Reagenz re-renders the whole component even if only a small part of its DOM is affected
-* Keep your components at a reasonable size to prevent unnecessary re-rendering of elements
+	* Keep your components at a reasonable size to prevent unnecessary re-rendering of elements
 * It's possible that child-components get re-rendered first, just to be trashed because their parent get's re-rendered
 	* This can be prevented by not having the same selectors in child and parent components
 * All apps and components will load at once if you don't implement lazy loading yourself

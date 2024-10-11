@@ -1,4 +1,5 @@
 import path from "path";
+import { fileURLToPath } from "url";
 
 import { copyFolder } from "./utilities/copyFolder.js";
 import { createLoggingTimeStamp } from "./utilities/createLoggingTimeStamp.js";
@@ -31,7 +32,10 @@ const executeNpmInstall = async () => {
 };
 
 export const executeNewProjectCommand = async () => {
-	const templateDirectory = path.join(import.meta.dirname, "../template-project");
+	const filename = fileURLToPath(import.meta.url);
+	const directoryName = path.dirname(filename);
+
+	const templateDirectory = path.join(directoryName, "../template-project");
 	const currentDirectory = process.cwd();
 
 	await copyTemplateProject(templateDirectory, currentDirectory);

@@ -1,6 +1,10 @@
 # Reagenz Changelog
 
-## 7.0.0 (?)
+## 7.0.1 (2024-10-11)
+
+* Fix npx reagenz new
+
+## 7.0.0 (2024-10-11)
 
 * Updated dependencies
 * Added .editorconfig to template source code
