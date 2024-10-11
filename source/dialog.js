@@ -24,7 +24,7 @@ export class Dialog {
 	/**
 	 * Opens the dialog using an HTML <dialog> element and executes the given callback when the dialog closes.
 	 * @param {Function} callback The function which should get executed when the dialog closes.
-	 * @param {?boolean} isClosable If true, the dialog can be closed by clicking the backdrop. Enabled by default.
+	 * @param {?boolean} isClosable If true, the dialog can be closed by clicking the backdrop or close button. Enabled by default.
 	 */
 	show(callback, isClosable = true) {
 		const dialogComponentInstance = new this.#dialogComponentClass();
