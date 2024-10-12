@@ -41,18 +41,11 @@ export declare class Component extends HTMLElement {
 	getBoolAttribute(attributeName: string): boolean | null;
 
 	/**
-	 * Loads the value from the given attribute and tries to convert it to a float value.
+	 * Loads the value from the given attribute and tries to convert it to a number.
 	 * @param attributeName The attribute name where the data should be taken from.
-	 * @returns A float if the conversion was successful, or null if the value can't be converted.
+	 * @returns A number if the conversion was successful, or null if the value can't be converted.
 	 */
-	getFloatAttribute(attributeName: string): number | null;
-
-	/**
-	 * Loads the value from the given attribute and tries to convert it to an integer value.
-	 * @param attributeName The attribute name where the data should be taken from.
-	 * @returns An integer if the conversion was successful, or null if the value can't be converted.
-	 */
-	getIntAttribute(attributeName: string): number | null;
+	getNumberAttribute(attributeName: string): number | null;
 
 	/**
 	 * Loads the value from the given attribute and tries to convert it to a JavaScript object.

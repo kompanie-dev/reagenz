@@ -91,25 +91,13 @@ export class Component extends HTMLElement {
 	}
 
 	/**
-	 * Loads the value from the given attribute and tries to convert it to a float value.
-	 * @param {string} attributeName The attribute name where the data should be taken from.
-	 * @returns {?number} A float if the conversion was successful. If the value can't be converted or the attribute does not exist, null.
+	 * Loads the value from the given attribute and tries to convert it to a number.
+	 * @param attributeName The attribute name where the data should be taken from.
+	 * @returns A number if the conversion was successful, or null if the value can't be converted.
 	 */
-	getFloatAttribute(attributeName) {
+	getNumberAttribute(attributeName) {
 		const attributeValue = this.getAttribute(attributeName);
-		const parsedValue = Number.parseFloat(attributeValue);
-
-		return Number.isNaN(parsedValue) ? null : parsedValue;
-	}
-
-	/**
-	 * Loads the value from the given attribute and tries to convert it to an integer value.
-	 * @param {string} attributeName The attribute name where the data should be taken from.
-	 * @returns {?number} An integer if the conversion was successful. If the value can't be converted or the attribute does not exist, null.
-	 */
-	getIntAttribute(attributeName) {
-		const attributeValue = this.getAttribute(attributeName);
-		const parsedValue = Number.parseInt(attributeValue, 10);
+		let parsedValue = Number(attributeValue);
 
 		return Number.isNaN(parsedValue) ? null : parsedValue;
 	}

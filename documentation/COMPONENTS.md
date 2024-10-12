@@ -106,9 +106,7 @@ These helper function are useful for accessing the attributes of the component i
 
 `getBoolAttribute(attributeName)`
 
-`getFloatAttribute(attributeName)`
-
-`getIntAttribute(attributeName)`
+`getNumberAttribute(attributeName)`
 
 `getJsonAttribute(attributeName)`
 
