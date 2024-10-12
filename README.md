@@ -36,28 +36,28 @@ import { countUp } from "../store/counter/actions.js";
 import { getCount } from "../store/counter/selectors.js";
 
 export class MyCounter extends Component {
-    constructor() {
-        super({
-            // The selectors you want to use inside your render function
+	constructor() {
+		super({
+			// The selectors you want to use inside your render function
 			// If values of the selectors change, the whole component re-renders
-            count: getCount
-        });
-    }
+			count: getCount
+		});
+	}
 
 	// This function generates the innerHTML of the component.
-    // In this case it also accesses the count selector specified in the constructor.
-    render({ count }) {
-        return /*html*/`
-            <div>Current value: ${count}</div>
-            <button $click="buttonClickEvent">Increase</button>`;
-    }
+	// In this case it also accesses the count selector specified in the constructor.
+	render({ count }) {
+		return /*html*/`
+			<div>Current value: ${count}</div>
+			<button $click="buttonClickEvent">Increase</button>`;
+	}
 
-    // This function gets executed by the $click attribute seen in render()
-    // It only fires for the element with the $click attribute
-    // You can also connect other events with $change, $input etc.
-    buttonClickEvent() {
-        this.dispatch(countUp(1));
-    }
+	// This function gets executed by the $click attribute seen in render()
+	// It only fires for the element with the $click attribute
+	// You can also connect other events with $change, $input etc.
+	buttonClickEvent() {
+		this.dispatch(countUp(1));
+	}
 }
 
 Component.define("my-counter", MyCounter);
