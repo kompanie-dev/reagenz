@@ -1,5 +1,9 @@
 # Reagenz Changelog
 
+## 8.0.0
+
+* Replace getIntAttribute and getFloatAttribute with getNumberAttribute
+
 ## 7.0.1 (2024-10-11)
 
 * Fix npx reagenz new
