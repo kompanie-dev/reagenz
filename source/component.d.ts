@@ -54,34 +54,6 @@ export declare class Component extends HTMLElement {
 	 */
 	getJsonAttribute(attributeName: string): Record<string, any> | null;
 
-	/**
-	 * Connects all attributes starting with "$" to functions of the parent component.
-	 * @param component The parent component which contains the functions that get connected.
-	 */
-	#addEventAttributeBindings(component: HTMLElement): void;
-
-	/**
-	 * Iterates through all the child elements of the given element recursively,
-	 * excluding the children of registered Web Components.
-	 * @param element The element of which the child elements should get iterated through.
-	 * @param callback The callback function which gets executed for each child element.
-	 */
-	#iterateChildElementsRecursively(element: HTMLElement, callback: (child: HTMLElement) => void): void;
-
-	/**
-	 * Executes the render() function with the supplied selectorData,
-	 * updates the component's innerHTML property with the resulting HTML,
-	 * and updates #currentSelectorData to the supplied selectorData.
-	 * @param selectorData An object containing results of the selector execution which should be used for the render function.
-	 */
-	#updateDOM(selectorData: Record<string, any>): void;
-
-	/**
-	 * Executes the selectors of the component and compares it to the previous result.
-	 * If changes are detected, an update of the innerHTML property is triggered.
-	 */
-	#updateDOMIfChangesDetected(): void;
-
 	// Properties (using Proxy)
 	dependencies: {
 		store?: {
