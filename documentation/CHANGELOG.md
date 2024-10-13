@@ -1,5 +1,11 @@
 # Reagenz Changelog
 
+## 8.1.0
+
+* Simplified check for Web Components in event attribute handler
+* Updated TypeScript definitions
+* Updated template project dependencies
+
 ## 8.0.0
 
 * Replace getIntAttribute and getFloatAttribute with getNumberAttribute
