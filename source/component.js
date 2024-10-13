@@ -146,7 +146,7 @@ export class Component extends HTMLElement {
 
 	/**
 	 * Iterates through all the child elements of the given element recursively,
-	 * excluding the children of registered Web Components.
+	 * excluding the children of Web Components.
 	 * @param {HTMLElement} element The element of which the child elements should get iterated through.
 	 * @param {Function} callback The callback function which gets executed for each child element.
 	 */
@@ -154,7 +154,7 @@ export class Component extends HTMLElement {
 		for (const childNode of element.children) {
 			callback(childNode);
 
-			if (customElements.get(childNode.tagName.toLowerCase()) === undefined) {
+			if (childNode.tagName.includes("-") === false) {
 				this.#iterateChildElementsRecursively(childNode, callback);
 			}
 		}
