@@ -1,12 +1,19 @@
 # Reagenz Changelog
 
-## 8.1.0
+## 9.0.0 (?)
+
+* Update dependencies
+* Enable minification in build
+* Replaced helper functions with getTypedAttribute()
+* Replace Injector, Launcher and WebComponentUtilities with App class
+
+## 8.1.0 (2024-10-13)
 
 * Simplified check for Web Components in event attribute handler
 * Updated TypeScript definitions
 * Updated template project dependencies
 
-## 8.0.0
+## 8.0.0 (2024-10-12)
 
 * Replace getIntAttribute and getFloatAttribute with getNumberAttribute
 

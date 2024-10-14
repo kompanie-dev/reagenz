@@ -25,7 +25,7 @@ export class App {
 	 */
 	static #attach(root, container) {
 		const rootInstance = new root();
-		rootInstance.setAttribute("framework", "@kompanie/reagenz@8.1.0");
+		rootInstance.setAttribute("framework", "@kompanie/reagenz@9.0.0");
 		container.append(rootInstance);
 	}
 
