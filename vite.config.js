@@ -7,7 +7,11 @@ export default defineConfig({
 			entry: resolve(import.meta.dirname, "index.js"),
 			fileName: "reagenz",
 			name: "Reagenz"
-		}
+		},
+		cssCodeSplit: false,
+		minify: true,
+		reportCompressedSize: true,
+		target: "esnext"
 	},
 	resolve: {
 		alias: {
