@@ -4,7 +4,7 @@ import { removeTask, saveEntriesRequest, updateTaskDone } from "../store/tasks.a
 export class TasksTaskItem extends Component {
 	render() {
 		const id = this.getAttribute("task-id");
-		const isDone = this.getBoolAttribute("done");
+		const isDone = this.getTypedAttribute("done", "boolean");
 
 		return /*html*/`
             <div>

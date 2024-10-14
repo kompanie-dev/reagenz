@@ -97,18 +97,12 @@ This is however not recommended for a few reasons:
 * Unnecessary split between configuring and starting the app
 * You need to be more careful with the correct order of executing things
 
-## Attribute helper functions
+## Attribute helper function
 
-Every Reagenz component has access to attribute helper functions.
-Those were made to be similar to the [getAttribute function](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute) which every HTML element has by default.
-This also means that every helper function returns `null` if the attribute does not exist or can not be converted into the respective data type, instead of throwing an error.
-These helper function are useful for accessing the attributes of the component in the `render` function.
-
-`getBoolAttribute(attributeName)`
-
-`getNumberAttribute(attributeName)`
-
-`getJsonAttribute(attributeName)`
+Every Reagenz component has access to `getTypedAttribute(attributeName, destinationType)`.
+It was made to be similar to the [getAttribute function](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute) which every HTML element has by default.
+This also means that it returns `null` if the attribute does not exist or can not be converted into the respective data type, instead of throwing an error.
+This helper function is useful for accessing the attributes of the component in the `render` function.
 
 ## Selectors
 
