@@ -37,7 +37,7 @@ import { getCount } from "../store/counter/selectors.js";
 
 export class MyCounter extends Component {
     constructor() {
-    super({
+        super({
             // The selectors you want to use inside your render function
             // If values of the selectors change, the entire component re-renders
             count: getCount
