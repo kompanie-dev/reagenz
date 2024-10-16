@@ -66,6 +66,8 @@ These helper functions are useful for accessing the attributes of the component 
 
 The main way of retrieving data in smart components is through selector functions, similar to the ones found in `Redux`.
 
+You can read more about the store system in the [store documentation](./STORE.md)
+
 In the following test component you can see a selector function called `getCount`, which gets executed in the background by the Reagenz component system.
 The value is then available in the `render` function as `count`, as specified in the constructor.
 The `render` function then can access its data directly.
