@@ -12,28 +12,12 @@ import { TasksTaskItem } from "./components/tasksTaskItem.js";
 import { TasksTaskList } from "./components/tasksTaskList.js";
 import { TasksTimeDisplay } from "./components/tasksTimeDisplay.js";
 
-import { updateRoute } from "./store/tasks.actions.js";
-
 import { tasksNetworkMiddleware } from "./store/tasks.middlewares.network.js";
 import { tasksInitialState, tasksReducer } from "./store/tasks.reducer.js";
 import { loggingMiddleware } from "../shared/middlewares/loggingMiddleware.js";
 
-if (location.hash === "") {
-	location.hash = "#/";
-}
-
-const reaTaskStore = new Store(tasksReducer, tasksInitialState, [
-	loggingMiddleware,
-	tasksNetworkMiddleware,
-]);
-
-window.addEventListener(
-	"popstate",
-	() => reaTaskStore.dispatch(updateRoute(location.hash))
-);
-
-App.create({
-	root: TasksMain,
+App.start({
+	mainComponent: TasksMain,
 	container: document.getElementById("task-app-container"),
 	components: [
 		TasksAboutPage,
@@ -46,6 +30,9 @@ App.create({
 	],
 	dependencies: {
 		logger: console,
-		store: reaTaskStore
+		store: new Store(tasksReducer, tasksInitialState, [
+			loggingMiddleware,
+			tasksNetworkMiddleware,
+		])
 	}
 });

@@ -7,10 +7,10 @@ import { AppRoot } from "./components/appRoot.js";
 import { CounterPage } from "./components/counterPage.js";
 import "./components/aboutPage.js";
 
-App.create({
-	root: AppRoot,
+App.start({
+	mainComponent: AppRoot,
 	container: document.getElementById("my-app-container"),
-	component: 	[
+	component: [
 		AppRoot,
 		CounterPage
 	],

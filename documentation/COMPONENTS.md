@@ -12,47 +12,38 @@ This file is the one which gets added to the HTML.
 <script src="./my-app-name/setup.js" type="module"></script>
 ```
 
-### Registering Reagenz Components
+### app.js
 
-After creating and linking the file you need to register your Reagenz Components in your `setup.js`.
-First of all make sure that all components call `Component.define` in their class.
-
-```js
-Component.define("my-main-page", MyMainPage);
-```
-
-You have two options to import the component.
-If you are not injecting any dependencies into your component you can import the component the following way:
+In the app.js file you can configure your entry point, the HTML element where your app should be attached to, your dependencies and your components.
 
 ```js
-import "./components/myMainPage.js";
-```
+import "./components/myExampleComponent.js";
+import { App, Store } from "@kompanie/reagenz";
+import { MainPage } from "./components/mainPage.js";
+import { ExampleWebComponent } from "./webComponents/exampleWebComponent.js";
 
-If you need dependency injection you need to access the class directly.
-You can use the following way to import the component:
+App.start({
+	// The main entry component of your app
+	mainComponent: MainPage,
 
-```js
-import { MyMainPage } from "./components/myMainPage.js";
-```
+	// The container element to which your main component gets attached to
+	container: document.getElementById("my-app-container"),
 
-### Registering Web Components
+	// Add all components which should get dependencies injected here
+	// Components which don't access dependencies can be imported like myExampleComponent.js in this example
+	components: [
+		MainPage
+	],
 
-Web Components should be registered using `WebComponentUtilities.defineComponents()`.
-The function is checking if a Web Component with the specified name is not added yet and then calls `customElements.define()`.
+	// The dependencies which get injected into the components
+	// They are available as this.dependencies.dependencyName
+	dependencies: {
+		logger: console,
+		store: new Store(myReducer, myInitialState, [myMiddlewareA, myMiddlewareB])
+	},
 
-You can also use your own logic for registering standard Web Components.
-Just keep in mind:
-
-* You need to register them before using them
-* If you have multiple apps using the same Web Component you should register them in every `setup.js` file
-	* That means you also have to take care that your component get's only added once, since `customElements.define()` throws an error otherwise
-
-```js
-// Registers a non-Reagenz Web Component
-// In this example it will be available as 'example-web-component' in HTML
-WebComponentUtilities.defineComponents({
-    "example-web-component": ExampleWebComponent,
-    "another-web-component": AnotherWebComponent
+	// Add non-Reagenz web components this way
+	webComponents: { "example-web-component": ExampleWebComponent },
 });
 ```
 
@@ -225,9 +216,9 @@ export class MyMainPage extends Component {
 ## Dependency injection in components
 
 To access the dependencies you injected before, you can use the `dependencies` property in the component.
-In this example a click would cause a console.log execution, since the `Injector.injectDependencies` call in the `Setting up Dependency Injection` sets the `logger` dependency to the browsers native `console`.
+In this example a click would cause a console.log execution, since the logger dependency in the `Setting up Dependency Injection` sets the `logger` dependency to the browsers native `console`.
 
-If you would want to replace the logger with something else, the only thing you would need to change is the `logger` property of the `injectDependencies` call.
+If you would want to replace the logger with something else, the only thing you would need to change is the `logger` property in the `app.js`.
 
 ```js
 import { Component } from "@kompanie/reagenz";

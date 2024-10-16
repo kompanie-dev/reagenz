@@ -5,28 +5,28 @@ export class App {
 	/**
 	 * Creates and starts a new Reagenz application.
 	 * @param {{
-	 * root: HTMLElement
+	 * mainComponent: HTMLElement
 	 * container: HTMLElement
 	 * components: HTMLElement[]
 	 * dependencies: object
 	 * webComponents: object
 	 * }} appConfig
 	 */
-	static create({ root, container, components, dependencies, webComponents = {} }) {
+	static start({ mainComponent, container, components, dependencies, webComponents = {} }) {
 		App.#defineWebComponents(webComponents);
 		App.#injectDependencies(dependencies, components);
-		App.#attach(root, container);
+		App.#attach(mainComponent, container);
 	}
 
 	/**
-	 * Starts the application by attaching the root component to the specified container element and adding a version info to the root.
-	 * @param {HTMLElement} root The root component of the application.
+	 * Starts the application by taking the main component, adding a version info and adding it to the specified container element.
+	 * @param {HTMLElement} mainComponent The main component of the application.
 	 * @param {HTMLElement} container The container element to which the main component gets attached to.
 	 */
-	static #attach(root, container) {
-		const rootInstance = new root();
-		rootInstance.setAttribute("framework", "@kompanie/reagenz@9.0.0");
-		container.append(rootInstance);
+	static #attach(mainComponent, container) {
+		const mainInstance = new mainComponent();
+		mainInstance.setAttribute("framework", "@kompanie/reagenz@9.0.0");
+		container.append(mainInstance);
 	}
 
 	/**
@@ -34,11 +34,12 @@ export class App {
 	 * @param {Object} componentConfig An object containing keys and the component class ({ "test-element": TestElementComponent, ... }).
 	 */
 	static #defineWebComponents(componentConfig) {
-		Object.entries(componentConfig)
-		.filter(([tagName]) => customElements.get(tagName) === undefined)
-		.forEach(([tagName, componentClass]) =>
-			customElements.define(tagName, componentClass)
-		);
+		Object
+			.entries(componentConfig)
+			.filter(([tagName]) => customElements.get(tagName) === undefined)
+			.forEach(([tagName, componentClass]) =>
+				customElements.define(tagName, componentClass)
+			);
 	}
 
 	/**

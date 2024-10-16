@@ -8,8 +8,8 @@ import { NotesMain } from "./components/notesMain.js";
 
 import { ExampleWebComponent } from "./webComponents/exampleWebComponent.js";
 
-App.create({
-	root: NotesMain,
+App.start({
+	mainComponent: NotesMain,
 	container: document.getElementById("note-app-container"),
 	components: [
 		NotesMain
@@ -19,4 +19,4 @@ App.create({
 		store: new Store(notesReducer, notesInitialState, [loggingMiddleware, notesNetworkMiddleware])
 	},
 	webComponents: { "example-web-component": ExampleWebComponent },
-  });
+});

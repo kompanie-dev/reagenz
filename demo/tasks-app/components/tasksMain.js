@@ -28,6 +28,15 @@ export class TasksMain extends Component {
 	}
 
 	onConnect() {
+		if (location.hash === "") {
+			location.hash = "#/";
+		}
+
+		window.addEventListener(
+			"popstate",
+			() => this.dispatch(updateRoute(location.hash))
+		);
+
 		this.dispatch(loadEntriesRequest());
 		this.dispatch(updateRoute(location.hash));
 	}
