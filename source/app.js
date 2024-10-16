@@ -3,14 +3,18 @@
  */
 export class App {
 	/**
-	 * Creates and starts a new Reagenz application.
-	 * @param {{
-	 * mainComponent: HTMLElement
-	 * container: HTMLElement
-	 * components: HTMLElement[]
-	 * dependencies: object
-	 * webComponents: object
-	 * }} appConfig
+	 * Initializes and starts a new Reagenz application.
+	 * This method sets up the components, injects dependencies into them
+	 * and attaches the main application component to a specified container.
+	 *
+	 * @param {Object} appConfig Configuration object for the Reagenz application.
+	 * @param {HTMLElement} appConfig.mainComponent The main component of the application that will be rendered in the container.
+	 * @param {HTMLElement} appConfig.container The HTML element that will serve as the container for the main application component.
+	 * @param {HTMLElement[]} appConfig.components A list of additional components that may require dependency injection or other setup.
+	 * @param {Object} appConfig.dependencies A collection of key-value pairs representing the dependencies required by the application and its components.
+	 * @param {Object} [appConfig.webComponents={}] An optional object that defines custom web components used within the application.
+	 *
+	 * @returns {void}
 	 */
 	static start({ mainComponent, container, components, dependencies, webComponents = {} }) {
 		App.#defineWebComponents(webComponents);
@@ -20,8 +24,11 @@ export class App {
 
 	/**
 	 * Starts the application by taking the main component, adding a version info and adding it to the specified container element.
+	 *
 	 * @param {HTMLElement} mainComponent The main component of the application.
 	 * @param {HTMLElement} container The container element to which the main component gets attached to.
+	 *
+	 * @returns {void}
 	 */
 	static #attach(mainComponent, container) {
 		const mainInstance = new mainComponent();
@@ -30,8 +37,15 @@ export class App {
 	}
 
 	/**
-	 * Registers Web Components in the CustomElementRegistry of the browser using an object and skips already registered ones.
-	 * @param {Object} componentConfig An object containing keys and the component class ({ "test-element": TestElementComponent, ... }).
+	 * Registers custom Web Components in the browser's CustomElementRegistry.
+	 * This method iterates through the provided `componentConfig` object and registers each component with a corresponding tag name.
+	 * If a component has already been registered, it will be skipped to avoid redefinition errors.
+	 *
+	 * @param {Object} componentConfig An object mapping custom element tag names to their respective component classes.
+	 * @param {string} componentConfig.tagName The tag name of the custom element (e.g., "test-element").
+	 * @param {CustomElementConstructor} componentConfig.componentClass The class definition of the custom element to be registered.
+	 *
+	 * @returns {void}
 	 */
 	static #defineWebComponents(componentConfig) {
 		Object
@@ -45,8 +59,11 @@ export class App {
 	/**
 	 * Injects the given dependency object into the prototype of all supplied classes.
 	 * The dependencies will be available in the class as dependencies property.
+	 *
 	 * @param {Object} dependencies An object containing all dependencies that should be available in the classes.
 	 * @param {Object[]} classes An array of classes in which the dependencies should get injected.
+	 *
+	 * @returns {void}
 	 */
 	static #injectDependencies(dependencies, classes) {
 		for (const receiverClass of classes) {

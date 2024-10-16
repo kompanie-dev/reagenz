@@ -7,6 +7,7 @@ export class Dialog {
 
 	/**
 	 * Creates a new instance of Dialog.
+	 *
 	 * @param {HTMLElement} componentClass A Reagenz or web component which contains the content of the modal.
 	 */
 	constructor(componentClass) {
@@ -15,7 +16,10 @@ export class Dialog {
 
 	/**
 	 * Closes the dialog.
+	 *
 	 * @param {?string} returnValue The return value of the dialog. "cancel" by default.
+	 *
+	 * @returns {void}
 	 */
 	close(returnValue = "cancel") {
 		this.#dialogElement.close(returnValue);
@@ -23,8 +27,11 @@ export class Dialog {
 
 	/**
 	 * Opens the dialog using an HTML <dialog> element and executes the given callback when the dialog closes.
+	 *
 	 * @param {Function} callback The function which should get executed when the dialog closes.
 	 * @param {?boolean} isClosable If true, the dialog can be closed by clicking the backdrop or close button. Enabled by default.
+	 *
+	 * @returns {void}
 	 */
 	show(callback, isClosable = true) {
 		const dialogComponentInstance = new this.#dialogComponentClass();
@@ -53,6 +60,16 @@ export class Dialog {
 		this.#dialogElement.showModal();
 	}
 
+	/**
+	 * Adds event handlers for click, close, keydown and submit events.
+	 *
+	 * @param {HTMLDialogElement} dialogElement The dialog element which the handlers get attached to.
+	 * @param {boolean} isClosable true, if the dialog can be cancelled, otherwise false.
+	 * @param {?Function} callback The function which should be called when the dialog closes.
+	 * @param {HTMLElement} dialogComponentInstance The instance of the Reagenz component which represents the content of the dialog.
+	 *
+	 * @returns {void}
+	 */
 	#addEventHandlers(dialogElement, isClosable, callback, dialogComponentInstance) {
 		dialogElement.addEventListener("click", (event) => {
 			if (isClosable === true && (event.target === dialogElement || event.target.value === "cancel")) {
