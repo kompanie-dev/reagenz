@@ -28,27 +28,27 @@ export class Dialog {
 	 */
 	show(callback, isClosable = true) {
 		const dialogComponentInstance = new this.#dialogComponentClass();
-		const title = dialogComponentInstance.querySelector("[dialog-part='title']")?.content.textContent;
+		const title = dialogComponentInstance.querySelector("[dialog-part='title']")?.content.innerHTML;
 
-		this.#dialogElement = document.createElement("dialog");
-		this.#dialogElement.className = "reagenz-dialog";
-		this.#dialogElement.innerHTML = /*html*/`
-            <form method="dialog">
-                <div class="reagenz-dialog-header">
-                    ${isClosable ? /*html*/`<button type='submit' value='cancel' class='reagenz-dialog-close-button'>✖</button>` : ""}
-                    <span class="reagenz-dialog-title">${title}</span>
-                </div>
+		document.body.insertAdjacentHTML("beforeend", /*html*/`
+			<dialog class="reagenz-dialog">
+				<form method="dialog">
+					<div class="reagenz-dialog-header">
+						${isClosable ? /*html*/`<button type="submit" value="cancel" class="reagenz-dialog-close-button">✖</button>` : ""}
+						<span class="reagenz-dialog-title">${title}</span>
+					</div>
 
-                <div class="reagenz-dialog-content"></div>
-            </form>`;
+					<div class="reagenz-dialog-content"></div>
+				</form>
+			</dialog>`);
+
+		this.#dialogElement = document.querySelector("dialog");
 
 		this.#dialogElement
 			.querySelector(".reagenz-dialog-content")
 			.append(dialogComponentInstance);
 
 		this.#addEventHandlers(this.#dialogElement, isClosable, callback, dialogComponentInstance);
-
-		document.body.append(this.#dialogElement);
 
 		this.#dialogElement.showModal();
 	}
