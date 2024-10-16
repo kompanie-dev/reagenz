@@ -5,11 +5,11 @@
 ### HTML
 
 Every Reagenz app should have its own JavaScript file setting up the application.
-Usually you want to name it something like `my-app-name.setup.js`.
+Usually you want to name it `app.js`.
 This file is the one which gets added to the HTML.
 
 ```html
-<script src="./my-app-name/setup.js" type="module"></script>
+<script src="./my-app-name/app.js" type="module"></script>
 ```
 
 ### app.js
@@ -47,53 +47,20 @@ App.start({
 });
 ```
 
-### Setting up Dependency Injection
+## Attribute helper functions
 
-You need to specifiy dependencies for dependency injection.
-You should at least specify a store.
-Then you need to inject this dependencies into every component which should be able to access the store or any other dependency.
-The dependencies will be available as a property called `dependencies` in the components, as seen in an example later in this documentation.
+Every Reagenz component has access to attribute helper functions.
+Those were made to be similar to the [getAttribute function](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute) which every HTML element has by default.
+This also means that every helper function returns `null` if the attribute does not exist or can not be converted into the respective data type, instead of throwing an error.
+These helper functions are useful for accessing the attributes of the component in the `render` function.
 
-```js
-Injector.injectDependencies(
-    {
-        logger: console,
-        store: testStore
-    },
-    [MyMainPage]
-);
-```
+`getArrayAttribute(attributeName)`
 
-### Starting the application
+`getBoolAttribute(attributeName)`
 
-After setting up your components and the dependency injection, you can start your app using the `Launcher.startApp()` function.
+`getNumberAttribute(attributeName)`
 
-```js
-Launcher.startApp(
-    MyMainPage,
-    document.getElementById("my-app-container")
-);
-```
-
-Since Reagenz components are internally Web Components, you could also attach them directly in your HTML like this:
-
-```html
-<body>
-    <my-main></my-main>
-</body>
-```
-
-This is however not recommended for a few reasons:
-
-* Unnecessary split between configuring and starting the app
-* You need to be more careful with the correct order of executing things
-
-## Attribute helper function
-
-Every Reagenz component has access to `getTypedAttribute(attributeName, destinationType)`.
-It was made to be similar to the [getAttribute function](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute) which every HTML element has by default.
-This also means that it returns `null` if the attribute does not exist or can not be converted into the respective data type, instead of throwing an error.
-This helper function is useful for accessing the attributes of the component in the `render` function.
+`getObjectAttribute(attributeName)`
 
 ## Selectors
 
@@ -237,7 +204,7 @@ export class TasksAboutPage extends Component {
 }
 ```
 
-If you forget to inject a dependency and you are trying to access it, Reagenz will log a warning and tell you how to do so.
+If you forget to inject a dependency and you are trying to access it, Reagenz will log a warning.
 
 ## if conditions
 
