@@ -78,7 +78,9 @@ export class Dialog {
 		});
 
 		dialogElement.addEventListener("close", (event) => {
+			/** @type {HTMLFormElement} */
 			const formElement = dialogElement.querySelector("[method='dialog']");
+
 			const formData = new FormData(formElement);
 
 			dialogElement.remove();
