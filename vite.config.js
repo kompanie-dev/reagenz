@@ -6,10 +6,12 @@ export default defineConfig({
 		lib: {
 			entry: resolve(import.meta.dirname, "index.js"),
 			fileName: "reagenz",
+			formats: ["es"],
 			name: "Reagenz"
 		},
 		cssCodeSplit: false,
 		minify: true,
+		outDir: "build",
 		reportCompressedSize: true,
 		target: "esnext"
 	},
