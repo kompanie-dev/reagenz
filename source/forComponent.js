@@ -11,7 +11,7 @@ import { HtmlEscaper } from "./htmlEscaper.js";
 export class ForComponent extends Component {
 	render() {
 		return this
-			.getTypedAttribute("array", "array")
+			.getArrayAttribute("array")
 			.map((element, index) =>
 				this.innerHTML
 					.replaceAll("@index()", index)

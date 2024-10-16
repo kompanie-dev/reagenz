@@ -13,7 +13,7 @@ It has the following features:
 * Easy to understand change detection based on selectors
 * Simple dependency injection system
 * Attribute event system for attributes like `$click`, `$change` etc.
-* Get parsed attributes with `getTypedAttribute()`
+* Attribute helper functions: `getArrayAttribute`, `getBooleanAttribute`, `getNumberAttribute` and `getObjectAttribute`
 * No [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM)
 * TypeScript support (Beta)
 

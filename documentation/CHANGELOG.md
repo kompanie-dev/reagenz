@@ -4,7 +4,8 @@
 
 * Update dependencies
 * Enable minification in build
-* Replaced helper functions with getTypedAttribute()
+* Added helper functions with getTypedAttribute() and getArrayAttribute()
+* Renamed getBoolAttribute() to getBooleanAttribute()
 * Replace Injector, Launcher and WebComponentUtilities with App class
 
 ## 8.1.0 (2024-10-13)
