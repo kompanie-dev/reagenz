@@ -8,7 +8,7 @@ export class App {
 	 * and attaches the main application component to a specified container.
 	 *
 	 * @param {Object} appConfig Configuration object for the Reagenz application.
-	 * @param {HTMLElement} appConfig.mainComponent The main component of the application that will be rendered in the container.
+	 * @param {CustomElementConstructor} appConfig.mainComponent The main component of the application that will be rendered in the container.
 	 * @param {HTMLElement} appConfig.container The HTML element that will serve as the container for the main application component.
 	 * @param {HTMLElement[]} appConfig.components A list of additional components that may require dependency injection or other setup.
 	 * @param {Object} appConfig.dependencies A collection of key-value pairs representing the dependencies required by the application and its components.
@@ -25,7 +25,7 @@ export class App {
 	/**
 	 * Starts the application by taking the main component, adding a version info and adding it to the specified container element.
 	 *
-	 * @param {HTMLElement} mainComponent The main component of the application.
+	 * @param {CustomElementConstructor} mainComponent The main component of the application.
 	 * @param {HTMLElement} container The container element to which the main component gets attached to.
 	 *
 	 * @returns {void}
@@ -41,9 +41,7 @@ export class App {
 	 * This method iterates through the provided `componentConfig` object and registers each component with a corresponding tag name.
 	 * If a component has already been registered, it will be skipped to avoid redefinition errors.
 	 *
-	 * @param {Object} componentConfig An object mapping custom element tag names to their respective component classes.
-	 * @param {string} componentConfig.tagName The tag name of the custom element (e.g., "test-element").
-	 * @param {CustomElementConstructor} componentConfig.componentClass The class definition of the custom element to be registered.
+	 * @param {Object.<string, CustomElementConstructor>} componentConfig An object mapping custom element tag names to their respective component classes.
 	 *
 	 * @returns {void}
 	 */

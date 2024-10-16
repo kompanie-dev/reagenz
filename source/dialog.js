@@ -8,7 +8,7 @@ export class Dialog {
 	/**
 	 * Creates a new instance of Dialog.
 	 *
-	 * @param {HTMLElement} componentClass A Reagenz or web component which contains the content of the modal.
+	 * @param {CustomElementConstructor} componentClass A Reagenz or web component which contains the content of the modal.
 	 */
 	constructor(componentClass) {
 		this.#dialogComponentClass = componentClass;

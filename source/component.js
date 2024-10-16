@@ -27,7 +27,7 @@ export class Component extends HTMLElement {
 	 * Defines the component and under which tag name it should be available.
 	 *
 	 * @param {string} tagName The name of the element, how it should be available in HTML. Needs to comply to the Web Components standard.
-	 * @param {Class} componentClass The class of the component.
+	 * @param {CustomElementConstructor} componentClass The class of the component.
 	 */
 	static define(tagName, componentClass) {
 		if (customElements.get(tagName) === undefined) {
@@ -181,7 +181,7 @@ export class Component extends HTMLElement {
 	 * Iterates through all the child elements of the given element recursively,
 	 * excluding the children of Web Components.
 	 *
-	 * @param {HTMLElement} element The element of which the child elements should get iterated through.
+	 * @param {Element} element The element of which the child elements should get iterated through.
 	 * @param {Function} callback The callback function which gets executed for each child element.
 	 *
 	 * @returns {void}
