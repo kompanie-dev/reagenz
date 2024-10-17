@@ -10,9 +10,7 @@ export default defineConfig({
 			name: "Reagenz"
 		},
 		cssCodeSplit: false,
-		minify: true,
 		outDir: "build",
-		reportCompressedSize: true,
 		target: "esnext"
 	},
 	resolve: {
