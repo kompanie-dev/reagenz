@@ -6,7 +6,7 @@ export declare class Dialog {
 	 * Creates a new instance of Dialog.
 	 * @param componentClass A Reagenz or web component which contains the content of the modal.
 	 */
-	constructor(componentClass: typeof HTMLElement);
+	constructor(componentClass: CustomElementConstructor);
 
 	/**
 	 * Closes the dialog.

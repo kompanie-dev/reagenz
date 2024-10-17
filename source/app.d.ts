@@ -7,7 +7,7 @@ export declare class App {
 	 * @param appConfig The configuration object for the application.
 	 */
 	static start(appConfig: {
-		mainComponent: HTMLElement;
+		mainComponent: CustomElementConstructor;
 		container: HTMLElement;
 		components: HTMLElement[];
 		dependencies: Record<string, any>;
