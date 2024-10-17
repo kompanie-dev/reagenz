@@ -4,7 +4,12 @@
 		"module": "ESNext",
 		"moduleResolution": "classic",
 		"checkJs": false,
-		"experimentalDecorators": true
+		"experimentalDecorators": true,
+		"paths": {
+			"@kompanie/reagenz": [
+				"./index.js"
+			]
+		}
 	},
 	"exclude": [
 		"node_modules"

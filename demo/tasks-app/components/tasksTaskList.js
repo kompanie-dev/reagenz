@@ -28,8 +28,10 @@ export class TasksTaskList extends Component {
 	}
 
 	clickAddTaskEvent() {
+		/** @type {HTMLInputElement} */
+		const oldTextInput = this.querySelector("input[type=text]");
+		const taskText = oldTextInput.value.trim();
 		const taskId = crypto.randomUUID();
-		const taskText = this.querySelector("input[type=text]").value.trim();
 
 		if (taskText === "") {
 			return;
@@ -38,8 +40,10 @@ export class TasksTaskList extends Component {
 		this.dispatch(addTask(taskId, taskText));
 		this.dispatch(saveEntriesRequest());
 
-		this.querySelector("input[type=text]").value = "";
-		this.querySelector("input[type=text]").focus();
+		/** @type {HTMLInputElement} */
+		const newTextInput = this.querySelector("input[type=text]");
+		newTextInput.value = "";
+		newTextInput.focus();
 	}
 
 	keydownTaskInputEvent(event) {

@@ -17,11 +17,17 @@ export class TasksAboutDialog extends Component {
 	}
 
 	resetInput() {
-		this.querySelector("[name='username']").value = "Rtest";
+		/** @type {HTMLInputElement} */
+		const userNameInput = this.querySelector("[name='username']");
+
+		userNameInput.value = "Rtest";
 	}
 
 	validate() {
-		return this.querySelector("[name='username']").value.startsWith("R");
+		/** @type {HTMLInputElement} */
+		const userNameInput = this.querySelector("[name='username']");
+
+		return userNameInput.value.startsWith("R");
 	}
 }
 
