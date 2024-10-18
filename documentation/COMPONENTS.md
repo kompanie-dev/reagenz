@@ -264,10 +264,10 @@ The title of the dialog is set via `<template dialog-part="title">About Reagenz<
 ```js
 // Example Dialog component:
 export class AboutDialog extends Component {
+	header = "About Reagenz";
+
     render() {
         return /*html*/`
-            <template dialog-part="title">About Reagenz</template>
-
             <div class="margin-top-small">The following input should have 3-5 characters and start with R:</div>
 
             <input type="text" name="username" class="input" minlength="3" maxlength="5" value="Rtest">
