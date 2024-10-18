@@ -1,10 +1,10 @@
 import { Component } from "@kompanie/reagenz";
 
 export class TasksAboutDialog extends Component {
+	header = "About";
+
 	render() {
 		return /*html*/`
-            <template dialog-part="title">About Reagenz</template>
-
             <div>This app was made with ❤️ and Reagenz!</div>
             <div class="margin-top-small">The following input should have 3-5 characters and start with R:</div>
 

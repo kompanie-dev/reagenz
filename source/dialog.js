@@ -35,14 +35,13 @@ export class Dialog {
 	 */
 	show(callback, isClosable = true) {
 		const dialogComponentInstance = new this.#dialogComponentClass();
-		const title = dialogComponentInstance.querySelector("[dialog-part='title']")?.content.innerHTML;
 
 		document.body.insertAdjacentHTML("beforeend", /*html*/`
 			<dialog class="reagenz-dialog">
 				<form method="dialog">
 					<div class="reagenz-dialog-header">
 						${isClosable ? /*html*/`<button type="submit" value="cancel" class="reagenz-dialog-close-button">✖</button>` : ""}
-						<span class="reagenz-dialog-title">${title}</span>
+						<span class="reagenz-dialog-title">${dialogComponentInstance.header}</span>
 					</div>
 
 					<div class="reagenz-dialog-content"></div>
