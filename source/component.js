@@ -18,9 +18,6 @@ export class Component extends HTMLElement {
 		super();
 
 		this.#selectors = selectors;
-		this.#unsubscribeCallback = this.dependencies.store?.subscribe(() => this.#updateDOMIfChangesDetected());
-
-		this.#updateDOMIfChangesDetected();
 	}
 
 	/**
@@ -28,6 +25,8 @@ export class Component extends HTMLElement {
 	 *
 	 * @param {string} tagName The name of the element, how it should be available in HTML. Needs to comply to the Web Components standard.
 	 * @param {CustomElementConstructor} componentClass The class of the component.
+	 *
+	 * @returns {void}
 	 */
 	static define(tagName, componentClass) {
 		if (customElements.get(tagName) === undefined) {
@@ -37,7 +36,7 @@ export class Component extends HTMLElement {
 		componentClass.prototype.dependencies = new Proxy({}, {
 			get(dependencyContainer, propertyName, ...args) {
 				if (!(propertyName in dependencyContainer) && propertyName !== "store") {
-					console.warn(`${tagName}: Tried to access dependency '${propertyName}, which is not injected'`);
+					console.warn(`${tagName}: Tried to access dependency '${String(propertyName)}, which is not injected'`);
 				}
 
 				return Reflect.get(dependencyContainer, propertyName, ...args);
@@ -51,6 +50,10 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	connectedCallback() {
+		this.#unsubscribeCallback = this.dependencies.store?.subscribe(() => this.#updateDOMIfChangesDetected());
+
+		this.#updateDOMIfChangesDetected();
+
 		this.onConnect?.();
 	}
 
@@ -75,7 +78,7 @@ export class Component extends HTMLElement {
 	 */
 	dispatch(action) {
 		if (this.dependencies.store === undefined) {
-			throw new Error(`${this.tagName.toLowerCase()}: No store was injected, so the action ${action?.type} could not be dispatched`);
+			throw new Error(`${this.tagName.toLowerCase()}: Actions can't be dispatched without an injected store`);
 		}
 
 		this.dependencies.store.dispatch(action);
