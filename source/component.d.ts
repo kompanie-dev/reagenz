@@ -14,7 +14,7 @@ export declare class Component extends HTMLElement {
 	 * @param tagName The name of the element, how it should be available in HTML. Needs to comply to the Web Components standard.
 	 * @param componentClass The class of the component.
 	 */
-	static define(tagName: string, componentClass: Component): void;
+	static define(tagName: string, componentClass: CustomElementConstructor): void;
 
 	/**
 	 * The default callback function when Web Components get added to the DOM.

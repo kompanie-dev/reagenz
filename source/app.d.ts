@@ -9,7 +9,7 @@ export declare class App {
 	static start(appConfig: {
 		mainComponent: CustomElementConstructor;
 		container: HTMLElement;
-		components: HTMLElement[];
+		components: CustomElementConstructor[];
 		dependencies: Record<string, any>;
 		webComponents?: Record<string, CustomElementConstructor>;
 	}): void;
