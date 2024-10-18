@@ -5,9 +5,9 @@
 export declare class Component extends HTMLElement {
 	/**
 	 * Creates a new instance of the Component.
-	 * @param selectors An object containing the selectors of the Component { selectorValue: selectorFunction }.
+	 * @param selectors An array containing the selector functions of the component.
 	 */
-	constructor(selectors?: Record<string, Function>);
+	constructor(selectors?: Function[]);
 
 	/**
 	 * Defines the component and under which tag name it should be available.

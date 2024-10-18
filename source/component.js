@@ -12,9 +12,9 @@ export class Component extends HTMLElement {
 	/**
 	 * Creates a new instance of the Component.
 	 *
-	 * @param {?Object} selectors An object containing the selectors of the Component { selectorValue: selectorFunction }.
+	 * @param {?Function[]} selectors An object containing the selectors of the Component { selectorValue: selectorFunction }.
 	 */
-	constructor(selectors = {}) {
+	constructor(selectors = []) {
 		super();
 
 		this.#selectors = selectors;
@@ -222,7 +222,7 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	#updateDOMIfChangesDetected() {
-		const newSelectorData = this.dependencies.store?.executeSelectors(this.#selectors) ?? {};
+		const newSelectorData = this.dependencies.store?.executeSelectors(this.#selectors) ?? [];
 
 		if (ObjectComparator.checkDeepEquality(this.#currentSelectorData, newSelectorData) === false) {
 			this.#updateDOM(newSelectorData);

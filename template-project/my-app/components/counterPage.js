@@ -4,12 +4,10 @@ import { increaseCounter, loadCountRequest, saveCountRequest } from "../store/my
 
 export class CounterPage extends Component {
 	constructor() {
-		super({
-			count: getCount
-		});
+		super([getCount]);
 	}
 
-	render({ count }) {
+	render([count]) {
 		return /*html*/`
             <div>
                 <h1>Welcome to my Counter App!</h1>

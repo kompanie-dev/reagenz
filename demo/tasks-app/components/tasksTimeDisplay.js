@@ -6,12 +6,10 @@ export class TasksTimeDisplay extends Component {
 	#intervalID;
 
 	constructor() {
-		super({
-			time: getTime
-		});
+		super([getTime]);
 	}
 
-	render({ time }) {
+	render([time]) {
 		return /*html*/`
             <span>${this.formatDate(new Date(time))}</span>
         `;

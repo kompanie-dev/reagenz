@@ -40,17 +40,12 @@ export class Store {
 	/**
 	 * Executes all the selector functions contained within the object and returns the result.
 	 *
-	 * @param {Object} selectorObject An object containing selector functions as properties ({ selectorA: selectorFunction, ... }).
+	 * @param {Function[]} selectors An object containing selector functions as properties ({ selectorA: selectorFunction, ... }).
 	 *
-	 * @returns {Object} An object containing the same property names, filled with the selector execution results.
+	 * @returns {Array} An object containing the same property names, filled with the selector execution results.
 	 */
-	executeSelectors(selectorObject) {
-		const executionResults =
-			Object
-				.entries(selectorObject)
-				.map(([propertyName, selectorFunction]) => [propertyName, this.select(selectorFunction)]);
-
-		return Object.fromEntries(executionResults);
+	executeSelectors(selectors) {
+		return selectors.map((selectorFunction) => this.select(selectorFunction));
 	}
 
 	/**

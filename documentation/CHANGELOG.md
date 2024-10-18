@@ -3,7 +3,8 @@
 ## 9.0.0 (?)
 
 * Update dependencies
-* Enable minification in build
+* Added option for minified builds
+* Changed selectors from objects to arrays
 * Added helper functions with getTypedAttribute() and getArrayAttribute()
 * Renamed getBoolAttribute() to getBooleanAttribute()
 * Replace Injector, Launcher and WebComponentUtilities with App class

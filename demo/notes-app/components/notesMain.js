@@ -4,12 +4,10 @@ import { loadNotesRequest, saveNotesRequest } from "../store/notes.actions.js";
 
 export class NotesMain extends Component {
 	constructor() {
-		super({
-			notes: getNotes
-		});
+		super([getNotes]);
 	}
 
-	render({ notes }) {
+	render([notes]) {
 		return /*html*/`
             <div class="padding-right-xsmall">
                 <h1>Notes App</h1>

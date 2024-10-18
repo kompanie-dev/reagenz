@@ -4,12 +4,10 @@ import { getRoute } from "../store/tasks.selectors.js";
 
 export class TasksMain extends Component {
 	constructor() {
-		super({
-			route: getRoute
-		});
+		super([getRoute]);
 	}
 
-	render({ route }) {
+	render([route]) {
 		if (route === "" || route === "#/") {
 			return /*html*/`<tasks-task-list-page></tasks-task-list-page>`;
 		}

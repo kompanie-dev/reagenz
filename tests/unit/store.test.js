@@ -18,14 +18,14 @@ describe("Store.executeSelectors()", () => {
 		const testReducer = () => { };
 		const testStore = new Store(testReducer, initialState, []);
 		const searchEntries = (state) => state.entries.filter(item => item.toLowerCase().includes(state.searchTerm.toLowerCase()));
-		const selectorObject = {
-			entries: searchEntries
-		};
-		const expected = {
-			entries: ["Apple", "Peach"]
-		};
+		const selectors = [
+			searchEntries
+		];
+		const expected = [
+			["Apple", "Peach"]
+		];
 
-		const actual = testStore.executeSelectors(selectorObject);
+		const actual = testStore.executeSelectors(selectors);
 
 		assert.deepEqual(actual, expected);
 	});

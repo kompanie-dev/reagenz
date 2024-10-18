@@ -4,12 +4,10 @@ import { updateRoute } from "../store/myapp.actions.js";
 
 export class AppRoot extends Component {
 	constructor() {
-		super({
-			route: getRoute
-		});
+		super([getRoute]);
 	}
 
-	render({ route }) {
+	render([route]) {
 		return /*html*/`
             <div>
                 <div>

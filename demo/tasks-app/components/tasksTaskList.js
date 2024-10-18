@@ -4,13 +4,10 @@ import { getIsLoading, searchEntries } from "../store/tasks.selectors.js";
 
 export class TasksTaskList extends Component {
 	constructor() {
-		super({
-			entries: searchEntries,
-			isLoading: getIsLoading
-		});
+		super([searchEntries, getIsLoading]);
 	}
 
-	render({ entries, isLoading }) {
+	render([entries, isLoading]) {
 		return /*html*/`
             <x-if condition="${isLoading === true}">
                 <loading-icon></loading-icon>

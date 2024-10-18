@@ -117,12 +117,10 @@ import { getCount } from "../store/test.selector.js";
 
 export class MyMainPage extends Component {
     constructor() {
-        super({
-            count: getCount
-        });
+        super([getCount]);
     }
 
-    render({ count }) {
+    render([count]) {
         return /*html*/`
             <div $click="clickCallback" $input="nonExistingFunction">${count}</div>
         `;
@@ -219,12 +217,10 @@ import { getEntries } from "../store/test.selectors.js";
 
 export class MyLoadingSpinner extends Component {
     constructor() {
-        super({
-            isLoading: getIsLoading
-        });
+        super([getIsLoading]);
     }
 
-    render({ isLoading }) {
+    render([isLoading]) {
         return /*html*/`<div>
             <x-if condition="${ isLoading === true }">
                 <h1>This block is visible while isLoading is true</h1>
@@ -244,12 +240,10 @@ import { getEntries } from "../store/test.selectors.js";
 
 export class MyListView extends Component {
     constructor() {
-        super({
-            entries: getEntries
-        });
+        super([getEntries]);
     }
 
-    render({ entries }) {
+    render([entries]) {
         return /*html*/`<div>
             <x-for array='${JSON.stringify(entries)}'>
                 <tasks-task-item done="@item(done)" task-id="@item(id)">@index(): @item(text)</tasks-task-item>

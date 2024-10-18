@@ -3,13 +3,10 @@ import { getSelectedEntryData, getSelectedEntryId } from "../store/tasks.selecto
 
 export class TasksTaskDetailPage extends Component {
 	constructor() {
-		super({
-			selectedEntryData: getSelectedEntryData,
-			selectedEntryId: getSelectedEntryId
-		});
+		super([getSelectedEntryData, getSelectedEntryId]);
 	}
 
-	render({ selectedEntryId, selectedEntryData }) {
+	render([selectedEntryData, selectedEntryId]) {
 		if (selectedEntryData === undefined) {
 			return /*html*/`
                 <h1>Loading details for Task ID ${selectedEntryId}</h1>
