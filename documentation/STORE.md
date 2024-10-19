@@ -120,7 +120,7 @@ export const searchEntries = (state) => state.entries.filter(item => item.text.t
 ```
 
 If you want to access the selector data in your component, you first have to define them in the constructor.
-After that they will be available in the render function as destructered object.
+After that they will be available in the render function as destructered array.
 
 ```js
 import { Component } from "@kompanie/reagenz";
@@ -128,12 +128,10 @@ import { searchEntries } from "../store/tasks.selectors.js";
 
 export class TaskList extends Component {
 	constructor() {
-		super({
-			entries: searchEntries
-		});
+		super([searchEntries]);
 	}
 
-	render({ entries }) {
+	render([entries]) {
 		return /*html*/`
             <x-for array='${JSON.stringify(entries)}'>
                 <div>@item(text)</div>

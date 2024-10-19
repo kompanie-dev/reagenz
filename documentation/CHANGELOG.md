@@ -5,6 +5,8 @@
 * Update dependencies
 * Added option for minified builds
 * Changed selectors from objects to arrays
+* Improved JSDoc and TypeScript typings
+* Improved error handling
 * Added helper functions with getTypedAttribute() and getArrayAttribute()
 * Renamed getBoolAttribute() to getBooleanAttribute()
 * Replace Injector, Launcher and WebComponentUtilities with App class

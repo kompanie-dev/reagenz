@@ -78,12 +78,10 @@ import { getCount } from "../store/test.selector.js";
 
 export class MyMainPage extends Component {
     constructor() {
-        super({
-            count: getCount
-        });
+        super([getCount]);
     }
 
-    render({ count }) {
+    render([count]) {
         return /*html*/`
             <div>${count}</div>
         `;
@@ -135,19 +133,25 @@ export class MyMainPage extends Component {
 `onConnect` and `onDisconnect` are executed when the component gets added to or removed from the DOM, just like the functions included in the Web Components standard called `connectedCallback()` and `disconnectedCallback()`.
 
 The main advantage in using the Reagenz functions is that you don't need to call `super.connectedCallback()` and `super.disconnectedCallback()` manually.
-If you forget this super calls in  `connectedCallback()` and `disconnectedCallback()` the Reagenz component system can break and cause memory leaks.
+If you forget these super calls in `connectedCallback()` and `disconnectedCallback()` the Reagenz component system can break and cause memory leaks.
 
 ```js
-export class MyAboutButton extends Component {
-    render() {
+import { Component } from "@kompanie/reagenz";
+import { getCount } from "../store/test.selector.js";
+
+export class MyMainPage extends Component {
+    constructor() {
+        super([getCount]);
+    }
+
+    render([count]) {
         return /*html*/`
-            <button $click="clickCallback">Open about dialog</button>
+            <div $click="clickCallback" $input="nonExistingFunction">${count}</div>
         `;
     }
 
     clickCallback(event) {
         console.log("Button got clicked", event);
-        alert("About my app");
     }
 
     onConnect() {
@@ -183,14 +187,14 @@ export class MyMainPage extends Component {
 ## Dependency injection in components
 
 To access the dependencies you injected before, you can use the `dependencies` property in the component.
-In this example a click would cause a console.log execution, since the logger dependency in the `Setting up Dependency Injection` sets the `logger` dependency to the browsers native `console`.
+In this example a click would cause a console.log execution, since the logger dependency in the `Setting up an application` sets the `logger` dependency to the browsers native `console`.
 
 If you would want to replace the logger with something else, the only thing you would need to change is the `logger` property in the `app.js`.
 
 ```js
 import { Component } from "@kompanie/reagenz";
 
-export class TasksAboutPage extends Component {
+export class MainPage extends Component {
     #logger = this.dependencies.logger;
 
     render() {
@@ -204,7 +208,7 @@ export class TasksAboutPage extends Component {
 }
 ```
 
-If you forget to inject a dependency and you are trying to access it, Reagenz will log a warning.
+If you forget to inject a dependency and you are trying to access it, Reagenz will throw an Error.
 
 ## if conditions
 
@@ -259,7 +263,7 @@ Reagenz has a built-in dialog system.
 It allows you to open Reagenz components inside an [HTML dialog element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog), validate the dialog component and return the result as a Form in the callback of the dialog.
 
 The following example shows a component with form validation in the input and special validation in it's `validate()` function.
-The title of the dialog is set via `<template dialog-part="title">About Reagenz</template>`.
+The title of the dialog is set via the header property.
 
 ```js
 // Example Dialog component:
