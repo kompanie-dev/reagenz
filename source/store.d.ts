@@ -16,7 +16,7 @@ export declare class Store {
 	constructor(
 		reducer: Function,
 		initialState: object,
-		middlewares?: Array<Function>
+		middlewares?: Function[]
 	);
 
 	/**
@@ -32,7 +32,7 @@ export declare class Store {
 	 */
 	executeSelectors(
 		selectorObject: Function[]
-	): Array;
+	): any[];
 
 	/**
 	 * Executes the given selector function against the current state and returns the escaped result.
