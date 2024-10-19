@@ -22,19 +22,20 @@ export declare class Store {
 
 	/**
 	 * Dispatches the given action, executes registered middlewares, updates the state and notifies subscribers.
+	 *
 	 * @param action An Action object, containing a type property and additional data.
 	 */
-	dispatch(action: object): void;
+	dispatch(action: { type: string; [key: string]: any }): void;
 
 	/**
 	 * Executes all the selector functions contained within the object and returns the result.
 	 *
-	 * @param selectorObject An object containing selector functions as properties ({ selectorA: selectorFunction, ... }).
+	 * @param selectors An array containing selector functions.
 	 *
-	 * @returns An object containing the same property names, filled with the selector execution results.
+	 * @returns An array containing the results of the selector function executions.
 	 */
 	executeSelectors(
-		selectorObject: Function[]
+		selectors: Function[]
 	): any[];
 
 	/**

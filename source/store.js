@@ -24,7 +24,7 @@ export class Store {
 	/**
 	 * Dispatches the given action, executes registered middlewares, updates the state and notifies subscribers.
 	 *
-	 * @param {Object} action An Action object, containing a type property and additional data.
+	 * @param {{ type: string, [key: string]: * }} action An Action object, containing a type property and additional data.
 	 *
 	 * @returns {void}
 	 */
@@ -40,9 +40,9 @@ export class Store {
 	/**
 	 * Executes all the selector functions contained within the object and returns the result.
 	 *
-	 * @param {Function[]} selectors An object containing selector functions as properties ({ selectorA: selectorFunction, ... }).
+	 * @param {Function[]} selectors An array containing selector functions.
 	 *
-	 * @returns {*[]} An object containing the same property names, filled with the selector execution results.
+	 * @returns {*[]} An array containing the results of the selector function executions.
 	 */
 	executeSelectors(selectors) {
 		return selectors.map((selectorFunction) => this.select(selectorFunction));

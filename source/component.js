@@ -78,7 +78,7 @@ export class Component extends HTMLElement {
 	 * Dispatches the action in the injected store.
 	 * A shorthand for this.dependencies.store.dispatch.
 	 *
-	 * @param {Object} action The Action object which should be dispatched
+	 * @param {{ type: string, [key: string]: * }} action The Action object which should be dispatched
 	 *
 	 * @returns {void}
 	 */

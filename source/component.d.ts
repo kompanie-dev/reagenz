@@ -26,7 +26,7 @@ export declare class Component extends HTMLElement {
 	 *
 	 * @param action The Action object which should be dispatched
 	 */
-	dispatch(action: Record<string, any>): void;
+	dispatch(action: { type: string; [key: string]: any }): void;
 
 	/**
 	 * Loads the value from the given attribute and tries to convert it to an array.
