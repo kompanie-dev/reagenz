@@ -29,9 +29,11 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	static define(tagName, componentClass) {
-		if (customElements.get(tagName) === undefined) {
-			customElements.define(tagName, componentClass);
+		if (customElements.get(tagName) !== undefined) {
+			return;
 		}
+
+		customElements.define(tagName, componentClass);
 
 		componentClass.prototype.dependencies = new Proxy({}, {
 			get(dependencyContainer, propertyName, ...args) {
