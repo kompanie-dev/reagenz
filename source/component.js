@@ -38,7 +38,7 @@ export class Component extends HTMLElement {
 		componentClass.prototype.dependencies = new Proxy({}, {
 			get(dependencyContainer, propertyName, ...args) {
 				if (!(propertyName in dependencyContainer) && propertyName !== "store") {
-					console.warn(`${tagName}: Tried to access dependency '${String(propertyName)}, which is not injected'`);
+					throw new Error(`${tagName}: Tried to access dependency '${String(propertyName)}', which is not injected`);
 				}
 
 				return Reflect.get(dependencyContainer, propertyName, ...args);
