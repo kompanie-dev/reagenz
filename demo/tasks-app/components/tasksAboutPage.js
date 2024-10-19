@@ -4,12 +4,6 @@ import { TasksAboutDialog } from "./tasksAboutDialog.js";
 export class TasksAboutPage extends Component {
 	#logger = this.dependencies.logger;
 
-	constructor() {
-		super();
-
-		this.dependencies.notExistingDependency;
-	}
-
 	render() {
 		return /*html*/`
             <h1>About Tasks Demo App</h1>

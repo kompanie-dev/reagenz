@@ -18,6 +18,10 @@ export class Component extends HTMLElement {
 		super();
 
 		this.#selectors = selectors;
+
+		if (this.dependencies.store === undefined && this.#selectors.length !== 0) {
+			throw new Error(`${this.tagName.toLowerCase()}: Tried to use selectors without injecting a store`);
+		}
 	}
 
 	/**
