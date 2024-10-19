@@ -14,7 +14,7 @@ export class ForComponent extends Component {
 			.getArrayAttribute("array")
 			.map((element, index) =>
 				this.innerHTML
-					.replaceAll("@index()", index)
+					.replaceAll("@index()", index.toString())
 					.replaceAll(/@item\((.*?)\)/gu,
 						(_, propertyName) => {
 							if (propertyName === "") {
