@@ -5,9 +5,9 @@ export class HtmlEscaper {
 	/**
 	 * Iterates all properties and sub-objects of the given object and escapes all string properties.
 	 *
-	 * @param {Object} unsafeObject The object with potentially unescaped HTML in string properties.
+	 * @param {*} unsafeObject The object with potentially unescaped HTML in string properties.
 	 *
-	 * @returns A new object with all string properties escaped.
+	 * @returns {*} A new object with all string properties escaped.
 	 */
 	static escapeObject(unsafeObject) {
 		if (typeof unsafeObject === "string") {
@@ -49,7 +49,7 @@ export class HtmlEscaper {
 	 *
 	 * @param {string} unsafeString The unescaped HTML string.
 	 *
-	 * @returns The escaped string.
+	 * @returns {string} The escaped string.
 	 */
 	static escapeString(unsafeString) {
 		return unsafeString.replace(/[<>'"&]/gu, (char) => HtmlEscaper.entityMap[char]);

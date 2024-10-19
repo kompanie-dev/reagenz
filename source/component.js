@@ -12,7 +12,7 @@ export class Component extends HTMLElement {
 	/**
 	 * Creates a new instance of the Component.
 	 *
-	 * @param {?Function[]} selectors An object containing the selectors of the Component { selectorValue: selectorFunction }.
+	 * @param {?Function[]} selectors An array containing the selector functions that should be used for change detection and rendering.
 	 */
 	constructor(selectors = []) {
 		super();
@@ -25,7 +25,7 @@ export class Component extends HTMLElement {
 	}
 
 	/**
-	 * Defines the component and under which tag name it should be available.
+	 * Defines the component and the tag name it should use.
 	 *
 	 * @param {string} tagName The name of the element, how it should be available in HTML. Needs to comply to the Web Components standard.
 	 * @param {CustomElementConstructor} componentClass The class of the component.
@@ -95,7 +95,7 @@ export class Component extends HTMLElement {
 	 *
 	 * @param {string} attributeName The attribute name where the data should be taken from.
 	 *
-	 * @returns {?Object[]} An array if the conversion was successful. If the value can't be converted or the attribute does not exist, null.
+	 * @returns {?Array.<Object>} An array if the conversion was successful. If the value can't be converted or the attribute does not exist, null.
 	 */
 	getArrayAttribute(attributeName) {
 		return this.getTypedAttribute(attributeName, "array");
@@ -142,7 +142,7 @@ export class Component extends HTMLElement {
 	 * @param {string} attributeName The name of the attribute where the value should be retrieved from.
 	 * @param {"array" | "boolean" | "number" | "object" | "string"} destinationType The destination type of the value.
 	 *
-	 * @returns {any} The attribute value converted into the right type, otherwise null
+	 * @returns {*} The attribute value converted into the right type, otherwise null
 	 */
 	getTypedAttribute(attributeName, destinationType) {
 		try {

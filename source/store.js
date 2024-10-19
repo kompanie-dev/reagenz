@@ -42,7 +42,7 @@ export class Store {
 	 *
 	 * @param {Function[]} selectors An object containing selector functions as properties ({ selectorA: selectorFunction, ... }).
 	 *
-	 * @returns {Array} An object containing the same property names, filled with the selector execution results.
+	 * @returns {*[]} An object containing the same property names, filled with the selector execution results.
 	 */
 	executeSelectors(selectors) {
 		return selectors.map((selectorFunction) => this.select(selectorFunction));
@@ -53,7 +53,7 @@ export class Store {
 	 *
 	 * @param {Function} selector The selector function which should be executed.
 	 *
-	 * @returns {any} The result of the selector function, with all properties escaped.
+	 * @returns {*} The result of the selector function, with all properties escaped.
 	 */
 	select(selector) {
 		return HtmlEscaper.escapeObject(selector(this.state));
@@ -64,7 +64,7 @@ export class Store {
 	 *
 	 * @param {Function} selector The selector function which should be executed.
 	 *
-	 * @returns {any} The result of the selector function, with all properties escaped.
+	 * @returns {*} The result of the selector function, with all properties escaped.
 	 */
 	insecureSelect(selector) {
 		return selector(this.state);
