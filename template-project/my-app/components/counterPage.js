@@ -1,6 +1,6 @@
 import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/myapp.selector.js";
-import { increaseCounter, loadCountRequest, saveCountRequest } from "../store/myapp.actions.js";
+import { increaseCounter, saveCountRequest } from "../store/myapp.actions.js";
 
 export class CounterPage extends Component {
 	constructor() {
@@ -28,10 +28,6 @@ export class CounterPage extends Component {
 	decreaseCounter() {
 		this.dispatch(increaseCounter(-1));
 		this.dispatch(saveCountRequest());
-	}
-
-	onConnect() {
-		this.dispatch(loadCountRequest());
 	}
 }
 

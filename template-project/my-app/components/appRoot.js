@@ -1,10 +1,12 @@
 import { Component } from "@kompanie/reagenz";
 import { getRoute } from "../store/myapp.selector.js";
-import { updateRoute } from "../store/myapp.actions.js";
+import { loadCountRequest, updateRoute } from "../store/myapp.actions.js";
 
 export class AppRoot extends Component {
 	constructor() {
 		super([getRoute]);
+
+		this.dispatch(loadCountRequest());
 	}
 
 	render([route]) {
