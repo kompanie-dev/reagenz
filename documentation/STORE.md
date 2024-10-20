@@ -24,13 +24,13 @@ import { addTask } from "../store/test.actions.js";
 export class MainPage extends Component {
     render([count]) {
         return /*html*/`
-			<input type="text">
+            <input type="text">
             <button $click="clickCallback">Add task</button>
         `;
     }
 
     clickCallback() {
-		const taskText = this.querySelector("input").value;
+        const taskText = this.querySelector("input").value;
 
         this.dispatch(addTask(taskText));
     }
@@ -58,16 +58,16 @@ There are actions that will only be handled by middlewares and not the reducer.
 
 ```js
 export const initialState = {
-	entries: []
+    entries: []
 };
 
 export function reducer(action, state = initialState) {
-	switch (action.type) {
-		case "TASK_ADD":
-			return { ...state, entries: [...state.entries, { text: action.text }] };
+    switch (action.type) {
+        case "TASK_ADD":
+            return { ...state, entries: [...state.entries, { text: action.text }] };
 
-		default:
-			return state;
+        default:
+            return state;
     }
 }
 ```
@@ -90,31 +90,31 @@ If you wanted to complete this you would need to listen to the success and failu
 import { loadEntriesFail, loadEntriesSuccess, saveEntriesFail, saveEntriesSuccess } from "./example.actions.js";
 
 export const tasksNetworkMiddleware = (store, next, action) => {
-	switch (action.type) {
-		case "TASK_LOAD_ENTRIES_REQUEST":
-			try {
-				// Do your networking stuff
-				store.dispatch(loadEntriesSuccess(entries));
-			}
-			catch {
-				// It failed, let's inform the reducer about this
-				store.dispatch(loadEntriesFail());
-			}
-			break;
+    switch (action.type) {
+        case "TASK_LOAD_ENTRIES_REQUEST":
+            try {
+                // Do your networking stuff
+                store.dispatch(loadEntriesSuccess(entries));
+            }
+            catch {
+                // It failed, let's inform the reducer about this
+                store.dispatch(loadEntriesFail());
+            }
+            break;
 
-		case "TASK_SAVE_ENTRIES_REQUEST":
-			try {
-				// Do your networking stuff
-				store.dispatch(saveEntriesSuccess());
-			}
-			catch {
-				// It failed, let's inform the reducer about this
-				store.dispatch(saveEntriesFail());
-			}
-			break;
-	}
+        case "TASK_SAVE_ENTRIES_REQUEST":
+            try {
+                // Do your networking stuff
+                store.dispatch(saveEntriesSuccess());
+            }
+            catch {
+                // It failed, let's inform the reducer about this
+                store.dispatch(saveEntriesFail());
+            }
+            break;
+    }
 
-	next();
+    next();
 };
 
 ```
@@ -147,17 +147,17 @@ import { Component } from "@kompanie/reagenz";
 import { searchEntries } from "../store/tasks.selectors.js";
 
 export class TaskList extends Component {
-	constructor() {
-		super([searchEntries]);
-	}
+    constructor() {
+        super([searchEntries]);
+    }
 
-	render([entries]) {
-		return /*html*/`
+    render([entries]) {
+        return /*html*/`
             <x-for array='${JSON.stringify(entries)}'>
                 <div>@item(text)</div>
             </x-for>
         `;
-	}
+    }
 }
 
 Component.define("task-list", TaskList);

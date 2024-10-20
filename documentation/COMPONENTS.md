@@ -23,27 +23,27 @@ import { MainPage } from "./components/mainPage.js";
 import { ExampleWebComponent } from "./webComponents/exampleWebComponent.js";
 
 App.start({
-	// The main entry component of your app
-	mainComponent: MainPage,
+    // The main entry component of your app
+    mainComponent: MainPage,
 
-	// The container element to which your main component gets attached to
-	container: document.getElementById("my-app-container"),
+    // The container element to which your main component gets attached to
+    container: document.getElementById("my-app-container"),
 
-	// Add all components which should get dependencies injected here
-	// Components which don't access dependencies can be imported like myExampleComponent.js in this example
-	components: [
-		MainPage
-	],
+    // Add all components which should get dependencies injected here
+    // Components which don't access dependencies can be imported like myExampleComponent.js in this example
+    components: [
+        MainPage
+    ],
 
-	// The dependencies which get injected into the components
-	// They are available as this.dependencies.dependencyName
-	dependencies: {
-		logger: console,
-		store: new Store(myReducer, myInitialState, [myMiddlewareA, myMiddlewareB])
-	},
+    // The dependencies which get injected into the components
+    // They are available as this.dependencies.dependencyName
+    dependencies: {
+        logger: console,
+        store: new Store(myReducer, myInitialState, [myMiddlewareA, myMiddlewareB])
+    },
 
-	// Add non-Reagenz web components this way
-	webComponents: { "example-web-component": ExampleWebComponent },
+    // Add non-Reagenz web components this way
+    webComponents: { "example-web-component": ExampleWebComponent }
 });
 ```
 
@@ -120,7 +120,7 @@ export class MainPage extends Component {
 
     render([count]) {
         return /*html*/`
-			<div>${count}</div>
+            <div>${count}</div>
             <button $click="clickCallback" $input="nonExistingFunction">Click me</button>
         `;
     }
@@ -147,7 +147,7 @@ export class MainPage extends Component {
 
     render([count]) {
         return /*html*/`
-			<div>${count}</div>
+            <div>${count}</div>
             <button $click="clickCallback" $input="nonExistingFunction">Click me</button>
         `;
     }
@@ -281,7 +281,7 @@ The title of the dialog is set via the header property.
 ```js
 // Example Dialog component:
 export class AboutDialog extends Component {
-	header = "About Reagenz";
+    header = "About Reagenz";
 
     render() {
         return /*html*/`

@@ -1,15 +1,15 @@
 # Reagenz Changelog
 
-## 9.0.0 (?)
+## 9.0.0 (2024-10-20)
 
 * Update dependencies
-* Added option for minified builds
+* Replace Injector, Launcher and WebComponentUtilities with App class
 * Changed selectors from objects to arrays
+* Added option for minified builds
 * Improved JSDoc and TypeScript typings
 * Improved error handling
 * Added helper functions with getTypedAttribute() and getArrayAttribute()
 * Renamed getBoolAttribute() to getBooleanAttribute()
-* Replace Injector, Launcher and WebComponentUtilities with App class
 
 ## 8.1.0 (2024-10-13)
 
