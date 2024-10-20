@@ -10,7 +10,7 @@ import "./components/aboutPage.js";
 App.start({
 	mainComponent: AppRoot,
 	container: document.getElementById("my-app-container"),
-	component: [
+	components: [
 		AppRoot,
 		CounterPage
 	],
