@@ -1,5 +1,9 @@
 # Reagenz Changelog
 
+## 9.0.1 (2024-10-20)
+
+* Fix template project
+
 ## 9.0.0 (2024-10-20)
 
 * Update dependencies
