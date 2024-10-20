@@ -76,7 +76,7 @@ The `render` function then can access its data directly.
 import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/test.selector.js";
 
-export class MyMainPage extends Component {
+export class MainPage extends Component {
     constructor() {
         super([getCount]);
     }
@@ -113,14 +113,15 @@ Reagenz will also warn you if you are trying to connect an event attribute to a 
 import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/test.selector.js";
 
-export class MyMainPage extends Component {
+export class MainPage extends Component {
     constructor() {
         super([getCount]);
     }
 
     render([count]) {
         return /*html*/`
-            <div $click="clickCallback" $input="nonExistingFunction">${count}</div>
+			<div>${count}</div>
+            <button $click="clickCallback" $input="nonExistingFunction">Click me</button>
         `;
     }
 
@@ -139,14 +140,15 @@ If you forget these super calls in `connectedCallback()` and `disconnectedCallba
 import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/test.selector.js";
 
-export class MyMainPage extends Component {
+export class MainPage extends Component {
     constructor() {
         super([getCount]);
     }
 
     render([count]) {
         return /*html*/`
-            <div $click="clickCallback" $input="nonExistingFunction">${count}</div>
+			<div>${count}</div>
+            <button $click="clickCallback" $input="nonExistingFunction">Click me</button>
         `;
     }
 
@@ -177,7 +179,18 @@ Reagenz will throw an error if you try to dispatch an action without injecting a
 import { Component } from "@kompanie/reagenz";
 import { countUp } from "../store/test.actions.js";
 
-export class MyMainPage extends Component {
+export class MainPage extends Component {
+    constructor() {
+        super([getCount]);
+    }
+
+    render([count]) {
+        return /*html*/`
+            <div>${count}</div>
+            <button $click="clickCallback" $input="nonExistingFunction">Count up</button>
+        `;
+    }
+
     clickCallback() {
         this.dispatch(countUp());
     }
@@ -217,9 +230,9 @@ In Reagenz this is done via the `x-if` helper component.
 
 ```js
 import { Component } from "@kompanie/reagenz";
-import { getEntries } from "../store/test.selectors.js";
+import { getIsLoading } from "../store/test.selectors.js";
 
-export class MyLoadingSpinner extends Component {
+export class LoadingSpinner extends Component {
     constructor() {
         super([getIsLoading]);
     }
@@ -242,7 +255,7 @@ Since a lot of components are iterating through arrays and convert the data into
 import { Component } from "@kompanie/reagenz";
 import { getEntries } from "../store/test.selectors.js";
 
-export class MyListView extends Component {
+export class ListView extends Component {
     constructor() {
         super([getEntries]);
     }

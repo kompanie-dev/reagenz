@@ -17,6 +17,26 @@ export const addTask = (text) => ({ type: "TASK_ADD", text });
 
 Components and services use these actions to tell the store what should be done.
 
+```js
+import { Component } from "@kompanie/reagenz";
+import { addTask } from "../store/test.actions.js";
+
+export class MainPage extends Component {
+    render([count]) {
+        return /*html*/`
+			<input type="text">
+            <button $click="clickCallback">Add task</button>
+        `;
+    }
+
+    clickCallback() {
+		const taskText = this.querySelector("input").value;
+
+        this.dispatch(addTask(taskText));
+    }
+}
+```
+
 ## Store
 
 The store is the center piece of the state management.
