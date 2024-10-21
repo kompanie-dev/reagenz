@@ -22,15 +22,13 @@ export class HtmlEscaper {
 			return unsafeObject;
 		}
 
-		const escapedObject = {};
-
-		for (const key in unsafeObject) {
-			if (Object.hasOwn(unsafeObject, key)) {
-				escapedObject[key] = HtmlEscaper.escapeObject(unsafeObject[key]);
-			}
-		}
-
-		return escapedObject;
+		return Object.fromEntries(
+			Object
+				.entries(unsafeObject)
+				.map(
+					([key, value]) => [key, HtmlEscaper.escapeObject(value)]
+				)
+		);
 	}
 
 	/**
