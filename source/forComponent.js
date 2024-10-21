@@ -13,25 +13,23 @@ export class ForComponent extends Component {
 		return this
 			.getArrayAttribute("array")
 			.map((element, index) =>
-				this.innerHTML
-					.replaceAll("@index()", index.toString())
-					.replaceAll(/@item\((.*?)\)/gu,
-						(_, propertyName) => {
-							if (propertyName === "") {
-								return HtmlEscaper.escapeString(element.toString());
-							}
+				this.innerHTML.replace(/@index\(\)|@item\((.*?)\)/gu, (match, propertyName) => {
+					if (match === "@index()") {
+						return index.toString();
+					}
 
-							const propertyValue = propertyName
-								.split(".")
-								.reduce(
-									(accumulator, currentProperty) => (accumulator?.[currentProperty] === undefined) ? undefined : accumulator[currentProperty], element
-								);
+					let propertyValue = element;
 
-							return (propertyValue === null || propertyValue === undefined) ?
-								propertyValue :
-								HtmlEscaper.escapeString(propertyValue.toString());
-						}
-					)
+					if (propertyName) {
+						propertyValue = propertyName
+							.split(".")
+							.reduce((accumulator, currentProperty) => accumulator?.[currentProperty], element);
+					}
+
+					return propertyValue === null || propertyValue === undefined
+						? ""
+						: HtmlEscaper.escapeString(propertyValue.toString());
+				})
 			)
 			.join("");
 	}
