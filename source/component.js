@@ -19,7 +19,7 @@ export class Component extends HTMLElement {
 
 		this.#selectors = selectors;
 
-		if (this.dependencies.store === undefined && this.#selectors.length !== 0) {
+		if (!this.dependencies.store && this.#selectors.length !== 0) {
 			throw new Error(`${this.tagName.toLowerCase()}: Tried to use selectors without injecting a store`);
 		}
 	}
@@ -33,7 +33,7 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	static define(tagName, componentClass) {
-		if (customElements.get(tagName) !== undefined) {
+		if (customElements.get(tagName)) {
 			return;
 		}
 
@@ -83,8 +83,8 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	dispatch(action) {
-		if (this.dependencies.store === undefined) {
-			throw new Error(`${this.tagName.toLowerCase()}: Actions can't be dispatched without an injected store`);
+		if (!this.dependencies.store) {
+			throw new Error(`${this.tagName.toLowerCase()}: Can't dispatch actions without an injected store`);
 		}
 
 		this.dependencies.store.dispatch(action);

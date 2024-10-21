@@ -71,7 +71,7 @@ export class Dialog {
 	 */
 	#addEventHandlers(dialogElement, isClosable, callback, dialogComponentInstance) {
 		dialogElement.addEventListener("click", (event) => {
-			if (isClosable === true && (event.target === dialogElement || event.target.value === "cancel")) {
+			if (isClosable && (event.target === dialogElement || event.target.value === "cancel")) {
 				dialogElement.close("cancel");
 			}
 		});
@@ -91,10 +91,10 @@ export class Dialog {
 		});
 
 		dialogElement.addEventListener("keydown", (event) => {
-			if (event.key === "Escape" && isClosable === true) {
+			if (event.key === "Escape" && isClosable) {
 				dialogElement.close("cancel");
 			}
-			else if (isClosable === false) {
+			else if (!isClosable) {
 				event.preventDefault();
 			}
 		});

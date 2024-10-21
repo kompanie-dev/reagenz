@@ -48,7 +48,7 @@ export class App {
 	static #defineWebComponents(componentConfig) {
 		Object
 			.entries(componentConfig)
-			.filter(([tagName]) => customElements.get(tagName) === undefined)
+			.filter(([tagName]) => !customElements.get(tagName))
 			.forEach(([tagName, componentClass]) =>
 				customElements.define(tagName, componentClass)
 			);
