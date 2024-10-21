@@ -308,9 +308,9 @@ If `isClosable` is set to `false`, it's not possible to cancel the dialog, can o
 import { Dialog } from "@kompanie/reagenz";
 
 const isClosable = true;
-const dialog = new Dialog(AboutDialog);
+const dialog = new Dialog();
 
-dialog.show((result) => {
+dialog.show(AboutDialog, (result) => {
     console.log("Dialog Result", result);
 }, isClosable);
 ```

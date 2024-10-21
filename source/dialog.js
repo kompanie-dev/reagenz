@@ -2,17 +2,7 @@
  * This class is used for creating and showing modals using the HTML <dialog> element.
  */
 export class Dialog {
-	#dialogComponentClass;
 	#dialogElement;
-
-	/**
-	 * Creates a new instance of Dialog.
-	 *
-	 * @param {CustomElementConstructor} componentClass A Reagenz or web component which contains the content of the modal.
-	 */
-	constructor(componentClass) {
-		this.#dialogComponentClass = componentClass;
-	}
 
 	/**
 	 * Closes the dialog.
@@ -28,13 +18,14 @@ export class Dialog {
 	/**
 	 * Opens the dialog using an HTML <dialog> element and executes the given callback when the dialog closes.
 	 *
+	 * @param {CustomElementConstructor} dialogComponentClass A Reagenz or web component which contains the content of the modal.
 	 * @param {Function} callback The function which should get executed when the dialog closes.
 	 * @param {?boolean} isClosable If true, the dialog can be closed by clicking the backdrop or close button. Enabled by default.
 	 *
 	 * @returns {void}
 	 */
-	show(callback, isClosable = true) {
-		const dialogComponentInstance = new this.#dialogComponentClass();
+	show(dialogComponentClass, callback, isClosable = true) {
+		const dialogComponentInstance = new dialogComponentClass();
 
 		document.body.insertAdjacentHTML("beforeend", /*html*/`
 			<dialog class="reagenz-dialog">

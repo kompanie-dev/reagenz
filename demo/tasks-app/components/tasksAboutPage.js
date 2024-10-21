@@ -21,17 +21,17 @@ export class TasksAboutPage extends Component {
 	}
 
 	showNotRequiredDialog() {
-		const dialog = new Dialog(TasksAboutDialog);
+		const dialog = new Dialog();
 
-		dialog.show((result) => {
+		dialog.show(TasksAboutDialog, (result) => {
 			this.#logger.log("Dialog Result", result);
 		}, true);
 	}
 
 	showRequiredDialog() {
-		const dialog = new Dialog(TasksAboutDialog);
+		const dialog = new Dialog();
 
-		dialog.show((result) => {
+		dialog.show(TasksAboutDialog, (result) => {
 			this.#logger.log("Dialog Result", result);
 		}, false);
 	}
