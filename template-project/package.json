@@ -9,7 +9,7 @@
 		"start": "vite --force --port 8000"
 	},
 	"dependencies": {
-		"@kompanie/reagenz": "9.0.1"
+		"@kompanie/reagenz": "9.0.2"
 	},
 	"devDependencies": {
 		"eslint": "^9.13.0",
