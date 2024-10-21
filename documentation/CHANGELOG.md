@@ -1,5 +1,10 @@
 # Reagenz Changelog
 
+## 9.0.2 (2024-10-21)
+
+* Simplify component
+* Simplify checks
+
 ## 9.0.1 (2024-10-20)
 
 * Fix template project
