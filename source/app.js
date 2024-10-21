@@ -65,7 +65,15 @@ export class App {
 	 */
 	static #injectDependencies(dependencies, classes) {
 		for (const receiverClass of classes) {
-			Object.assign(receiverClass.prototype.dependencies, dependencies);
+			receiverClass.prototype.dependencies = new Proxy(dependencies, {
+				get(dependencyContainer, propertyName, ...args) {
+					if (!(propertyName in dependencyContainer) && propertyName !== "store") {
+						throw new Error(`Tried to access dependency '${String(propertyName)}', which is not injected`);
+					}
+
+					return Reflect.get(dependencyContainer, propertyName, ...args);
+				}
+			});
 		}
 	}
 }

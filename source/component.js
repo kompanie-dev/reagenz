@@ -19,7 +19,7 @@ export class Component extends HTMLElement {
 
 		this.#selectors = selectors;
 
-		if (!this.dependencies.store && this.#selectors.length !== 0) {
+		if (!this.dependencies?.store && this.#selectors.length !== 0) {
 			throw new Error(`${this.tagName.toLowerCase()}: Tried to use selectors without injecting a store`);
 		}
 	}
@@ -38,16 +38,6 @@ export class Component extends HTMLElement {
 		}
 
 		customElements.define(tagName, componentClass);
-
-		componentClass.prototype.dependencies = new Proxy({}, {
-			get(dependencyContainer, propertyName, ...args) {
-				if (!(propertyName in dependencyContainer) && propertyName !== "store") {
-					throw new Error(`${tagName}: Tried to access dependency '${String(propertyName)}', which is not injected`);
-				}
-
-				return Reflect.get(dependencyContainer, propertyName, ...args);
-			}
-		});
 	}
 
 	/**
@@ -56,7 +46,7 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	connectedCallback() {
-		this.#unsubscribeCallback = this.dependencies.store?.subscribe(() => this.#updateDOM());
+		this.#unsubscribeCallback = this.dependencies?.store?.subscribe(() => this.#updateDOM());
 
 		this.#updateDOM(true);
 
@@ -83,11 +73,11 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	dispatch(action) {
-		if (!this.dependencies.store) {
+		if (!this.dependencies?.store) {
 			throw new Error(`${this.tagName.toLowerCase()}: Can't dispatch actions without an injected store`);
 		}
 
-		this.dependencies.store.dispatch(action);
+		this.dependencies?.store.dispatch(action);
 	}
 
 	/**
@@ -201,7 +191,7 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	#updateDOM(force = false) {
-		const newSelectorData = this.dependencies.store?.executeSelectors(this.#selectors);
+		const newSelectorData = this.dependencies?.store?.executeSelectors(this.#selectors);
 
 		if (!force && ObjectComparator.checkDeepEquality(this.#currentSelectorData, newSelectorData)) {
 			return;
