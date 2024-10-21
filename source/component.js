@@ -56,9 +56,9 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	connectedCallback() {
-		this.#unsubscribeCallback = this.dependencies.store?.subscribe(() => this.#updateDOMIfChangesDetected());
+		this.#unsubscribeCallback = this.dependencies.store?.subscribe(() => this.#updateDOM());
 
-		this.#updateDOMIfChangesDetected();
+		this.#updateDOM(true);
 
 		this.onConnect?.();
 	}
@@ -158,83 +158,61 @@ export class Component extends HTMLElement {
 	}
 
 	/**
-	* Connects all attributes starting with "$" to functions of the parent component.
-	* In this example the button's click event would execute "functionA" on the Reagenz component:
-	* <button $click="functionA">Test</button>.
+	 * Connects all attributes starting with "$" to functions of the component.
+	 * In this example the button's click event would execute "functionA" on the Reagenz component:
+	 * <button $click="functionA">Test</button>.
 
-	* @param {HTMLElement} component The parent component which contains the functions that get connected.
-	*
-	* @returns {void}
-	*/
-	#addEventAttributeBindings(component) {
-		this.#iterateChildElementsRecursively(this, (childNode) => {
+	 * @param {Element} element The element which contains the attributes that should get connected.
+	 *
+	 * @returns {void}
+	 */
+	#bindEventAttributes(component, element) {
+		for (const childNode of element.children) {
 			for (const attribute of childNode.attributes) {
 				const eventName = attribute.name;
 				const functionName = attribute.value;
 
-				if (eventName.startsWith("$") === false) {
+				if (!eventName.startsWith("$")) {
 					continue;
 				}
 
 				if (typeof component[functionName] === "function") {
 					childNode.addEventListener(eventName.substring(1), (event) => component[functionName](event));
+
+					continue;
 				}
-				else {
-					console.warn(`${component.tagName.toLowerCase()}: ${eventName} handler '${functionName}' doesn't exist or is not a function`);
-				}
+
+				console.warn(`${component.tagName.toLowerCase()}: ${eventName} handler ${functionName} doesn't exist or is not a function`);
 			}
-		});
-	}
 
-	/**
-	 * Iterates through all the child elements of the given element recursively,
-	 * excluding the children of Web Components.
-	 *
-	 * @param {Element} element The element of which the child elements should get iterated through.
-	 * @param {Function} callback The callback function which gets executed for each child element.
-	 *
-	 * @returns {void}
-	 */
-	#iterateChildElementsRecursively(element, callback) {
-		for (const childNode of element.children) {
-			callback(childNode);
-
-			if (childNode.tagName.includes("-") === false) {
-				this.#iterateChildElementsRecursively(childNode, callback);
+			if (!childNode.tagName.includes("-")) {
+				component.#bindEventAttributes(component, childNode);
 			}
 		}
 	}
 
 	/**
-	 * Executes the render() function with the supplied selectorData,
+	 * Executes the render() function with the selector data,
 	 * updates the components innerHTML property with the resulting HTML
 	 * and updates #currentSelectorData to the supplied selectorData.
 	 *
-	 * @param {Object} selectorData An object containing results of the selector execution which should be used for the render function.
+	 * @param {boolean} force If true, change detection is skipped and the innerHTML is rendered.
 	 *
 	 * @returns {void}
 	 */
-	#updateDOM(selectorData) {
+	#updateDOM(force = false) {
+		const newSelectorData = this.dependencies.store?.executeSelectors(this.#selectors);
+
+		if (!force && ObjectComparator.checkDeepEquality(this.#currentSelectorData, newSelectorData)) {
+			return;
+		}
+
 		this.innerHTML =
 			(this.styles ? `<style>${this.styles()}</style>` : "") +
-			this.render(selectorData);
+			this.render(newSelectorData);
 
-		this.#currentSelectorData = selectorData;
+		this.#currentSelectorData = newSelectorData;
 
-		this.#addEventAttributeBindings(this);
-	}
-
-	/**
-	 * Executes the selectors of the component and compares it to the previous result.
-	 * If changes are detected, an update of the innerHTML property is triggered.
-	 *
-	 * @returns {void}
-	 */
-	#updateDOMIfChangesDetected() {
-		const newSelectorData = this.dependencies.store?.executeSelectors(this.#selectors) ?? [];
-
-		if (ObjectComparator.checkDeepEquality(this.#currentSelectorData, newSelectorData) === false) {
-			this.#updateDOM(newSelectorData);
-		}
+		this.#bindEventAttributes(this, this);
 	}
 }
