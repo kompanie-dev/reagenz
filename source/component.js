@@ -33,11 +33,7 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	static define(tagName, componentClass) {
-		if (customElements.get(tagName)) {
-			return;
-		}
-
-		customElements.define(tagName, componentClass);
+		customElements.get(tagName) ?? customElements.define(tagName, componentClass);
 	}
 
 	/**
