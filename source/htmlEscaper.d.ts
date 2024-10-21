@@ -12,11 +12,6 @@ export declare class HtmlEscaper {
 	static escapeObject(unsafeObject: any): any;
 
 	/**
-	 * A map which contains all unsafe HTML characters and their entities.
-	 */
-	static entityMap: { [key: string]: string };
-
-	/**
 	 * Escapes the unsafe characters of HTML (&, <, >, ", ') in the supplied string.
 	 *
 	 * @param unsafeString The unescaped HTML string.

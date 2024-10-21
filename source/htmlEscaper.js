@@ -32,17 +32,6 @@ export class HtmlEscaper {
 	}
 
 	/**
-	 * A map which contains all unsafe HTML characters and their entities.
-	 */
-	static entityMap = {
-		"<": "&lt;",
-		">": "&gt;",
-		"\"": "&quot;",
-		"'": "&#39;",
-		"&": "&amp;"
-	};
-
-	/**
 	 * Escapes the unsafe characters of HTML (&, <, >, ", ') in the supplied string.
 	 *
 	 * @param {string} unsafeString The unescaped HTML string.
@@ -50,6 +39,14 @@ export class HtmlEscaper {
 	 * @returns {string} The escaped string.
 	 */
 	static escapeString(unsafeString) {
-		return unsafeString.replace(/[<>'"&]/gu, (char) => HtmlEscaper.entityMap[char]);
+		const entityMap = {
+			"<": "&lt;",
+			">": "&gt;",
+			"\"": "&quot;",
+			"'": "&#39;",
+			"&": "&amp;"
+		};
+
+		return unsafeString.replace(/[<>'"&]/gu, (char) => entityMap[char]);
 	}
 }
