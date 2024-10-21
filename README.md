@@ -44,7 +44,7 @@ export class MyCounter extends Component {
 
     // This function generates the innerHTML of the component.
     // In this case it also accesses the count selector specified in the constructor.
-    render({ count }) {
+    render([count]) {
         return /*html*/`
             <div>Current value: ${count}</div>
             <button $click="buttonClickEvent">Increase</button>`;
