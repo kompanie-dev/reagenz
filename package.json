@@ -1,6 +1,6 @@
 {
 	"name": "@kompanie/reagenz",
-	"version": "9.0.2",
+	"version": "10.0.0",
 	"license": "MIT",
 	"main": "index.js",
 	"repository": "github:kompanie-dev/reagenz",
