@@ -304,13 +304,13 @@ To open the component as dialog you need to import the `Dialog` class and instan
 After that call the `.show()` function, where you specifiy if a dialog is closable and the callback that gets executed when the dialog is cancelled or submitted.
 If `isClosable` is set to `false`, it's not possible to cancel the dialog, can only be submitted if the `validate()` function returns `true` and the form inside the component is in a valid state.
 
+If you want to close the Dialog externally, use the function returned by the `.show()` function.
+
 ```js
 import { Dialog } from "@kompanie/reagenz";
 
 const isClosable = true;
-const dialog = new Dialog();
-
-dialog.show(AboutDialog, (result) => {
+const dialogCloseFunction = Dialog.show(AboutDialog, (result) => {
     console.log("Dialog Result", result);
 }, isClosable);
 ```

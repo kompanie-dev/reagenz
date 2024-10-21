@@ -1,5 +1,10 @@
 # Reagenz Changelog
 
+# 10.0.0 (2024-10-21)
+
+* Make dialog static
+* Cleanup code
+
 ## 9.0.2 (2024-10-21)
 
 * Simplify component

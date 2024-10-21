@@ -2,19 +2,6 @@
  * This class is used for creating and showing modals using the HTML <dialog> element.
  */
 export class Dialog {
-	#dialogElement;
-
-	/**
-	 * Closes the dialog.
-	 *
-	 * @param {?string} returnValue The return value of the dialog. "cancel" by default.
-	 *
-	 * @returns {void}
-	 */
-	close(returnValue = "cancel") {
-		this.#dialogElement.close(returnValue);
-	}
-
 	/**
 	 * Opens the dialog using an HTML <dialog> element and executes the given callback when the dialog closes.
 	 *
@@ -22,9 +9,9 @@ export class Dialog {
 	 * @param {Function} callback The function which should get executed when the dialog closes.
 	 * @param {?boolean} isClosable If true, the dialog can be closed by clicking the backdrop or close button. Enabled by default.
 	 *
-	 * @returns {void}
+	 * @returns {Function} A function to close the dialog.
 	 */
-	show(dialogComponentClass, callback, isClosable = true) {
+	static show(dialogComponentClass, callback, isClosable = true) {
 		const dialogComponentInstance = new dialogComponentClass();
 
 		document.body.insertAdjacentHTML("beforeend", /*html*/`
@@ -39,15 +26,19 @@ export class Dialog {
 				</form>
 			</dialog>`);
 
-		this.#dialogElement = document.querySelector("dialog");
+		const dialogElement = document.querySelector("dialog");
 
-		this.#dialogElement
+		dialogElement
 			.querySelector(".reagenz-dialog-content")
 			.append(dialogComponentInstance);
 
-		this.#addEventHandlers(this.#dialogElement, isClosable, callback, dialogComponentInstance);
+		this.#addEventHandlers(dialogElement, isClosable, callback, dialogComponentInstance);
 
-		this.#dialogElement.showModal();
+		dialogElement.showModal();
+
+		return (returnValue = "cancel") => {
+			dialogElement.close(returnValue);
+		};
 	}
 
 	/**
@@ -60,7 +51,7 @@ export class Dialog {
 	 *
 	 * @returns {void}
 	 */
-	#addEventHandlers(dialogElement, isClosable, callback, dialogComponentInstance) {
+	static #addEventHandlers(dialogElement, isClosable, callback, dialogComponentInstance) {
 		dialogElement.addEventListener("click", (event) => {
 			if (isClosable && (event.target === dialogElement || event.target.value === "cancel")) {
 				dialogElement.close("cancel");
