@@ -1,5 +1,9 @@
 # Reagenz Changelog
 
+# 10.0.1 (2024-10-21)
+
+* Simplify forComponent
+
 # 10.0.0 (2024-10-21)
 
 * Make dialog static
