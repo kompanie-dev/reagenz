@@ -32,7 +32,7 @@ export class App {
 	 */
 	static #attach(mainComponent, container) {
 		const mainInstance = new mainComponent();
-		mainInstance.setAttribute("framework", "@kompanie/reagenz@10.0.0");
+		mainInstance.setAttribute("framework", "@kompanie/reagenz@10.0.1");
 		container.append(mainInstance);
 	}
 
