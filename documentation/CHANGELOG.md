@@ -1,10 +1,18 @@
 # Reagenz Changelog
 
-# 10.0.1 (2024-10-21)
+## 11.0.0 (2024-10-22)
+
+* Rename Dialog to Modal
+* Styles are now applied via styles property
+* Selectors are now assigned via selectors property
+* Removed Components.define
+* Cleanup code
+
+## 10.0.1 (2024-10-21)
 
 * Simplify forComponent
 
-# 10.0.0 (2024-10-21)
+## 10.0.0 (2024-10-21)
 
 * Make dialog static
 * Cleanup code
