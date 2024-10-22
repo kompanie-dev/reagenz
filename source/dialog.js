@@ -26,7 +26,7 @@ export class Dialog {
 				</form>
 			</dialog>`);
 
-		const dialogElement = document.querySelector("dialog");
+		const dialogElement = document.body.lastChild;
 
 		dialogElement
 			.querySelector(".reagenz-dialog-content")
@@ -59,15 +59,10 @@ export class Dialog {
 		});
 
 		dialogElement.addEventListener("close", (event) => {
-			/** @type {HTMLFormElement} */
-			const formElement = dialogElement.querySelector("[method='dialog']");
-
-			const formData = new FormData(formElement);
-
 			dialogElement.remove();
 
 			callback?.({
-				formData,
+				formData: new FormData(dialogElement.firstElementChild),
 				returnValue: event.target.returnValue
 			});
 		});
