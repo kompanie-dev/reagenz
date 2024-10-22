@@ -15,20 +15,19 @@ export class HtmlEscaper {
 		}
 
 		if (Array.isArray(unsafeObject)) {
-			return unsafeObject.map(item => HtmlEscaper.escapeObject(item));
+			return unsafeObject.map(HtmlEscaper.escapeObject);
 		}
 
-		if (unsafeObject === null || typeof unsafeObject !== "object") {
-			return unsafeObject;
+		if (unsafeObject !== null && typeof unsafeObject === "object") {
+			return Object.fromEntries(
+				Object
+					.entries(unsafeObject)
+					.map(
+						([key, value]) => [key, HtmlEscaper.escapeObject(value)]
+					));
 		}
 
-		return Object.fromEntries(
-			Object
-				.entries(unsafeObject)
-				.map(
-					([key, value]) => [key, HtmlEscaper.escapeObject(value)]
-				)
-		);
+		return unsafeObject;
 	}
 
 	/**
