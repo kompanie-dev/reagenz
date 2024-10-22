@@ -32,4 +32,4 @@ export class TasksTaskDetailPage extends Component {
 	}
 }
 
-Component.define("tasks-task-detail-page", TasksTaskDetailPage);
+customElements.define("tasks-task-detail-page", TasksTaskDetailPage);

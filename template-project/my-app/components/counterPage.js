@@ -31,4 +31,4 @@ export class CounterPage extends Component {
 	}
 }
 
-Component.define("counter-page", CounterPage);
+customElements.define("counter-page", CounterPage);

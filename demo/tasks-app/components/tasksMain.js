@@ -40,4 +40,4 @@ export class TasksMain extends Component {
 	}
 }
 
-Component.define("tasks-main", TasksMain);
+customElements.define("tasks-main", TasksMain);

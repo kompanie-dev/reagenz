@@ -58,7 +58,7 @@ export class MyCounter extends Component {
     }
 }
 
-Component.define("my-counter", MyCounter);
+customElements.define("my-counter", MyCounter);
 ```
 
 ## Structure

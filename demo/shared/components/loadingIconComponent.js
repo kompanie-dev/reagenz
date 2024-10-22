@@ -58,4 +58,4 @@ export class LoadingIconComponent extends Component {
 	}
 }
 
-Component.define("loading-icon", LoadingIconComponent);
+customElements.define("loading-icon", LoadingIconComponent);

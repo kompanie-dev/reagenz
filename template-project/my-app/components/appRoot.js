@@ -35,4 +35,4 @@ export class AppRoot extends Component {
 	}
 }
 
-Component.define("app-root", AppRoot);
+customElements.define("app-root", AppRoot);

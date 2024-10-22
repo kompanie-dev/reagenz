@@ -33,4 +33,4 @@ export class TasksAboutPage extends Component {
 	}
 }
 
-Component.define("tasks-about-page", TasksAboutPage);
+customElements.define("tasks-about-page", TasksAboutPage);

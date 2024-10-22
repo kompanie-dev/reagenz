@@ -50,4 +50,4 @@ export class TasksTaskList extends Component {
 	}
 }
 
-Component.define("tasks-task-list", TasksTaskList);
+customElements.define("tasks-task-list", TasksTaskList);

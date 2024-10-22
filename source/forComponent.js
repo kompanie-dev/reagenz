@@ -35,4 +35,4 @@ export class ForComponent extends Component {
 	}
 }
 
-Component.define("x-for", ForComponent);
+customElements.define("x-for", ForComponent);

@@ -13,4 +13,4 @@ export class TasksSearchBar extends Component {
 	}
 }
 
-Component.define("tasks-search-bar", TasksSearchBar);
+customElements.define("tasks-search-bar", TasksSearchBar);

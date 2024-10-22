@@ -31,4 +31,4 @@ export class TasksAboutDialog extends Component {
 	}
 }
 
-Component.define("tasks-about-dialog", TasksAboutDialog);
+customElements.define("tasks-about-dialog", TasksAboutDialog);

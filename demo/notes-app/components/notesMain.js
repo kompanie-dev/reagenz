@@ -26,4 +26,4 @@ export class NotesMain extends Component {
 	}
 }
 
-Component.define("notes-main", NotesMain);
+customElements.define("notes-main", NotesMain);

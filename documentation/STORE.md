@@ -160,5 +160,5 @@ export class TaskList extends Component {
     }
 }
 
-Component.define("task-list", TaskList);
+customElements.define("task-list", TaskList);
 ```

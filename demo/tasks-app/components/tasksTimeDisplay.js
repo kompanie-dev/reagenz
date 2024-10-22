@@ -41,4 +41,4 @@ export class TasksTimeDisplay extends Component {
 	}
 }
 
-Component.define("tasks-time-display", TasksTimeDisplay);
+customElements.define("tasks-time-display", TasksTimeDisplay);

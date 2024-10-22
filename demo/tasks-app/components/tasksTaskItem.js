@@ -51,4 +51,4 @@ export class TasksTaskItem extends Component {
 	}
 }
 
-Component.define("tasks-task-item", TasksTaskItem);
+customElements.define("tasks-task-item", TasksTaskItem);

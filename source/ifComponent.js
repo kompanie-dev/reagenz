@@ -9,4 +9,4 @@ export class IfComponent extends Component {
 	}
 }
 
-Component.define("x-if", IfComponent);
+customElements.define("x-if", IfComponent);

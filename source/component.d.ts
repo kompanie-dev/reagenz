@@ -13,20 +13,12 @@ export declare class Component extends HTMLElement {
 	constructor(selectors?: Function[]);
 
 	/**
-	 * Defines the component and under which tag name it should be available.
-	 *
-	 * @param tagName The name of the element, how it should be available in HTML. Needs to comply to the Web Components standard.
-	 * @param componentClass The class of the component.
-	 */
-	static define(tagName: string, componentClass: CustomElementConstructor): void;
-
-	/**
 	 * Dispatches the action in the injected store.
 	 * A shorthand for this.dependencies.store.dispatch.
 	 *
 	 * @param action The Action object which should be dispatched
 	 */
-	dispatch(action: { type: string; [key: string]: any }): void;
+	dispatch(action: { type: string;[key: string]: any }): void;
 
 	/**
 	 * Loads the value from the given attribute and tries to convert it to an array.

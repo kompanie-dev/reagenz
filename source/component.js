@@ -23,19 +23,6 @@ export class Component extends HTMLElement {
 			throw new Error(`${this.tagName.toLowerCase()}: Tried to use selectors without injecting a store`);
 		}
 	}
-
-	/**
-	 * Defines the component and the tag name it should use.
-	 *
-	 * @param {string} tagName The name of the element, how it should be available in HTML. Needs to comply to the Web Components standard.
-	 * @param {CustomElementConstructor} componentClass The class of the component.
-	 *
-	 * @returns {void}
-	 */
-	static define(tagName, componentClass) {
-		customElements.get(tagName) ?? customElements.define(tagName, componentClass);
-	}
-
 	/**
 	 * The default callback function when Web Components get added to the DOM.
 	 *
