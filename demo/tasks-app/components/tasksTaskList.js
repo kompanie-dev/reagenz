@@ -3,9 +3,7 @@ import { addTask, saveEntriesRequest } from "../store/tasks.actions.js";
 import { getIsLoading, searchEntries } from "../store/tasks.selectors.js";
 
 export class TasksTaskList extends Component {
-	constructor() {
-		super([searchEntries, getIsLoading]);
-	}
+	selectors = [searchEntries, getIsLoading];
 
 	render([entries, isLoading]) {
 		return /*html*/`

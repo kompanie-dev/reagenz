@@ -6,23 +6,8 @@ import { ObjectComparator } from "./objectComparator.js";
  */
 export class Component extends HTMLElement {
 	#currentSelectorData;
-	#selectors;
 	#unsubscribeCallback;
 
-	/**
-	 * Creates a new instance of the Component.
-	 *
-	 * @param {?Function[]} selectors An array containing the selector functions that should be used for change detection and rendering.
-	 */
-	constructor(selectors = []) {
-		super();
-
-		this.#selectors = selectors;
-
-		if (!this.dependencies?.store && this.#selectors.length !== 0) {
-			throw new Error(`${this.tagName.toLowerCase()}: Tried to use selectors without injecting a store`);
-		}
-	}
 	/**
 	 * The default callback function when Web Components get added to the DOM.
 	 *
@@ -174,7 +159,11 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	#updateDOM(force = false) {
-		const newSelectorData = this.dependencies?.store?.executeSelectors(this.#selectors);
+		if (!this.dependencies?.store && this.selectors?.length > 0) {
+			throw new Error(`${this.tagName.toLowerCase()}: Tried to use selectors without injecting a store`);
+		}
+
+		const newSelectorData = this.dependencies?.store?.executeSelectors(this.selectors ?? []);
 
 		if (!force && ObjectComparator.checkDeepEquality(this.#currentSelectorData, newSelectorData)) {
 			return;

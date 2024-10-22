@@ -5,9 +5,7 @@ import { getTime } from "../store/tasks.selectors.js";
 export class TasksTimeDisplay extends Component {
 	#intervalID;
 
-	constructor() {
-		super([getTime]);
-	}
+	selectors = [getTime];
 
 	render([time]) {
 		return /*html*/`

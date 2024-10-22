@@ -3,9 +3,7 @@ import { loadEntriesRequest, updateRoute } from "../store/tasks.actions.js";
 import { getRoute } from "../store/tasks.selectors.js";
 
 export class TasksMain extends Component {
-	constructor() {
-		super([getRoute]);
-	}
+	selectors = [getRoute];
 
 	render([route]) {
 		if (route === "" || route === "#/") {

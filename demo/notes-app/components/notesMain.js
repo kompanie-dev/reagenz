@@ -3,9 +3,7 @@ import { getNotes } from "../store/notes.selector.js";
 import { loadNotesRequest, saveNotesRequest } from "../store/notes.actions.js";
 
 export class NotesMain extends Component {
-	constructor() {
-		super([getNotes]);
-	}
+	selectors = [getNotes];
 
 	render([notes]) {
 		return /*html*/`

@@ -2,9 +2,7 @@ import { Component } from "@kompanie/reagenz";
 import { getSelectedEntryData, getSelectedEntryId } from "../store/tasks.selectors.js";
 
 export class TasksTaskDetailPage extends Component {
-	constructor() {
-		super([getSelectedEntryData, getSelectedEntryId]);
-	}
+	selectors = [getSelectedEntryData, getSelectedEntryId];
 
 	render([selectedEntryData, selectedEntryId]) {
 		if (selectedEntryData === undefined) {

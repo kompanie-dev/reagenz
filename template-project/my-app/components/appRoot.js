@@ -4,10 +4,10 @@ import { loadCountRequest, updateRoute } from "../store/myapp.actions.js";
 
 export class AppRoot extends Component {
 	constructor() {
-		super([getRoute]);
-
 		this.dispatch(loadCountRequest());
 	}
+
+	selectors = [getRoute];
 
 	render([route]) {
 		return /*html*/`

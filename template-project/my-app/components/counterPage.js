@@ -3,9 +3,7 @@ import { getCount } from "../store/myapp.selector.js";
 import { increaseCounter, saveCountRequest } from "../store/myapp.actions.js";
 
 export class CounterPage extends Component {
-	constructor() {
-		super([getCount]);
-	}
+	selectors = [getCount];
 
 	render([count]) {
 		return /*html*/`
