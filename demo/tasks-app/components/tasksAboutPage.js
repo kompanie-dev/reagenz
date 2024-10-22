@@ -1,4 +1,4 @@
-import { Component, Dialog } from "@kompanie/reagenz";
+import { Component, Modal } from "@kompanie/reagenz";
 import { TasksAboutDialog } from "./tasksAboutDialog.js";
 
 export class TasksAboutPage extends Component {
@@ -21,14 +21,14 @@ export class TasksAboutPage extends Component {
 	}
 
 	showNotRequiredDialog() {
-		Dialog.show(TasksAboutDialog, (result) => {
-			this.#logger.log("Dialog Result", result);
+		Modal.show(TasksAboutDialog, (result) => {
+			this.#logger.log("Modal Result", result);
 		}, true);
 	}
 
 	showRequiredDialog() {
-		Dialog.show(TasksAboutDialog, (result) => {
-			this.#logger.log("Dialog Result", result);
+		Modal.show(TasksAboutDialog, (result) => {
+			this.#logger.log("Modal Result", result);
 		}, false);
 	}
 }

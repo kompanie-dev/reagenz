@@ -260,11 +260,11 @@ export class ListView extends Component {
 
 ## Dialog System
 
-Reagenz has a built-in dialog system.
-It allows you to open Reagenz components inside an [HTML dialog element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog), validate the dialog component and return the result as a Form in the callback of the dialog.
+Reagenz has a built-in modal system.
+It allows you to open Reagenz components inside an [HTML dialog element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog), validate the modal component and return the result as a Form in the callback of the modal.
 
 The following example shows a component with form validation in the input and special validation in it's `validate()` function.
-The title of the dialog is set via the header property.
+The title of the modal is set via the header property.
 
 ```js
 // Example Dialog component:
@@ -280,7 +280,7 @@ export class AboutDialog extends Component {
             <button type="submit" value="submit" class="button">OK</button>`;
     }
 
-    // true, if the state of the dialog is valid, otherwise false
+    // true, if the state of the modal is valid, otherwise false
     // If the validate function is omitted, the component is always valid
     validate() {
         return this.querySelector("[name='username']").value.startsWith("R");
@@ -288,18 +288,18 @@ export class AboutDialog extends Component {
 }
 ```
 
-To open the component as dialog you need to import the `Dialog` class and instantiate it with the component you want to use as dialog content.
-After that call the `.show()` function, where you specifiy if a dialog is closable and the callback that gets executed when the dialog is cancelled or submitted.
-If `isClosable` is set to `false`, it's not possible to cancel the dialog, can only be submitted if the `validate()` function returns `true` and the form inside the component is in a valid state.
+To open the component as modal you need to import the `Modal` class and instantiate it with the component you want to use as modal content.
+After that call the `.show()` function, where you specifiy if a modal is closable and the callback that gets executed when the modal is cancelled or submitted.
+If `isClosable` is set to `false`, it's not possible to cancel the modal, can only be submitted if the `validate()` function returns `true` and the form inside the component is in a valid state.
 
-If you want to close the Dialog externally, use the function returned by the `.show()` function.
+If you want to close the modal externally, use the function returned by the `.show()` function.
 
 ```js
-import { Dialog } from "@kompanie/reagenz";
+import { Modal } from "@kompanie/reagenz";
 
 const isClosable = true;
-const dialogCloseFunction = Dialog.show(AboutDialog, (result) => {
-    console.log("Dialog Result", result);
+const modalCloseFunction = Modal.show(AboutModal, (result) => {
+    console.log("Modal Result", result);
 }, isClosable);
 ```
 
