@@ -77,9 +77,7 @@ import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/test.selector.js";
 
 export class MainPage extends Component {
-    constructor() {
-        super([getCount]);
-    }
+    selectors = [getCount];
 
     render([count]) {
         return /*html*/`
@@ -114,9 +112,7 @@ import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/test.selector.js";
 
 export class MainPage extends Component {
-    constructor() {
-        super([getCount]);
-    }
+    selectors = [getCount];
 
     render([count]) {
         return /*html*/`
@@ -141,9 +137,7 @@ import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/test.selector.js";
 
 export class MainPage extends Component {
-    constructor() {
-        super([getCount]);
-    }
+    selectors = [getCount];
 
     render([count]) {
         return /*html*/`
@@ -180,9 +174,7 @@ import { Component } from "@kompanie/reagenz";
 import { countUp } from "../store/test.actions.js";
 
 export class MainPage extends Component {
-    constructor() {
-        super([getCount]);
-    }
+    selectors = [getCount];
 
     render([count]) {
         return /*html*/`
@@ -233,9 +225,7 @@ import { Component } from "@kompanie/reagenz";
 import { getIsLoading } from "../store/test.selectors.js";
 
 export class LoadingSpinner extends Component {
-    constructor() {
-        super([getIsLoading]);
-    }
+    selectors = [getIsLoading];
 
     render([isLoading]) {
         return /*html*/`<div>
@@ -256,9 +246,7 @@ import { Component } from "@kompanie/reagenz";
 import { getEntries } from "../store/test.selectors.js";
 
 export class ListView extends Component {
-    constructor() {
-        super([getEntries]);
-    }
+    selectors = [getEntries];
 
     render([entries]) {
         return /*html*/`<div>

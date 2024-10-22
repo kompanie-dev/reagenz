@@ -36,11 +36,9 @@ import { countUp } from "../store/counter/actions.js";
 import { getCount } from "../store/counter/selectors.js";
 
 export class MyCounter extends Component {
-    constructor() {
-        // The selectors you want to use inside your render function
-        // If values of the selectors change, the entire component re-renders
-        super([getCount]);
-    }
+    // The selectors you want to use inside your render function
+    // If values of the selectors change, the entire component re-renders
+    selectors = [getCount];
 
     // This function generates the innerHTML of the component.
     // In this case it also accesses the count selector specified in the constructor.

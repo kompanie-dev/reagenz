@@ -22,7 +22,7 @@ import { Component } from "@kompanie/reagenz";
 import { addTask } from "../store/test.actions.js";
 
 export class MainPage extends Component {
-    render([count]) {
+    render() {
         return /*html*/`
             <input type="text">
             <button $click="clickCallback">Add task</button>
@@ -147,9 +147,7 @@ import { Component } from "@kompanie/reagenz";
 import { searchEntries } from "../store/tasks.selectors.js";
 
 export class TaskList extends Component {
-    constructor() {
-        super([searchEntries]);
-    }
+    selectors = [searchEntries];
 
     render([entries]) {
         return /*html*/`
