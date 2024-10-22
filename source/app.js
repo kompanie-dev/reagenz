@@ -31,7 +31,7 @@ export class App {
 	 * @returns {void}
 	 */
 	static #attach(mainComponent, container) {
-		container.setAttribute("framework", "@kompanie/reagenz@10.0.1");
+		container.setAttribute("framework", "@kompanie/reagenz@11.0.0");
 		container.append(new mainComponent());
 	}
 
