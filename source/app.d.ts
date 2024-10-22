@@ -3,7 +3,9 @@
  */
 export declare class App {
 	/**
-	 * Creates and starts a new Reagenz application.
+	 * Initializes and starts a new Reagenz application.
+	 * This method sets up the components, injects dependencies into them
+	 * and attaches the main application component to a specified container.
 	 *
 	 * @param appConfig The configuration object for the application.
 	 */

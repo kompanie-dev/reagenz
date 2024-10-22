@@ -23,7 +23,7 @@ export class App {
 	}
 
 	/**
-	 * Starts the application by taking the main component, adding a version info and adding it to the specified container element.
+	 * Starts the application by attaching the main component to the container and adding a version info to it.
 	 *
 	 * @param {CustomElementConstructor} mainComponent The main component of the application.
 	 * @param {HTMLElement} container The container element to which the main component gets attached to.
@@ -31,9 +31,8 @@ export class App {
 	 * @returns {void}
 	 */
 	static #attach(mainComponent, container) {
-		const mainInstance = new mainComponent();
-		mainInstance.setAttribute("framework", "@kompanie/reagenz@10.0.1");
-		container.append(mainInstance);
+		container.setAttribute("framework", "@kompanie/reagenz@10.0.1");
+		container.append(new mainComponent());
 	}
 
 	/**
