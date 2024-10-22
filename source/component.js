@@ -170,7 +170,7 @@ export class Component extends HTMLElement {
 		}
 
 		this.innerHTML =
-			(this.styles ? `<style>${this.styles()}</style>` : "") +
+			(this.styles ? `<style>${this.styles}</style>` : "") +
 			this.render(newSelectorData);
 
 		this.#currentSelectorData = newSelectorData;
