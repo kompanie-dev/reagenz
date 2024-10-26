@@ -47,6 +47,40 @@ App.start({
 });
 ```
 
+## Styling
+
+Reagenz is fully compatible with popular CSS frameworks which work by adding classes to HTML elements.
+Sometimes you might want to apply CSS only for one component though.
+Reagenz has a `styles` property for CSS.
+All CSS which is assigned to the styles property gets added in a styles tag inside the innerHTML of the component.
+This also means that you could write CSS rules that affect other components.
+To prevent this it's recommended to scope the CSS by adding the component tag name around the CSS rules.
+
+```js
+import { Component } from "@kompanie/reagenz";
+import { getCount } from "../store/test.selector.js";
+
+export class MainPage extends Component {
+    selectors = [getCount];
+
+    styles = /*css*/`
+        main-page {
+            div {
+                color: red;
+            }
+        }
+    `;
+
+    render([count]) {
+        return /*html*/`
+            <div>${count}</div>
+        `;
+    }
+}
+
+customElements.define("main-page", MainPage);
+```
+
 ## Attribute helper functions
 
 Every Reagenz component has access to attribute helper functions.
@@ -85,6 +119,8 @@ export class MainPage extends Component {
         `;
     }
 }
+
+customElements.define("main-page", MainPage);
 ```
 
 ## Change detection
@@ -125,6 +161,8 @@ export class MainPage extends Component {
         console.log("Button got clicked", event);
     }
 }
+
+customElements.define("main-page", MainPage);
 ```
 
 `onConnect` and `onDisconnect` are executed when the component gets added to or removed from the DOM, just like the functions included in the Web Components standard called `connectedCallback()` and `disconnectedCallback()`.
@@ -158,6 +196,8 @@ export class MainPage extends Component {
         console.log("Component got removed");
     }
 }
+
+customElements.define("main-page", MainPage);
 ```
 
 ## Store access
@@ -187,6 +227,8 @@ export class MainPage extends Component {
         this.dispatch(countUp());
     }
 }
+
+customElements.define("main-page", MainPage);
 ```
 
 ## Dependency injection in components
@@ -211,6 +253,8 @@ export class MainPage extends Component {
         this.#logger.log("Hello dependency injection");
     }
 }
+
+customElements.define("main-page", MainPage);
 ```
 
 If you forget to inject a dependency and you are trying to access it, Reagenz will throw an Error.
@@ -235,6 +279,8 @@ export class LoadingSpinner extends Component {
         </div>`;
     }
 }
+
+customElements.define("loading-spinner", LoadingSpinner);
 ```
 
 ## Looping HTML elements
@@ -256,6 +302,8 @@ export class ListView extends Component {
         </div>`;
     }
 }
+
+customElements.define("list-view", ListView);
 ```
 
 ## Dialog System
@@ -286,6 +334,8 @@ export class AboutDialog extends Component {
         return this.querySelector("[name='username']").value.startsWith("R");
     }
 }
+
+customElements.define("about-dialog", AboutDialog);
 ```
 
 To open the component as modal you need to import the `Modal` class and instantiate it with the component you want to use as modal content.

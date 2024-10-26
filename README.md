@@ -40,6 +40,14 @@ export class MyCounter extends Component {
     // If values of the selectors change, the entire component re-renders
     selectors = [getCount];
 
+    styles = /*css*/`
+        my-counter {
+            div {
+                color: red;
+            }
+        }
+    `;
+
     // This function generates the innerHTML of the component.
     // In this case it also accesses the count selector specified in the constructor.
     render([count]) {
