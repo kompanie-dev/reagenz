@@ -13,7 +13,7 @@ It has the following features:
 * Easy to understand change detection based on selectors
 * Simple dependency injection system
 * Attribute event system for attributes like `$click`, `$change` etc.
-* Attribute helper functions: `getArrayAttribute`, `getBooleanAttribute`, `getNumberAttribute` and `getObjectAttribute`
+* Typed attributes
 * No [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM)
 * TypeScript support (Beta)
 
@@ -51,7 +51,7 @@ export class MyCounter extends Component {
     // This function generates the innerHTML of the component.
     // In this case it also accesses the count selector specified in the constructor.
     render() {
-		const { count } = this.useSelectorData();
+        const { count } = this.useSelectorData();
 
         return /*html*/`
             <div>Current value: ${count}</div>
