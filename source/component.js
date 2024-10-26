@@ -52,7 +52,7 @@ export class Component extends HTMLElement {
 	/**
 	 * Returns the parsed attributes of the component as an object.
 	 *
-	 * @returns The attributes as an object, converted to the types specified in attributeTypes.
+	 * @returns {Object} The attributes as an object, converted to the types specified in attributeTypes.
 	 */
 	useAttributes() {
 		return this.#currentAttributeValues;
@@ -61,7 +61,7 @@ export class Component extends HTMLElement {
 	/**
 	 * Returns all injected dependencies as object.
 	 *
-	 * @returns An object containing all the dependencies.
+	 * @returns {Object} An object containing all the dependencies.
 	 */
 	useDependencies() {
 		return this.dependencies;
@@ -70,7 +70,7 @@ export class Component extends HTMLElement {
 	/**
 	 * Returns the result of all executed selectors as object.
 	 *
-	 * @returns An object containing the name of the selector and the result.
+	 * @returns {Object} An object containing the name of the selector and the result.
 	 */
 	useSelectorData() {
 		return this.#currentSelectorData;
@@ -138,6 +138,12 @@ export class Component extends HTMLElement {
 		return null;
 	}
 
+	/**
+	 * Parses the attributes specified in the attributeTypes property and tries to convert them to the given type.
+	 * If the conversion fails, null is used as value.
+	 *
+	 * @returns An object with the same property names as attributeTypes, but with the converted data.
+	 */
 	#parseAttributes() {
 		return Object.fromEntries(
 				Object
