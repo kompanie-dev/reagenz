@@ -9,9 +9,11 @@ export class AppRoot extends Component {
 		this.dispatch(loadCountRequest());
 	}
 
-	selectors = [getRoute];
+	selectors = { route: getRoute };
 
-	render([route]) {
+	render() {
+		const { route } = this.useSelectorData();
+
 		return /*html*/`
             <div>
                 <div>

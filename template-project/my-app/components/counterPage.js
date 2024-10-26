@@ -3,9 +3,11 @@ import { getCount } from "../store/myapp.selector.js";
 import { increaseCounter, saveCountRequest } from "../store/myapp.actions.js";
 
 export class CounterPage extends Component {
-	selectors = [getCount];
+	selectors = { count: getCount };
 
-	render([count]) {
+	render() {
+		const { count } = this.useSelectorData();
+
 		return /*html*/`
             <div>
                 <h1>Welcome to my Counter App!</h1>

@@ -237,7 +237,11 @@ import { Component } from "@kompanie/reagenz";
 import { getIsLoading } from "../store/test.selectors.js";
 
 export class LoadingSpinner extends Component {
-    render([isLoading]) {
+    selectors = { isLoading: getIsLoading };
+
+    render() {
+        const { isLoading } = this.useSelectorData();
+
         return /*html*/`<div>
             <x-if condition="${ isLoading === true }">
                 <h1>This block is visible while isLoading is true</h1>
@@ -477,9 +481,11 @@ import { Component } from "@kompanie/reagenz";
 import { selectFilteredEntries } from "../store/tasks.selectors.js";
 
 export class TaskList extends Component {
-	selectors = [selectFilteredEntries];
+	selectors = { entries: selectFilteredEntries };
 
-	render([entries]) {
+	render() {
+        const { entries } = this.useSelectorData();
+
 		return /*html*/`
 			<x-for array='${JSON.stringify(entries)}'>
 				<div>@item(text)</div>
@@ -511,11 +517,14 @@ Reagenz will throw an error if you try to dispatch an action without injecting a
 ```js
 import { Component } from "@kompanie/reagenz";
 import { countUp } from "../store/test.actions.js";
+import { getCount } from "../store/test.selectors.js";
 
 export class MainPage extends Component {
-    selectors = [getCount];
+    selectors = { count: getCount };
 
-    render([count]) {
+    render() {
+        const { count } = this.useSelectorData();
+
         return /*html*/`
             <div>${count}</div>
             <button $click="clickCallback" $input="nonExistingFunction">Count up</button>
