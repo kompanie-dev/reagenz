@@ -3,26 +3,26 @@
 ## Table of contents
 
 - [Reagenz Documentation](#reagenz-documentation)
-	- [Table of contents](#table-of-contents)
-	- [Setting up an application](#setting-up-an-application)
-		- [HTML](#html)
-		- [app.js](#appjs)
-	- [Styling](#styling)
-	- [Attribute helper functions](#attribute-helper-functions)
-	- [Event system](#event-system)
-	- [Dependency Injection](#dependency-injection)
-	- [Templating](#templating)
-		- [x-if: Conditional rendering](#x-if-conditional-rendering)
-		- [x-for: Iterating arrays](#x-for-iterating-arrays)
-	- [Dialog System](#dialog-system)
-	- [State Management (Store)](#state-management-store)
-		- [Actions](#actions)
-		- [Store](#store)
-		- [Reducer](#reducer)
-		- [Middlewares](#middlewares)
-		- [Selectors](#selectors)
-			- [Change detection](#change-detection)
-		- [Store access](#store-access)
+  - [Table of contents](#table-of-contents)
+  - [Setting up an application](#setting-up-an-application)
+    - [HTML](#html)
+    - [app.js](#appjs)
+  - [Styling](#styling)
+  - [Typed attributes](#typed-attributes)
+  - [Event system](#event-system)
+  - [Dependency Injection](#dependency-injection)
+  - [Templating](#templating)
+    - [x-if: Conditional rendering](#x-if-conditional-rendering)
+    - [x-for: Iterating arrays](#x-for-iterating-arrays)
+  - [Dialog System](#dialog-system)
+  - [State Management (Store)](#state-management-store)
+    - [Actions](#actions)
+    - [Store](#store)
+    - [Reducer](#reducer)
+    - [Middlewares](#middlewares)
+    - [Selectors](#selectors)
+      - [Change detection](#change-detection)
+    - [Store access](#store-access)
 
 ## Setting up an application
 
@@ -102,21 +102,39 @@ export class MainPage extends Component {
 customElements.define("main-page", MainPage);
 ```
 
-## Attribute helper functions
+## Typed attributes
 
-Every Reagenz component has access to attribute helper functions.
-Those were made to be similar to the [getAttribute function](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute) which every HTML element has by default.
-This also means that every helper function returns `null` if the attribute does not exist or can not be converted into the respective data type, instead of throwing an error.
-These helper functions are useful for accessing the attributes of the component in the `render` function.
+Every Reagenz component has access to typed attributes.
+They allow accessing the specified attributes of the component in the desired type.
+This eliminates the need for boilerplate code to convert attributes into the correct types.
+The following types are allowed: Array, Boolean, Number, Object and String.
 
-`getArrayAttribute(attributeName)`
+If your HTML would look like this:
+```html
+<person-details age="21" personName="Alice Bob"></person-details>
+```
+You can access the attributes in the code like this:
 
-`getBoolAttribute(attributeName)`
+```js
+import { Component } from "@kompanie/reagenz";
 
-`getNumberAttribute(attributeName)`
+export class PersonDetails extends Component {
+    attributeTypes = {
+        personName: String,
+        age: Number
+    };
 
-`getObjectAttribute(attributeName)`
+    render() {
+        const { personName, age } = this.useAttributes();
 
+        return /*html*/`
+            <div>${personName} is ${age} years old</div>
+        `;
+    }
+}
+
+customElements.define("person-details", PersonDetails);
+```
 
 ## Event system
 

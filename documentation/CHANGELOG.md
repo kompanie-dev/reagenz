@@ -1,5 +1,10 @@
 # Reagenz Changelog
 
+## 12.0.0 (?)
+
+* Replace attribute helper functions with useAttributes()
+* Add useDependencies()
+
 ## 11.0.0 (2024-10-22)
 
 * Rename Dialog to Modal
