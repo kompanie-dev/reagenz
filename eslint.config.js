@@ -69,5 +69,8 @@ export default [
 			"require-unicode-regexp": "error",
 			"semi": ["error", "always"]
 		}
+	},
+	{
+		ignores: ["build/"],
 	}
 ];
