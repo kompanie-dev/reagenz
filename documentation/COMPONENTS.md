@@ -1,4 +1,28 @@
-# Reagenz Component System Documentation
+# Reagenz Documentation
+
+## Table of contents
+
+- [Reagenz Documentation](#reagenz-documentation)
+	- [Table of contents](#table-of-contents)
+	- [Setting up an application](#setting-up-an-application)
+		- [HTML](#html)
+		- [app.js](#appjs)
+	- [Styling](#styling)
+	- [Attribute helper functions](#attribute-helper-functions)
+	- [Event system](#event-system)
+	- [Dependency Injection](#dependency-injection)
+	- [Templating](#templating)
+		- [x-if: Conditional rendering](#x-if-conditional-rendering)
+		- [x-for: Iterating arrays](#x-for-iterating-arrays)
+	- [Dialog System](#dialog-system)
+	- [State Management (Store)](#state-management-store)
+		- [Actions](#actions)
+		- [Store](#store)
+		- [Reducer](#reducer)
+		- [Middlewares](#middlewares)
+		- [Selectors](#selectors)
+			- [Change detection](#change-detection)
+		- [Store access](#store-access)
 
 ## Setting up an application
 
@@ -58,11 +82,8 @@ To prevent this it's recommended to scope the CSS by adding the component tag na
 
 ```js
 import { Component } from "@kompanie/reagenz";
-import { getCount } from "../store/test.selector.js";
 
 export class MainPage extends Component {
-    selectors = [getCount];
-
     styles = /*css*/`
         main-page {
             div {
@@ -71,9 +92,9 @@ export class MainPage extends Component {
         }
     `;
 
-    render([count]) {
+    render() {
         return /*html*/`
-            <div>${count}</div>
+            <div>Hello World!</div>
         `;
     }
 }
@@ -96,41 +117,6 @@ These helper functions are useful for accessing the attributes of the component 
 
 `getObjectAttribute(attributeName)`
 
-## Selectors
-
-The main way of retrieving data in smart components is through selector functions, similar to the ones found in `Redux`.
-
-You can read more about the store system in the [store documentation](./STORE.md)
-
-In the following test component you can see a selector function called `getCount`, which gets executed in the background by the Reagenz component system.
-The value is then available in the `render` function as `count`, as specified in the constructor.
-The `render` function then can access its data directly.
-
-```js
-import { Component } from "@kompanie/reagenz";
-import { getCount } from "../store/test.selector.js";
-
-export class MainPage extends Component {
-    selectors = [getCount];
-
-    render([count]) {
-        return /*html*/`
-            <div>${count}</div>
-        `;
-    }
-}
-
-customElements.define("main-page", MainPage);
-```
-
-## Change detection
-
-Selector functions are also responsible for the change detection in Reagenz.
-Every time an action is dispatched in the Store, all connected components execute their selector functions and check if the result changed.
-If the result differs, the entire component gets re-rendered.
-This simple change detection is quite effective and predictable as long as you keep your components at a reasonable size.
-Also be sure to only include selectors in the constructor that you are actually using in the `render` function.
-Otherwise the component does unnecessary selector executions and might even re-render.
 
 ## Event system
 
@@ -145,14 +131,10 @@ Reagenz will also warn you if you are trying to connect an event attribute to a 
 
 ```js
 import { Component } from "@kompanie/reagenz";
-import { getCount } from "../store/test.selector.js";
 
 export class MainPage extends Component {
-    selectors = [getCount];
-
-    render([count]) {
+    render() {
         return /*html*/`
-            <div>${count}</div>
             <button $click="clickCallback" $input="nonExistingFunction">Click me</button>
         `;
     }
@@ -175,11 +157,8 @@ import { Component } from "@kompanie/reagenz";
 import { getCount } from "../store/test.selector.js";
 
 export class MainPage extends Component {
-    selectors = [getCount];
-
-    render([count]) {
+    render() {
         return /*html*/`
-            <div>${count}</div>
             <button $click="clickCallback" $input="nonExistingFunction">Click me</button>
         `;
     }
@@ -200,38 +179,7 @@ export class MainPage extends Component {
 customElements.define("main-page", MainPage);
 ```
 
-## Store access
-
-Every component has access to the store via the `dependencies.store` property.
-If you only use selectors in the `render()` function and only dispatch actions using the Reagenz `dispatch()` function, you don't need to access the store directly at all.
-While every component has this property, it is fine to not use selectors and stores at all and create a dumb component.
-It's also possible to use standard Web Components as dumb components and manage the store selectors and actions in a parent Reagenz component.
-Keep in mind that you need to inject a store if you want to use selectors or dispatch actions in your component.
-Reagenz will throw an error if you try to dispatch an action without injecting a store.
-
-```js
-import { Component } from "@kompanie/reagenz";
-import { countUp } from "../store/test.actions.js";
-
-export class MainPage extends Component {
-    selectors = [getCount];
-
-    render([count]) {
-        return /*html*/`
-            <div>${count}</div>
-            <button $click="clickCallback" $input="nonExistingFunction">Count up</button>
-        `;
-    }
-
-    clickCallback() {
-        this.dispatch(countUp());
-    }
-}
-
-customElements.define("main-page", MainPage);
-```
-
-## Dependency injection in components
+## Dependency Injection
 
 To access the dependencies you injected before, you can use the `dependencies` property in the component.
 In this example a click would cause a console.log execution, since the logger dependency in the `Setting up an application` sets the `logger` dependency to the browsers native `console`.
@@ -259,7 +207,9 @@ customElements.define("main-page", MainPage);
 
 If you forget to inject a dependency and you are trying to access it, Reagenz will throw an Error.
 
-## if conditions
+## Templating
+
+### x-if: Conditional rendering
 
 Most apps require some kind of templating to hide or show content based on the value of a variable.
 In Reagenz this is done via the `x-if` helper component.
@@ -269,8 +219,6 @@ import { Component } from "@kompanie/reagenz";
 import { getIsLoading } from "../store/test.selectors.js";
 
 export class LoadingSpinner extends Component {
-    selectors = [getIsLoading];
-
     render([isLoading]) {
         return /*html*/`<div>
             <x-if condition="${ isLoading === true }">
@@ -283,21 +231,26 @@ export class LoadingSpinner extends Component {
 customElements.define("loading-spinner", LoadingSpinner);
 ```
 
-## Looping HTML elements
+### x-for: Iterating arrays
 
 Since a lot of components are iterating through arrays and convert the data into HTML, Reagenz has a helper component called `x-for`.
 
+It supports three types of placeholders:
+
+* `@index()`: The index of the current iteration
+* `@item()`: Tries to render the array item as-is
+* `@item(obj.propA.propB)`: Tries to access the object properties specified
+
 ```js
 import { Component } from "@kompanie/reagenz";
-import { getEntries } from "../store/test.selectors.js";
 
 export class ListView extends Component {
-    selectors = [getEntries];
+    render() {
+		const entries = ["A", "B", "C"];
 
-    render([entries]) {
         return /*html*/`<div>
             <x-for array='${JSON.stringify(entries)}'>
-                <tasks-task-item done="@item(done)" task-id="@item(id)">@index(): @item(text)</tasks-task-item>
+				<div>@index() @item()</div>
             </x-for>
         </div>`;
     }
@@ -356,3 +309,205 @@ const modalCloseFunction = Modal.show(AboutModal, (result) => {
 Keep in mind that the form validation is based on the HTML standard, with all it's advantages and drawbacks.
 
 You can read more about [Client-side form validation on MDN](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation).
+
+## State Management (Store)
+
+Reagenz uses a store based system for it's state management similar to the one found in `Redux`.
+Each application has it's own store, which contains functions for updating and selecting the state and the state object itself.
+
+![Store flow](./assets/StoreFlow.drawio.svg)
+
+### Actions
+
+Actions are functions that create an object which defines what should be done.
+It needs at least a `type` property.
+An action creating a new task entry inside a TODO app could look like this:
+
+```js
+export const addTask = (text) => ({ type: "TASK_ADD", text });
+```
+
+Components and services use these actions to tell the store what should be done.
+
+```js
+import { Component } from "@kompanie/reagenz";
+import { addTask } from "../store/test.actions.js";
+
+export class MainPage extends Component {
+	render() {
+		return /*html*/`
+			<input type="text">
+			<button $click="clickCallback">Add task</button>
+		`;
+	}
+
+	clickCallback() {
+		const taskText = this.querySelector("input").value;
+
+		this.dispatch(addTask(taskText));
+	}
+}
+```
+
+### Store
+
+The store is the center piece of the state management.
+It contains the state object, takes the action objects and passes them to the middlewares and reducers.
+All Reagenz components subscribe to the store automatically and wait for actions getting dispatched.
+Once an action got dispatched and the reducer is finished, all components get notified.
+
+### Reducer
+
+A reducer is responsible for updating the state object.
+It has to do it in a predictable and repeatable way.
+That means if the state and the dispatched action are the same, the resulting new state should also be the same.
+This makes state management very easy to test.
+
+This very simple example of a reducer shows how when `TASK_ADD` is executed in the reducer,
+a new copy of the state is created and the new entry get's added.
+If the action type doesn't get handled by the reducer, the state needs to be returned as-is.
+There are actions that will only be handled by middlewares and not the reducer.
+
+```js
+export const initialState = {
+	entries: []
+};
+
+export function reducer(action, state = initialState) {
+	switch (action.type) {
+		case "TASK_ADD":
+			return { ...state, entries: [...state.entries, { text: action.text }] };
+
+		default:
+			return state;
+	}
+}
+```
+
+### Middlewares
+
+So if a reducer needs to return the same state if the state and action are the same, how can a store system deal with unpredictable and changing data?
+That's what middlewares are for.
+Middlewares are great for networking or other calls which can fail or change each time they execute.
+
+The following example shows a simplified network loading and saving example.
+As you can see it listens to the action types `TASK_LOAD_ENTRIES_REQUEST` and `TASK_SAVE_ENTRIES_REQUEST`.
+Depending on if the requests succeded or failed, different actions get dispatched.
+
+If for whatever reason you want to stop the execution of the middleware chain and the reducer, you can skip calling next().
+
+If you wanted to complete this you would need to listen to the success and failure action types in the reducer.
+
+```js
+import { loadEntriesFail, loadEntriesSuccess, saveEntriesFail, saveEntriesSuccess } from "./example.actions.js";
+
+export const tasksNetworkMiddleware = (store, next, action) => {
+	switch (action.type) {
+		case "TASK_LOAD_ENTRIES_REQUEST":
+			try {
+				// Do your networking stuff
+				store.dispatch(loadEntriesSuccess(entries));
+			}
+			catch {
+				// It failed, let's inform the reducer about this
+				store.dispatch(loadEntriesFail());
+			}
+			break;
+
+		case "TASK_SAVE_ENTRIES_REQUEST":
+			try {
+				// Do your networking stuff
+				store.dispatch(saveEntriesSuccess());
+			}
+			catch {
+				// It failed, let's inform the reducer about this
+				store.dispatch(saveEntriesFail());
+			}
+			break;
+	}
+
+	next();
+};
+
+```
+
+### Selectors
+
+Now we can update the state and communicate with services.
+How do you get data from the store?
+Selectors are used for retrieving data from the store.
+
+While it seems complicated at first to use extra functions for this instead of accessing the state directly, there are some benefits:
+
+* Abstraction: Your component doesn't need to know the exact structure of the state anymore
+* Performance: Since the change detection of Reagenz is comparing JavaScript objects, smaller objects = faster comparisons
+* Re-using the same data without copying it
+
+The following two selectors show how the same data (entries in this case) can be used to cover different use cases.
+
+```js
+export const selectAllEntries = (state) => state.entries;
+
+export const selectFilteredEntries = (state) => state.entries.filter(item => item.text.toLowerCase().includes(state.searchValue.toLowerCase()));
+```
+
+If you want to access the selector data in your component, you first have to define them in the constructor.
+After that they will be available in the render function as destructered array.
+
+```js
+import { Component } from "@kompanie/reagenz";
+import { selectFilteredEntries } from "../store/tasks.selectors.js";
+
+export class TaskList extends Component {
+	selectors = [selectFilteredEntries];
+
+	render([entries]) {
+		return /*html*/`
+			<x-for array='${JSON.stringify(entries)}'>
+				<div>@item(text)</div>
+			</x-for>
+		`;
+	}
+}
+
+customElements.define("task-list", TaskList);
+```
+
+#### Change detection
+
+Selector functions are also responsible for the change detection in Reagenz.
+Every time an action is dispatched in the Store, all connected components execute their selector functions and check if the result changed.
+If the result differs, the entire component gets re-rendered.
+This simple change detection is quite effective and predictable as long as you keep your components at a reasonable size.
+Also be sure to only include selectors in the constructor that you are actually using in the `render` function.
+Otherwise the component does unnecessary selector executions and might even re-render.
+
+### Store access
+
+Every component has access to the store via the `dependencies.store` property.
+If you only use selectors in the `render()` function and only dispatch actions using the Reagenz `dispatch()` function, you don't need to access the store directly at all.
+
+Keep in mind that you need to inject a store if you want to use selectors or dispatch actions in your component.
+Reagenz will throw an error if you try to dispatch an action without injecting a store.
+
+```js
+import { Component } from "@kompanie/reagenz";
+import { countUp } from "../store/test.actions.js";
+
+export class MainPage extends Component {
+    selectors = [getCount];
+
+    render([count]) {
+        return /*html*/`
+            <div>${count}</div>
+            <button $click="clickCallback" $input="nonExistingFunction">Count up</button>
+        `;
+    }
+
+    clickCallback() {
+        this.dispatch(countUp());
+    }
+}
+
+customElements.define("main-page", MainPage);
+```
