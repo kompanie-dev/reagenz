@@ -115,6 +115,10 @@ export class Component extends HTMLElement {
 		return null;
 	}
 
+	useDependencies() {
+		return this.dependencies;
+	}
+
 	/**
 	 * Connects all attributes starting with "$" to functions of the component.
 	 * In this example the button's click event would execute "functionA" on the Reagenz component:

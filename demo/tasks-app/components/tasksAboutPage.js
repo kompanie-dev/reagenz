@@ -2,8 +2,6 @@ import { Component, Modal } from "@kompanie/reagenz";
 import { TasksAboutDialog } from "./tasksAboutDialog.js";
 
 export class TasksAboutPage extends Component {
-	#logger = this.dependencies.logger;
-
 	render() {
 		return /*html*/`
             <h1>About Tasks Demo App</h1>
@@ -21,14 +19,18 @@ export class TasksAboutPage extends Component {
 	}
 
 	showNotRequiredDialog() {
+		const { logger } = this.useDependencies();
+
 		Modal.show(TasksAboutDialog, (result) => {
-			this.#logger.log("Modal Result", result);
+			logger.log("Modal Result", result);
 		}, true);
 	}
 
 	showRequiredDialog() {
+		const { logger } = this.useDependencies();
+
 		Modal.show(TasksAboutDialog, (result) => {
-			this.#logger.log("Modal Result", result);
+			logger.log("Modal Result", result);
 		}, false);
 	}
 }

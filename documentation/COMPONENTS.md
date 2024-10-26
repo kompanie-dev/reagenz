@@ -181,7 +181,7 @@ customElements.define("main-page", MainPage);
 
 ## Dependency Injection
 
-To access the dependencies you injected before, you can use the `dependencies` property in the component.
+To access the dependencies you injected before, you can execute `useDependencies()` in the component.
 In this example a click would cause a console.log execution, since the logger dependency in the `Setting up an application` sets the `logger` dependency to the browsers native `console`.
 
 If you would want to replace the logger with something else, the only thing you would need to change is the `logger` property in the `app.js`.
@@ -190,15 +190,15 @@ If you would want to replace the logger with something else, the only thing you 
 import { Component } from "@kompanie/reagenz";
 
 export class MainPage extends Component {
-    #logger = this.dependencies.logger;
-
     render() {
         return /*html*/`
             <button $click="clickCallback">Add Log</button>`;
     }
 
     clickCallback() {
-        this.#logger.log("Hello dependency injection");
+        const { logger } = this.useDependencies();
+
+        logger.log("Hello dependency injection");
     }
 }
 
