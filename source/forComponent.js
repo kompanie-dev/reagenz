@@ -9,9 +9,12 @@ import { HtmlEscaper } from "./htmlEscaper.js";
  * If you need to access certain properties of the array element use @item(item.propertyA.propertyB).
  */
 export class ForComponent extends Component {
+	attributeTypes = { array: Array };
+
 	render() {
-		return this
-			.getArrayAttribute("array")
+		const { array } = this.useAttributes();
+
+		return array
 			.map((element, index) =>
 				this.innerHTML.replace(/@index\(\)|@item\((.*?)\)/gu, (match, propertyName) => {
 					if (match === "@index()") {

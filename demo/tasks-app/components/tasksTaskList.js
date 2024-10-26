@@ -12,7 +12,7 @@ export class TasksTaskList extends Component {
             </x-if>
 
             <x-for array='${JSON.stringify(entries)}'>
-                <tasks-task-item done="@item(done)" task-id="@item(id)">@item(text)</tasks-task-item>
+                <tasks-task-item done="@item(done)" taskId="@item(id)">@item(text)</tasks-task-item>
             </x-for>
 
             <div class="margin-top-small">

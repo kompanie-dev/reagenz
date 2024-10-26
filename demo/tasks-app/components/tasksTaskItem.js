@@ -2,19 +2,10 @@ import { Component } from "@kompanie/reagenz";
 import { removeTask, saveEntriesRequest, updateTaskDone } from "../store/tasks.actions.js";
 
 export class TasksTaskItem extends Component {
-	render() {
-		const id = this.getAttribute("task-id");
-		const isDone = this.getBooleanAttribute("done");
-
-		return /*html*/`
-            <div>
-                <input type="checkbox" $click="clickDoneCheckboxEvent" ${isDone ? "checked" : ""}>
-                <span>${this.innerHTML}</span>
-                <button class="margin-left-xsmall task-item-button" $click="clickRemoveTaskEvent">❌</button>
-                <a href="#/tasks/${id}" class="a margin-left-xsmall task-item-button">ℹ️</a>
-            </div>
-        `;
-	}
+	attributeTypes = {
+		taskId: String,
+		done: Boolean
+	};
 
 	styles = /*css*/`
 		tasks-task-item {
@@ -35,18 +26,31 @@ export class TasksTaskItem extends Component {
 		}
 	`;
 
+	render() {
+		const { taskId, done } = this.useAttributes();
+
+		return /*html*/`
+            <div>
+                <input type="checkbox" $click="clickDoneCheckboxEvent" ${done ? "checked" : ""}>
+                <span>${this.innerHTML}</span>
+                <button class="margin-left-xsmall task-item-button" $click="clickRemoveTaskEvent">❌</button>
+                <a href="#/tasks/${taskId}" class="a margin-left-xsmall task-item-button">ℹ️</a>
+            </div>
+        `;
+	}
+
 	clickDoneCheckboxEvent() {
-		const id = this.getAttribute("task-id");
+		const { taskId } = this.useAttributes();
 		const done = this.querySelector("input").checked;
 
-		this.dispatch(updateTaskDone(id, done));
+		this.dispatch(updateTaskDone(taskId, done));
 		this.dispatch(saveEntriesRequest());
 	}
 
 	clickRemoveTaskEvent() {
-		const id = this.getAttribute("task-id");
+		const { taskId } = this.useAttributes();
 
-		this.dispatch(removeTask(id));
+		this.dispatch(removeTask(taskId));
 		this.dispatch(saveEntriesRequest());
 	}
 }
