@@ -2,9 +2,14 @@ import { Component } from "@kompanie/reagenz";
 import { getSelectedEntryData, getSelectedEntryId } from "../store/tasks.selectors.js";
 
 export class TasksTaskDetailPage extends Component {
-	selectors = [getSelectedEntryData, getSelectedEntryId];
+	selectors = {
+		selectedEntryData: getSelectedEntryData,
+		selectedEntryId: getSelectedEntryId
+	};
 
-	render([selectedEntryData, selectedEntryId]) {
+	render() {
+		const { selectedEntryData, selectedEntryId } = this.useSelectorData();
+
 		if (selectedEntryData === undefined) {
 			return /*html*/`
                 <h1>Loading details for Task ID ${selectedEntryId}</h1>

@@ -3,9 +3,11 @@ import { getNotes } from "../store/notes.selector.js";
 import { loadNotesRequest, saveNotesRequest } from "../store/notes.actions.js";
 
 export class NotesMain extends Component {
-	selectors = [getNotes];
+	selectors = { notes: getNotes };
 
-	render([notes]) {
+	render() {
+		const { notes } = this.useSelectorData();
+
 		return /*html*/`
             <div class="padding-right-xsmall">
                 <h1>Notes App</h1>

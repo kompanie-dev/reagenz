@@ -1,14 +1,6 @@
 import { Component } from "@kompanie/reagenz";
 
 export class LoadingIconComponent extends Component {
-	render() {
-		return /*html*/`
-            <div class="loading-icon-ripple">
-                <div></div>
-                <div></div>
-            </div>`;
-	}
-
 	styles = /*css*/`
 		loading-icon {
 			.loading-icon-ripple {
@@ -57,6 +49,14 @@ export class LoadingIconComponent extends Component {
 			}
 		}
 	`;
+
+	render() {
+		return /*html*/`
+            <div class="loading-icon-ripple">
+                <div></div>
+                <div></div>
+            </div>`;
+	}
 }
 
 customElements.define("loading-icon", LoadingIconComponent);

@@ -4,6 +4,7 @@
 
 * Replace attribute helper functions with useAttributes()
 * Add useDependencies()
+* Replace render([selectorData]) with useSelectorData()
 
 ## 11.0.0 (2024-10-22)
 

@@ -5,9 +5,11 @@ import { getTime } from "../store/tasks.selectors.js";
 export class TasksTimeDisplay extends Component {
 	#intervalID;
 
-	selectors = [getTime];
+	selectors = { time: getTime };
 
-	render([time]) {
+	render() {
+		const { time } = this.useSelectorData();
+
 		return /*html*/`
             <span>${this.formatDate(new Date(time))}</span>
         `;

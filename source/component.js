@@ -68,6 +68,15 @@ export class Component extends HTMLElement {
 	}
 
 	/**
+	 * Returns the result of all executed selectors as object.
+	 *
+	 * @returns An object containing the name of the selector and the result.
+	 */
+	useSelectorData() {
+		return this.#currentSelectorData;
+	}
+
+	/**
 	 * Connects all attributes starting with "$" to functions of the component.
 	 * In this example the button's click event would execute "functionA" on the Reagenz component:
 	 * <button $click="functionA">Test</button>.
@@ -152,7 +161,7 @@ export class Component extends HTMLElement {
 			throw new Error(`${this.tagName.toLowerCase()}: Tried to use selectors without injecting a store`);
 		}
 
-		const newSelectorData = this.dependencies?.store?.executeSelectors(this.selectors ?? []);
+		const newSelectorData = this.dependencies?.store?.executeSelectors(this.selectors ?? {});
 
 		if (!force && ObjectComparator.checkDeepEquality(this.#currentSelectorData, newSelectorData)) {
 			return;
@@ -163,7 +172,7 @@ export class Component extends HTMLElement {
 
 		this.innerHTML =
 			(this.styles ? `<style>${this.styles}</style>` : "") +
-			this.render(newSelectorData);
+			this.render();
 
 		this.#bindEventAttributes(this, this);
 	}

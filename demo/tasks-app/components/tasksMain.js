@@ -3,9 +3,11 @@ import { loadEntriesRequest, updateRoute } from "../store/tasks.actions.js";
 import { getRoute } from "../store/tasks.selectors.js";
 
 export class TasksMain extends Component {
-	selectors = [getRoute];
+	selectors = { route: getRoute };
 
-	render([route]) {
+	render() {
+		const { route } = this.useSelectorData();
+
 		if (route === "" || route === "#/") {
 			return /*html*/`<tasks-task-list-page></tasks-task-list-page>`;
 		}

@@ -35,8 +35,8 @@ export declare class Store {
 	 * @returns An array containing the results of the selector function executions.
 	 */
 	executeSelectors(
-		selectors: Function[]
-	): any[];
+		selectorObject: Record<string, Function>
+	): Record<string, any>;
 
 	/**
 	 * Executes the given selector function against the current state and returns the escaped result.
