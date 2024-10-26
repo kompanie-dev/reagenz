@@ -17,19 +17,21 @@ export class TasksTaskItem extends Component {
 	}
 
 	styles = /*css*/`
-		tasks-task-item div span {
-			display: inline-block;
-			width: 170px;
-		}
+		tasks-task-item {
+			span {
+				display: inline-block;
+				width: 170px;
+			}
 
-		.task-item-button {
-			border: none;
-			background: #000;
-			border-radius: 50%;
-		}
+			.task-item-button {
+				border: none;
+				background: #000;
+				border-radius: 50%;
+			}
 
-		.task-item-button:hover {
-			background: #ccc;
+			.task-item-button:hover {
+				background: #ccc;
+			}
 		}
 	`;
 
