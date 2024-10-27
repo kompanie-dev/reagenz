@@ -9,6 +9,7 @@ export default [
 			"demo/**/*.js",
 			"source/**/*.js",
 			"template-project/**/*.js",
+			"tests/browser/*.js",
 			"tests/unit/*.js",
 			"index.js"
 		],
