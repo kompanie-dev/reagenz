@@ -3,7 +3,7 @@ import "../../source/forComponent.js";
 
 describe("ForComponent", () => {
 	it("Should iterate array and successfully replace @index() and @item()", () => {
-		document.body.insertAdjacentHTML("afterend", `
+		document.body.insertAdjacentHTML("afterend", /*html*/`
 			<x-for array='[3, "X", 7]'>
 				<div>@index() @item()</div>
 			</x-for>
@@ -18,7 +18,7 @@ describe("ForComponent", () => {
 	});
 
 	it("Should iterate array and successfully replace @item(property)", () => {
-		document.body.insertAdjacentHTML("afterend", `
+		document.body.insertAdjacentHTML("afterend", /*html*/`
 			<x-for array='[{"a": {"b": "xyz"}}, 7]'>
 				<div>@item(a.b)</div>
 			</x-for>

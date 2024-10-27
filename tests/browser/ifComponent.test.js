@@ -3,7 +3,7 @@ import "../../source/ifComponent.js";
 
 describe("IfComponent", () => {
 	it("Should show innerHTML if condition is true", () => {
-		document.body.insertAdjacentHTML("afterend", `
+		document.body.insertAdjacentHTML("afterend", /*html*/`
 			<x-if condition="true">
 				<div>Visible</div>
 			</x-for>
@@ -15,7 +15,7 @@ describe("IfComponent", () => {
 	});
 
 	it("Should hide innerHTML if condition is false", () => {
-		document.body.insertAdjacentHTML("afterend", `
+		document.body.insertAdjacentHTML("afterend", /*html*/`
 			<x-if condition="false">
 				<div>Visible</div>
 			</x-for>

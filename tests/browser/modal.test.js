@@ -6,7 +6,7 @@ class TestDialog extends Component {
 	header = "My test header";
 
 	render() {
-		return `<div>Test content</div>`;
+		return /*html*/`<div>Test content</div>`;
 	}
 }
 
