@@ -107,6 +107,15 @@ describe("ObjectComparator.checkDeepEquality()", () => {
 		assert.isFalse(actual);
 	});
 
+	it("Should return true for two objects with same properties in different order", () => {
+		const objectA = { testA: 0, testB: 5 };
+		const objectB = { testB: 5, testA: 0 };
+
+		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
+
+		assert.isTrue(actual);
+	});
+
 	it("Should return true for two empty arrays", () => {
 		const actual = ObjectComparator.checkDeepEquality([], []);
 
