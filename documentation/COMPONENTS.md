@@ -268,11 +268,11 @@ import { Component } from "@kompanie/reagenz";
 
 export class ListView extends Component {
     render() {
-		const entries = ["A", "B", "C"];
+        const entries = ["A", "B", "C"];
 
         return /*html*/`<div>
             <x-for array='${JSON.stringify(entries)}'>
-				<div>@index() @item()</div>
+                <div>@index() @item()</div>
             </x-for>
         </div>`;
     }
@@ -474,24 +474,24 @@ export const selectFilteredEntries = (state) => state.entries.filter(item => ite
 ```
 
 If you want to access the selector data in your component, you first have to define them in the constructor.
-After that they will be available in the render function as destructered array.
+After that they will be available via `this.useSelectorData()` in your component.
 
 ```js
 import { Component } from "@kompanie/reagenz";
 import { selectFilteredEntries } from "../store/tasks.selectors.js";
 
 export class TaskList extends Component {
-	selectors = { entries: selectFilteredEntries };
+    selectors = { entries: selectFilteredEntries };
 
-	render() {
+    render() {
         const { entries } = this.useSelectorData();
 
-		return /*html*/`
-			<x-for array='${JSON.stringify(entries)}'>
-				<div>@item(text)</div>
-			</x-for>
-		`;
-	}
+        return /*html*/`
+            <x-for array='${JSON.stringify(entries)}'>
+                <div>@item(text)</div>
+            </x-for>
+        `;
+    }
 }
 
 customElements.define("task-list", TaskList);
