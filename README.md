@@ -78,9 +78,10 @@ The repository consists of the following folders:
     * `notes`: A note app
     * `shared`: Components shared between the apps
     * `tasks`: A ToDo app
+* `documentation`: Documentation including assets
 * `source`: The source code of the Reagenz library
 * `template-project`: The project that get's used for `npx reagenz new`
-* `tests`: Unit and performance tests
+* `tests`: Unit, browser and performance tests
 
 ## Limitations
 
