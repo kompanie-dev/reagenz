@@ -28,7 +28,7 @@ npm i @kompanie/reagenz
 Reagenz uses ES6 class syntax.
 You can see a simple counter component in the example.
 If you want to see Reagenz in action take a look at the demo project.
-If you want to learn more about the features you can read the [component system documentation](documentation/COMPONENTS.md).
+If you want to learn more about the features you can read the [Reagenz documentation](documentation/DOCUMENTATION.md).
 
 ```js
 import { Component } from "@kompanie/reagenz";
