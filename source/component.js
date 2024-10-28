@@ -59,7 +59,7 @@ export class Component extends HTMLElement {
 	}
 
 	/**
-	 * Returns all injected dependencies as object.
+	 * Returns all injected dependencies as an object.
 	 *
 	 * @returns {Object} An object containing all the dependencies.
 	 */
@@ -68,7 +68,7 @@ export class Component extends HTMLElement {
 	}
 
 	/**
-	 * Returns the result of all executed selectors as object.
+	 * Returns the result of all executed selectors as an object.
 	 *
 	 * @returns {Object} An object containing the name of the selector and the result.
 	 */
