@@ -13,12 +13,13 @@ class TestDialog extends Component {
 customElements.define("test-dialog", TestDialog);
 
 describe("Modal", () => {
-	it("Should show the dialog", () => {
+	it("show() with isClosable=true should show the dialog with close button", () => {
 		Modal.show(TestDialog, () => {}, true);
 		const element = document.body.querySelector("dialog");
 
 		expect(element)
 			.toBeInTheDocument()
+			.toContainHTML(`<button type="submit" value="cancel" class="reagenz-dialog-close-button"`)
 			.toContainHTML("My test header")
 			.toContainHTML("<div>Test content</div>");
 	});
