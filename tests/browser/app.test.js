@@ -1,4 +1,4 @@
-import { assert, expect, describe, it } from "vitest";
+import { expect, describe, it } from "vitest";
 import { App } from "../../source/app.js";
 import { Component } from "../../source/component.js";
 

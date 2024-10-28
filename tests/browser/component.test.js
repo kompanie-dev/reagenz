@@ -1,4 +1,4 @@
-import { assert, expect, describe, it } from "vitest";
+import { assert, describe, it } from "vitest";
 import { Component } from "../../source/component.js";
 
 class AttributeTestComponent extends Component {
@@ -26,7 +26,7 @@ describe("Component", () => {
 				testArray="[7]"
 				testBoolean="true"
 				testNumber="5"
-				testObject='{\"prop\": \"abc\"}'
+				testObject='{"prop": "abc"}'
 				testString="Hello">
 			</attribute-test-component>
 		`);
