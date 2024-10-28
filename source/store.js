@@ -45,12 +45,12 @@ export class Store {
 	 * @returns {Object} An object containing the same property names, filled with the selector execution results.
 	 */
 	executeSelectors(selectorObject) {
-		const executionResults =
+		return Object.fromEntries(
 			Object
 				.entries(selectorObject)
-				.map(([propertyName, selectorFunction]) => [propertyName, this.select(selectorFunction)]);
-
-		return Object.fromEntries(executionResults);
+				.map(
+					([propertyName, selectorFunction]) => [propertyName, this.select(selectorFunction)]
+				));
 	}
 
 	/**
