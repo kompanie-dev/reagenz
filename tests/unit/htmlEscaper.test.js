@@ -40,6 +40,7 @@ describe("HtmlEscaper.escapeObject()", () => {
 		const testObject = {
 			testArray: [1, 2, 3],
 			testBool: true,
+			testNull: null,
 			testNumber: 123,
 			testObject: {
 				propertyA: 1,
@@ -53,6 +54,7 @@ describe("HtmlEscaper.escapeObject()", () => {
 		const expected = {
 			testArray: [1, 2, 3],
 			testBool: true,
+			testNull: null,
 			testNumber: 123,
 			testObject: {
 				propertyA: 1,
@@ -72,6 +74,7 @@ describe("HtmlEscaper.escapeObject()", () => {
 		const expected = {
 			testArray: [1, 2, 3],
 			testBool: true,
+			testNull: null,
 			testNumber: 123,
 			testObject: {
 				propertyA: 1,
