@@ -14,11 +14,10 @@ export declare class Component extends HTMLElement {
 
 	/**
 	 * Dispatches the action in the injected store.
-	 * A shorthand for this.dependencies.store.dispatch.
 	 *
 	 * @param action The Action object which should be dispatched
 	 */
-	dispatch(action: { type: string; [key: string]: any }): void;
+	dispatch(action: { type: string;[key: string]: any }): void;
 
 	/**
 	 * Get's executed when the component is added to the DOM.

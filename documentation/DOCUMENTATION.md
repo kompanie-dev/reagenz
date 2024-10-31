@@ -60,7 +60,7 @@ App.start({
     ],
 
     // The dependencies which get injected into the components
-    // They are available as this.dependencies.dependencyName
+    // They are available via this.useDependencies()
     dependencies: {
         logger: console,
         store: new Store(myReducer, myInitialState, [myMiddlewareA, myMiddlewareB])
@@ -222,8 +222,6 @@ export class MainPage extends Component {
 
 customElements.define("main-page", MainPage);
 ```
-
-If you forget to inject a dependency and you are trying to access it, Reagenz will throw an Error.
 
 ## Templating
 
@@ -512,7 +510,6 @@ Every component has access to the store via the `dependencies.store` property.
 If you only use selectors in the `render()` function and only dispatch actions using the Reagenz `dispatch()` function, you don't need to access the store directly at all.
 
 Keep in mind that you need to inject a store if you want to use selectors or dispatch actions in your component.
-Reagenz will throw an error if you try to dispatch an action without injecting a store.
 
 ```js
 import { Component } from "@kompanie/reagenz";

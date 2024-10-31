@@ -35,18 +35,13 @@ export class Component extends HTMLElement {
 
 	/**
 	 * Dispatches the action in the injected store.
-	 * A shorthand for this.dependencies.store.dispatch.
 	 *
 	 * @param {{ type: string, [key: string]: * }} action The Action object which should be dispatched
 	 *
 	 * @returns {void}
 	 */
 	dispatch(action) {
-		if (!this.dependencies?.store) {
-			throw new Error(`${this.tagName.toLowerCase()}: Can't dispatch actions without an injected store`);
-		}
-
-		this.dependencies?.store.dispatch(action);
+		this.dependencies.store.dispatch(action);
 	}
 
 	/**
@@ -146,11 +141,11 @@ export class Component extends HTMLElement {
 	 */
 	#parseAttributes() {
 		return Object.fromEntries(
-				Object
-					.entries(this.attributeTypes ?? {})
-					.map(
-						([attributeName, attributeType]) => [attributeName, this.#getTypedAttribute(attributeName, attributeType.name.toLowerCase())]
-					));
+			Object
+				.entries(this.attributeTypes ?? {})
+				.map(
+					([attributeName, attributeType]) => [attributeName, this.#getTypedAttribute(attributeName, attributeType.name.toLowerCase())]
+				));
 	}
 
 	/**
@@ -163,10 +158,6 @@ export class Component extends HTMLElement {
 	 * @returns {void}
 	 */
 	#updateDOM(force = false) {
-		if (!this.dependencies?.store && this.selectors?.length > 0) {
-			throw new Error(`${this.tagName.toLowerCase()}: Tried to use selectors without injecting a store`);
-		}
-
 		const newSelectorData = this.dependencies?.store?.executeSelectors(this.selectors ?? {});
 
 		if (!force && ObjectComparator.checkDeepEquality(this.#currentSelectorData, newSelectorData)) {
