@@ -68,7 +68,7 @@ describe("Component", () => {
 	it("Event attributes should be correctly bound", () => {
 		class EventAttributeTestComponent extends Component {
 			render() {
-				return /*html*/`<button $click="clickEventHandler">Click</button>`;
+				return /*html*/`<button propA="test" propB="test" $click="clickEventHandler">Click</button>`;
 			}
 
 			clickEventHandler() {
