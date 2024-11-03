@@ -1,34 +1,34 @@
 {
-  "name": "@kompanie/reagenz",
-  "version": "12.0.0",
-  "license": "MIT",
-  "main": "index.js",
-  "repository": "github:kompanie-dev/reagenz",
-  "type": "module",
-  "sideEffects": false,
-  "files": [
-    "/cli",
-    "/source",
-    "/template-project"
-  ],
-  "scripts": {
-    "build": "vite build",
-    "build-minified": "esbuild index.js --bundle --format=esm --minify --target=esnext --outfile=build/reagenz.min.js",
-    "lint": "eslint",
-    "start": "vite --force --port 8000",
-    "test": "vitest --workspace=vitest.workspace.js",
+	"name": "@kompanie/reagenz",
+	"version": "12.0.0",
+	"license": "MIT",
+	"main": "index.js",
+	"repository": "github:kompanie-dev/reagenz",
+	"type": "module",
+	"sideEffects": false,
+	"files": [
+		"/cli",
+		"/source",
+		"/template-project"
+	],
+	"scripts": {
+		"build": "vite build",
+		"build-minified": "esbuild index.js --bundle --format=esm --minify --target=esnext --outfile=build/reagenz.min.js",
+		"lint": "eslint",
+		"start": "vite --force --port 8000",
+		"test": "vitest --workspace=vitest.workspace.js",
 		"test-coverage": "vitest run --coverage"
-  },
-  "bin": {
-    "reagenz": "cli/index.js"
-  },
-  "devDependencies": {
-    "@vitest/browser": "^2.1.4",
-    "@vitest/coverage-v8": "^2.1.4",
-    "esbuild": "0.24.0",
-    "eslint": "^9.13.0",
-    "playwright": "^1.48.2",
-    "vite": "^5.4.10",
-    "vitest": "^2.1.4"
-  }
+	},
+	"bin": {
+		"reagenz": "cli/index.js"
+	},
+	"devDependencies": {
+		"@vitest/browser": "^2.1.4",
+		"@vitest/coverage-v8": "^2.1.4",
+		"esbuild": "0.24.0",
+		"eslint": "^9.14.0",
+		"playwright": "^1.48.2",
+		"vite": "^5.4.10",
+		"vitest": "^2.1.4"
+	}
 }
