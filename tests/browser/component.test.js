@@ -142,4 +142,36 @@ describe("Component", () => {
 		assert.equal(onConnectCallbackExecuted, true);
 		assert.equal(onDisconnectCallbackExecuted, true);
 	});
+
+	it("dispatch() should execute action", () => {
+		let actionDispatched = false;
+
+		class DispatchTestComponent extends Component {
+			render() {
+				return /*html*/`<button $click="testDispatch">Dispatch</button>`;
+			}
+
+			testDispatch() {
+				this.dispatch({ type: "TEST_ACTION" });
+			}
+		}
+
+		customElements.define("dispatch-test-component", DispatchTestComponent);
+
+		DispatchTestComponent.prototype.dependencies = {
+			store: {
+				dispatch: () => { actionDispatched = true },
+				subscribe: () => { },
+				executeSelectors: () => { }
+			}
+		};
+
+		document.body.insertAdjacentHTML("afterend", /*html*/`
+			<dispatch-test-component></dispatch-test-component>
+		`);
+
+		document.querySelector("dispatch-test-component button").click();
+
+		assert.isTrue(actionDispatched);
+	});
 });
