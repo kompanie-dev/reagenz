@@ -1,4 +1,4 @@
-import { assert, describe, it } from "vitest";
+import { assert, describe, it, vi } from "vitest";
 import { Component } from "../../source/component.js";
 import { Store } from "../../source/store.js";
 
@@ -86,7 +86,27 @@ describe("Component", () => {
 		document.querySelector("event-attribute-test-component button").click();
 		const element = document.querySelector("event-attribute-test-component");
 
-		assert.equal(element.clicked, true);
+		assert.isTrue(element.clicked);
+	});
+
+	it("Event attributes which do not exist log a warning to the console", () => {
+		class EventAttributeErrorTestComponent extends Component {
+			render() {
+				return /*html*/`<button propA="test" propB="test" $click="notExistingFunction">Click</button>`;
+			}
+		}
+
+		const warnSpy = vi.spyOn(console, "warn");
+
+		customElements.define("event-attribute-error-test-component", EventAttributeErrorTestComponent);
+
+		document.body.insertAdjacentHTML("afterend", /*html*/`
+			<event-attribute-error-test-component></event-attribute-error-test-component>
+		`);
+
+		assert.isFalse(warnSpy.mock.calls.length === 0);
+
+		warnSpy.mockRestore();
 	});
 
 	it("Selectors should be executed and return correct result", () => {
@@ -160,7 +180,7 @@ describe("Component", () => {
 
 		DispatchTestComponent.prototype.dependencies = {
 			store: {
-				dispatch: () => { actionDispatched = true },
+				dispatch: () => { actionDispatched = true; },
 				subscribe: () => { },
 				executeSelectors: () => { }
 			}
