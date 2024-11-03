@@ -6,16 +6,20 @@ describe("Component", () => {
 		class AttributeTestComponent extends Component {
 			attributeTypes = {
 				testArray: Array,
+				testArrayWrongType: Array,
 				testBoolean: Boolean,
+				testBooleanWrongType: Boolean,
 				testNumber: Number,
+				testNumberWrongType: Number,
 				testObject: Object,
+				testObjectWrongType: Object,
 				testString: String
 			};
 
 			render() {
-				const { testArray, testBoolean, testNumber, testObject, testString } = this.useAttributes();
+				const { testArray, testArrayWrongType, testBoolean, testBooleanWrongType, testNumber, testNumberWrongType, testObject, testObjectWrongType, testString } = this.useAttributes();
 
-				return `<div>${testArray.length}/${testBoolean}/${testNumber}/${testObject.prop}/${testString}</div>`;
+				return `<div>${testArray[0]}/${testArrayWrongType}/${testBoolean}/${testBooleanWrongType}/${testNumber}/${testNumberWrongType}/${testObject.prop}/${testObjectWrongType}/${testString}</div>`;
 			}
 		}
 
@@ -24,16 +28,20 @@ describe("Component", () => {
 		document.body.insertAdjacentHTML("afterend", /*html*/`
 			<attribute-test-component
 				testArray="[7]"
+				testArrayWrongType="XYZ"
 				testBoolean="true"
+				testBooleanWrongType="5"
 				testNumber="5"
+				testNumberWrongType="abc"
 				testObject='{"prop": "abc"}'
+				testObjectWrongType="[]"
 				testString="Hello">
 			</attribute-test-component>
 		`);
 
 		const element = document.querySelector("attribute-test-component");
 
-		assert.equal(element.innerHTML, "<div>1/true/5/abc/Hello</div>");
+		assert.equal(element.innerHTML, "<div>7/null/true/null/5/null/abc/null/Hello</div>");
 	});
 
 	it("useDependencies() should return dependencies correctly", () => {
