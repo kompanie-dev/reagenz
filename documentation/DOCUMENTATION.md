@@ -44,7 +44,7 @@ In the app.js file you can configure your entry point, the HTML element where yo
 import "./components/myExampleComponent.js";
 import { App, Store } from "@kompanie/reagenz";
 import { MainPage } from "./components/mainPage.js";
-import { ExampleWebComponent } from "./webComponents/exampleWebComponent.js";
+import "./webComponents/exampleWebComponent.js";
 
 App.start({
     // The main entry component of your app
@@ -64,10 +64,7 @@ App.start({
     dependencies: {
         logger: console,
         store: new Store(myReducer, myInitialState, [myMiddlewareA, myMiddlewareB])
-    },
-
-    // Add non-Reagenz web components this way
-    webComponents: { "example-web-component": ExampleWebComponent }
+    }
 });
 ```
 

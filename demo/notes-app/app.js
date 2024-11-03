@@ -6,7 +6,7 @@ import { loggingMiddleware } from "../shared/middlewares/loggingMiddleware.js";
 
 import { NotesMain } from "./components/notesMain.js";
 
-import { ExampleWebComponent } from "./webComponents/exampleWebComponent.js";
+import "./webComponents/exampleWebComponent.js";
 
 App.start({
 	mainComponent: NotesMain,
@@ -17,6 +17,5 @@ App.start({
 	dependencies: {
 		logger: console,
 		store: new Store(notesReducer, notesInitialState, [loggingMiddleware, notesNetworkMiddleware])
-	},
-	webComponents: { "example-web-component": ExampleWebComponent },
+	}
 });

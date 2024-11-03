@@ -16,3 +16,5 @@ export class ExampleWebComponent extends HTMLElement {
 		shadowRoot.appendChild(template.content.cloneNode(true));
 	}
 }
+
+customElements.define("example-web-component", ExampleWebComponent);

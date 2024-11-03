@@ -17,8 +17,5 @@ App.start({
 	dependencies: {
 		logger: console,
 		store: new Store(myAppReducer, myAppInitialState, [myAppNetworkMiddleware])
-	},
-	webComponents: {
-		// "example-web-component": ExampleWebComponent
 	}
 });

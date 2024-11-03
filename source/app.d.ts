@@ -14,6 +14,5 @@ export declare class App {
 		container: HTMLElement;
 		components: CustomElementConstructor[];
 		dependencies: Record<string, any>;
-		webComponents?: Record<string, CustomElementConstructor>;
 	}): void;
 }

@@ -12,44 +12,14 @@ export class App {
 	 * @param {HTMLElement} appConfig.container The HTML element that will serve as the container for the main application component.
 	 * @param {HTMLElement[]} appConfig.components A list of additional components that may require dependency injection or other setup.
 	 * @param {Object} appConfig.dependencies A collection of key-value pairs representing the dependencies required by the application and its components.
-	 * @param {Object} [appConfig.webComponents={}] An optional object that defines custom web components used within the application.
 	 *
 	 * @returns {void}
 	 */
-	static start({ mainComponent, container, components, dependencies, webComponents = {} }) {
-		App.#defineWebComponents(webComponents);
+	static start({ mainComponent, container, components, dependencies }) {
 		App.#injectDependencies(dependencies, components);
-		App.#attach(mainComponent, container);
-	}
 
-	/**
-	 * Starts the application by attaching the main component to the container and adding a version info to it.
-	 *
-	 * @param {CustomElementConstructor} mainComponent The main component of the application.
-	 * @param {HTMLElement} container The container element to which the main component gets attached to.
-	 *
-	 * @returns {void}
-	 */
-	static #attach(mainComponent, container) {
 		container.setAttribute("framework", "@kompanie/reagenz@12.0.0");
 		container.append(new mainComponent());
-	}
-
-	/**
-	 * Registers custom Web Components in the browser's CustomElementRegistry.
-	 * This method iterates through the provided `componentConfig` object and registers each component with a corresponding tag name.
-	 * If a component has already been registered, it will be skipped to avoid redefinition errors.
-	 *
-	 * @param {Object.<string, CustomElementConstructor>} componentConfig An object mapping custom element tag names to their respective component classes.
-	 *
-	 * @returns {void}
-	 */
-	static #defineWebComponents(componentConfig) {
-		Object
-			.entries(componentConfig)
-			.forEach(([tagName, componentClass]) => {
-				customElements.get(tagName) ?? customElements.define(tagName, componentClass);
-			});
 	}
 
 	/**
