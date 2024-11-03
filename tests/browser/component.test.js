@@ -64,4 +64,27 @@ describe("Component", () => {
 
 		assert.equal(element.innerHTML, "<div>success</div>");
 	});
+
+	it("Event attributes should be correctly bound", () => {
+		class EventAttributeTestComponent extends Component {
+			render() {
+				return /*html*/`<button $click="clickEventHandler">Click</button>`;
+			}
+
+			clickEventHandler() {
+				this.clicked = true;
+			}
+		}
+
+		customElements.define("event-attribute-test-component", EventAttributeTestComponent);
+
+		document.body.insertAdjacentHTML("afterend", /*html*/`
+			<event-attribute-test-component></event-attribute-test-component>
+		`);
+
+		document.querySelector("event-attribute-test-component button").click();
+		const element = document.querySelector("event-attribute-test-component");
+
+		assert.equal(element.clicked, true);
+	});
 });
