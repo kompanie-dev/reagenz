@@ -87,4 +87,40 @@ describe("HtmlEscaper.escapeObject()", () => {
 
 		assert.deepEqual(actual, expected);
 	});
+
+	it("Should return the boolean as-is when input is a boolean", () => {
+		const actual = HtmlEscaper.escapeObject(true);
+
+		assert.isTrue(actual);
+	});
+
+	it("Should return null when input is null", () => {
+		const actual = HtmlEscaper.escapeObject(null);
+
+		assert.isNull(actual);
+	});
+
+	it("Should return the number as-is when input is a number", () => {
+		const actual = HtmlEscaper.escapeObject(123);
+
+		assert.deepEqual(actual, 123);
+	});
+
+	it("Should return the string as-is when input is a string without special characters", () => {
+		const actual = HtmlEscaper.escapeObject("Hello World");
+
+		assert.deepEqual(actual, "Hello World");
+	});
+
+	it("Should return undefined when input is undefined", () => {
+		const actual = HtmlEscaper.escapeObject(undefined);
+
+		assert.isUndefined(actual);
+	});
+
+	it("Should return the empty object as-is when input is an empty object", () => {
+		const actual = HtmlEscaper.escapeObject({});
+
+		assert.deepEqual(actual, {});
+	});
 });
