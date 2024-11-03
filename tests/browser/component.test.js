@@ -1,5 +1,6 @@
 import { assert, describe, it } from "vitest";
 import { Component } from "../../source/component.js";
+import { Store } from "../../source/store.js";
 
 describe("Component", () => {
 	it("useAttributes() should convert and return attributes correctly", () => {
@@ -86,5 +87,29 @@ describe("Component", () => {
 		const element = document.querySelector("event-attribute-test-component");
 
 		assert.equal(element.clicked, true);
+	});
+
+	it("Selectors should be executed and return correct result", () => {
+		class SelectorTestComponent extends Component {
+			selectors = { testSelectorValue: () => "Selector Result" };
+
+			render() {
+				const { testSelectorValue } = this.useSelectorData();
+
+				return /*html*/`<span>${testSelectorValue}</span>`;
+			}
+		}
+
+		customElements.define("selector-test-component", SelectorTestComponent);
+
+		SelectorTestComponent.prototype.dependencies = { store: new Store(state => state, {}) };
+
+		document.body.insertAdjacentHTML("afterend", /*html*/`
+			<selector-test-component></selector-test-component>
+		`);
+
+		const element = document.querySelector("selector-test-component");
+
+		assert.equal(element.innerHTML, "<span>Selector Result</span>");
 	});
 });
