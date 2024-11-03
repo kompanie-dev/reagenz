@@ -112,4 +112,34 @@ describe("Component", () => {
 
 		assert.equal(element.innerHTML, "<span>Selector Result</span>");
 	});
+
+	it("onConnect and onDisconnect should be executed when connected or disconnected from DOM", () => {
+		let onConnectCallbackExecuted = false;
+		let onDisconnectCallbackExecuted = false;
+
+		class CallbackTestComponent extends Component {
+			render() {
+				return /*html*/`<span>Test</span>`;
+			}
+
+			onConnect() {
+				onConnectCallbackExecuted = true;
+			}
+
+			onDisconnect() {
+				onDisconnectCallbackExecuted = true;
+			}
+		}
+
+		customElements.define("callback-test-component", CallbackTestComponent);
+
+		document.body.insertAdjacentHTML("afterend", /*html*/`
+			<callback-test-component></callback-test-component>
+		`);
+
+		document.querySelector("callback-test-component").remove();
+
+		assert.equal(onConnectCallbackExecuted, true);
+		assert.equal(onDisconnectCallbackExecuted, true);
+	});
 });
