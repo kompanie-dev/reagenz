@@ -12,12 +12,12 @@
 		"/template-project"
 	],
 	"scripts": {
-		"build": "vite build",
-		"build-minified": "esbuild index.js --bundle --format=esm --minify --target=esnext --outfile=build/reagenz.min.js",
+		"build": "esbuild index.js --bundle --format=esm --target=esnext --outfile=build/reagenz.js",
+		"build:minified": "esbuild index.js --bundle --format=esm --minify --target=esnext --outfile=build/reagenz.min.js",
 		"lint": "eslint",
 		"start": "vite --force --port 8000",
-		"test": "vitest --workspace=vitest.workspace.js",
-		"test-coverage": "vitest run --coverage"
+		"test": "vitest run --coverage --workspace=vitest.workspace.js",
+		"test:watch": "vitest --coverage --watch --workspace=vitest.workspace.js"
 	},
 	"bin": {
 		"reagenz": "cli/index.js"
