@@ -6,11 +6,14 @@
 <link rel="stylesheet" href="shared/styles/reagenz-dialog.css">
 <link rel="stylesheet" href="shared/styles/utilities.css">
 
-<!--
-If you don't want to use tools like vite, you can use import maps to
-replace the @kompanie/reagenz imports with actual file names.
-Read more about them here: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap
--->
+<script type="importmap">
+	{
+		"imports": {
+			"@kompanie/reagenz": "../index.js"
+		}
+	}
+</script>
+
 
 <body class="display-flex gap-24px">
 	<div id="task-app-container" class="width-50"></div>
