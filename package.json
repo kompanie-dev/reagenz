@@ -14,7 +14,7 @@
 		"build": "esbuild index.js --bundle --format=esm --target=esnext --outfile=build/reagenz.js",
 		"build:minified": "esbuild index.js --bundle --format=esm --minify --target=esnext --outfile=build/reagenz.min.js",
 		"lint": "eslint",
-		"start": "vite --force --port 8000",
+		"start": "cd demo && npm start",
 		"test": "vitest run --coverage --workspace=vitest.workspace.js",
 		"test:watch": "vitest --coverage --watch --workspace=vitest.workspace.js"
 	},
