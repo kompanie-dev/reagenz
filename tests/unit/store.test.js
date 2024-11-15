@@ -1,4 +1,5 @@
-import { assert, describe, it } from "vitest";
+import assert from "node:assert";
+import { describe, it } from "node:test";
 import { Store } from "../../source/store.js";
 
 describe("Store.constructor()", () => {
@@ -8,7 +9,7 @@ describe("Store.constructor()", () => {
 
 		const testStore = new Store(testReducer, expectedState, []);
 
-		assert.deepEqual(testStore.state, expectedState);
+		assert.deepStrictEqual(testStore.state, expectedState);
 	});
 });
 
@@ -27,7 +28,7 @@ describe("Store.executeSelectors()", () => {
 
 		const actual = testStore.executeSelectors(selectorObject);
 
-		assert.deepEqual(actual, expected);
+		assert.deepStrictEqual(actual, expected);
 	});
 });
 
@@ -42,7 +43,7 @@ describe("Store.select()", () => {
 
 		const actual = testStore.select(searchEntries);
 
-		assert.deepEqual(actual, expected);
+		assert.deepStrictEqual(actual, expected);
 	});
 });
 
@@ -56,7 +57,7 @@ describe("Store.insecureSelect()", () => {
 
 		const actual = testStore.insecureSelect(searchEntries);
 
-		assert.deepEqual(actual, expected);
+		assert.deepStrictEqual(actual, expected);
 	});
 });
 
@@ -77,7 +78,7 @@ describe("Store.dispatch()", () => {
 
 		testStore.dispatch(testAction);
 
-		assert.deepEqual(testStore.state.entries, expected);
+		assert.deepStrictEqual(testStore.state.entries, expected);
 	});
 
 	it("Should correctly execute the action, modify the state and execute middleware", () => {
@@ -105,7 +106,7 @@ describe("Store.dispatch()", () => {
 
 		testStore.dispatch(testAction);
 
-		assert.deepEqual(testStore.state.entries, expected);
+		assert.deepStrictEqual(testStore.state.entries, expected);
 	});
 
 	it("Should correctly execute the action, modify the state and skip the second middleware and reducer call", () => {
@@ -132,7 +133,7 @@ describe("Store.dispatch()", () => {
 
 		testStore.dispatch(testAction);
 
-		assert.deepEqual(testStore.state.entries, expected);
+		assert.deepStrictEqual(testStore.state.entries, expected);
 	});
 
 	it("Should correctly execute the action and notify all subscribers in the correct order", () => {
@@ -150,7 +151,7 @@ describe("Store.dispatch()", () => {
 		});
 		testStore.dispatch({});
 
-		assert.deepEqual(receivedSubscriberData, expected);
+		assert.deepStrictEqual(receivedSubscriberData, expected);
 	});
 });
 
@@ -175,6 +176,6 @@ describe("Store.unsubscribe()", () => {
 		unsubscribeFunction();
 		testStore.dispatch({});
 
-		assert.deepEqual(receivedSubscriberData, expected);
+		assert.deepStrictEqual(receivedSubscriberData, expected);
 	});
 });

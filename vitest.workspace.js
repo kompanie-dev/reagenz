@@ -9,7 +9,8 @@ export default defineWorkspace([
 				name: "chromium",
 				provider: "playwright",
 				providerOptions: {},
-			}
+			},
+			include: ["tests/browser/*.js"]
 		}
 	}
 ]);

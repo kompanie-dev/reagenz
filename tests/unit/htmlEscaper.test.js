@@ -1,4 +1,5 @@
-import { assert, describe, it } from "vitest";
+import assert from "node:assert";
+import { describe, it } from "node:test";
 import { HtmlEscaper } from "../../source/htmlEscaper.js";
 
 describe("HtmlEscaper.escapeString()", () => {
@@ -7,7 +8,7 @@ describe("HtmlEscaper.escapeString()", () => {
 
 		const actual = HtmlEscaper.escapeString(`<h1>Test</h1>`);
 
-		assert.equal(actual, expected);
+		assert.strictEqual(actual, expected);
 	});
 
 	it("Should escape quotes (\", ')", () => {
@@ -15,7 +16,7 @@ describe("HtmlEscaper.escapeString()", () => {
 
 		const actual = HtmlEscaper.escapeString(`<test-component value="'"></test-component>`);
 
-		assert.equal(actual, expected);
+		assert.strictEqual(actual, expected);
 	});
 
 	it("Should escape '&'", () => {
@@ -23,7 +24,7 @@ describe("HtmlEscaper.escapeString()", () => {
 
 		const actual = HtmlEscaper.escapeString(`<a href="?page=test&folder=root">`);
 
-		assert.equal(actual, expected);
+		assert.strictEqual(actual, expected);
 	});
 
 	it("Should ignore other characters", () => {
@@ -31,7 +32,7 @@ describe("HtmlEscaper.escapeString()", () => {
 
 		const actual = HtmlEscaper.escapeString(expected);
 
-		assert.equal(actual, expected);
+		assert.strictEqual(actual, expected);
 	});
 });
 
@@ -91,13 +92,13 @@ describe("HtmlEscaper.escapeObject()", () => {
 	it("Should return the boolean as-is when input is a boolean", () => {
 		const actual = HtmlEscaper.escapeObject(true);
 
-		assert.isTrue(actual);
+		assert.strictEqual(actual, true);
 	});
 
 	it("Should return null when input is null", () => {
 		const actual = HtmlEscaper.escapeObject(null);
 
-		assert.isNull(actual);
+		assert.strictEqual(actual, null);
 	});
 
 	it("Should return the number as-is when input is a number", () => {
@@ -115,7 +116,7 @@ describe("HtmlEscaper.escapeObject()", () => {
 	it("Should return undefined when input is undefined", () => {
 		const actual = HtmlEscaper.escapeObject(undefined);
 
-		assert.isUndefined(actual);
+		assert.strictEqual(actual, undefined);
 	});
 
 	it("Should return the empty object as-is when input is an empty object", () => {

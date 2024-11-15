@@ -15,19 +15,21 @@
 		"build:minified": "esbuild index.js --bundle --format=esm --minify --target=esnext --outfile=build/reagenz.min.js",
 		"lint": "eslint",
 		"start": "cd demo && npm start",
-		"test": "vitest run --coverage --workspace=vitest.workspace.js",
-		"test:watch": "vitest --coverage --watch --workspace=vitest.workspace.js"
+		"test:browser": "vitest run --coverage --workspace=vitest.workspace.js",
+		"test:browser-watch": "vitest --coverage --watch --workspace=vitest.workspace.js",
+		"test:unit": "node --test --experimental-test-coverage \"tests/unit/*.test.js\"",
+		"test:unit-watch": "node --test --experimental-test-coverage --watch \"tests/unit/*.test.js\""
 	},
 	"bin": {
 		"reagenz": "cli/index.js"
 	},
 	"devDependencies": {
-		"@vitest/browser": "^2.1.4",
-		"@vitest/coverage-v8": "^2.1.4",
+		"@vitest/browser": "^2.1.5",
+		"@vitest/coverage-v8": "^2.1.5",
 		"esbuild": "0.24.0",
 		"eslint": "^9.14.0",
 		"playwright": "^1.48.2",
-		"vite": "^5.4.10",
-		"vitest": "^2.1.4"
+		"vite": "^5.4.11",
+		"vitest": "^2.1.5"
 	}
 }
