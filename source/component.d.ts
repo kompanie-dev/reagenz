@@ -6,13 +6,6 @@ import { Store } from "./store.js";
  */
 export declare class Component extends HTMLElement {
 	/**
-	 * Creates a new instance of the Component.
-	 *
-	 * @param selectors An array containing the selector functions of the component.
-	 */
-	constructor(selectors?: Function[]);
-
-	/**
 	 * Dispatches the action in the injected store.
 	 *
 	 * @param action The Action object which should be dispatched

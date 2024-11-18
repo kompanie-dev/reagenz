@@ -468,7 +468,7 @@ export const selectAllEntries = (state) => state.entries;
 export const selectFilteredEntries = (state) => state.entries.filter(item => item.text.toLowerCase().includes(state.searchValue.toLowerCase()));
 ```
 
-If you want to access the selector data in your component, you first have to define them in the constructor.
+If you want to access the selector data in your component, you first have to define them in the `selectors` property.
 After that they will be available via `this.useSelectorData()` in your component.
 
 ```js
@@ -498,7 +498,7 @@ Selector functions are also responsible for the change detection in Reagenz.
 Every time an action is dispatched in the Store, all connected components execute their selector functions and check if the result changed.
 If the result differs, the entire component gets re-rendered.
 This simple change detection is quite effective and predictable as long as you keep your components at a reasonable size.
-Also be sure to only include selectors in the constructor that you are actually using in the `render` function.
+Also be sure to only include selectors in the `selectors` property that you are actually using in the `render` function.
 Otherwise the component does unnecessary selector executions and might even re-render.
 
 ### Store access
