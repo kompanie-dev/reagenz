@@ -27,7 +27,7 @@ npm i @kompanie/reagenz
 
 Reagenz uses ES6 class syntax.
 You can see a simple counter component in the example.
-If you want to see Reagenz in action take a look at the demo project.
+To see buildless Reagenz applications in action take a look at the [demo project](demo/index.html).
 If you want to learn more about the features you can read the [Reagenz documentation](documentation/DOCUMENTATION.md).
 
 ```js
@@ -103,7 +103,7 @@ The performance of Reagenz is usually great if you keep the following things in 
 
 ## Getting Started
 
-Execute `npm install` and then use `npm start` to run the demo project.
+Execute `npm install` and then use `npm start` to run the demo project locally.
 
 The site will be available at [localhost:8000/](http://localhost:8000/).
 
