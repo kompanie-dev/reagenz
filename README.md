@@ -27,7 +27,7 @@ npm i @kompanie/reagenz
 
 Reagenz uses ES6 class syntax.
 You can see a simple counter component in the example.
-To see buildless Reagenz applications in action take a look at the [demo project](demo/index.html).
+To see buildless Reagenz applications in action take a look at the [demo project](https://kompanie-dev.github.io/reagenz/demo/#/).
 If you want to learn more about the features you can read the [Reagenz documentation](documentation/DOCUMENTATION.md).
 
 ```js
