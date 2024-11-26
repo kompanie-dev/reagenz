@@ -60,7 +60,7 @@ App.start({
     ],
 
     // The dependencies which get injected into the components
-    // They are available via this.useDependencies()
+    // They are available via this.dependencies
     dependencies: {
         logger: console,
         store: new Store(myReducer, myInitialState, [myMiddlewareA, myMiddlewareB])
@@ -122,7 +122,7 @@ export class PersonDetails extends Component {
     };
 
     render() {
-        const { personName, age } = this.useAttributes();
+        const { personName, age } = this.attributeData;
 
         return /*html*/`
             <div>${personName} is ${age} years old</div>
@@ -196,7 +196,7 @@ customElements.define("main-page", MainPage);
 
 ## Dependency Injection
 
-To access the dependencies you injected before, you can execute `useDependencies()` in the component.
+To access the dependencies you injected before, you can execute `dependencies` in the component.
 In this example a click would cause a console.log execution, since the logger dependency in the `Setting up an application` sets the `logger` dependency to the browsers native `console`.
 
 If you would want to replace the logger with something else, the only thing you would need to change is the `logger` property in the `app.js`.
@@ -211,7 +211,7 @@ export class MainPage extends Component {
     }
 
     clickCallback() {
-        const { logger } = this.useDependencies();
+        const { logger } = this.dependencies;
 
         logger.log("Hello dependency injection");
     }
@@ -235,7 +235,7 @@ export class LoadingSpinner extends Component {
     selectors = { isLoading: getIsLoading };
 
     render() {
-        const { isLoading } = this.useSelectorData();
+        const { isLoading } = this.selectorData;
 
         return /*html*/`<div>
             <x-if condition="${ isLoading === true }">
@@ -469,7 +469,7 @@ export const selectFilteredEntries = (state) => state.entries.filter(item => ite
 ```
 
 If you want to access the selector data in your component, you first have to define them in the `selectors` property.
-After that they will be available via `this.useSelectorData()` in your component.
+After that they will be available via `this.selectorData` in your component.
 
 ```js
 import { Component } from "@kompanie/reagenz";
@@ -479,7 +479,7 @@ export class TaskList extends Component {
     selectors = { entries: selectFilteredEntries };
 
     render() {
-        const { entries } = this.useSelectorData();
+        const { entries } = this.selectorData;
 
         return /*html*/`
             <x-for array='${JSON.stringify(entries)}'>
@@ -517,7 +517,7 @@ export class MainPage extends Component {
     selectors = { count: getCount };
 
     render() {
-        const { count } = this.useSelectorData();
+        const { count } = this.selectorData;
 
         return /*html*/`
             <div>${count}</div>

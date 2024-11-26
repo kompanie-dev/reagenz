@@ -12,24 +12,24 @@ export class AppRoot extends Component {
 	selectors = { route: getRoute };
 
 	render() {
-		const { route } = this.useSelectorData();
+		const { route } = this.selectorData;
 
 		return /*html*/`
-            <div>
-                <div>
-                    <a href="#!about">About</a>
-                    <a href="">Counter</a>
-                </div>
+			<div>
+				<div>
+					<a href="#!about">About</a>
+					<a href="">Counter</a>
+				</div>
 
-                <x-if condition="${route === "#!about"}">
-                    <about-page></about-page>
-                </x-if>
+				<x-if condition="${route === "#!about"}">
+					<about-page></about-page>
+				</x-if>
 
-                <x-if condition="${route === ""}">
-                    <counter-page></counter-page>
-                </x-if>
-            </div>
-        `;
+				<x-if condition="${route === ""}">
+					<counter-page></counter-page>
+				</x-if>
+			</div>
+		`;
 	}
 
 	onConnect() {

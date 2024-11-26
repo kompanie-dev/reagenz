@@ -6,7 +6,7 @@ export class TasksMain extends Component {
 	selectors = { route: getRoute };
 
 	render() {
-		const { route } = this.useSelectorData();
+		const { route } = this.selectorData;
 
 		if (route === "" || route === "#/") {
 			return /*html*/`<tasks-task-list-page></tasks-task-list-page>`;

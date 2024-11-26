@@ -2,9 +2,8 @@
 
 ## 12.0.0 (?)
 
-* Replace attribute helper functions with useAttributes()
-* Add useDependencies()
-* Replace render([selectorData]) with useSelectorData()
+* Replace attribute helper functions with attributeData
+* Replace render([selectorData]) with selectorData
 
 ## 11.0.0 (2024-10-22)
 

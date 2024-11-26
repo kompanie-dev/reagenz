@@ -12,9 +12,7 @@ export class ForComponent extends Component {
 	attributeTypes = { array: Array };
 
 	render() {
-		const { array } = this.useAttributes();
-
-		return array
+		return this.attributeData.array
 			.map((element, index) =>
 				this.innerHTML.replace(/@index\(\)|@item\((.*?)\)/gu, (match, propertyName) => {
 					if (match === "@index()") {

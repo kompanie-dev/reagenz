@@ -51,7 +51,7 @@ export class MyCounter extends Component {
     // This function generates the innerHTML of the component.
     // In this case it also accesses the count selector specified in the selectors property.
     render() {
-        const { count } = this.useSelectorData();
+        const { count } = this.selectorData;
 
         return /*html*/`
             <div>Current value: ${count}</div>

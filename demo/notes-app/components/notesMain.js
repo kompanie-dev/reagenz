@@ -6,15 +6,15 @@ export class NotesMain extends Component {
 	selectors = { notes: getNotes };
 
 	render() {
-		const { notes } = this.useSelectorData();
+		const { notes } = this.selectorData;
 
 		return /*html*/`
-            <div class="padding-right-xsmall">
-                <h1>Notes App</h1>
-                <textarea class="textarea width-100" $input="inputNotesValueEvent" rows="32">${notes}</textarea>
-                <example-web-component></example-web-component>
-            </div>
-        `;
+			<div class="padding-right-xsmall">
+				<h1>Notes App</h1>
+				<textarea class="textarea width-100" $input="inputNotesValueEvent" rows="32">${notes}</textarea>
+				<example-web-component></example-web-component>
+			</div>
+		`;
 	}
 
 	inputNotesValueEvent(event) {

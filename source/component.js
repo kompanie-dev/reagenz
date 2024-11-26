@@ -5,8 +5,6 @@ import { ObjectComparator } from "./objectComparator.js";
  * All Reagenz components are Web Components.
  */
 export class Component extends HTMLElement {
-	#currentSelectorData;
-	#currentAttributeValues;
 	#unsubscribeCallback;
 
 	/**
@@ -42,33 +40,6 @@ export class Component extends HTMLElement {
 	 */
 	dispatch(action) {
 		this.dependencies.store.dispatch(action);
-	}
-
-	/**
-	 * Returns the parsed attributes of the component as an object.
-	 *
-	 * @returns {Object} The attributes as an object, converted to the types specified in attributeTypes.
-	 */
-	useAttributes() {
-		return this.#currentAttributeValues;
-	}
-
-	/**
-	 * Returns all injected dependencies as an object.
-	 *
-	 * @returns {Object} An object containing all the dependencies.
-	 */
-	useDependencies() {
-		return this.dependencies;
-	}
-
-	/**
-	 * Returns the result of all executed selectors as an object.
-	 *
-	 * @returns {Object} An object containing the name of the selector and the result.
-	 */
-	useSelectorData() {
-		return this.#currentSelectorData;
 	}
 
 	/**
@@ -160,12 +131,12 @@ export class Component extends HTMLElement {
 	#updateDOM(force = false) {
 		const newSelectorData = this.dependencies?.store?.executeSelectors(this.selectors ?? {});
 
-		if (!force && ObjectComparator.checkDeepEquality(this.#currentSelectorData, newSelectorData)) {
+		if (!force && ObjectComparator.checkDeepEquality(this.selectorData, newSelectorData)) {
 			return;
 		}
 
-		this.#currentAttributeValues = this.#parseAttributes();
-		this.#currentSelectorData = newSelectorData;
+		this.attributeData = this.#parseAttributes();
+		this.selectorData = newSelectorData;
 
 		this.innerHTML =
 			(this.styles ? `<style>${this.styles}</style>` : "") +

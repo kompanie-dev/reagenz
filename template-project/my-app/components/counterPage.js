@@ -6,18 +6,18 @@ export class CounterPage extends Component {
 	selectors = { count: getCount };
 
 	render() {
-		const { count } = this.useSelectorData();
+		const { count } = this.selectorData;
 
 		return /*html*/`
-            <div>
-                <h1>Welcome to my Counter App!</h1>
-                <div>
-                    ${count}
-                </div>
-                <button $click="increaseCounter">+</button>
-                <button $click="decreaseCounter">-</button>
-            </div>
-        `;
+			<div>
+				<h1>Welcome to my Counter App!</h1>
+				<div>
+					${count}
+				</div>
+				<button $click="increaseCounter">+</button>
+				<button $click="decreaseCounter">-</button>
+			</div>
+		`;
 	}
 
 	increaseCounter() {

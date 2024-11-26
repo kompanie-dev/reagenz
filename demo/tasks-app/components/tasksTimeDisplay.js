@@ -8,11 +8,11 @@ export class TasksTimeDisplay extends Component {
 	selectors = { time: getTime };
 
 	render() {
-		const { time } = this.useSelectorData();
+		const { time } = this.selectorData;
 
 		return /*html*/`
-            <span>${this.formatDate(new Date(time))}</span>
-        `;
+			<span>${this.formatDate(new Date(time))}</span>
+		`;
 	}
 
 	onConnect() {

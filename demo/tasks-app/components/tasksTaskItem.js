@@ -27,20 +27,20 @@ export class TasksTaskItem extends Component {
 	`;
 
 	render() {
-		const { taskId, done } = this.useAttributes();
+		const { taskId, done } = this.attributeData;
 
 		return /*html*/`
-            <div>
-                <input type="checkbox" $click="clickDoneCheckboxEvent" ${done ? "checked" : ""}>
-                <span>${this.innerHTML}</span>
-                <button class="margin-left-xsmall task-item-button" $click="clickRemoveTaskEvent">❌</button>
-                <a href="#/tasks/${taskId}" class="a margin-left-xsmall task-item-button">ℹ️</a>
-            </div>
-        `;
+			<div>
+				<input type="checkbox" $click="clickDoneCheckboxEvent" ${done ? "checked" : ""}>
+				<span>${this.innerHTML}</span>
+				<button class="margin-left-xsmall task-item-button" $click="clickRemoveTaskEvent">❌</button>
+				<a href="#/tasks/${taskId}" class="a margin-left-xsmall task-item-button">ℹ️</a>
+			</div>
+		`;
 	}
 
 	clickDoneCheckboxEvent() {
-		const { taskId } = this.useAttributes();
+		const { taskId } = this.attributeData;
 		const done = this.querySelector("input").checked;
 
 		this.dispatch(updateTaskDone(taskId, done));
@@ -48,7 +48,7 @@ export class TasksTaskItem extends Component {
 	}
 
 	clickRemoveTaskEvent() {
-		const { taskId } = this.useAttributes();
+		const { taskId } = this.attributeData;
 
 		this.dispatch(removeTask(taskId));
 		this.dispatch(saveEntriesRequest());

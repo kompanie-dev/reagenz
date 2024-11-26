@@ -32,17 +32,17 @@ export declare class Component extends HTMLElement {
 	/**
 	 * Returns the parsed attributes of the component as an object.
 	 */
-	useAttributes(): { [key: string]: any };
+	attributeData: { [key: string]: any };
 
 	/**
 	 * Returns all injected dependencies as an object.
 	 */
-	useDependencies(): { [key: string]: any };
+	dependencies: { [key: string]: any };
 
 	/**
 	 * Returns the result of all executed selectors as an object.
 	 */
-	useSelectorData(): { [key: string]: any };
+	selectorData: { [key: string]: any };
 
 	/** An object containing the attribute names and the desired types. */
 	attributeTypes?: {

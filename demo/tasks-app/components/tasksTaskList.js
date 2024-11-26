@@ -9,22 +9,22 @@ export class TasksTaskList extends Component {
 	};
 
 	render() {
-		const { entries, isLoading } = this.useSelectorData();
+		const { entries, isLoading } = this.selectorData;
 
 		return /*html*/`
-            <x-if condition="${isLoading === true}">
-                <loading-icon></loading-icon>
-            </x-if>
+			<x-if condition="${isLoading === true}">
+				<loading-icon></loading-icon>
+			</x-if>
 
-            <x-for array='${JSON.stringify(entries)}'>
-                <tasks-task-item done="@item(done)" taskId="@item(id)">@item(text)</tasks-task-item>
-            </x-for>
+			<x-for array='${JSON.stringify(entries)}'>
+				<tasks-task-item done="@item(done)" taskId="@item(id)">@item(text)</tasks-task-item>
+			</x-for>
 
-            <div class="margin-top-small">
-                <input type="text" class="input" $keydown="keydownTaskInputEvent" maxlength="25" ${isLoading ? "disabled" : ""} placeholder="Text" value="" autofocus>
-                <button class="button" $click="clickAddTaskEvent" ${isLoading ? "disabled" : ""}>Add</button>
-            </div>
-        `;
+			<div class="margin-top-small">
+				<input type="text" class="input" $keydown="keydownTaskInputEvent" maxlength="25" ${isLoading ? "disabled" : ""} placeholder="Text" value="" autofocus>
+				<button class="button" $click="clickAddTaskEvent" ${isLoading ? "disabled" : ""}>Add</button>
+			</div>
+		`;
 	}
 
 	clickAddTaskEvent() {

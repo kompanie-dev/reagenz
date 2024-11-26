@@ -3,7 +3,7 @@ import { Component } from "../../source/component.js";
 import { Store } from "../../source/store.js";
 
 describe("Component", () => {
-	it("useAttributes() should convert and return attributes correctly", () => {
+	it("attributeData should convert and return attributes correctly", () => {
 		class AttributeTestComponent extends Component {
 			attributeTypes = {
 				testArray: Array,
@@ -18,7 +18,7 @@ describe("Component", () => {
 			};
 
 			render() {
-				const { testArray, testArrayWrongType, testBoolean, testBooleanWrongType, testNumber, testNumberWrongType, testObject, testObjectWrongType, testString } = this.useAttributes();
+				const { testArray, testArrayWrongType, testBoolean, testBooleanWrongType, testNumber, testNumberWrongType, testObject, testObjectWrongType, testString } = this.attributeData;
 
 				return `<div>${testArray[0]}/${testArrayWrongType}/${testBoolean}/${testBooleanWrongType}/${testNumber}/${testNumberWrongType}/${testObject.prop}/${testObjectWrongType}/${testString}</div>`;
 			}
@@ -45,10 +45,10 @@ describe("Component", () => {
 		assert.equal(element.innerHTML, "<div>7/null/true/null/5/null/abc/null/Hello</div>");
 	});
 
-	it("useDependencies() should return dependencies correctly", () => {
+	it("dependencies should return dependencies correctly", () => {
 		class DependencyTestComponent extends Component {
 			render() {
-				const { testDependency } = this.useDependencies();
+				const { testDependency } = this.dependencies;
 
 				return `<div>${testDependency.value}</div>`;
 			}
@@ -114,7 +114,7 @@ describe("Component", () => {
 			selectors = { testSelectorValue: () => "Selector Result" };
 
 			render() {
-				const { testSelectorValue } = this.useSelectorData();
+				const { testSelectorValue } = this.selectorData;
 
 				return /*html*/`<span>${testSelectorValue}</span>`;
 			}
