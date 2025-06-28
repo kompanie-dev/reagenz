@@ -11,5 +11,5 @@ If you use Visual Studio Code you can use [es6-string-html](https://marketplace.
 
 ## TODO
 
-* Add a .gitignore file
+* Add your .gitignore file
 * Add information about your project here
