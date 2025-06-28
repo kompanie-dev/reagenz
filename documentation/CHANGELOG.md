@@ -1,9 +1,11 @@
 # Reagenz Changelog
 
-## 12.0.0 (?)
+## 12.0.0 (2025-06-28)
 
 * Replace attribute helper functions with attributeData
 * Replace render([selectorData]) with selectorData
+* All tests are now run via @kompanie/testwerk
+* The development server is now based on @kompanie/diener
 
 ## 11.0.0 (2024-10-22)
 
