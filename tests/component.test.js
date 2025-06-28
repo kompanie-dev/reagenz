@@ -1,9 +1,17 @@
-import { assert, describe, it, vi } from "vitest";
-import { Component } from "../../source/component.js";
-import { Store } from "../../source/store.js";
+import { Assert } from "../node_modules/@kompanie/assert/index.js";
+import { Component } from "../source/component.js";
+import { Store } from "../source/store.js";
 
-describe("Component", () => {
-	it("attributeData should convert and return attributes correctly", () => {
+export class ComponentTests {
+	afterAll() {
+		const customElements = document.querySelectorAll("attribute-test-component, callback-test-component, dependency-test-component, dispatch-test-component, event-attribute-test-component, event-attribute-error-test-component, selector-test-component");
+
+		for (const customElement of customElements) {
+			customElement.remove();
+		}
+	}
+
+	attributeData_shouldConvertAndReturnAttributes() {
 		class AttributeTestComponent extends Component {
 			attributeTypes = {
 				testArray: Array,
@@ -42,10 +50,10 @@ describe("Component", () => {
 
 		const element = document.querySelector("attribute-test-component");
 
-		assert.equal(element.innerHTML, "<div>7/null/true/null/5/null/abc/null/Hello</div>");
-	});
+		Assert.equal(element.innerHTML, "<div>7/null/true/null/5/null/abc/null/Hello</div>");
+	}
 
-	it("dependencies should return dependencies correctly", () => {
+	dependenciesProperty_shouldReturnDependencies() {
 		class DependencyTestComponent extends Component {
 			render() {
 				const { testDependency } = this.dependencies;
@@ -63,10 +71,10 @@ describe("Component", () => {
 
 		const element = document.querySelector("dependency-test-component");
 
-		assert.equal(element.innerHTML, "<div>success</div>");
-	});
+		Assert.equal(element.innerHTML, "<div>success</div>");
+	}
 
-	it("Event attributes should be correctly bound", () => {
+	eventAttributes_shouldBeBound() {
 		class EventAttributeTestComponent extends Component {
 			render() {
 				return /*html*/`<button propA="test" propB="test" $click="clickEventHandler">Click</button>`;
@@ -86,17 +94,19 @@ describe("Component", () => {
 		document.querySelector("event-attribute-test-component button").click();
 		const element = document.querySelector("event-attribute-test-component");
 
-		assert.isTrue(element.clicked);
-	});
+		Assert.equal(element.clicked, true);
+	}
 
-	it("Event attributes which do not exist log a warning to the console", () => {
+	eventAttributes_whichDontExist_logWarningToConsole() {
 		class EventAttributeErrorTestComponent extends Component {
 			render() {
 				return /*html*/`<button propA="test" propB="test" $click="notExistingFunction">Click</button>`;
 			}
 		}
 
-		const warnSpy = vi.spyOn(console, "warn");
+		let mockCalled = false;
+		const originalConsoleWarn = console.warn;
+		console.warn = () => { mockCalled = true; };
 
 		customElements.define("event-attribute-error-test-component", EventAttributeErrorTestComponent);
 
@@ -104,12 +114,12 @@ describe("Component", () => {
 			<event-attribute-error-test-component></event-attribute-error-test-component>
 		`);
 
-		assert.isFalse(warnSpy.mock.calls.length === 0);
+		Assert.equal(mockCalled, true);
 
-		warnSpy.mockRestore();
-	});
+		console.warn = originalConsoleWarn;
+	}
 
-	it("Selectors should be executed and return correct result", () => {
+	selectors_shouldReturnCorrectResult() {
 		class SelectorTestComponent extends Component {
 			selectors = { testSelectorValue: () => "Selector Result" };
 
@@ -130,10 +140,10 @@ describe("Component", () => {
 
 		const element = document.querySelector("selector-test-component");
 
-		assert.equal(element.innerHTML, "<span>Selector Result</span>");
-	});
+		Assert.equal(element.innerHTML, "<span>Selector Result</span>");
+	}
 
-	it("onConnect and onDisconnect should be executed when connected or disconnected from DOM", () => {
+	onConnectAndOnDisconnect_shouldBeExecuted() {
 		let onConnectCallbackExecuted = false;
 		let onDisconnectCallbackExecuted = false;
 
@@ -159,11 +169,11 @@ describe("Component", () => {
 
 		document.querySelector("callback-test-component").remove();
 
-		assert.equal(onConnectCallbackExecuted, true);
-		assert.equal(onDisconnectCallbackExecuted, true);
-	});
+		Assert.equal(onConnectCallbackExecuted, true);
+		Assert.equal(onDisconnectCallbackExecuted, true);
+	}
 
-	it("dispatch() should execute action", () => {
+	dispatch_shouldExecuteAction() {
 		let actionDispatched = false;
 
 		class DispatchTestComponent extends Component {
@@ -192,6 +202,6 @@ describe("Component", () => {
 
 		document.querySelector("dispatch-test-component button").click();
 
-		assert.isTrue(actionDispatched);
-	});
-});
+		Assert.equal(actionDispatched, true);
+	}
+}

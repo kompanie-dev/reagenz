@@ -1,43 +1,40 @@
-import assert from "node:assert";
-import { describe, it } from "node:test";
-import { HtmlEscaper } from "../../source/htmlEscaper.js";
+import { Assert } from "../node_modules/@kompanie/assert/index.js";
+import { HtmlEscaper } from "../index.js";
 
-describe("HtmlEscaper.escapeString()", () => {
-	it("Should escape HTML tags (<, >)", () => {
+export class HtmlEscaperTests {
+	escapeString_shouldEscapeHtmlTags() {
 		const expected = "&lt;h1&gt;Test&lt;/h1&gt;";
 
 		const actual = HtmlEscaper.escapeString(`<h1>Test</h1>`);
 
-		assert.strictEqual(actual, expected);
-	});
+		Assert.equal(actual, expected);
+	}
 
-	it("Should escape quotes (\", ')", () => {
+	escapeString_shouldEscapeQuotes() {
 		const expected = "&lt;test-component value=&quot;&#39;&quot;&gt;&lt;/test-component&gt;";
 
 		const actual = HtmlEscaper.escapeString(`<test-component value="'"></test-component>`);
 
-		assert.strictEqual(actual, expected);
-	});
+		Assert.equal(actual, expected);
+	}
 
-	it("Should escape '&'", () => {
+	escapeString_shouldEscapeAmpersand() {
 		const expected = "&lt;a href=&quot;?page=test&amp;folder=root&quot;&gt;";
 
 		const actual = HtmlEscaper.escapeString(`<a href="?page=test&folder=root">`);
 
-		assert.strictEqual(actual, expected);
-	});
+		Assert.equal(actual, expected);
+	}
 
-	it("Should ignore other characters", () => {
+	escapeString_shouldIgnoreOtherCharacters() {
 		const expected = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?.,:;#+-=%{}()[]$*|";
 
 		const actual = HtmlEscaper.escapeString(expected);
 
-		assert.strictEqual(actual, expected);
-	});
-});
+		Assert.equal(actual, expected);
+	}
 
-describe("HtmlEscaper.escapeObject()", () => {
-	it("Should escape string properties with escapable characters", () => {
+	escapeObject_shouldEscapeStringPropertiesWithEscapeableCharacters() {
 		const testObject = {
 			testArray: [1, 2, 3],
 			testBool: true,
@@ -68,10 +65,10 @@ describe("HtmlEscaper.escapeObject()", () => {
 
 		const actual = HtmlEscaper.escapeObject(testObject);
 
-		assert.deepEqual(actual, expected);
-	});
+		Assert.deepEqual(actual, expected);
+	}
 
-	it("Should ignore objects without properties to escape", () => {
+	escapeObject_shouldIgnoreObjectsWithoutPropertiesToEscape() {
 		const expected = {
 			testArray: [1, 2, 3],
 			testBool: true,
@@ -86,42 +83,42 @@ describe("HtmlEscaper.escapeObject()", () => {
 
 		const actual = HtmlEscaper.escapeObject(expected);
 
-		assert.deepEqual(actual, expected);
-	});
+		Assert.deepEqual(actual, expected);
+	}
 
-	it("Should return the boolean as-is when input is a boolean", () => {
+	escapeObject_shouldReturnBooleanAsIsWhenInputIsBoolean() {
 		const actual = HtmlEscaper.escapeObject(true);
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return null when input is null", () => {
+	escapeObject_shouldReturnNullWhenInputIsNull() {
 		const actual = HtmlEscaper.escapeObject(null);
 
-		assert.strictEqual(actual, null);
-	});
+		Assert.equal(actual, null);
+	}
 
-	it("Should return the number as-is when input is a number", () => {
+	escapeObject_shouldReturnNumberAsIsWhenInputIsNumber() {
 		const actual = HtmlEscaper.escapeObject(123);
 
-		assert.deepEqual(actual, 123);
-	});
+		Assert.deepEqual(actual, 123);
+	}
 
-	it("Should return the string as-is when input is a string without special characters", () => {
+	escapeObject_shouldReturnStringAsIsWhenNoSpecialCharactersArePresent() {
 		const actual = HtmlEscaper.escapeObject("Hello World");
 
-		assert.deepEqual(actual, "Hello World");
-	});
+		Assert.deepEqual(actual, "Hello World");
+	}
 
-	it("Should return undefined when input is undefined", () => {
+	escapeObject_shouldReturnUndefinedWhenInputIsUndefined() {
 		const actual = HtmlEscaper.escapeObject(undefined);
 
-		assert.strictEqual(actual, undefined);
-	});
+		Assert.equal(actual, undefined);
+	}
 
-	it("Should return the empty object as-is when input is an empty object", () => {
+	escapeObject_shouldReturnEmptyObjectWhenInputIsEmptyObject() {
 		const actual = HtmlEscaper.escapeObject({});
 
-		assert.deepEqual(actual, {});
-	});
-});
+		Assert.deepEqual(actual, {});
+	}
+}

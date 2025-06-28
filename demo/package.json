@@ -2,7 +2,7 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"build": "vite build",
-		"start": "vite --force --port 8000"
+		"build": "esbuild index.html --bundle --format=esm --target=esnext",
+		"start": "npx diener --livereload --ignore-git --port 8000"
 	}
 }

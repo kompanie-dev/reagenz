@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="../node_modules/@kompanie/testwerk/index.css">
+
+<body class="testwerk-body">
+    <div id="test-result-container"></div>
+
+    <script type="module">
+        import { TestRunnerHtml } from "../node_modules/@kompanie/testwerk/index.js";
+        
+        import { AppTests } from "./app.test.js";
+        import { ComponentTests } from "./component.test.js";
+        import { ForComponentTests } from "./forComponent.test.js";
+        import { HtmlEscaperTests } from "./htmlEscaper.test.js";
+        import { IfComponentTests } from "./ifComponent.test.js";
+        import { IndexTests } from "./index.test.js";
+        import { ModalTests } from "./modal.test.js";
+        import { ObjectComparatorTests } from "./objectComparator.test.js";
+        import { StoreTests } from "./store.test.js";
+
+        const asyncTimeoutMs = 5000;
+        const testResultContainer = document.getElementById("test-result-container");
+        const testRunnerHtml = new TestRunnerHtml(asyncTimeoutMs);
+        testRunnerHtml.run(testResultContainer, AppTests, ComponentTests, ForComponentTests, HtmlEscaperTests, IfComponentTests, IndexTests, ModalTests, ObjectComparatorTests, StoreTests);
+    </script>
+</body>

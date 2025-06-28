@@ -1,166 +1,241 @@
-import assert from "node:assert";
-import { describe, it } from "node:test";
-import { ObjectComparator } from "../../source/objectComparator.js";
+import { Assert } from "../node_modules/@kompanie/assert/index.js";
+import { ObjectComparator } from "../index.js";
 
-describe("ObjectComparator.checkDeepEquality()", () => {
-	it("Should return true for same bool inputs", () => {
+export class ObjectComparatorTests {
+	checkDeepEquality_sameBooleans_shouldReturnTrue() {
 		const actual = ObjectComparator.checkDeepEquality(false, false);
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return false for differing bool inputs", () => {
+	checkDeepEquality_differentBooleans_shouldReturnFalse() {
 		const actual = ObjectComparator.checkDeepEquality(true, false);
 
-		assert.strictEqual(actual, false);
-	});
+		Assert.equal(actual, false);
+	}
 
-	it("Should return true for the same strings", () => {
+	checkDeepEquality_sameStrings_shouldReturnTrue() {
 		const actual = ObjectComparator.checkDeepEquality("TestA", "TestA");
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return false for two different strings", () => {
+	checkDeepEquality_differentStrings_shouldReturnFalse() {
 		const actual = ObjectComparator.checkDeepEquality("TestA", "TestB");
 
-		assert.strictEqual(actual, false);
-	});
+		Assert.equal(actual, false);
+	}
 
-	it("Should return true for the same numbers", () => {
+	checkDeepEquality_sameNumbers_shouldReturnTrue() {
 		const actual = ObjectComparator.checkDeepEquality(7, 7);
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return false for two different numbers", () => {
+	checkDeepEquality_differentNumbers_shouldReturnFalse() {
 		const actual = ObjectComparator.checkDeepEquality(3, 7);
 
-		assert.strictEqual(actual, false);
-	});
+		Assert.equal(actual, false);
+	}
 
-	it("Should return true for two nulls", () => {
+	checkDeepEquality_nulls_shouldReturnTrue() {
 		const actual = ObjectComparator.checkDeepEquality(null, null);
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return true for two undefined", () => {
+	checkDeepEquality_undefineds_shouldReturnTrue() {
 		const actual = ObjectComparator.checkDeepEquality(undefined, undefined);
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return false for null and undefined", () => {
+	checkDeepEquality_nullAndUndefined_shouldReturnFalse() {
 		const actual = ObjectComparator.checkDeepEquality(null, undefined);
 
-		assert.strictEqual(actual, false);
-	});
+		Assert.equal(actual, false);
+	}
 
-	it("Should return true for two empty objects", () => {
+	checkDeepEquality_emptyObjects_shouldReturnTrue() {
 		const actual = ObjectComparator.checkDeepEquality({}, {});
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return true for two objects with same properties", () => {
+	checkDeepEquality_objectsWithSameProperties_shouldReturnTrue() {
 		const objectA = { testA: "A", testB: "B" };
 		const objectB = { testA: "A", testB: "B" };
 
 		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
+		
+		Assert.equal(actual, true);
+	}
 
-		assert.strictEqual(actual, true);
-	});
-
-	it("Should return false for two objects with different properties", () => {
+	checkDeepEquality_objectsWithDifferentProperties_shouldReturnFalse() {
 		const objectA = { testA: "A", testB: "B" };
 		const objectB = { testA: "A", testC: "B" };
 
 		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
 
-		assert.strictEqual(actual, false);
-	});
+		Assert.equal(actual, false);
+	}
 
-	it("Should return true for two objects with same nested properties", () => {
+	checkDeepEquality_objectsWithSameNestedObjects_shouldReturnTrue() {
 		const objectA = { testA: 0, testB: { nested: 0 } };
 		const objectB = { testA: 0, testB: { nested: 0 } };
 
 		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return false for two objects with different nested properties", () => {
+	checkDeepEquality_objectsWithDifferentNestedObjects_shouldReturnFalse() {
 		const objectA = { testA: 0, testB: { nested: 0 } };
 		const objectB = { testA: 0, testB: { nested: 1 } };
 
 		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
 
-		assert.strictEqual(actual, false);
-	});
+		Assert.equal(actual, false);
+	}
 
-	it("Should return false for two objects with one missing a nested property", () => {
+	checkDeepEquality_sameObjectsWithOneMissingProperty_shouldReturnFalse() {
 		const objectA = { testA: 0, testB: { nestedA: 0, nestedB: 7 } };
 		const objectB = { testA: 0, testB: { nestedA: 0 } };
 
 		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
 
-		assert.strictEqual(actual, false);
-	});
+		Assert.equal(actual, false);
+	}
 
-	it("Should return true for two objects with same properties in different order", () => {
+	checkDeepEquality_samePropertiesWithDifferentOrder_shouldReturnTrue() {
 		const objectA = { testA: 0, testB: 5 };
 		const objectB = { testB: 5, testA: 0 };
 
 		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return true for two empty arrays", () => {
+	checkDeepEquality_emptyArrays_shouldReturnTrue() {
 		const actual = ObjectComparator.checkDeepEquality([], []);
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return true for two identical number arrays", () => {
-		const arrayA = [1, 2, 3];
-		const arrayB = [1, 2, 3];
+	checkDeepEquality_identicalNumberArrays_shouldReturnTrue() {
+		const objectA = [1, 2, 3];
+		const objectB = [1, 2, 3];
 
-		const actual = ObjectComparator.checkDeepEquality(arrayA, arrayB);
+		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return false for two different number arrays", () => {
-		const arrayA = [1, 2, 3];
-		const arrayB = [1, 2, 4];
+	checkDeepEquality_differentNumberArrays_shouldReturnFalse() {
+		const objectA = [1, 2, 3];
+		const objectB = [1, 2, 4];
 
-		const actual = ObjectComparator.checkDeepEquality(arrayA, arrayB);
+		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
 
-		assert.strictEqual(actual, false);
-	});
+		Assert.equal(actual, false);
+	}
 
-	it("Should return true for two identical mixed arrays", () => {
-		const arrayA = [1, "test", { testA: { testB: "XYz" } }];
-		const arrayB = [1, "test", { testA: { testB: "XYz" } }];
+	checkDeepEquality_identicalMixedTypeArrays_shouldReturnTrue() {
+		const objectA = [1, "test", { testA: { testB: "XYz" } }];
+		const objectB = [1, "test", { testA: { testB: "XYz" } }];
 
-		const actual = ObjectComparator.checkDeepEquality(arrayA, arrayB);
+		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
 
-		assert.strictEqual(actual, true);
-	});
+		Assert.equal(actual, true);
+	}
 
-	it("Should return false for two different mixed arrays", () => {
-		const arrayA = [1, "test", { testA: { testB: "XYz" } }];
-		const arrayB = [1, "test", { testA: { testB: "ABC" } }];
+	checkDeepEquality_differentMixedArrays_shouldReturnFalse() {
+		const objectA = [1, "test", { testA: { testB: "XYz" } }];
+		const objectB = [1, "test", { testA: { testB: "ABC" } }];
 
-		const actual = ObjectComparator.checkDeepEquality(arrayA, arrayB);
+		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
 
-		assert.strictEqual(actual, false);
-	});
+		Assert.equal(actual, false);
+	}
 
+	checkDeepEquality_sameBigObjectsSame_shouldReturnTrue() {
+		const objectA = {
+			name: "Test Object",
+			id: 123,
+			isActive: true,
+			details: {
+				createdAt: new Date("2023-10-04T12:00:00Z"),
+				updatedAt: new Date("2024-01-01T08:00:00Z"),
+				tags: ["tag1", "tag2", { name: "special", active: false }],
+				metadata: {
+					description: "This is a nested description",
+					views: 100,
+					likes: 50,
+					options: [
+						{ key: "option1", value: "val1" },
+						{ key: "option2", value: "val2" }
+					]
+				}
+			},
+			nestedArray: [
+				[1, 2, 3],
+				[{ a: 10, b: 20 }, { c: 30, d: [40, 50, 60] }],
+				"simple string",
+				null
+			],
+			references: {
+				key1: { ref: "value1", status: true },
+				key2: { ref: "value2", status: false, subRef: { count: 5 } }
+			},
+			someNullValue: null,
+			numberArray: [1, 2, 3, 4, 5],
+			extraInfo: {
+				emptyArray: [],
+				emptyObject: {}
+			}
+		};
 
-	it("Should return false for two different mixed big objects containing nulls", () => {
+		const objectB = {
+			name: "Test Object",
+			id: 123,
+			isActive: true,
+			details: {
+				createdAt: new Date("2023-10-04T12:00:00Z"),
+				updatedAt: new Date("2024-01-01T08:00:00Z"),
+				tags: ["tag1", "tag2", { name: "special", active: false }],
+				metadata: {
+					description: "This is a nested description",
+					views: 100,
+					likes: 50,
+					options: [
+						{ key: "option1", value: "val1" },
+						{ key: "option2", value: "val2" }
+					]
+				}
+			},
+			nestedArray: [
+				[1, 2, 3],
+				[{ a: 10, b: 20 }, { c: 30, d: [40, 50, 60] }],
+				"simple string",
+				null
+			],
+			references: {
+				key1: { ref: "value1", status: true },
+				key2: { ref: "value2", status: false, subRef: { count: 5 } }
+			},
+			someNullValue: null,
+			numberArray: [1, 2, 3, 4, 5],
+			extraInfo: {
+				emptyArray: [],
+				emptyObject: {}
+			}
+		};
+
+		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
+		Assert.equal(actual, true);
+	}
+
+	checkDeepEquality_differentBigObjects_shouldReturnFalse() {
 		const objectA = {
 			name: "Test Object",
 			id: 123,
@@ -233,86 +308,9 @@ describe("ObjectComparator.checkDeepEquality()", () => {
 			}
 		};
 
-		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
-
-		assert.strictEqual(actual, false);
-	});
-
-	it("Should return true for two identical mixed big objects containing nulls", () => {
-		const objectA = {
-			name: "Test Object",
-			id: 123,
-			isActive: true,
-			details: {
-				createdAt: new Date("2023-10-04T12:00:00Z"),
-				updatedAt: new Date("2024-01-01T08:00:00Z"),
-				tags: ["tag1", "tag2", { name: "special", active: false }],
-				metadata: {
-					description: "This is a nested description",
-					views: 100,
-					likes: 50,
-					options: [
-						{ key: "option1", value: "val1" },
-						{ key: "option2", value: "val2" }
-					]
-				}
-			},
-			nestedArray: [
-				[1, 2, 3],
-				[{ a: 10, b: 20 }, { c: 30, d: [40, 50, 60] }],
-				"simple string",
-				null
-			],
-			references: {
-				key1: { ref: "value1", status: true },
-				key2: { ref: "value2", status: false, subRef: { count: 5 } }
-			},
-			someNullValue: null,
-			numberArray: [1, 2, 3, 4, 5],
-			extraInfo: {
-				emptyArray: [],
-				emptyObject: {}
-			}
-		};
-
-		const objectB = {
-			name: "Test Object",
-			id: 123,
-			isActive: true,
-			details: {
-				createdAt: new Date("2023-10-04T12:00:00Z"),
-				updatedAt: new Date("2024-01-01T08:00:00Z"),
-				tags: ["tag1", "tag2", { name: "special", active: false }],
-				metadata: {
-					description: "This is a nested description",
-					views: 100,
-					likes: 50,
-					options: [
-						{ key: "option1", value: "val1" },
-						{ key: "option2", value: "val2" }
-					]
-				}
-			},
-			nestedArray: [
-				[1, 2, 3],
-				[{ a: 10, b: 20 }, { c: 30, d: [40, 50, 60] }],
-				"simple string",
-				null
-			],
-			references: {
-				key1: { ref: "value1", status: true },
-				key2: { ref: "value2", status: false, subRef: { count: 5 } }
-			},
-			someNullValue: null,
-			numberArray: [1, 2, 3, 4, 5],
-			extraInfo: {
-				emptyArray: [],
-				emptyObject: {}
-			}
-		};
+		objectB.isActive = true;
 
 		const actual = ObjectComparator.checkDeepEquality(objectA, objectB);
-
-		assert.strictEqual(actual, true);
-	});
-});
+		Assert.equal(actual, false);
+	}
+}

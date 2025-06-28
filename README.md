@@ -4,8 +4,8 @@ Reagenz is an opinionated [Web Components](https://developer.mozilla.org/en-US/d
 
 It has the following features:
 
-* Extremly compact
-* Buildless: Doesn't require any compilation or transpilation
+* Extremley compact
+* Buildless: No need for a bundler, compiler, or transpiler
 * Fully compatible with standard Web Components
 * No external dependencies
 * Very easy to understand source code
@@ -19,7 +19,7 @@ It has the following features:
 
 ## Usage
 
-At first you need to install the package using the following command:
+First, install the package with the following command:
 
 ```console
 npm i @kompanie/reagenz
@@ -80,7 +80,7 @@ The repository consists of the following folders:
     * `tasks`: A ToDo app
 * `documentation`: Documentation including assets
 * `source`: The source code of the Reagenz library
-* `template-project`: The project that get's used for `npx reagenz new`
+* `template-project`: The project that gets used for `npx reagenz new`
 * `tests`: Unit, browser and performance tests
 
 ## Limitations
@@ -89,32 +89,35 @@ The repository consists of the following folders:
 
 The performance of Reagenz is usually great if you keep the following things in mind:
 
-* Reagenz re-renders the whole component even if only a small part of its DOM is affected
-	* Keep your components at a reasonable size to prevent unnecessary re-rendering of elements
-* It's possible that child-components get re-rendered first, just to be trashed because their parent get's re-rendered
-	* This can be prevented by not having the same selectors in child and parent components
-* All apps and components will load at once if you don't implement lazy loading yourself
+* **Component re-renders**: Reagenz re-renders the whole component if any selected state changes.
+* **Child re-renders**: Child components might be re-rendered unnecessarily if they use the same selectors as the parent.
+* **Lazy loading**: All components are loaded at once unless you implement lazy loading manually.
 
 ### Other
 
-* It's not possible to have two ore more apps using the same tag name for different components
+* It's not possible to have two or more apps using the same tag name for different components
 * It's not possible to update a state property and use it in the same component
 	* This example would cause focus issues if `updateSearchValue` updated `searchValue` while you type in the input: `<input type="text" value="${searchValue}" $input="updateSearchValue">`
 
 ## Getting Started
 
-Execute `npm install` and then use `npm start` to run the demo project locally.
+To run the demo project or tests locally:
 
-The site will be available at [localhost:8000/](http://localhost:8000/).
+```console
+npm install
+npm start
+```
 
-You should use an ES6 template string formatter to better see the HTML used in the render function of components.
+Then open [localhost:8000/demo](http://localhost:8000/demo) for the demo app or [localhost:8000/tests](http://localhost:8000/tests) for the tests.
+
+To improve developer experience when writing HTML inside template strings, consider installing ES6 template string formatter to better see the HTML used in the render function of components.
 If you use Visual Studio Code you can use [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html).
 
 If you want to update Reagenz you can check out [CHANGELOG.md](documentation/CHANGELOG.md) to see what changed between releases.
 
 ## Setting up your own project
 
-If you want to start a completly fresh Reagenz project with only the basic structure set up do the following:
+If you want to start a completley fresh Reagenz project with only the basic structure set up do the following:
 
 * run `npx reagenz new`
 * run `npm start`

@@ -9,8 +9,7 @@ export default [
 			"demo/**/*.js",
 			"source/**/*.js",
 			"template-project/**/*.js",
-			"tests/browser/*.js",
-			"tests/unit/*.js",
+			"tests/*.js",
 			"index.js"
 		],
 		languageOptions: {
@@ -69,6 +68,12 @@ export default [
 			"require-await": "error",
 			"require-unicode-regexp": "error",
 			"semi": ["error", "always"]
+		}
+	},
+	{
+		files: ["tests/*.js"],
+		rules: {
+			"camelcase": "off"
 		}
 	},
 	{
