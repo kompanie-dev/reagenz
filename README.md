@@ -119,7 +119,9 @@ If you want to update Reagenz you can check out [CHANGELOG.md](documentation/CHA
 
 If you want to start a completley fresh Reagenz project with only the basic structure set up do the following:
 
-* run `npx reagenz new`
-* run `npm start`
+```console
+npx reagenz new
+npm start
+```
 
 You can now start developing your own Reagenz project.
