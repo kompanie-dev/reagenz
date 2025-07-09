@@ -15,7 +15,7 @@ It has the following features:
 * Attribute event system for attributes like `$click`, `$change` etc.
 * Typed attributes
 * No [Virtual DOM](https://en.wikipedia.org/wiki/Virtual_DOM)
-* TypeScript support (Beta)
+* Documentation via JSDoc, which can be used with TypeScript
 
 ## Usage
 
