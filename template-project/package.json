@@ -13,7 +13,7 @@
 	},
 	"devDependencies": {
 		"@kompanie/diener": "^2.0.0",
-		"esbuild": "0.25.5",
-		"eslint": "^9.30.0"
+		"esbuild": "0.25.6",
+		"eslint": "^9.30.1"
 	}
 }
