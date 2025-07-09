@@ -23,6 +23,7 @@
     - [Selectors](#selectors)
       - [Change detection](#change-detection)
     - [Store access](#store-access)
+    - [Web Components](#web-components)
 
 ## Setting up an application
 
@@ -381,7 +382,7 @@ That means if the state and the dispatched action are the same, the resulting ne
 This makes state management very easy to test.
 
 This very simple example of a reducer shows how when `TASK_ADD` is executed in the reducer,
-a new copy of the state is created and the new entry get's added.
+a new copy of the state is created and the new entry gets added.
 If the action type doesn't get handled by the reducer, the state needs to be returned as-is.
 There are actions that will only be handled by middlewares and not the reducer.
 
@@ -532,3 +533,8 @@ export class MainPage extends Component {
 
 customElements.define("main-page", MainPage);
 ```
+
+## Web Components
+
+Non-Reagenz Web Components are supported by default.
+Just make sure that they get registered using the browsers `customElements.define()` function.
