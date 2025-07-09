@@ -3,7 +3,7 @@ import { HtmlEscaper } from "./htmlEscaper.js";
 
 /**
  * Reads the stringified array contained inside the array attribute of the component
- * and uses it's values and index to render the innerHTML of the component for each item of the array.
+ * and uses its values and index to render the innerHTML of the component for each item of the array.
  * To get the current index of the loop use the @index() placeholder.
  * For accessing the data of the array use @item().
  * If you need to access certain properties of the array element use @item(item.propertyA.propertyB).

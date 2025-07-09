@@ -108,7 +108,7 @@ export class Component extends HTMLElement {
 	 * Parses the attributes specified in the attributeTypes property and tries to convert them to the given type.
 	 * If the conversion fails, null is used as value.
 	 *
-	 * @returns An object with the same property names as attributeTypes, but with the converted data.
+	 * @returns {*} An object with the same property names as attributeTypes, but with the converted data.
 	 */
 	#parseAttributes() {
 		return Object.fromEntries(
@@ -124,7 +124,7 @@ export class Component extends HTMLElement {
 	 * updates the components innerHTML property with the resulting HTML
 	 * and updates #currentSelectorData to the supplied selectorData.
 	 *
-	 * @param {boolean} force If true, change detection is skipped and the innerHTML is rendered.
+	 * @param {?boolean} force If true, change detection is skipped and the innerHTML is rendered.
 	 *
 	 * @returns {void}
 	 */

@@ -40,7 +40,7 @@ export class Store {
 	/**
 	 * Executes all the selector functions contained within the object and returns the result.
 	 *
-	 * @param {Object} selectorObject An object containing selector functions as properties ({ selectorA: selectorFunction, ... }).
+	 * @param @param {{ [key: string]: Function }} selectorObject An object containing selector functions as properties.
 	 *
 	 * @returns {Object} An object containing the same property names, filled with the selector execution results.
 	 */
@@ -58,7 +58,7 @@ export class Store {
 	 *
 	 * @param {Function} selector The selector function which should be executed.
 	 *
-	 * @returns {*} The result of the selector function, with all properties escaped.
+	 * @returns {*} The result of the selector function, with all string properties escaped.
 	 */
 	select(selector) {
 		return HtmlEscaper.escapeObject(selector(this.state));
@@ -69,7 +69,7 @@ export class Store {
 	 *
 	 * @param {Function} selector The selector function which should be executed.
 	 *
-	 * @returns {*} The result of the selector function, with all properties escaped.
+	 * @returns {*} The raw result of the selector function, without escaping string properties.
 	 */
 	insecureSelect(selector) {
 		return selector(this.state);
@@ -78,7 +78,7 @@ export class Store {
 	/**
 	 * Add the given listener function to the list of subscribers and execute the listener each time an action is dispatched.
 	 *
-	 * @param {Function} listenerCallback A function which gets called whenever an action get's dispatched.
+	 * @param {Function} listenerCallback A function which gets called whenever an action gets dispatched.
 	 *
 	 * @returns {Function} An unsubscribe function which removes the listener function from the subscribed functions when executed.
 	 */
