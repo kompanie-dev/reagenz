@@ -9,7 +9,7 @@
 		"start": "npx diener --port 8000"
 	},
 	"dependencies": {
-		"@kompanie/reagenz": "12.0.0"
+		"@kompanie/reagenz": "12.1.0"
 	},
 	"devDependencies": {
 		"@kompanie/diener": "^2.0.0",
