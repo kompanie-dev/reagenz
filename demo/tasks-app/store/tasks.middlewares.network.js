@@ -3,6 +3,8 @@ import { loadEntriesSuccess, saveEntriesSuccess } from "./tasks.actions.js";
 export const tasksNetworkMiddleware = (store, next, action) => {
 	switch (action.type) {
 		case "TASK_LOAD_ENTRIES_REQUEST":
+			// setTimeout is used here to simulate network latency.
+			// You don't need this in a real app.
 			setTimeout(
 				() => {
 					const entryJson = localStorage.getItem("task_entries");
@@ -13,6 +15,8 @@ export const tasksNetworkMiddleware = (store, next, action) => {
 			break;
 
 		case "TASK_SAVE_ENTRIES_REQUEST":
+			// setTimeout is used here to simulate network latency.
+			// You don't need this in a real app.
 			setTimeout(
 				() => {
 					const entriesString = JSON.stringify(store.state.entries);
