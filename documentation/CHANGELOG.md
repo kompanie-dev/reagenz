@@ -1,5 +1,10 @@
 # Reagenz Changelog
 
+## 12.1.0 (2025-07-11)
+
+* Remove .d.ts files
+* Simplify and beautify demo project
+
 ## 12.0.0 (2025-06-28)
 
 * Replace attribute helper functions with attributeData
