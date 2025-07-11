@@ -8,21 +8,15 @@ export class TasksMain extends Component {
 	render() {
 		const { route } = this.selectorData;
 
-		if (route === "" || route === "#/") {
-			return /*html*/`<tasks-task-list-page></tasks-task-list-page>`;
+		switch (route) {
+			case "#/about":
+				return /*html*/`<tasks-about-page></tasks-about-page>`;
+
+			
+			default:
+			case "#/tasks":
+				return /*html*/`<tasks-task-list-page></tasks-task-list-page>`;
 		}
-
-		if (route === "#/about") {
-			return /*html*/`<tasks-about-page></tasks-about-page>`;
-		}
-
-		if (route.startsWith("#/tasks/") === true) {
-			const taskId = route.replace("#/tasks/", "");
-
-			return /*html*/`<tasks-task-detail-page task-id="${taskId}"></tasks-task-detail-page>`;
-		}
-
-		return /*html*/`<h1>Not Found</h1>`;
 	}
 
 	onConnect() {

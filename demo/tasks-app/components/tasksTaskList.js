@@ -16,19 +16,18 @@ export class TasksTaskList extends Component {
 				<loading-icon></loading-icon>
 			</x-if>
 
+			<div class="display-flex margin-bottom-xsmall margin-top-small">
+				<input type="text" class="input flex-grow-1" $keydown="keydownTaskInputEvent" maxlength="25" ${isLoading ? "disabled" : ""} placeholder="Text" value="" autofocus>
+				<button class="button" $click="clickAddTaskEvent" ${isLoading ? "disabled" : ""}>Add</button>
+			</div>
+
 			<x-for array='${JSON.stringify(entries)}'>
 				<tasks-task-item done="@item(done)" taskId="@item(id)">@item(text)</tasks-task-item>
 			</x-for>
-
-			<div class="margin-top-small">
-				<input type="text" class="input" $keydown="keydownTaskInputEvent" maxlength="25" ${isLoading ? "disabled" : ""} placeholder="Text" value="" autofocus>
-				<button class="button" $click="clickAddTaskEvent" ${isLoading ? "disabled" : ""}>Add</button>
-			</div>
 		`;
 	}
 
 	clickAddTaskEvent() {
-		/** @type {HTMLInputElement} */
 		const oldTextInput = this.querySelector("input[type=text]");
 		const taskText = oldTextInput.value.trim();
 		const taskId = crypto.randomUUID();
@@ -40,7 +39,6 @@ export class TasksTaskList extends Component {
 		this.dispatch(addTask(taskId, taskText));
 		this.dispatch(saveEntriesRequest());
 
-		/** @type {HTMLInputElement} */
 		const newTextInput = this.querySelector("input[type=text]");
 		newTextInput.value = "";
 		newTextInput.focus();

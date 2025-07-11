@@ -8,14 +8,13 @@
 	text-decoration: none;
 }
 
-body {
+.body {
 	padding: .5rem;
 }
 
-body,
+.body,
 .button,
-.input,
-.textarea {
+.input {
 	background: #000;
 	color: #ccc;
 	font-family: Arial, sans-serif;
@@ -23,10 +22,8 @@ body,
 }
 
 .button,
-.input,
-.textarea {
+.input {
 	border: 1px solid #ccc;
-	border-radius: 13px;
 	padding: 5px 8px;
 }
 
@@ -40,9 +37,4 @@ body,
 	background: #999;
 	color: #333;
 	cursor: not-allowed;
-}
-
-.input:invalid {
-	border-color: red;
-	outline: 5px solid red;
 }

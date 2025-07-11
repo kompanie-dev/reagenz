@@ -4,34 +4,28 @@ import { TasksAboutDialog } from "./tasksAboutDialog.js";
 export class TasksAboutPage extends Component {
 	render() {
 		return /*html*/`
-			<h1>About Tasks Demo App</h1>
+			<h1>About</h1>
 
-			<div $click="notExistingClickFunction">
-				Welcome to the simple Tasks App!
+			<div>
+				Welcome to the Reagenz demo app!
 			</div>
 
 			<div class="margin-top-small">
-				<button $click="showRequiredDialog" class="button">Show Required About Dialog</button>
-				<button $click="showNotRequiredDialog" class="button">Show Not Required About Dialog</button>
+				<button $click="showAboutDialog" class="button">Show About Dialog</button>
 
 				<a href="#" class="a button">Back to home</a>
 			</div>`;
 	}
 
-	showNotRequiredDialog() {
+	showAboutDialog() {
 		const { logger } = this.dependencies;
+		const isClosable = true;
 
-		Modal.show(TasksAboutDialog, (result) => {
+		const closeFunction = Modal.show(TasksAboutDialog, (result) => {
 			logger.log("Modal Result", result);
-		}, true);
-	}
+		}, isClosable);
 
-	showRequiredDialog() {
-		const { logger } = this.dependencies;
-
-		Modal.show(TasksAboutDialog, (result) => {
-			logger.log("Modal Result", result);
-		}, false);
+		logger.log("If you call this function, the modal gets closed", closeFunction);
 	}
 }
 

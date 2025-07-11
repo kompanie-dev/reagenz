@@ -7,7 +7,6 @@ import "./components/tasksTaskListPage.js";
 import { TasksAboutPage } from "./components/tasksAboutPage.js";
 import { TasksMain } from "./components/tasksMain.js";
 import { TasksSearchBar } from "./components/tasksSearchBar.js";
-import { TasksTaskDetailPage } from "./components/tasksTaskDetailPage.js";
 import { TasksTaskItem } from "./components/tasksTaskItem.js";
 import { TasksTaskList } from "./components/tasksTaskList.js";
 import { TasksTimeDisplay } from "./components/tasksTimeDisplay.js";
@@ -23,7 +22,6 @@ App.start({
 		TasksAboutPage,
 		TasksMain,
 		TasksSearchBar,
-		TasksTaskDetailPage,
 		TasksTaskItem,
 		TasksTaskList,
 		TasksTimeDisplay

@@ -9,6 +9,12 @@ export class TasksTaskItem extends Component {
 
 	styles = /*css*/`
 		tasks-task-item {
+			div {
+				border-bottom: 1px solid #ccc;
+				margin-bottom: 10px;
+				padding: 3px;
+			}
+
 			span {
 				display: inline-block;
 				width: 170px;
@@ -17,11 +23,13 @@ export class TasksTaskItem extends Component {
 			.task-item-button {
 				border: none;
 				background: #000;
-				border-radius: 50%;
+				color: #c00;
+				cursor: pointer;
+				width: 30px;
 			}
 
 			.task-item-button:hover {
-				background: #ccc;
+				color: #ccc;
 			}
 		}
 	`;
@@ -33,8 +41,7 @@ export class TasksTaskItem extends Component {
 			<div>
 				<input type="checkbox" $click="clickDoneCheckboxEvent" ${done ? "checked" : ""}>
 				<span>${this.innerHTML}</span>
-				<button class="margin-left-xsmall task-item-button" $click="clickRemoveTaskEvent">❌</button>
-				<a href="#/tasks/${taskId}" class="a margin-left-xsmall task-item-button">ℹ️</a>
+				<button class="float-right margin-left-xsmall task-item-button" $click="clickRemoveTaskEvent">✕</button>
 			</div>
 		`;
 	}

@@ -2,26 +2,32 @@
 	display: flex;
 }
 
-.gap-24px {
-	gap: 24px;
+.flex-grow-1 {
+	flex-grow: 1;
 }
 
-.margin-top-small {
-	margin-top: 1.5rem;
+.float-right {
+	float: right;
+}
+
+.margin-bottom-xsmall {
+	margin-bottom: 1rem;
 }
 
 .margin-left-xsmall {
 	margin-left: 1rem;
 }
 
-.padding-right-xsmall {
-	padding-right: 1rem;
+.margin-top-small {
+	margin-top: 1.5rem;
 }
 
-.width-50 {
-	width: 50%;
+.text-align-center {
+	text-align: center;
 }
 
-.width-100 {
-	width: 100%;
+@media (min-width: 400px) {
+	.max-width-400px-desktop {
+		max-width: 400px;
+	}
 }
