@@ -81,7 +81,7 @@ The repository consists of the following folders:
 * `documentation`: Documentation including assets
 * `source`: The source code of the Reagenz library
 * `template-project`: The project that gets used for `npx reagenz new`
-* `tests`: Unit, browser and performance tests
+* `tests`: Unit and browser tests
 
 ## Limitations
 
