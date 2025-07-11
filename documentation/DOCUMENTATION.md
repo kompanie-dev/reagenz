@@ -41,10 +41,19 @@ This file is the one which gets added to the HTML.
 
 In the app.js file you can configure your entry point, the HTML element where your app should be attached to, your dependencies and your components.
 
+If you add new components don't forget to add them in your app.js, otherwise they won't show up in your application.
+
 ```js
-import "./components/myExampleComponent.js";
+// Reagenz classes
 import { App, Store } from "@kompanie/reagenz";
+
+// Import like this if you don't need to inject dependencies into it
+import "./components/myExampleComponent.js";
+
+// Import Reagenz components like this, if you want to inject your store and other dependencies into it.
 import { MainPage } from "./components/mainPage.js";
+
+// Standard web components are supported out of the box. Just import them like this!
 import "./webComponents/exampleWebComponent.js";
 
 App.start({
@@ -74,7 +83,7 @@ App.start({
 Reagenz is fully compatible with popular CSS frameworks which work by adding classes to HTML elements.
 Sometimes you might want to apply CSS only for one component though.
 Reagenz has a `styles` property for CSS.
-All CSS which is assigned to the styles property gets added in a styles tag inside the innerHTML of the component.
+All CSS which is assigned to the `styles` property gets added in a `<styles>` tag inside the innerHTML of the component.
 This also means that you could write CSS rules that affect other components.
 To prevent this it's recommended to scope the CSS by adding the component tag name around the CSS rules.
 
@@ -197,8 +206,8 @@ customElements.define("main-page", MainPage);
 
 ## Dependency Injection
 
-To access the dependencies you injected before, you can execute `dependencies` in the component.
-In this example a click would cause a console.log execution, since the logger dependency in the `Setting up an application` sets the `logger` dependency to the browsers native `console`.
+To access the dependencies you injected before, you can access the `dependencies` property in your component.
+In this example a click would cause a `console.log` execution, since the logger dependency in the `Setting up an application` sets the `logger` dependency to the browsers native `console`.
 
 If you would want to replace the logger with something else, the only thing you would need to change is the `logger` property in the `app.js`.
 
@@ -227,6 +236,7 @@ customElements.define("main-page", MainPage);
 
 Most apps require some kind of templating to hide or show content based on the value of a variable.
 In Reagenz this is done via the `x-if` helper component.
+If the string inside the `condition` attribute matches exactly `"true"`, the content will be rendered.
 
 ```js
 import { Component } from "@kompanie/reagenz";
@@ -258,6 +268,9 @@ It supports three types of placeholders:
 * `@index()`: The index of the current iteration
 * `@item()`: Tries to render the array item as-is
 * `@item(obj.propA.propB)`: Tries to access the object properties specified
+
+Why `JSON.stringify()`? Since the HTML is written as template string, only adding `${entries}` would cause the output to be [object Object].
+So everytime you pass an array or an object to a component, be sure you use `JSON.stringify()`.
 
 ```js
 import { Component } from "@kompanie/reagenz";
@@ -300,7 +313,7 @@ export class AboutDialog extends Component {
     }
 
     // true, if the state of the modal is valid, otherwise false
-    // If the validate function is omitted, the component is always valid
+    // If no validate function is found, the component will always be valid
     validate() {
         return this.querySelector("[name='username']").value.startsWith("R");
     }
