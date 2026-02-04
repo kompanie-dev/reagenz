@@ -1,8 +1,0 @@
-{
-	"license": "MIT",
-	"type": "module",
-	"scripts": {
-		"build": "esbuild index.html --bundle --format=esm --target=esnext",
-		"start": "npx diener --livereload --ignore-git --port 8000"
-	}
-}

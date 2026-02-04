@@ -1,14 +1,4 @@
-/**
- * Contains functions to escape HTML in strings and objects.
- */
 export class HtmlEscaper {
-	/**
-	 * Iterates all properties and sub-objects of the given object and escapes all string properties.
-	 *
-	 * @param {*} unsafeObject The object with potentially unescaped HTML in string properties.
-	 *
-	 * @returns {*} A new object with all string properties escaped.
-	 */
 	static escapeObject(unsafeObject) {
 		if (typeof unsafeObject === "string") {
 			return HtmlEscaper.escapeString(unsafeObject);
@@ -30,13 +20,6 @@ export class HtmlEscaper {
 		return unsafeObject;
 	}
 
-	/**
-	 * Escapes the unsafe characters of HTML (&, <, >, ", ') in the supplied string.
-	 *
-	 * @param {string} unsafeString The unescaped HTML string.
-	 *
-	 * @returns {string} The escaped string.
-	 */
 	static escapeString(unsafeString) {
 		const entityMap = {
 			"<": "&lt;",

@@ -1,29 +1,15 @@
 {
-	"name": "@kompanie/reagenz",
-	"version": "12.1.0",
-	"license": "MIT",
-	"main": "index.js",
-	"repository": "github:kompanie-dev/reagenz",
-	"type": "module",
-	"files": [
-		"/cli",
-		"/source",
-		"/template-project"
-	],
-	"scripts": {
-		"build": "esbuild index.js --bundle --format=esm --target=esnext --outfile=build/reagenz.js",
-		"build:minified": "esbuild index.js --bundle --format=esm --minify --target=esnext --outfile=build/reagenz.min.js",
-		"lint": "eslint",
-		"start": "npx diener --livereload --ignore-git"
-	},
-	"bin": {
-		"reagenz": "cli/index.js"
-	},
-	"devDependencies": {
-		"@kompanie/assert": "^2.0.0",
-		"@kompanie/diener": "^3.0.0",
-		"@kompanie/testwerk": "^2.1.1",
-		"esbuild": "0.25.9",
-		"eslint": "^9.35.0"
-	}
+  "name": "experiment",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx diener --livereload --port 8000"
+  },
+  "dependencies": {
+    "@kompanie/diener": "^3.0.0"
+  }
 }
