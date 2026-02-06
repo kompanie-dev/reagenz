@@ -38,6 +38,7 @@ export class ForTemplateModule {
 
       if (node.nodeType === Node.ELEMENT_NODE) {
         const el = node;
+        
         if (el.tagName === "TEMPLATE") {
           if (el.hasAttribute("for")) {
             if (depth > maxDepth) {
@@ -118,20 +119,22 @@ export class ForTemplateModule {
     // Also replace tokens inside property-binding attribute values (e.g., .todo="@value" or .todo="@value.path")
     const elements = fragment.querySelectorAll("*");
 
-    for (const el of elements) {
-      const attrs = Array.from(el.attributes ?? []);
+    for (const element of elements) {
+      const elementAttributes = Array.from(element.attributes ?? []);
 
-      for (const attr of attrs) {
-        if (!attr.name.startsWith(".")) {
+      for (const attribute of elementAttributes) {
+        if (!attribute.name.startsWith(".")) {
           continue;
         }
 
         let computed;
 
-        if (attr.value === valueToken) {
+        if (attribute.value === valueToken) {
           computed = value;
-        } else if (valueTokenWithPathRegex.test(attr.value)) {
-          const match = attr.value.match(valueTokenWithPathRegex);
+        }
+        else if (valueTokenWithPathRegex.test(attribute.value)) {
+          const match = attribute.value.match(valueTokenWithPathRegex);
+
           if (match && match[0]) {
             const path = match[0].slice(valueToken.length + 1);
             computed = this.#getPropertyPathValue(value, path);
@@ -141,7 +144,7 @@ export class ForTemplateModule {
         if (computed !== undefined) {
           const id = `dataID-${crypto.randomUUID()}`;
           dataRegistry.set(id, computed);
-          el.setAttribute(attr.name, id);
+          attribute.value = id;
         }
       }
     }
