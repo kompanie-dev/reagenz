@@ -1,5 +1,7 @@
 import { Component, css, html } from "../../../../index.js";
 import { counterStore } from "../state/state.js";
+import { Modal } from "../../../../source/modal.js";
+import { CounterModal } from "./counterModal.js";
 
 export class CounterApp extends Component {
   state = {
@@ -62,6 +64,21 @@ export class CounterApp extends Component {
       background: var(--accent-2);
     }
 
+    .info {
+      background: #333;
+      border: 1px solid var(--border);
+      
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 14px;
+      height: 32px;
+      width: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
     .status {
       color: var(--muted);
       display: inline-flex;
@@ -81,11 +98,11 @@ export class CounterApp extends Component {
     const loading = this.state.loading.get();
     const saving = this.state.saving.get();
     const value = this.state.count.get();
-
     return html`
       <div class="app">
         <div class="header">
           <h1>Counter</h1>
+          <button class="info" @click="${this.showInfo}">i</button>
         </div>
 
         <div class="counter">
@@ -108,6 +125,10 @@ export class CounterApp extends Component {
 
   decrement() {
     counterStore.decrement();
+  }
+
+  showInfo() {
+    Modal.show(CounterModal);
   }
 }
 
