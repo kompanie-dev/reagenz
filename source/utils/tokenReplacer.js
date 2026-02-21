@@ -26,19 +26,19 @@ export class TokenReplacer {
     return replaced;
   }
 
-  static replacePlaceholdersInAttribute(attrValue, valueName, value, iteratorName, index) {
+  static replacePlaceholdersInAttribute(attributeValue, valueName, value, iteratorName, index) {
     const valueToken = `@${valueName}`;
     const valueTokenWithPathRegex = new RegExp(`@${valueName}(?:\\.[A-Za-z_$][\\w$]*)+`, "g");
 
-    if (attrValue === valueToken) {
+    if (attributeValue === valueToken) {
       const id = `dataID-${crypto.randomUUID()}`;
       dataRegistry.set(id, value);
 
       return id;
     }
 
-    if (valueTokenWithPathRegex.test(attrValue)) {
-      const match = attrValue.match(valueTokenWithPathRegex);
+    if (valueTokenWithPathRegex.test(attributeValue)) {
+      const match = attributeValue.match(valueTokenWithPathRegex);
 
       if (match && match[0]) {
         const path = match[0].slice(valueToken.length + 1);
@@ -47,7 +47,7 @@ export class TokenReplacer {
         if (computed !== undefined) {
           const id = `dataID-${crypto.randomUUID()}`;
           dataRegistry.set(id, computed);
-          
+
           return id;
         }
       }
