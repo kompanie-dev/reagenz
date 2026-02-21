@@ -16,20 +16,10 @@ export class TemplateModuleBase {
     let maxDepth = -1;
 
     const visit = (node, depth) => {
-      if (node.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-        for (const child of node.childNodes) {
-          if (child.nodeType === Node.ELEMENT_NODE) {
-            visit(child, depth);
-          }
-        }
-
-        return;
-      }
-
       if (node.nodeType === Node.ELEMENT_NODE) {
-        if (this.matches(node) && depth > maxDepth) {
-            maxDepth = depth;
-            deepest = node;
+        if (this.matches(node) === true && depth > maxDepth) {
+          maxDepth = depth;
+          deepest = node;
         }
 
         if (node.tagName === "TEMPLATE") {
@@ -37,8 +27,12 @@ export class TemplateModuleBase {
 
           return;
         }
+      }
 
-        for (const child of node.children) {
+      const children = node.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? node.childNodes : node.children;
+
+      for (const child of children) {
+        if (child.nodeType === Node.ELEMENT_NODE || child.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
           visit(child, depth + 1);
         }
       }
@@ -57,6 +51,6 @@ export class TemplateModuleBase {
   }
 
   handleTemplate(templateElement) {
-    // no-op
+    
   }
 }
