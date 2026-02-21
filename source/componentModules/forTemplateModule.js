@@ -1,6 +1,6 @@
 import { dataRegistry } from "../frameworkState.js";
 import { TemplateModuleBase } from "./templateModuleBase.js";
-import { TokenReplacer } from "../utils/tokenReplacer.js";
+import { TokenReplacer } from "../utilities/tokenReplacer.js";
 
 export class ForTemplateModule extends TemplateModuleBase {
   matches(element) {
