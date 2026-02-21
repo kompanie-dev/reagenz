@@ -3,8 +3,8 @@ import { TemplateModuleBase } from "./templateModuleBase.js";
 import { TokenReplacer } from "../utils/tokenReplacer.js";
 
 export class ForTemplateModule extends TemplateModuleBase {
-  matches(el) {
-    return el.tagName === "TEMPLATE" && el.hasAttribute("for");
+  matches(element) {
+    return element.tagName === "TEMPLATE" && element.hasAttribute("for") === true;
   }
 
   handleTemplate(forTemplate) {

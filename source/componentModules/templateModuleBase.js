@@ -1,11 +1,7 @@
 export class TemplateModuleBase {
   run({ template }) {
-    this.#processTemplates(template.content);
-  }
-
-  #processTemplates(rootFragment) {
     while (true) {
-      const deepest = this.#findDeepestTemplate(rootFragment);
+      const deepest = this.#findDeepestTemplate(template.content);
 
       if (!deepest) {
         break;
@@ -15,7 +11,7 @@ export class TemplateModuleBase {
     }
   }
 
-  #findDeepestTemplate(root) {
+  #findDeepestTemplate(rootElement) {
     let deepest = null;
     let maxDepth = -1;
 
@@ -35,26 +31,24 @@ export class TemplateModuleBase {
       }
 
       if (node.nodeType === Node.ELEMENT_NODE) {
-        const el = node;
-        
-        if (this.matches(el) && depth > maxDepth) {
+        if (this.matches(node) && depth > maxDepth) {
             maxDepth = depth;
-            deepest = el;
+            deepest = node;
         }
 
-        if (el.tagName === "TEMPLATE") {
-          visit(el.content, depth + 1);
+        if (node.tagName === "TEMPLATE") {
+          visit(node.content, depth + 1);
 
           return;
         }
 
-        for (const child of el.children) {
+        for (const child of node.children) {
           visit(child, depth + 1);
         }
       }
     };
 
-    visit(root, 0);
+    visit(rootElement, 0);
 
     return deepest;
   }
