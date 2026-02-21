@@ -2,7 +2,7 @@ export class TemplateModuleBase {
   run({ template }) {
     while (true) {
       const deepest = this.#findDeepestTemplate(template.content);
-      
+
       if (deepest === null) {
         break;
       }
@@ -16,7 +16,7 @@ export class TemplateModuleBase {
     let maxDepth = -1;
 
     const visit = (node, depth) => {
-      if (node === null || node === undefined) {
+      if (node === undefined) {
         return;
       }
 
