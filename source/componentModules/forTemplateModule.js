@@ -1,66 +1,13 @@
 import { dataRegistry } from "../frameworkState.js";
+import { TemplateModuleBase } from "./templateModuleBase.js";
 
-export class ForTemplateModule {
-  run({ template }) {
-    this.#processForTemplates(template.content);
+export class ForTemplateModule extends TemplateModuleBase {
+  matches(el) {
+    return el.tagName === "TEMPLATE" && el.hasAttribute("for");
   }
 
-  #processForTemplates(rootFragment) {
-    while (true) {
-      const deepest = this.#findDeepestForTemplate(rootFragment);
-
-      if (!deepest) {
-        break;
-      }
-
-      this.#renderForTemplate(deepest);
-    }
-  }
-
-  #findDeepestForTemplate(root) {
-    let deepest = null;
-    let maxDepth = -1;
-
-    const visit = (node, depth) => {
-      if (!node) {
-        return;
-      }
-
-      if (node.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-        for (const child of node.childNodes) {
-          if (child.nodeType === Node.ELEMENT_NODE) {
-            visit(child, depth);
-          }
-        }
-
-        return;
-      }
-
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        const el = node;
-        
-        if (el.tagName === "TEMPLATE") {
-          if (el.hasAttribute("for")) {
-            if (depth > maxDepth) {
-              maxDepth = depth;
-              deepest = el;
-            }
-          }
-
-          visit(el.content, depth + 1);
-
-          return;
-        }
-
-        for (const child of el.children) {
-          visit(child, depth + 1);
-        }
-      }
-    };
-
-    visit(root, 0);
-
-    return deepest;
+  handleTemplate(forTemplate) {
+    this.#renderForTemplate(forTemplate);
   }
 
   #renderForTemplate(forTemplate) {
