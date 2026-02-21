@@ -16,10 +16,6 @@ export class TemplateModuleBase {
     let maxDepth = -1;
 
     const visit = (node, depth) => {
-      if (node === undefined) {
-        return;
-      }
-
       if (node.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
         for (const child of node.childNodes) {
           if (child.nodeType === Node.ELEMENT_NODE) {
