@@ -13,11 +13,11 @@ export class TokenReplacer {
       return resolved?.toString() ?? "";
     });
 
-    if (replaced.includes(iteratorToken)) {
+    if (replaced.includes(iteratorToken) === true) {
       replaced = replaced.split(iteratorToken).join(index.toString());
     }
 
-    if (replaced.includes(valueToken)) {
+    if (replaced.includes(valueToken) === true) {
       replaced = replaced.split(valueToken).join(value.toString());
     }
 
@@ -35,10 +35,10 @@ export class TokenReplacer {
       return id;
     }
 
-    if (valueTokenWithPathRegex.test(attributeValue)) {
+    if (valueTokenWithPathRegex.test(attributeValue) === true) {
       const match = attributeValue.match(valueTokenWithPathRegex);
 
-      if (match && match[0]) {
+      if (match !== null && match[0] !== undefined) {
         const path = match[0].slice(valueToken.length + 1);
         const computed = TokenReplacer.getPropertyPathValue(value, path);
 
