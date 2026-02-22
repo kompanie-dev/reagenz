@@ -6,9 +6,7 @@ export class TokenReplacer {
     const valueToken = `@${valueName}`;
     const valueTokenWithPathRegex = new RegExp(`@${valueName}(?:\\.[A-Za-z_$][\\w$]*)+`, "g");
 
-    let replaced = text;
-
-    replaced = replaced.replace(valueTokenWithPathRegex, (match) => {
+    let replaced = text.replace(valueTokenWithPathRegex, (match) => {
       const path = match.slice(valueToken.length + 1);
       const resolved = TokenReplacer.getPropertyPathValue(value, path);
 
