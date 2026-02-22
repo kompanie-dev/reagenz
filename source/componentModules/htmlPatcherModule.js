@@ -1,30 +1,15 @@
+import { Component } from "../component.js";
+
 export class HtmlPatcherModule {
   run({ component, template, eventBindings = [], dataAttributeObjects = [] }) {
     const cloned = template.content.cloneNode(true);
     const eventBindingMap = new WeakMap();
     const propertyBindingMap = new WeakMap();
 
-    this.#handleDataAttributes(
-      dataAttributeObjects,
-      template,
-      cloned,
-      propertyBindingMap,
-    );
+    this.#handleDataAttributes(dataAttributeObjects, template, cloned, propertyBindingMap);
+    this.#handleEventAttributes(eventBindings, template, cloned, eventBindingMap);
 
-    this.#handleEventAttributes(
-      eventBindings,
-      template,
-      cloned,
-      eventBindingMap,
-    );
-
-    this.#patchChildren(
-      component,
-      cloned,
-      component,
-      eventBindingMap,
-      propertyBindingMap,
-    );
+    this.#patchChildren(component, cloned, component, eventBindingMap, propertyBindingMap);
   }
 
   #applyNodeBindingsDeep(node, propertyBindingMap, eventBindingMap, component) {
@@ -35,13 +20,8 @@ export class HtmlPatcherModule {
 
     let child = node.firstChild;
 
-    while (child) {
-      this.#applyNodeBindingsDeep(
-        child,
-        propertyBindingMap,
-        eventBindingMap,
-        component,
-      );
+    while (child !== null) {
+      this.#applyNodeBindingsDeep(child, propertyBindingMap, eventBindingMap, component);
 
       child = child.nextSibling;
     }
@@ -54,11 +34,11 @@ export class HtmlPatcherModule {
     while (current && current !== stopNode) {
       const parent = current.parentNode;
 
-      if (!parent) {
+      if (parent === null) {
         return null;
       }
 
-      const index = Array.prototype.indexOf.call(parent.childNodes, current);
+      const index = [...parent.childNodes].indexOf(current);
 
       if (index < 0) {
         return null;
@@ -72,11 +52,7 @@ export class HtmlPatcherModule {
   }
 
   #canPatchNode(templateNode, liveNode) {
-    if (
-      !templateNode ||
-      !liveNode ||
-      templateNode.nodeType !== liveNode.nodeType
-    ) {
+    if (templateNode?.nodeType !== liveNode?.nodeType) {
       return false;
     }
 
@@ -96,7 +72,7 @@ export class HtmlPatcherModule {
 
     let child = node.firstChild;
 
-    while (child) {
+    while (child !== null) {
       this.#cleanupNode(child, component);
       child = child.nextSibling;
     }
@@ -105,7 +81,7 @@ export class HtmlPatcherModule {
   #findNodeInClone(templateNode, templateRoot, clonedRoot) {
     const path = this.#buildNodePath(templateNode, templateRoot);
 
-    if (!path) {
+    if (path === null) {
       return null;
     }
 
@@ -118,7 +94,7 @@ export class HtmlPatcherModule {
     for (const index of path) {
       current = current.childNodes[index];
 
-      if (!current) {
+      if (current === null) {
         return null;
       }
     }
@@ -126,95 +102,59 @@ export class HtmlPatcherModule {
     return current;
   }
 
-  #handleDataAttributes(
-    dataAttributeObjects,
-    template,
-    cloned,
-    propertyBindingMap,
-  ) {
+  #handleDataAttributes(dataAttributeObjects, template, cloned, propertyBindingMap) {
     for (const binding of dataAttributeObjects) {
-      const originalElement = binding.element;
-      const propertyName = binding.propertyName;
+      const targetNode = this.#findNodeInClone(binding.element, template.content, cloned);
 
-      const target = this.#findNodeInClone(
-        originalElement,
-        template.content,
-        cloned,
-      );
+      const entry = propertyBindingMap.get(targetNode) ?? [];
+      entry.push({
+        propertyName: binding.propertyName,
+        value: binding.value
+      });
 
-      const entry = propertyBindingMap.get(target) ?? [];
-      entry.push({ propertyName, value: binding.value });
-
-      propertyBindingMap.set(target, entry);
+      propertyBindingMap.set(targetNode, entry);
     }
   }
 
   #handleEventAttributes(eventBindings, template, cloned, eventBindingMap) {
     for (const binding of eventBindings) {
-      const originalElement = binding.element;
-      const eventName = binding.eventName;
-      const handler = binding.handler;
+      const targetNode = this.#findNodeInClone(binding.element, template.content, cloned);
 
-      const target = this.#findNodeInClone(
-        originalElement,
-        template.content,
-        cloned,
-      );
+      const entry = eventBindingMap.get(targetNode) ?? [];
+      entry.push({
+        eventName:binding.eventName,
+        handler: binding.handler,
+      });
 
-      const entry = eventBindingMap.get(target) ?? [];
-      entry.push({ eventName, handler });
-      eventBindingMap.set(target, entry);
+      eventBindingMap.set(targetNode, entry);
     }
   }
 
-  #patchChildren(
-    parent,
-    templateParent,
-    component,
-    eventBindingMap,
-    propertyBindingMap,
-  ) {
+  #patchChildren(parent, templateParent, component, eventBindingMap, propertyBindingMap) {
     const newChildren = Array.from(templateParent.childNodes);
     let currentChild = parent.firstChild;
 
     for (const newChild of newChildren) {
-      if (!currentChild) {
-        this.#applyNodeBindingsDeep(
-          newChild,
-          propertyBindingMap,
-          eventBindingMap,
-          component,
-        );
-
+      if (currentChild === null) {
+        this.#applyNodeBindingsDeep(newChild, propertyBindingMap, eventBindingMap, component);
         parent.appendChild(newChild);
 
         continue;
       }
 
-      if (this.#canPatchNode(newChild, currentChild)) {
-        this.#patchNode(
-          newChild,
-          currentChild,
-          component,
-          eventBindingMap,
-          propertyBindingMap,
-        );
+      if (this.#canPatchNode(newChild, currentChild) === true) {
+        this.#patchNode(newChild, currentChild, component, eventBindingMap, propertyBindingMap);
         currentChild = currentChild.nextSibling;
 
         continue;
       }
 
-      this.#applyNodeBindingsDeep(
-        newChild,
-        propertyBindingMap,
-        eventBindingMap,
-        component,
-      );
+      this.#applyNodeBindingsDeep(newChild, propertyBindingMap, eventBindingMap, component);
 
       parent.insertBefore(newChild, currentChild);
     }
 
-    while (currentChild) {
+    while (currentChild !== null) {
       const nextSibling = currentChild.nextSibling;
       this.#cleanupNode(currentChild, component);
       parent.removeChild(currentChild);
@@ -222,13 +162,7 @@ export class HtmlPatcherModule {
     }
   }
 
-  #patchNode(
-    templateNode,
-    liveNode,
-    component,
-    eventBindingMap,
-    propertyBindingMap,
-  ) {
+  #patchNode(templateNode, liveNode, component, eventBindingMap, propertyBindingMap) {
     if (templateNode.nodeType === Node.TEXT_NODE) {
       if (liveNode.textContent !== templateNode.textContent) {
         liveNode.textContent = templateNode.textContent;
@@ -237,31 +171,21 @@ export class HtmlPatcherModule {
       return;
     }
 
-    if (templateNode.nodeType !== Node.ELEMENT_NODE) {
-      return;
+    if (templateNode.nodeType === Node.ELEMENT_NODE) {
+      this.#syncAttributes(templateNode, liveNode);
+      this.#syncProperties(templateNode, liveNode, propertyBindingMap);
+      this.#syncEvents(templateNode, liveNode, component, eventBindingMap);
     }
 
-    this.#syncAttributes(templateNode, liveNode);
-    this.#syncProperties(templateNode, liveNode, propertyBindingMap);
-    this.#syncEvents(templateNode, liveNode, component, eventBindingMap);
-
-    if (typeof liveNode?.runModules === "function") {
-      return;
+    if ((liveNode instanceof Component) === false) {
+      this.#patchChildren(liveNode, templateNode, component, eventBindingMap, propertyBindingMap);
     }
-
-    this.#patchChildren(
-      liveNode,
-      templateNode,
-      component,
-      eventBindingMap,
-      propertyBindingMap,
-    );
   }
 
   #removeNodeListeners(node, component) {
     const bindings = component.eventAttributeListeners.get(node);
 
-    if (!bindings) {
+    if (bindings === undefined) {
       return;
     }
 
@@ -275,22 +199,22 @@ export class HtmlPatcherModule {
   #syncAttributes(templateNode, liveNode) {
     const existingAttributes = Array.from(liveNode.attributes ?? []);
 
-    for (const attr of existingAttributes) {
-      if (templateNode.hasAttribute(attr.name)) {
+    for (const attribute of existingAttributes) {
+      if (templateNode.hasAttribute(attribute.name) === true) {
         continue;
       }
 
-      liveNode.removeAttribute(attr.name);
+      liveNode.removeAttribute(attribute.name);
     }
 
     const templateAttributes = Array.from(templateNode.attributes ?? []);
 
-    for (const attr of templateAttributes) {
-      if (liveNode.getAttribute(attr.name) === attr.value) {
+    for (const attribute of templateAttributes) {
+      if (liveNode.getAttribute(attribute.name) === attribute.value) {
         continue;
       }
 
-      liveNode.setAttribute(attr.name, attr.value);
+      liveNode.setAttribute(attribute.name, attribute.value);
     }
   }
 
@@ -303,7 +227,7 @@ export class HtmlPatcherModule {
         (binding) => binding.eventName === eventName,
       );
 
-      if (stillNeeded) {
+      if (stillNeeded === true) {
         continue;
       }
 
@@ -314,11 +238,8 @@ export class HtmlPatcherModule {
     for (const binding of desiredBindings) {
       const boundHandler = (event) => binding.handler.call(component, event);
 
-      if (currentBindings[binding.eventName]) {
-        liveNode.removeEventListener(
-          binding.eventName,
-          currentBindings[binding.eventName],
-        );
+      if (currentBindings[binding.eventName] !== undefined) {
+        liveNode.removeEventListener(binding.eventName, currentBindings[binding.eventName]);
       }
 
       liveNode.addEventListener(binding.eventName, boundHandler);
@@ -327,9 +248,10 @@ export class HtmlPatcherModule {
 
     const hasBindings = Object.keys(currentBindings).length > 0;
 
-    if (hasBindings) {
+    if (hasBindings === true) {
       component.eventAttributeListeners.set(liveNode, currentBindings);
-    } else if (component.eventAttributeListeners.has(liveNode)) {
+    }
+    else if (component.eventAttributeListeners.has(liveNode) === true) {
       component.eventAttributeListeners.delete(liveNode);
     }
   }
@@ -341,18 +263,14 @@ export class HtmlPatcherModule {
 
     const bindings = propertyBindingMap.get(templateNode);
 
-    if (!bindings || bindings.length === 0) {
+    if (bindings === undefined || bindings.length === 0) {
       return;
     }
 
     let shouldRerender = false;
 
     for (const { propertyName, value } of bindings) {
-      if (
-        !propertyName ||
-        value === undefined ||
-        liveNode[propertyName] === value
-      ) {
+      if (!propertyName || value === undefined || liveNode[propertyName] === value) {
         continue;
       }
 
@@ -360,7 +278,7 @@ export class HtmlPatcherModule {
       shouldRerender = true;
     }
 
-    if (shouldRerender && typeof liveNode.runModules === "function") {
+    if (shouldRerender && liveNode instanceof Component) {
       liveNode.runModules();
     }
   }
