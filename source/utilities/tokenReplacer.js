@@ -28,6 +28,10 @@ export class TokenReplacer {
     const valueToken = `@${valueName}`;
     const valueTokenWithPathRegex = new RegExp(`@${valueName}(?:\\.[A-Za-z_$][\\w$]*)+`, "g");
 
+    if (attributeValue !== valueToken && !valueTokenWithPathRegex.test(attributeValue)) {
+      return null;
+    }
+
     if (attributeValue === valueToken) {
       const id = `dataID-${crypto.randomUUID()}`;
       dataRegistry.set(id, value);
@@ -35,23 +39,23 @@ export class TokenReplacer {
       return id;
     }
 
-    if (valueTokenWithPathRegex.test(attributeValue) === true) {
-      const match = attributeValue.match(valueTokenWithPathRegex);
+    const match = attributeValue.match(valueTokenWithPathRegex);
 
-      if (match !== null && match[0] !== undefined) {
-        const path = match[0].slice(valueToken.length + 1);
-        const computed = TokenReplacer.getPropertyPathValue(value, path);
-
-        if (computed !== undefined) {
-          const id = `dataID-${crypto.randomUUID()}`;
-          dataRegistry.set(id, computed);
-
-          return id;
-        }
-      }
+    if (match === null || match[0] === undefined) {
+      return null;
     }
 
-    return null;
+    const path = match[0].slice(valueToken.length + 1);
+    const computed = TokenReplacer.getPropertyPathValue(value, path);
+
+    if (computed === undefined) {
+      return null;
+    }
+
+    const id = `dataID-${crypto.randomUUID()}`;
+    dataRegistry.set(id, computed);
+
+    return id;
   }
 
   static getPropertyPathValue(obj, path) {
